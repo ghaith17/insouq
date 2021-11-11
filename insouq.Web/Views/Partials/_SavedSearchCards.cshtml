@@ -1,0 +1,138 @@
+﻿@model List<insouq.Models.SavedSearch>
+@using insouq.Shared.Utility;
+<style>
+    .TypeColor0 {
+        background-color: #7255F1 !important;
+        border-color: #7255F1 !important;
+    }
+
+    .TypeColor1 {
+        background-color: #FF0073 !important;
+        border-color: #FF0073 !important;
+    }
+
+    .TypeColor2 {
+        background-color: #FFC456 !important;
+        border-color: #FFC456 !important;
+    }
+
+    .TypeColor3 {
+        background-color: #FF665B !important;
+        border-color: #FF665B !important;
+    }
+
+    .TypeColor4 {
+        background-color: #00D4F9 !important;
+        border-color: #00D4F9 !important;
+    }
+
+    .TypeColor5 {
+        background-color: #6DD400 !important;
+        border-color: #6DD400 !important;
+    }
+
+    .TypeColor6 {
+        background-color: #0091FF !important;
+        border-color: #0091FF !important;
+    }
+
+    .TypeColor7 {
+        background-color: #7255F1 !important;
+        border-color: #7255F1 !important;
+    }
+
+    .TypeColor8 {
+        background-color: #FFD300 !important;
+        border-color: #FFD300 !important;
+    }
+</style>
+
+@foreach (var item in Model)
+{
+    var colorClass = "TypeColor" + item.ADTypeId;
+    <div class="col-md-12" id="@item.Id">
+        <div class="featured-box2" style="min-height:150px">
+            <div class="col-md-2">
+                <figure>
+                    <p class=" icon-box2  @colorClass " data-toggle="tab" title="Rss">
+                        <img src="@item.ADCategory.SecondImage" />
+                    </p>
+                </figure>
+            </div>
+            <div class="col-md-10">
+                <button type="button" onclick="DeleteSearch(@item.Id)" class="close-style2" data-dismiss="modal">
+                    <i class="fa fa-trash" aria-hidden="true"></i>  Delete
+                </button>
+                <div class="row">
+                    <div class="feature-content col-12">
+
+                        <h4>
+                            <a href="ads-details.html">
+                                You searched for: @item.ADCategory.En_Name,
+                                @item.ADType.En_Name , @item.Location.Split('-')[0]
+                            </a>
+                        </h4>
+                        <div class="padding-form3">
+                            <span>@HelperFunctions.GetTime(item.Date)</span>
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="padding-form4">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <label>Allow Email alert</label>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="padding-form4">
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider round"></span>
+                                </label>
+                                <label>Allow Push Notifications</label>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="display:flex ; justify-content:end; align-content:center">
+                            <button type="button" style="position:relative;top:0;left:0;width:100%" class="change-btn5" name="button" onclick="GoToSearch('@item.ADTypeId','@item.ADCategoryId','@item.Location.Split('-')[0].ToString()','@Url.Action("All","Ads")' )">Go</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+
+
+    function DeleteSearch(id) {
+
+        console.log("in ", id);
+
+        $.ajax({
+            url: "/Users/DeletSavedSearch?searchId=" + id,
+            method: "GET",
+            contentType: "application/json",
+            success: function (response) {
+
+
+
+
+                if (response.isSuccess) {
+                    $("#" + id).fadeOut();
+                }
+            },
+            error: function (error) {
+                alert(error.message);
+                console.log(error);
+            }
+        });
+    }
+
+
+
+
+
+</script>

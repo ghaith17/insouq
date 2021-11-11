@@ -1,0 +1,592 @@
+﻿@using insouq.Shared.Utility
+@model List<insouq.Shared.DTOS.TypeDTOS.TypeDTO>
+
+<div class="notification-style">
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Post an Ad</h1>
+                <ol class="breadcrumb-style">
+                    <li><a asp-controller="Home" asp-action="Index" class="breadcrumb-color">Home > </a></li>
+                    <li class="breadcrumb-color"> Post an Ad</li>
+                </ol>
+
+            </div>
+            <div class="col-md-12">
+
+                <p class="post-p">Let’s start by selecting the right category for your listing</p>
+                <ul class="social-network5 social-circle change-color" style="display: flex;">
+                    <li><a onclick="GetCategories(@StaticData.Motors_ID, 'Motors')" href="#categoiesItem" data-toggle="tab" class="icocar home-motors" title="Motors"></a><p>Motors</p></li>
+                    <li><a onclick="GetCategories(@StaticData.Properties_ID, 'Properties')" href="#categoiesItem" data-toggle="tab" class="icoTwitter home-Property" title="Property"></a><p>Property</p></li>
+                    <li><a onclick="GetCategories(@StaticData.Jobs_ID, 'Jobs')" href="#categoiesItem" data-toggle="tab" class="icoGoogle home-Jobs" title="Jobs"></a><p>Jobs</p></li>
+                    <li><a onclick="GetCategories(@StaticData.Services_ID, 'Services')" href="#categoiesItem" data-toggle="tab" class="icoLinkedin home-Services" title="Services"></a><p>Services</p></li>
+                    <li><a onclick="GetCategories(@StaticData.Business_ID, 'Business')" href="#categoiesItem" data-toggle="tab" class="icobag home-Business" title="Business"></a><p>Business</p></li>
+                    <li><a onclick="GetClassifiedData()" href="#c1" data-toggle="tab" class="icopa home-Classifieds" title="Classifieds"></a><p>Classifieds</p></li>
+                    <li><a onclick="GetCategories(@StaticData.Numbers_ID, 'Numbers')" href="#categoiesItem" data-toggle="tab" class="icope home-Numbers" title="Numbers"></a><p>Numbers</p></li>
+                    <li><a onclick="GetCategories(@StaticData.Electronics_ID, 'Electronics')" href="#categoiesItem" data-toggle="tab" class="icoya home-Electronics" title="Electronics"></a><p>Electronics</p></li>
+
+
+                    @*@foreach (var item in Model)
+            {
+                <li onclick="GetCategories(@item.Id, '@item.En_Name')"><a href="#categoiesItem" data-toggle="tab" class="icocar"><i class="fa fa-car"></i><p>@item.En_Name</p></a></li>
+            }*@
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane" id="categoiesItem">
+                        <div class="row" id="formData">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-7">
+                                <div id="contents">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+
+        var makerDLloaded = false;
+        var subCategoryIdloaded = false;
+        var locationloaded = false;
+        var categoryIdloaded = false;
+
+        function GetCategories(id, typeName) {
+            $.ajax({
+                url: `/Categories/GetCategories?typeId=${id}`,
+                method: "get",
+                success: function (response) {
+                    if (response.count == 0) {
+                        window.location.href = `/${typeName}/Add`;
+                    } else {
+                        $("#categoriesList").remove();
+                        $(`<div id="categoriesList"><p class="post-p2">What exactly would you like to list in ${typeName} ?</p>
+                                                    <div id="tabs">
+                                                        <ul class="list-motor"></ul></div></div>`).insertBefore("#formData");
+                    }
+
+                    var items = [];
+
+                    $.each(response.items, function (i, item) {
+
+                        var href = `/${typeName}/Add/?categoryId=${item.id}`;
+
+                        var onclick = "";
+
+                        if (id == Motors_ID) {
+                            href = "#m1";
+                            onclick = `GetMotorData(${item.id})`;
+                        }
+                        else if (id == Services_ID) {
+                            href = "#s1";
+                            onclick = `GetServiceData(${item.id})`;
+                        }
+                        else if (item.id == JobOpening_ID) {
+                            href = `/Users/MyCompanyProfile?categoryId=${item.id}`;
+                        }
+
+                        else if (item.id == JobWanted_ID) {
+                            href = "#j1";
+                            onclick = `GetJobWantedData(${item.id})`;
+                        }
+
+                        if (id == Business_ID) {
+                            if (item.id != 23) return; // hide bussiness others
+                        }
+
+
+
+                        items.push(`<li><a onclick="${onclick}" href="${href}"><i class="fa icon-motors-${item.id}"><p>${item.en_Name}</p></i></a></li>`);
+
+                            var serverDomain = "@StaticData.SERVER_DOMAIN";
+
+                            var firstImageSrc = serverDomain + item.firstImage;
+
+                            var secondImageSrc = serverDomain + item.secondImage;
+
+                            firstImageSrc = firstImageSrc.replace('\\', '/');
+
+                            firstImageSrc = firstImageSrc.replace('\\', '/');
+
+                            secondImageSrc = secondImageSrc.replace('\\', '/');
+
+                            secondImageSrc = secondImageSrc.replace('\\', '/');
+
+
+                        var color = getColorByTypeId(id);
+
+
+                            $("head").append('<style type="text/css"></style>');
+                            var newStyleElement = $("head").children(':last');
+                            newStyleElement.html(`.icon-motors-${item.id} {
+                                background: url("${firstImageSrc}") no-repeat !important;
+                                background-position-x: 50% !important;
+                                background-position-y: 29% !important;
+                                background-color: #fff !important;
+                        }
+.icon-motors-${item.id}:hover{
+background: url("${secondImageSrc}") no-repeat !important;
+background-position-x: 50% !important;
+background-position-y: 29% !important;
+background-color: ${color} !important;
+}
+`);
+
+                    });
+
+                    $('.list-motor').append(items.join(''));
+
+                    $("#contents").css("display", "none");
+
+                    //if (id == Motors_ID) {
+                    //    $("#contents").css("display", "block");
+
+                    //}
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+        function GetMotorData(categoryId) {
+            makerDLloaded = false;
+            subCategoryIdloaded = false;
+            $.ajax({
+                url: `/Motors/GetData?categoryId=${categoryId}`,
+                success: function (response) {
+                    $("#contents").css("display", "block");
+                    $("#contents").empty();
+                    $("#contents").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+        function GetServiceData(categoryId) {
+            subCategoryIdloaded = false;
+            locationloaded = false;
+            $.ajax({
+                url: `/Services/GetServiceData?categoryId=${categoryId}`,
+                success: function (response) {
+                    $("#contents").css("display", "block");
+                    $("#contents").empty();
+                    $("#contents").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+        function GetClassifiedData() {
+            subCategoryIdloaded = false;
+            $.ajax({
+                url: "/Classifieds/GetInitialClassifiedData",
+                success: function (response) {
+                    $("#contents").css("display", "block");
+                    $("#contents").empty();
+                    $("#contents").html(response);
+                    $("#categoriesList").remove();
+                    $(".tab-pane").css("display", "block");
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+        function GetJobWantedData() {
+            $.ajax({
+                url: "/Jobs/GetJobWantedData",
+                success: function (response) {
+                    $("#contents").css("display", "block");
+                    $("#contents").empty();
+                    $("#contents").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+        function onLocationClick() {
+                console.log(locationloaded);
+                if (locationloaded)
+                    return;
+                $.ajax({
+                    url: "/DropDowns/GetAllLocation",
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#location").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                        });
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+                locationloaded = true;
+        }
+
+
+        function onMakerClick() {
+            if (makerDLloaded)
+                return;
+
+            var categoryId = $("#categoryId").val();
+
+            $.ajax({
+                url: "/DropDowns/GetAllMotorMaker",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#maker").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    $("#maker").append(`<option value='others'>others</option>`);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            makerDLloaded = true;
+        }
+
+        function onMakerChange() {
+            var categoryId = $("#categoryId").val();
+
+            $('#model option').not(':first').remove();
+
+            $('#trim option').not(':first').remove();
+
+            $("#model").val(null);
+            $("#trim").val(null);
+
+            $("#otherModel").html("");
+            $("#otherTrim").html("");
+
+            if ($("#maker").val() != "") {
+                if ($("#maker").val().toLowerCase() == "others") {
+                    $("#otherMaker").css("display", "block");
+                    $("#otherMaker").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherMaker' name='OtherMaker' class="line-input-style15" type="text">
+                                    </p>`);
+
+
+                    $("#model").append(`<option value='others'>others</option>`);
+
+                } else {
+
+                    $("#otherMaker").html("");
+
+                    var maker = $("#maker").val();
+                    $.ajax({
+                        url: `/DropDowns/GetAllMotorModelByMaker?maker=${maker}`,
+                        method: "GET",
+                        success: function (response) {
+                            $.each(response.items, function (i, item) {
+                                $("#model").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                            });
+
+                            $("#model").append(`<option value='others'>others</option>`);
+                        },
+                        error: function (error) {
+                            alert(error.message);
+                        }
+                    });
+                }
+            } else {
+                $("#otherMaker").html("");
+            }
+        }
+
+        function onModelChange() {
+
+            $('#trim option').not(':first').remove();
+
+            $("#otherTrim").html("");
+            $("#trim").val(null);
+
+            if ($("#model").val() != "") {
+                if ($("#model").val().toLowerCase() == "others") {
+                    $("#otherModel").css("display", "block");
+                    $("#otherModel").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherModel' name='OtherModel' class="line-input-style15" type="text">
+                                    </p>`);
+
+
+                    $("#trim").append(`<option id="othersTrim" value='others'>others</option>`);
+
+                } else {
+                    $("#otherModel").html("");
+
+                    var model = $("#model").val();
+                    $.ajax({
+                        url: `/DropDowns/GetAllMotorTrimByModel?model=${model}`,
+                        method: "GET",
+                        success: function (response) {
+                            console.log(response);
+                            $.each(response.items, function (i, item) {
+                                $("#trim").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                            });
+
+                            if ($('#othersTrim').length) {
+                            } else {
+                                $("#trim").append(`<option id="othersTrim" value='others'>others</option>`);
+                            }
+
+                        },
+                        error: function (error) {
+                            alert(error.message);
+                        }
+                    });
+                }
+            } else {
+                $("#otherModel").html("");
+            }
+
+        }
+
+
+        function onCategoryClick() {
+            if (categoryIdloaded)
+                return;
+            $.ajax({
+                url: `/Categories/GetCategories?typeId=${Classifieds_ID}`,
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#categoryId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            categoryIdloaded = true;
+        }
+
+        function onCategoryChange() {
+                $("#otherSubCategory").html("");
+                $("#otherSubType").html("");
+                $("#subCategoryId").val(null);
+                $("#subCategoryId option").not(':first').remove();
+                $("#subTypeId").val(null);
+                $("#subTypeId option").not(':first').remove();
+
+                if ($("#categoryId").val() != "") {
+                    var categoryId = $("#categoryId").val();
+                    $.ajax({
+                        url: `/SubCategories/GetSubCategories?categoryId=${categoryId}`,
+                        method: "GET",
+                        success: function (response) {
+                            $.each(response.items, function (i, item) {
+                                $("#subCategoryId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                            });
+
+                            $("#subCategoryId").append(`<option value='0'>others</option>`);
+
+                        },
+                        error: function (error) {
+                            alert(error.message);
+                        }
+                    });
+
+                }
+        }
+
+        function onSubCategoryClick() {
+            if (subCategoryIdloaded)
+                return;
+
+            var categoryId = $("#categoryId").val();
+
+            $.ajax({
+                url: `/SubCategories/GetSubCategories?categoryId=${categoryId}`,
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#subCategoryId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                    });
+
+                    $("#subCategoryId").append(`<option value='0'>others</option>`);
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            subCategoryIdloaded = true;
+        }
+
+        function onSubCategoryChange() {
+            if ($("#subCategoryId").val().toLowerCase() == "0") {
+                console.log("asd");
+                $("#otherSubCategory").css("display", "block");
+                $("#otherSubCategory").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherSubCategory' name='OtherSubCategory' class="line-input-style15" type="text">
+                                    </p>`);
+
+                $('#subTypeId option').not(':first').remove();
+
+                $("#subTypeId").append(`<option id="othersSubType" value='0'>others</option>`);
+
+                $('#partName option').not(':first').remove();
+                $("#partName").append(`<option value='0'>others</option>`);
+
+
+            } else {
+                $("#otherSubCategory").html("");
+                $("#otherSubType").html("");
+                $("#otherPartName").html("");
+                $("#partName").val(null);
+                $("#subTypeId").val(null);
+                $("#subTypeId option").not(':first').remove();
+                $("#partName option").not(':first').remove();
+
+                if ($("#subCategoryId").val() != "") {
+                    var subCategoryId = $("#subCategoryId").val();
+                    $.ajax({
+                        url: `/SubTypes/GetSubTypes?subCategoryId=${subCategoryId}`,
+                        method: "GET",
+                        success: function (response) {
+                            $.each(response.items, function (i, item) {
+                                $("#subTypeId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                            });
+
+
+                            $("#subTypeId").append(`<option id="othersSubType" value='0'>others</option>`);
+
+                        },
+                        error: function (error) {
+                            alert(error.message);
+                        }
+                    });
+
+                }
+
+            }
+        }
+
+        function onSubTypeChange() {
+            if ($("#subTypeId").val().toLowerCase() == "0") {
+                $("#otherSubType").css("display", "block");
+                $("#otherSubType").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherSubType' name='OtherSubType' class="line-input-style15" type="text">
+                                    </p>`);
+
+
+                $('#partName option').not(':first').remove();
+
+                $("#partName").append(`<option value='0'>others</option>`);
+
+            } else {
+                $("#otherSubType").html("");
+                $("#otherPartName").html("");
+                $("#partName").val(null);
+                $("#partName option").not(':first').remove();
+
+                if ($("#subTypeId").val() != "") {
+                    var subTypeId = $("#subTypeId").val();
+                    $.ajax({
+                        url: `/DropDowns/GetAllParts?subTypeId=${subTypeId}`,
+                        method: "GET",
+                        success: function (response) {
+                            $.each(response.items, function (i, item) {
+                                $("#partName").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                            });
+
+
+                            $("#partName").append(`<option value='0'>others</option>`);
+
+                        },
+                        error: function (error) {
+                            alert(error.message);
+                        }
+                    });
+
+                }
+            }
+        }
+
+        function onPartNameChange() {
+            if ($("#partName").val().toLowerCase() == "0") {
+                $("#otherPartName").css("display", "block");
+                $("#otherPartName").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherPartName' name='OtherPartName' class="line-input-style15" type="text">
+                                    </p>`);
+
+            } else {
+                $("#otherPartName").html("");
+            }
+        }
+
+        function onTrimChange() {
+            if ($("#trim").val().toLowerCase() == "others") {
+                $("#otherTrim").css("display", "block");
+                $("#otherTrim").html(`<p class="padding-p">
+                                                <input placeholder="Other, please type here" required id='OtherTrim' name='OtherTrim' class="line-input-style15" type="text">
+                                                        </p>`);
+            } else {
+                $("#otherTrim").html("");
+            }
+        }
+
+        var jobTypeDLloaded = false;
+
+        function onJobTypeClick() {
+                if (jobTypeDLloaded)
+                    return;
+                $.ajax({
+                    url: "/DropDowns/GetAllJobType",
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#JobType").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                        });
+
+                        $("#JobType").append(`<option value='others'>others</option>`);
+
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+                jobTypeDLloaded = true;
+        }
+
+
+        function onJobTypeChange() {
+            if ($("#JobType").val().toLowerCase() == "others") {
+                    $("#otherJobType").css("display", "block");
+                    $("#otherJobType").html(`<p class='padding-p'>
+                                    <input placeholder="Other, please type here" required class="line-input-style15" id="OtherJobType" name="OtherJobType">
+                                </p>`);
+
+                } else {
+                    $("#otherJobType").html("");
+
+                }
+        }
+
+    </script>
+}

@@ -1,0 +1,256 @@
+﻿<div class="notification-style">
+    <div class="tab-pane active">
+        <div class="contents">
+            <div id="exTab1" class="container tabad">
+                <ul class="social-network social-circle">
+
+                    @{
+                        var myAdsCount = 0;
+
+                        foreach (var item in Model.MyAdsCount)
+                        {
+                            myAdsCount += item.Count;
+                        }
+
+                        var myFavoriteCount = 0;
+
+                        foreach (var item in Model.MyFavoriteCount)
+                        {
+                            myFavoriteCount += item.Count;
+                        }
+
+                        var mySavedSearchCount = 0;
+
+                        foreach (var item in Model.MySavedSearchCount)
+                        {
+                            mySavedSearchCount += item.Count;
+                        }
+                    }
+                    <li><a href="#1a" data-toggle="tab" class="tab-ad">My Ads <span class="tab-count">@myAdsCount</span></a></li>
+                    <li><a href="#2a" data-toggle="tab" class="tab-ad"> My favorite <span class="tab-count">@myFavoriteCount</span></a></li>
+                    <li><a href="#3a" data-toggle="tab" class="tab-ad">Saved Searches <span class="tab-count">@mySavedSearchCount</span></a></li>
+
+                </ul>
+                <div class="tab-content clearfix">
+
+                    <div class="tab-pane" id="1a">
+                        <div class="contents">
+                            <div id="exTab1" class="container">
+                                @*<ul class="social-network social-circle">
+                                    <li><a href="#ads" onclick="GetMyAds(1)" data-toggle="tab" class="icocar"><i class="fa fa-car"></i></a></li>
+                                    <li><a href="#ads" onclick="GetMyAds(2)" data-toggle="tab" class="icoTwitter"><i class="fa fa-home"></i></a></li>
+                                    <li><a href="#ads" onclick="GetMyAds(3)" data-toggle="tab" class="icoGoogle"><i class="fa fa-user"></i></a></li>
+                                    <li><a href="#ads" onclick="GetMyAds(4)" data-toggle="tab" class="icoLinkedin"><i class="fa fa-wrench"></i></a></li>
+                                    <li><a href="#ads" onclick="GetMyAds(5)" data-toggle="tab" class="icobag"><i class="fa fa-briefcase"></i></a></li>
+                                    <li><a href="#ads" onclick="GetMyAds(6)" data-toggle="tab" class="icopa"><i class="fa fa-list"></i></a></li>
+                                    <li><a href="#ads" onclick="GetMyAds(7)" data-toggle="tab" class="icope"><i class="fa fa-ellipsis-h"></i></a></li>
+                                    <li><a href="#ads" onclick="GetMyAds(8)" data-toggle="tab" class="icoya"><i class="fa fa-square"></i></a></li>
+
+                                </ul>*@
+                                <ul class="social-network social-circle">
+
+                                    <li><span class="motors-color">@Model.MyAdsCount[0].Count</span><a href="#ads" onclick="GetMyAds(1)" data-toggle="tab" class="icocar home-motors" title="Motors"></a></li>
+                                    <li><span class="proparity-color">@Model.MyAdsCount[1].Count</span><a href="#ads" onclick="GetMyAds(2)" data-toggle="tab" class="icoTwitter home-Property" title="Property"></a></li>
+                                    <li><span class="jop-color">@Model.MyAdsCount[2].Count</span><a href="#ads" onclick="GetMyAds(3)" data-toggle="tab" class="icoGoogle home-Jobs" title="Jobs"></a></li>
+                                    <li><span class="services-color">@Model.MyAdsCount[3].Count</span><a href="#ads" onclick="GetMyAds(4)" data-toggle="tab" class="icoLinkedin home-Services" title="Services"></a></li>
+                                    <li><span class="Business-color">@Model.MyAdsCount[4].Count</span><a href="#ads" onclick="GetMyAds(5)" data-toggle="tab" class="icobag home-Business" title="Business"></a></li>
+                                    <li><span class="classifieds-color">@Model.MyAdsCount[5].Count</span><a href="#ads" onclick="GetMyAds(6)" data-toggle="tab" class="icopa home-Classifieds" title="Classifieds"></a></li>
+                                    <li><span class="numbers-color">@Model.MyAdsCount[6].Count</span><a href="#ads" onclick="GetMyAds(7)" data-toggle="tab" class="icope home-Numbers" title="Numbers"></a></li>
+                                    <li><span class="electronics-color">@Model.MyAdsCount[7].Count</span><a href="#ads" onclick="GetMyAds(8)" data-toggle="tab" class="icoya home-Electronics" title="Electronics"></a></li>
+
+                                </ul>
+                                <div class="tab-content clearfix">
+
+                                    @*<div class="featured-box" id="advirtisingDiv" style="display:none;">
+                                        <div class="mylist-tabel">
+                                            <ul>
+                                                <li class="moto-count" id="advirtisingCount"></li>
+                                                <li class="moto-adv">advertising</li>
+                                                <li class="moto-text" id="advirtisingCount2"></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>*@
+
+                                    <div class="tab-pane" id="ads">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="2a">
+                        <div class="contents">
+                            <div id="exTab1" class="container">
+
+                                @*<ul class="social-network social-circle">
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(1)" data-toggle="tab" class="icocar"><i class="fa fa-car"></i></a></li>
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(2)" data-toggle="tab" class="icoTwitter"><i class="fa fa-home"></i></a></li>
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(3)" data-toggle="tab" class="icoGoogle"><i class="fa fa-user"></i></a></li>
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(4)" data-toggle="tab" class="icoLinkedin"><i class="fa fa-wrench"></i></a></li>
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(5)" data-toggle="tab" class="icobag"><i class="fa fa-briefcase"></i></a></li>
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(6)" data-toggle="tab" class="icopa"><i class="fa fa-list"></i></a></li>
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(7)" data-toggle="tab" class="icope"><i class="fa fa-ellipsis-h"></i></a></li>
+            <li><a href="#myFav" onclick="GetMyFavoriteAds(8)" data-toggle="tab" class="icoya"><i class="fa fa-square"></i></a></li>
+
+        </ul>*@
+                                <ul class="social-network social-circle">
+
+                                    <li><span class="motors-color">@Model.MyFavoriteCount[0].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(1)" data-toggle="tab" class="icocar home-motors" title="Motors"></a></li>
+                                    <li><span class="proparity-color">@Model.MyFavoriteCount[1].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(2)" data-toggle="tab" class="icoTwitter home-Property" title="Property"></a></li>
+                                    <li><span class="jop-color">@Model.MyFavoriteCount[2].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(3)" data-toggle="tab" class="icoGoogle home-Jobs" title="Jobs"></a></li>
+                                    <li><span class="services-color">@Model.MyFavoriteCount[3].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(4)" data-toggle="tab" class="icoLinkedin home-Services" title="Services"></a></li>
+                                    <li><span class="Business-color">@Model.MyFavoriteCount[4].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(5)" data-toggle="tab" class="icobag home-Business" title="Business"></a></li>
+                                    <li><span class="classifieds-color">@Model.MyFavoriteCount[5].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(6)" data-toggle="tab" class="icopa home-Classifieds" title="Classifieds"></a></li>
+                                    <li><span class="numbers-color">@Model.MyFavoriteCount[6].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(7)" data-toggle="tab" class="icope home-Numbers" title="Numbers"></a></li>
+                                    <li><span class="electronics-color">@Model.MyFavoriteCount[7].Count</span><a href="#myFav" onclick="GetMyFavoriteAds(8)" data-toggle="tab" class="icoya home-Electronics" title="Electronics"></a></li>
+
+                                </ul>
+                                <div class="tab-content clearfix">
+
+                                    <div class="tab-pane" id="myFav">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="3a">
+                        <div class="contents">
+                            <div id="exTab1" class="container">
+                                @*<ul class="social-network social-circle">
+                                <li><a href="#mySreach" onclick="GetSavedSearch(1)" data-toggle="tab" class="icocar"><i class="fa fa-car"></i></a></li>
+                                <li><a href="#mySreach" onclick="GetSavedSearch(2)" data-toggle="tab" class="icoTwitter"><i class="fa fa-home"></i></a></li>
+                                <li><a href="#mySreach" onclick="GetSavedSearch(3)" data-toggle="tab" class="icoGoogle"><i class="fa fa-user"></i></a></li>
+                                <li><a href="#mySreach" onclick="GetSavedSearch(4)" data-toggle="tab" class="icoLinkedin"><i class="fa fa-wrench"></i></a></li>
+                                <li><a href="#mySreach" onclick="GetSavedSearch(5)" data-toggle="tab" class="icobag"><i class="fa fa-briefcase"></i></a></li>
+                                <li><a href="#mySreach" onclick="GetSavedSearch(6)" data-toggle="tab" class="icopa"><i class="fa fa-list"></i></a></li>
+                                <li><a href="#mySreach" onclick="GetSavedSearch(7)" data-toggle="tab" class="icope"><i class="fa fa-ellipsis-h"></i></a></li>
+                                <li><a href="#mySreach" onclick="GetSavedSearch(8)" data-toggle="tab" class="icoya"><i class="fa fa-square"></i></a></li>
+
+                            </ul>*@
+                                <ul class="social-network social-circle">
+
+                                    <li><span class="motors-color">@Model.MySavedSearchCount[0].Count</span><a href="#mySreach" onclick="GetSavedSearch(1)" data-toggle="tab" class="icocar home-motors" title="Motors"></a></li>
+                                    <li><span class="proparity-color">@Model.MySavedSearchCount[1].Count</span><a href="#mySreach" onclick="GetSavedSearch(2)" data-toggle="tab" class="icoTwitter home-Property" title="Property"></a></li>
+                                    <li><span class="jop-color">@Model.MySavedSearchCount[2].Count</span><a href="#mySreach" onclick="GetSavedSearch(3)" data-toggle="tab" class="icoGoogle home-Jobs" title="Jobs"></a></li>
+                                    <li><span class="services-color">@Model.MySavedSearchCount[3].Count</span><a href="#mySreach" onclick="GetSavedSearch(4)" data-toggle="tab" class="icoLinkedin home-Services" title="Services"></a></li>
+                                    <li><span class="Business-color">@Model.MySavedSearchCount[4].Count</span><a href="#mySreach" onclick="GetSavedSearch(5)" data-toggle="tab" class="icobag home-Business" title="Business"></a></li>
+                                    <li><span class="classifieds-color">@Model.MySavedSearchCount[5].Count</span><a href="#mySreach" onclick="GetSavedSearch(6)" data-toggle="tab" class="icopa home-Classifieds" title="Classifieds"></a></li>
+                                    <li><span class="numbers-color">@Model.MySavedSearchCount[6].Count</span><a href="#mySreach" onclick="GetSavedSearch(7)" data-toggle="tab" class="icope home-Numbers" title="Numbers"></a></li>
+                                    <li><span class="electronics-color">@Model.MySavedSearchCount[7].Count</span><a href="#mySreach" onclick="GetSavedSearch(8)" data-toggle="tab" class="icoya home-Electronics" title="Electronics"></a></li>
+
+                                </ul>
+                                <div class="tab-content clearfix">
+
+                                    <div class="tab-pane" id="mySreach">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts {
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script>
+        function GetMyAds(typeId) {
+            $.ajax({
+                url: `/Ads/GetMyAds?typeId=${typeId}`,
+                method: "get",
+                success: function (response) {
+                    $("#advirtisingDiv").css("display", "block");
+                    $("#ads").empty();
+                    $("#ads").html(response);
+                    var count = $('.myAdDiv').length;
+                    console.log(count);
+                    $("#advirtisingCount").html(count);
+                    $("#advirtisingCount2").html("Number plates credits: " + count + "/" + count);
+                    $("#advirtisingDiv").css("display", "block");
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+        function GetMyFavoriteAds(typeId) {
+            $.ajax({
+                url: `/Ads/GetMyFavoriteAds?typeId=${typeId}`,
+                method: "get",
+                success: function (response) {
+                    $("#myFav").empty();
+                    $("#myFav").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+
+
+        function GetSavedSearch(typeId) {
+            $.ajax({
+                url: `/Ads/GetMySearches?typeId=${typeId}`,
+                method: "get",
+                success: function (response) {
+                    $("#mySreach").empty();
+                    $("#mySreach").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+
+        function DeleteAd(adId) {
+
+            var result = confirm("Are you sure you want to delete this ad ?");
+            if (result) {
+                var data = {
+                    adId: adId
+                };
+
+                $.ajax({
+                    url: `/Ads/Delete`,
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (!response.isSuccess) {
+                            alert(response.message);
+                        } else {
+                            window.location.reload();
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    function GoToEdit(typeName, adId) {
+    console.log(`/${typeName}/Update?adId=${adId}`);
+    window.location.href = `/${typeName}/Update?adId=${adId}`;
+    }
+
+    </script>
+}
+

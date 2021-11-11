@@ -1,0 +1,165 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/*******************************************************/
+
+.featured-box11 {
+    width: 46%;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 18px 0px rgb(198 198 198 / 30%);
+}
+.change-btn9 {
+    text-align: center;
+    width: 20%;
+    background: #FFB01C;
+    color: #fff;
+    padding: 7px 0px;
+    border: 0px;
+    border-radius: 30px;
+    text-transform: uppercase;
+}
+.line-input-style15 {
+    display: block;
+    border: none;
+    border-bottom: none;
+    width: 83%;
+    height: 40px;
+    font-weight: bold;
+    background: #fff;
+    float: right;
+    margin-right: 130px;
+    color: black;
+    margin-bottom: 20px;
+}
+.line-input-style16 {
+    display: block;
+    border: none;
+    border-bottom: none;
+    width: 83%;
+    height: 40px;
+    font-weight: bold;
+    background: #fff;
+    float: right;
+    margin-right: 130px;
+    color: black;
+    padding-left: 50px;
+    margin-bottom: 20px;
+}
+.label-price1 {
+    position: absolute;
+    left: 25px;
+    margin-top: 8px;
+}
+.location-style6 {
+  float: right;
+margin-right: 148px;
+margin-top: -45px;
+}
+.line-input-style17 {
+    display: block;
+    border: none;
+    border-bottom: none;
+    width: 83%;
+    height: 40px;
+    font-weight: bold;
+    background: #fff;
+    float: right;
+    margin-right: 130px;
+    color: black;
+    margin-bottom: 20px;
+}
+.line-input-style17::placeholder {
+    display: block;
+    border: none;
+    width: 50%;
+    background: none;
+    color: #FFB01C;
+    font-size: 14px;
+    margin-top: 26px;
+    font-weight: bold;
+}
+.signin-btn9 {
+    text-align: center;
+    font-size: 13px;
+    font-weight: bold;
+    width: 30%;
+    background: #FFB01C;
+    color: #fff;
+    padding: 7px 0px;
+    border: 0px;
+    border-radius: 30px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+

@@ -1,0 +1,20 @@
+﻿@model List<insouq.Shared.DTOS.TypeDTOS.TypeDTO>
+
+<ul class="navbar-nav mr-auto">
+    @foreach (var type in Model)
+    {
+    <li class="nav-item dropdown inline-view">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @type.En_Name
+        </a>
+        <div class="dropdown-menu">
+
+            @foreach (var category in type.Categories)
+            {
+                <a class="dropdown-item" asp-controller="Ads" asp-action="All" asp-route-typeId="@type.Id" asp-route-categoryId="@category.Id">@category.En_Name</a>
+            }
+
+        </div>
+    </li>
+    }
+</ul>

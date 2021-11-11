@@ -1,0 +1,176 @@
+﻿@model insouq.Shared.DTOS.ServiceAdDTO
+
+<div class="notification-style">
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Post an Ad</h1>
+                <ol class="breadcrumb-style">
+                    <li><a href="home.html" class="breadcrumb-color">Home > </a></li>
+                    <li class="breadcrumb-color"> Post an Ad</li>
+                </ol>
+
+            </div>
+
+            <div class="form-width">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-7">
+                    <form asp-action="Update" method="post" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.AdId)
+                        @Html.HiddenFor(m => m.CategoryId)
+                        @Html.HiddenFor(m => m.Lng, new { id = "lng" })
+                        @Html.HiddenFor(m => m.Lat, new { id = "lat" })
+                        <input hidden value="@Model.SubCategoryId" id="subCatId" />
+                        <input hidden value="@Model.Location" id="locationValue" />
+
+
+                        <p class="post-p3">Let’s start with the title</p>
+                        <p>Try to have an informative title that’s to be point and not very long</p>
+                        <div class="padding-form">
+                            <input type="text" class="line-input-style17" maxlength="40" required asp-for="Title" placeholder="Dodge charger 2010 for Sale, perfect condition">
+                            <Small>Recommended 40 characters</Small>
+                            <p class="post-p4">Looks good, Now please add more details</p>
+                        </div>
+
+                        <div class="padding-form">
+                            <label class="change-color">Phone Number</label>
+                            <input required type="number" class="line-input-style17" asp-for="PhoneNumber">
+                        </div>
+
+                        <div class="padding-form">
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                            <br>
+                            <span>@Model.Description.Length/400 words</span>
+                        </div>
+
+                        <p class="post-p4">Specifications</p>
+
+
+                        <div class="padding-form">
+                            <select onchange="onServiceTypeChanged()" required asp-for="SubCategoryId"
+                                    class="line-input-style15" id="subCategoryDL">
+                                <option value="">Service Type</option>
+                            </select>
+                        </div>
+
+                        @if (!string.IsNullOrEmpty(Model.OtherSubCategory))
+                        {
+                            <div id="otherServiceType">
+                                <div class='padding-form'>
+                                    <input placeholder="Other, please type here" required class="line-input-style15" asp-for="OtherSubCategory">
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div id="otherServiceType" style="display:none">
+
+                            </div>
+                        }
+
+
+                        <div class="padding-form">
+                            <select required asp-for="Location" class="line-input-style15" id="locationDL">
+                                <option value="">Your Location</option>
+                            </select>
+                        </div>
+
+
+                        <div class="padding-form">
+                            <button type="button" class="change-btn2" name="button" onclick="GetLocation()">Detect Location</button>
+                        </div>
+
+                        <label class="cont2">
+                            <p class="text-style3">
+                                By submitting this ad, I agree on <a href="#"> {Terms & Conditions}</a> and
+                                <a href="#">{Privacy Policy}</a>
+                            </p>
+                            <input type="checkbox">
+                            <span class="checkmark3" required></span>
+                        </label>
+
+
+                        <label class="">
+                            <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+
+                        </label>
+
+                        <div class="padding-form padding-top">
+                            <button type="submit" class="change-btn3" name="button">CONTINUE</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        window.onload = function () {
+
+            $.ajax({
+                url: "/SubCategories/GetSubCategories?categoryId=@Model.CategoryId",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#subCategoryDL").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                    });
+
+                    $("#subCategoryDL").append(`<option value='0'>Others</option>`);
+
+                    var subCategoryId = $("#subCatId").val();
+
+                    if (subCategoryId == "") {
+                        $("#subCategoryDL").val('0');
+                    } else {
+                        $("#subCategoryDL").val(subCategoryId);
+                    }
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+
+                $.ajax({
+                    url: "/DropDowns/GetAllLocation",
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#locationDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                        });
+
+                        var location = $("#locationValue").val();
+
+                        $("#locationDL").val(location);
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+
+        }
+    </script>
+    <script>
+        function onServiceTypeChanged() {
+            if ($("#subCategoryDL").val().toLowerCase() == "0") {
+                $("#otherServiceType").css("display", "block");
+                $("#otherServiceType").html(`<div class='padding-form'>
+                                    <input placeholder="Other, please type here" required  class="line-input-style15" id="OtherSubCategory" name="OtherSubCategory">
+                                </div>`);
+            } else {
+                $("#otherServiceType").html("");
+            }
+
+        }
+
+    </script>
+}

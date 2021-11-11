@@ -1,0 +1,53 @@
+﻿@{
+    ViewData["Title"] = "Classifieds DL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["ActivePage"] = "Classifieds DL";
+}
+
+@using insouq.Shared.Utility
+
+<div class="row">
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="Category" asp-action="Index" asp-route-typeId="@StaticData.Classifieds_ID">
+            <div class="dl-style">
+                <p>Classified Category</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="SubCategory" asp-action="WithCategory" asp-route-typeId="@StaticData.Classifieds_ID">
+            <div class="dl-style">
+                <p>Classified Sub Category</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="SubType" asp-action="WithCategory" asp-route-typeId="@StaticData.Classifieds_ID">
+            <div class="dl-style">
+                <p>Item Name</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="ClassifiedsDL" asp-action="Ages" asp-route-typeId="@StaticData.Classifieds_ID">
+            <div class="dl-style">
+                <p>Age</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="ClassifiedsDL" asp-action="Usages" asp-route-typeId="@StaticData.Classifieds_ID">
+            <div class="dl-style">
+                <p>Usage</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="ClassifiedsDL" asp-action="Conditions" asp-route-typeId="@StaticData.Classifieds_ID">
+            <div class="dl-style">
+                <p>Condition</p>
+            </div>
+        </a>
+    </div>
+</div>
+

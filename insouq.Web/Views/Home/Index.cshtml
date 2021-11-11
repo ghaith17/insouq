@@ -1,0 +1,1473 @@
+﻿@using insouq.Shared.Utility
+@model insouq.Web.ViewModels.HomeVM
+
+
+<style media="screen">
+    .jop-bar fieldset {
+        margin: 0px 70px;
+        border: 0;
+        padding: 0;
+        width: 100%;
+        float: none;
+    }
+
+    .line-style {
+        border: 1px solid white;
+        position: inherit;
+        padding-top: 8px;
+        padding-bottom: 8px;
+        background: white;
+        width: 91%;
+        background: white;
+        margin: 10px 70px;
+    }
+
+    #hero-area {
+        background: url(assets/img/124.png) no-repeat;
+        background-size: cover;
+        width: 100%;
+        height: 708px;
+        color: #fff;
+        overflow: hidden;
+        position: relative;
+        top: 80px;
+    }
+
+    .line-style1 {
+        border: 1px solid white;
+        position: initial;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 67%;
+        margin-left: 56px;
+        background: white;
+    }
+
+    .bann-top img {
+        width: 100%;
+        margin-top: 0;
+        height: 2cm;
+    }
+
+    .bann-marge {
+        margin-top: 100px;
+    }
+
+    .btn-style {
+        background-color: #8c63e7;
+        position: initial;
+        width: 83%;
+        height: 56px;
+        border: 0px;
+        color: #fff;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .line-style1 {
+        border: 1px solid white;
+        position: initial;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        width: 96%;
+        margin-left: 56px;
+        background: white;
+    }
+
+    .numbers-home {
+        width: 100%;
+        height: 152px;
+        border-radius: 6px;
+        object-fit: contain !important;
+        background: white;
+    }
+
+    .jop-bar .tg-select {
+        color: #666;
+        float: left;
+        width: 100%;
+        position: relative;
+        text-transform: uppercase;
+        background: #fff;
+    }
+
+    .jop-bar1 .form-group .form-control, .jop-bar .form-group .tg-select select {
+        border: 0;
+        height: 60px;
+        border-radius: 0;
+        font-size: 16px;
+        line-height: 30px;
+        padding: 15px 15px 15px 15px;
+        background: transparent;
+    }
+
+    .jop-bar .tg-select:after {
+        top: 10px;
+        right: 15px;
+        z-index: 0;
+        color: #666;
+        display: block;
+        content: '\e93a';
+        position: absolute;
+        text-align: center;
+        font-size: inherit;
+        line-height: 40px;
+        font-family: 'LineIcons';
+    }
+
+    .tg-inputwithicon .tg-selects select {
+        border: 0;
+        border-bottom: 1px solid #E4E8F0;
+        border-radius: 0;
+        font-size: 16px;
+        width: 100%;
+        line-height: 30px;
+        background: transparent;
+        z-index: 1;
+        width: 100%;
+        position: relative;
+        appearance: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        color: #6C7B8A;
+    }
+
+    .tg-inputwithicon .tg-selects:after {
+        top: 30px;
+        right: 15px;
+        z-index: 0;
+        color: #C9CCD2;
+        display: block;
+        content: '\e93a';
+        position: absolute;
+        text-align: center;
+        font-size: inherit;
+        line-height: 40px;
+        font-family: 'LineIcons';
+    }
+</style>
+
+<div id="hero-area">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-xs-12 text-center">
+                <div class="contents">
+                    <h1 class="head-title">List. Sell. Buy.<span class="year"> Repeat.</span></h1>
+                    <div id="exTab1" class="container">
+                        <ul class="social-network5 social-circle change-color home-ic">
+                            <!--<li class="active"><a--> @*href="#a1"*@ <!--class="icoRss" data-toggle="tab"><i>All</i></a></li>-->
+                            @*<li><a onclick="showCat(1)" class="icocar"><i class="fa fa-car"></i></a></li>
+                                <li><a onclick="showCat(2)" class="icoTwitter"><i class="fa fa-home"></i></a></li>
+                                <li><a onclick="showCat(3)" class="icoGoogle"><i class="fa fa-user"></i></a></li>
+                                <li><a onclick="showCat(4)" class="icoLinkedin"><i class="fa fa-wrench"></i></a></li>
+                                <li><a onclick="showCat(5)" class="icobag"><i class="fa fa-briefcase"></i></a></li>
+                                <li><a onclick="showCat(6)" class="icopa"><i class="fa fa-list"></i></a></li>
+                                <li><a onclick="showCat(7)" class="icope"><i class="fa fa-ellipsis-h"></i></a></li>
+                                <li><a onclick="showCat(8)" class="icoya"><i class="fa fa-square"></i></a></li>*@
+
+                            <li><a onclick="showCat(1)" class="titleview icocar home-motors" title="Motors"></a><p class="hides">Motors</p></li>
+                            <li><a onclick="showCat(2)" class="titleview icoTwitter home-Property" title="Property"></a><p class="hides">Property</p></li>
+                            <li><a onclick="showCat(3)" class="titleview icoGoogle home-Jobs" title="Jobs"></a><p class="hides">Jobs</p></li>
+                            <li><a onclick="showCat(4)" class="titleview icoLinkedin home-Services" title="Services"></a><p class="hides">Services</p></li>
+                            <li><a onclick="showCat(5)" class="titleview icobag home-Business" title="Business"></a><p class="hides">Business</p></li>
+                            <li><a onclick="showCat(6)" class="titleview icopa home-Classifieds" title="Classifieds"></a><p class="hides">Classifieds</p></li>
+                            <li><a onclick="showCat(7)" class="titleview icope home-Numbers" title="Numbers"></a><p class="hides">Numbers</p></li>
+                            <li><a onclick="showCat(8)" class="titleview icoya home-Electronics" title="Electronics"></a><p class="hides">Electronics</p></li>
+                        </ul>
+
+
+
+                        <div class="tab-content clearfix">
+                            <!------------------------------- orginal -------------------------------------------------------------------------->
+                            <!--
+                            <div class="tab-pane >
+                                <div class="search-bar">
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+                                                <input type="text" name="customword" class="form-control" id="txt1" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat1">
+                                                        @foreach (var item in Model.Types[0].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+                                                        }
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(1)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-------------------------------------- new start ------------------------------------------------------------------->
+
+                            <div class="tab-pane active" id="catItems1">
+
+                                <form class="search-form">
+                                    <div class="jop-bar">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="locationDL">
+                                                        <option value="">All Cities</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select cat-select">
+                                                    <select>
+                                                        <option value="none">Motors</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat1">
+                                                        @foreach (var item in Model.Types[0].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+
+                                    <div class="line-style" id="moreFilters">
+                                        <fieldset>
+                                            <div class="col-md-4">
+
+
+                                                <div class="form-group tg-inputwithicon">
+                                                    <div class="tg-selects">
+                                                        <label>Make</label>
+                                                        <select id="makerDL">
+                                                            <option value="none">All Makes</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group tg-inputwithicon">
+                                                    <div class="tg-selects ">
+                                                        <label>Model</label>
+                                                        <select id="modelDL">
+                                                            <option value="none">All Models</option>
+
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group tg-inputwithicon">
+                                                    <div class="tg-selects">
+                                                        <label class="label-style">Trim</label>
+                                                        <select id="trimDL">
+                                                            <option value="none">All Trims</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Price Range (in AED)</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="minPrice" class="line-input" name="" value="" placeholder="500,000">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="maxPrice" class="line-input" name="" value="" placeholder="500,000">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Year</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="minYear" class="line-input" name="" value="" placeholder="2005">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="maxYear" class="line-input" name="" value="" placeholder="2019">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-4">
+                                                <label>Mileage (in KMs)</label>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="minKm" class="line-input" name="" value="" placeholder="0">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <input type="text" id="maxKm" class="line-input" name="" value="" placeholder="50,000">
+                                                </div>
+                                            </div>
+
+
+                                        </fieldset>
+
+
+
+
+
+                                    </div>
+                                    <div class="col-md-10 mt-2">
+                                        <div class="line-style1">
+                                            <fieldset>
+                                                <div class="col-md-12">
+                                                    <input type="text" name="customword" class="input-style1" id="txt1" placeholder="I am looking for…">
+                                                </div>
+
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 mt-2">
+                                        <button class="btn-style" onclick="doSearch(1)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </div>
+                                    <!-- <button class="btn btn-common1" type="button"><i class="fa fa-search"></i>Search</button> -->
+                                </form>
+
+
+                            </div>
+
+                            <!--------------------------------------------------- new End ------------------------------------------------------>
+                            <div class="tab-pane" id="catItems2">
+                                <div class="search-bar">
+
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+
+                                                <input type="text" name="customword" class="form-control" id="txt2" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat2" style="font-size:14px;">
+                                                        @foreach (var item in Model.Types[1].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(2)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane" id="catItems3">
+                                <div class="search-bar">
+
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+
+                                                <input type="text" name="customword" class="form-control" id="txt3" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat3">
+                                                        @foreach (var item in Model.Types[2].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(3)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div class="tab-pane" id="catItems4">
+                                <div class="search-bar">
+
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+
+                                                <input type="text" name="customword" class="form-control" id="txt4" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat4">
+                                                        @foreach (var item in Model.Types[3].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(4)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="catItems5">
+                                <div class="search-bar">
+
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+
+                                                <input type="text" name="customword" class="form-control" id="txt5" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat5">
+                                                        @foreach (var item in Model.Types[4].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(5)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="catItems6">
+                                <div class="search-bar">
+
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+
+                                                <input type="text" name="customword" class="form-control" id="txt6" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat6">
+                                                        @foreach (var item in Model.Types[5].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(6)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="catItems7">
+                                <div class="search-bar">
+
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+
+                                                <input type="text" name="customword" class="form-control" id="txt7" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat7">
+                                                        @foreach (var item in Model.Types[6].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(7)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="tab-pane" id="catItems8">
+                                <div class="search-bar">
+
+                                    <form class="search-form">
+                                        <fieldset>
+                                            <div class="form-group tg-inputwithicon">
+
+                                                <input type="text" name="customword" class="form-control" id="txt8" placeholder="I am looking for…">
+                                            </div>
+                                            <div class="form-group tg-inputwithicon">
+                                                <div class="tg-select">
+                                                    <select id="cat8">
+                                                        @foreach (var item in Model.Types[7].Categories)
+                                                        {
+                                                            <option value="@item.Id">@item.En_Name</option>
+
+                                                        }
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <button class="btn btn-common1" onclick="doSearch(8)" type="button"><i class="fa fa-search"></i>Search</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="row" style="margin-top:100px">
+    <div class="col-md-2">
+        <div class="bann-left">
+            <img src="~/assets/img/86.png" alt="">
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="bann-top" style="margin-top:100px">
+
+            <img src="~/assets/img/88.png" alt="">
+        </div>
+
+
+        <section class="section-padding">
+            <div class="-card text-center wow  wow fadeInUp">
+                <h1 class="section-title1">Popular Categories</h1>
+                <div class="row">
+                    @foreach (var type in Model.Types)
+                    {
+                        var count = 1;
+
+
+                        <div class="col-md-3 items">
+
+                            @{
+                                var className = "items-bold" + (type.Id - 1);
+                            }
+                            <p class="@className">
+                                <img class="popular-images" src="@StaticFunctions.GetTypeImage(type.Id)" />
+                                @type.En_Name
+                            </p>
+
+                            @foreach (var category in type.Categories)
+                            {
+                                if (count == 4) break;
+
+                                <a asp-controller="Ads" asp-action="All" asp-route-typeId="@type.Id" asp-route-categoryId="@category.Id"><p class="subcat-home">@category.En_Name <span> (@category.NumberOfAds)</span></p></a>
+
+                                count++;
+
+                            }
+
+                            <p><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="@type.Id">Show More<i class="fa fa-arrow-right"></i></a></p>
+
+
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        </section>
+        <section style="background:#F6F6F9">
+
+
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(1)">New in Motors</h1>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="1" asp-route-categoryId="2">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.MotorsAds)
+                            {
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @{
+                                            var imageSrc = StaticData.SERVER_DOMAIN + item.Pictures
+                                                .FirstOrDefault().ImageURL;
+                                        }
+                                        <img class="recent-listing-image" src="@imageSrc">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Motors, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED @String.Format("{0:n0}", item.Price)
+                                    </div>
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(2)">New in Property</h1>
+
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="2" asp-route-categoryId="10">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.PropertyAds)
+                            {
+
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @{
+                                            var imageSrc = StaticData.SERVER_DOMAIN + item.Pictures
+                                                .FirstOrDefault().ImageURL;
+                                        }
+                                        <img class="recent-listing-image" src="@imageSrc">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Property, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+
+                                    @{
+                                        var price = "";
+                                        if (item.Price != null)
+                                        {
+                                            price = @String.Format("{0:n0}", item.Price);
+                                        }
+                                        else
+                                        {
+                                            price = @String.Format("{0:n0}", item.AnnualRent);
+                                        }
+                                    }
+
+                                    <div class="lisitng-price">
+                                        AED @price
+                                    </div>
+                                </a>
+                            }
+
+
+                            @*<a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/4.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">3 BR Luxurious Villa in heart of Dubai</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Property, Residential Property for Sale
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 2,350,949
+                                    </div>
+                                </a>
+                                <a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/5.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">Newly built 3 BR Villa</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Property, Residential Property for Sale
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 2,350,949
+                                    </div>
+                                </a>
+                                <a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/6.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">Newly built 3 BR Villa</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Property, Residential Property for Sale
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 144,400
+                                    </div>
+                                </a>
+                                <a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/7.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">3 BR Luxurious Villa in heart of Dubai</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Property, Residential Property for Sale
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 35,524
+                                    </div>
+                                </a>*@
+
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                </div>
+            </section>
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(3)">New in Jobs</h1>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Jobs_ID" asp-route-categoryId="@StaticData.JobOpening_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.JobsAds)
+                            {
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @{
+                                            var imageSrc = StaticData.SERVER_DOMAIN + item.Pictures
+                                                .FirstOrDefault().ImageURL;
+                                        }
+                                        <img class="recent-listing-image" src="@imageSrc">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Jobs, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+                                    @*<div class="lisitng-price">
+                                            AED @String.Format("{0:n0}", item.Price)
+                                        </div>*@
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(4)">New in Services</h1>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Services_ID" asp-route-categoryId="@StaticData.CarLift_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.ServicesAds)
+                            {
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @{
+                                            var imageSrc = StaticData.SERVER_DOMAIN + item.Pictures
+                                                .FirstOrDefault().ImageURL;
+                                        }
+                                        <img class="recent-listing-image" src="@imageSrc">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Services, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+                                    @*<div class="lisitng-price">
+                                            AED @String.Format("{0:n0}", item.Price)
+                                        </div>*@
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(5)">New in Business</h1>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Business_ID" asp-route-categoryId="23">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.BusinessAds)
+                            {
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @{
+                                            var imageSrc = StaticData.SERVER_DOMAIN + item.Pictures
+                                                .FirstOrDefault().ImageURL;
+                                        }
+                                        <img class="recent-listing-image" src="@imageSrc">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Business, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED @String.Format("{0:n0}", item.Price)
+                                    </div>
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(6)">New in Classifieds</h1>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Classifieds_ID" asp-route-categoryId="@StaticData.FurnitureHomeAndGarden_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.ClassifiedAds)
+                            {
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @{
+                                            var imageSrc = StaticData.SERVER_DOMAIN + item.Pictures
+                                                .FirstOrDefault().ImageURL;
+                                        }
+                                        <img class="recent-listing-image" src="@imageSrc">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Classifieds, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED @String.Format("{0:n0}", item.Price)
+                                    </div>
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(7)">New in Numbers</h1>
+
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="7" asp-route-categoryId="@StaticData.PlateNumbers_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.NumbersAds)
+                            {
+                                var imageSrc = StaticData.SERVER_DOMAIN + item.Photo;
+
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                        {
+
+                                            var plateCodeClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Code-Home";
+                                            var plateNumberClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Number-Home";
+                                            
+                                            <img class="recent-listing-image numbers-home" src="@imageSrc">
+                                            <h2 class="@plateCodeClass">@item.PlateCode</h2>
+                                            <h2 class="@plateNumberClass">@item.Number</h2>
+                                        }
+                                        else if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                        {
+                                            <img class="recent-listing-image numbers-home" src="@imageSrc">
+                                            <h2 class="mobile-numbers-Home">@item.Code @item.Number</h2>
+                                        }
+
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Electronics, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED @String.Format("{0:n0}", item.Price)
+                                    </div>
+                                </a>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class=" ">
+                <div class="">
+                    <div class="Homepage__card">
+                        <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(8)">New in Electronics</h1>
+
+                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="8" asp-route-categoryId="19">View all<i class="fa fa-arrow-right"></i></a></p>
+
+                        <div class="recent-listing-wrapper">
+                            @foreach (var item in Model.ElectronicAds)
+                            {
+                                <a class="recent-listing" asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">
+                                    <div class="recent-listing-image-wrapper">
+                                        @{
+                                            var imageSrc = StaticData.SERVER_DOMAIN + item.Pictures
+                                                .FirstOrDefault().ImageURL;
+                                        }
+                                        <img class="recent-listing-image" src="@imageSrc">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">@item.Title</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Electronics, @item.CategoryEnName
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            @item.En_Location
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED @String.Format("{0:n0}", item.Price)
+                                    </div>
+                                </a>
+                            }
+
+
+                            @*<a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/9.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">Samsung Galaxy Tab A7</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Electronics, Mobiles/Tablets
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 2,350.00
+                                    </div>
+                                </a>
+                                <a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/10.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">Brand New Apple iPhone 11 Pro 64 GB</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Electronics, Mobiles/Tablets
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 4,400.00
+                                    </div>
+                                </a>
+                                <a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/8.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">Panasonic Stainless Steel 635L French Door Fridge</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Electronics, Home Electronics
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 3,524.00
+                                    </div>
+                                </a>
+                                <a class="recent-listing" href="details.html">
+                                    <div class="recent-listing-image-wrapper">
+                                        <img class="recent-listing-image" src="assets/img/10.png">
+                                    </div>
+                                    <div class="listing-head-wrapper">
+                                    </div>
+                                    <div class="recent-listing-header">
+                                        <div class="recent-listing-title">Brand New Apple iPhone 11 Pro 64 GB</div>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Electronics, Mobiles/Tablets
+                                        </span>
+                                    </div>
+                                    <div class="recent-listing-details">
+                                        <span class="detail-items">
+                                            Arabian Ranches, Dubai
+                                        </span>
+                                    </div>
+                                    <div class="lisitng-price">
+                                        AED 4,400.00
+                                    </div>
+                                </a>*@
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section>
+            <div class="trending-cat2 dawnload-background">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-3 dawnload-logo">
+                            <img src="~/assets/img/81.png" alt="">
+                        </div>
+                        <div class="col-md-3 dawnload-footer">
+
+                            <h1>Download Our new Mobile app for Free!</h1>
+
+                        </div>
+                        <div class="col-md-3 dawnload-pho">
+
+                            <img src="~/assets/img/90.png" alt="">
+
+                        </div>
+                        <div class="col-md-2">
+                            <div class="dawnload-img">
+
+
+                                <a href="#"><img src="~/assets/img/11.png" alt=""></a>
+                                <a href="#"><img src="~/assets/img/12.png" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-2">
+        <div class="bann-right">
+            <img src="~/assets/img/84.png" alt="">
+        </div>
+    </div>
+</div>
+
+@section FooterSection {
+    <footer>
+
+        <!-- Footer Area Start -->
+        <section class="footer-Content">
+            <div class="">
+                @*<a href="agency/index.html" class="agency-link"><h1>register your agency! <i class="fa fa-arrow-right" aria-hidden="true"></i></h1></a>*@
+                <div class="row">
+                    <div class="col-md-20">
+                        <div class="margin-logo">
+                            <img src="~/assets/img/55.png" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <h3 class="block-title">About</h3>
+                            <ul class="menu">
+                                <li><a asp-controller="Home" asp-action="AboutInsouq">About Insouq</a></li>
+                                <li><a asp-controller="Home" asp-action="HowItWorks">How it works</a></li>
+                                <li><a asp-controller="Home" asp-action="FAQ">FAQs</a></li>
+                                <li><a asp-controller="Home" asp-action="ContactUs">Contact us</a></li>
+                                <li><a asp-controller="Home" asp-action="Advertisors">advertisers</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <h3 class="block-title">Posting an Ad</h3>
+                            <ul class="menu">
+                                <li><a asp-controller="Ads" asp-action="PostAnAd">Listing an Ad</a></li>
+                                <li><a asp-controller="Home" asp-action="SellingGuidelines">Selling guidelines</a></li>
+                                <li><a asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a></li>
+                                <li><a asp-controller="Home" asp-action="Terms">Term & Conditions</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <h3 class="block-title">Account</h3>
+                            <ul class="menu">
+                                <li><a asp-controller="Users" asp-action="MyProfile">Profile</a></li>
+                                <li><a asp-controller="Users" asp-action="MyFavorites">Favorites</a></li>
+                                <li><a asp-controller="Users" asp-action="MyAds">Ads list</a></li>
+                                <li><a asp-controller="Users" asp-action="SavedSearches">Saved searches</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <h3 class="block-title">UAE</h3>
+                            <ul class="menu">
+                                <li><a href="">Abu Dhabi</a></li>
+                                <li><a href="">Dubai</a></li>
+                                <li><a href="">Sharjha</a></li>
+                                <li><a href="">Ras al Khaimah</a></li>
+                                <li><a href="">Ajman</a></li>
+                                <li><a href="">Fujairah</a></li>
+                                <li><a href="">Umm al Quwain</a></li>
+                                <li><a href="">Al Ain</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-2">
+                      <div class="widget">
+                        <h3 class="block-title">Get our app</h3>
+                        <ul class="contact-footer">
+                          <li>
+                            <a href="#"><img src="assets/img/11.png" alt=""></a>
+                          </li>
+                          <li>
+                            <a href="#"><img src="assets/img/12.png" alt=""></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div> -->
+                </div>
+            </div>
+
+        </section>
+        <!-- Footer area End -->
+        <!-- Copyright Start  -->
+        <div id="copyright">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-border"></div>
+                        <div class="site-info float-left">
+                            <!-- <p>Copy right &copy; 2021,All Rights Reserved.By <a href="http://www.hudhudit.com" target="_blank">HUDHUDIT</a></p> -->
+                        </div>
+                        <div class="float-right">
+                            <ul class="footer-social">
+                                <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                                <li><a href="#"><i class="lni lni-instagram"></i></a></li>
+                                <li><a href="#"><i class="lni-twitter-filled"></i></a></li>
+                                <li><a href="#"><i class="fa fa-snapchat-ghost"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+    </footer>
+
+}
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+    function doSearch(typeId) {
+        let catId = $("#cat" + typeId).val().trim();
+        console.log("catId", catId);
+        let searchTxt = $("#txt" + typeId).val();
+        console.log("searchTxt", searchTxt);
+        if (typeId == 1) {
+            let trim = $("#trimDL").val();
+            let model = $("#modelDL").val();
+            let maker = $("#makerDL").val();
+            let location = $("#locationDL").val();
+            let minPrice = $("#minPrice").val();
+            let maxPrice = $("#maxPrice").val();
+            let minYear = $("#minYear").val();
+            let maxYear = $("#maxYear").val();
+            let minKm = $("#minKm").val();
+            let maxKm = $("#maxKm").val();
+            console.log("test");
+            let urlParams = "typeId=" + +typeId + "&categoryId=" + catId + "&searchText=" + searchTxt + "&location=" + location + "&maxKm=" + maxKm + "&minKm=" + minKm + "&maxYear=" + maxYear + "&minYear=" + minYear + "&maxPrice=" + maxPrice + "&minPrice=" + minPrice + "&maker=" + maker + "&model=" + model + "&trim=" + trim;
+            console.log("urlParams", urlParams);
+            window.location.href = '@Url.Action("All","Ads")' + "?" + urlParams;
+        } else {
+        window.location.href = '@Url.Action("All","Ads")' + "?typeId=" + +typeId + "&categoryId=" + catId + "&searchText=" + searchTxt;
+        }
+    }
+    function showCat(id) {
+        $('.tab-pane').hide();
+        $('.tab-pane').removeClass("active");
+        $(`#catItems${id}`).addClass("active");
+        $(`#catItems${id}`).removeAttr("style");
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    var vcode = (function () {
+        //cache dom
+        var $inputs = $("#vcode").find("input");
+        //bind events
+        $inputs.on('keyup', processInput);
+        //define methods
+        function processInput(e) {
+            var x = e.charCode || e.keyCode;
+            if ((x == 8 || x == 46) && this.value.length == 0) {
+                var indexNum = $inputs.index(this);
+                if (indexNum != 0) {
+                    $inputs.eq($inputs.index(this) - 1).focus();
+                }
+            }
+            if (ignoreChar(e))
+                return false;
+            else if (this.value.length == this.maxLength) {
+                $(this).next('input').focus();
+            }
+        }
+        function ignoreChar(e) {
+            var x = e.charCode || e.keyCode;
+            if (x == 37 || x == 38 || x == 39 || x == 40)
+                return true;
+            else
+                return false
+        }
+    })();
+</script>
+
+
+<script type="text/javascript">
+    $(Document).ready(() => {
+        console.log("in location ");
+        $.ajax({
+            url: "/DropDowns/GetAllLocation",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+
+                    $("#locationDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    });
+    var makerDLloaded = false;
+    $("#makerDL").on("click", function () {
+        if (makerDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllMotorMaker",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#makerDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        makerDLloaded = true;
+    });
+    $("#makerDL").on("change", function () {
+        $('#modelDL option').remove();
+        $("#modelDL").append(`<option value=''>All Models</option>`);
+        $("#modelDL").val(null);
+        var maker = $("#makerDL").val();
+        $.ajax({
+            url: `/DropDowns/GetAllMotorModelByMaker?maker=${maker}`,
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#modelDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    });
+    $("#modelDL").on("change", function () {
+        $("#trimDL").val(null);
+        var model = $("#modelDL").val();
+        $.ajax({
+            url: `/DropDowns/GetAllMotorTrimByModel?model=${model}`,
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#trimDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    });
+    $("#cat1").on("change", function () {
+        console.log("cat dddd");
+        var cat = $("#cat1").val();
+        console.log("cat 1 =", cat);
+        if (cat == 2 || cat == 8) {
+            $("#moreFilters").fadeIn()
+        } else {
+            $("#moreFilters").fadeOut()
+        }
+    });
+    function toggleMore() {
+        console.log("toggleMore")
+    }
+</script>

@@ -1,0 +1,15 @@
+﻿@model List<insouq.Shared.DTOS.CategoryDTOS.CategoryDTO>
+
+@if (Model.Count != 0)
+{
+    <p class="post-p2">What exactly would you like to list in <span>@ViewBag.typeName</span> ?</p>
+    <div id="tabs">
+        <ul class="list-motor">
+            @foreach (var item in Model)
+            {
+                <li><a asp-controller="@ViewBag.typeName" asp-action="Add" asp-route-categoryId="@item.Id" title=""><i class="fa fa-car"><p>@item.En_Name</p></i></a></li>
+            }
+
+        </ul>
+    </div>
+}

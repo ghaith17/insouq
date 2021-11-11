@@ -1,0 +1,696 @@
+﻿@using insouq.Shared.Utility
+
+@model insouq.Web.ViewModels.UpdateProfileVM
+
+@{
+    var countryCodde =  "";
+    var countryCoddeSvg = "";
+
+    if (Model.User.MobileNumber != null)
+    {
+        countryCodde = Model.User.MobileNumber.Substring(0, Model.User.MobileNumber.Length - 9);
+
+        countryCoddeSvg = countryCodde + ".svg";
+    }
+}
+
+@section Css {
+    <style>
+        .flag-icon-ae {
+            background-image: url('@Url.Content("~/flags/4x3/"+ countryCoddeSvg)');
+            width: 17%;
+        }
+    </style>
+}  
+
+<input value="@Model.User.Id" id="userId" />
+
+
+
+@if (!Model.User.ExternalLogin)
+{
+    <div class="container">
+
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal7" role="dialog">
+            <div class="modal-dialog dialog-padding">
+
+                <!-- Modal content-->
+                <div class="modal5-styles">
+                    <div class="modal-header-styles2">
+                        <h4 class="title-dir">Password Change</h4>
+                        <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form class="" action="" method="post">
+
+                            <div class="new-password-style">
+                                <input class="" type="password" name="" value="" id="currentPassword" placeholder="Current password">
+                                <input class="" type="password" name="" value="" id="newPassword" placeholder="New password">
+                                <input class="" type="password" name="" value="" id="confirmPassword" placeholder="Confirm your password">
+                            </div>
+
+                            <div id="changePasswordError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                <span id="changePasswordErrorMessage" style="color:red;"></span>
+                            </div>
+
+                            <button type="button" class="signin-btn5" name="button" onclick="ChangePassword()">Change Password</button>
+
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal9" role="dialog">
+            <div class="modal-dialog dialog-padding">
+
+                <!-- Modal content-->
+                <div class="modal5-styles">
+                    <div class="modal-header-styles2">
+                        <h4 class="title-dir">Change Email Address</h4>
+                        <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form class="" action="" method="post">
+
+                            <div class="new-password-style">
+                                <input class="" type="text" id="newEmailAddress" placeholder="New Email Address">
+                            </div>
+
+                            <div id="sendEmailCodeError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                <span id="sendEmailCodeErrorMessage" style="color:red;"></span>
+                            </div>
+
+                            <button type="button" class="signin-btn5" name="button" onclick="SendEmailCode()">Change email</button>
+
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+
+<div class="container">
+
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal8" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal5-styles">
+                <div class="modal-header-styles2">
+                    <h4 class="title-dir">Change Mobile Number</h4>
+                    <button type="button" class="close-style7" data-dismiss="modal" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form class="" action="" method="post">
+
+                        <div class="new-password-style">
+                            <select id="countryCodeFromChange">
+                                <option value="">Country Code</option>
+                                <option value="+962">+962</option>
+                                <option value="+966">+966</option>
+                                <option value="+971">+971</option>
+                            </select>
+                            <input class="" type="text" name="" value="" placeholder="Mobile Number" id="mobileNumberFromChange" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9">
+                        </div>
+
+                        <div id="changeNumberError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                            <span id="changeNumberErrorMessage" style="color:red;"></span>
+                        </div>
+
+                        <button type="button" class="signin-btn5" name="button" onclick="SendVerificationCode()">Change Mobile number</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="container">
+
+    <!-- Modal -->
+    <div class="modal fade" id="VerifyCodeModal" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal5-styles">
+                <div class="modal-header-styles2">
+                    <h4 class="title-dir">Verify Mobile Number</h4>
+                    <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="par-style">
+                        <p>We sent you an SMS with a verification code, please enter below</p>
+                    </div>
+                    <form class="" action="" method="post">
+                        <div class="new-password-style">
+                            <input class="" type="text" name="" value="" id="verificationCode" placeholder="Verification Code">
+                            <input type="hidden" id="mobileNumberFromVerify">
+                            <div class="resend-style"><p><a style="cursor:pointer;" onclick="SendVerificationCode()">Resend Code</a></p></div>
+                        </div>
+
+                        <div id="verifyNumberCodeError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                            <span id="verifyNumberCodeErrorMessage" style="color:red;"></span>
+                        </div>
+
+                        <button type="button" class="signin-btn5" name="button" onclick="VerifyVerficationCode()">Verify</button>
+
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="VerifyEmailModal" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal5-styles">
+                <div class="modal-header-styles2">
+                    <h4 class="title-dir">Verify Email Address</h4>
+                    <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="par-style">
+                        <p>We sent you an email with a verification code, please enter below</p>
+                    </div>
+                    <form class="" action="" method="post">
+                        <div class="new-password-style">
+                            <input class="" type="text" name="" value="" id="emailVerificationCode" placeholder="Verification Code">
+                            <div class="resend-style"><p><a style="cursor:pointer;" onclick="SendEmailCode()">Resend Code</a></p></div>
+                        </div>
+
+                        <div id="verifyEmailCodeError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                            <span id="verifyEmailCodeErrorMessage" style="color:red;"></span>
+                        </div>
+
+                        <button type="button" class="signin-btn5" name="button" onclick="VerifyEmailCode()">Verify</button>
+
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="notification-style" style="padding-top:45px;">
+
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Edit My Profile</h1>
+                <ol class="breadcrumb-style">
+                    <li><a asp-controller="Home" asp-action="Index"  class="breadcrumb-color">Home > </a></li>
+                    <li><a href="#" class="breadcrumb-color"> My Profile > </a></li>
+                    <li class="breadcrumb-color"> Edit My Profile</li>
+                </ol>
+
+            </div>
+            <div class="form-width">
+                <form class="" asp-action="UpdateProfile" method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-2">
+                        @{
+                            var imageSrc = StaticData.SERVER_DOMAIN + Model.User.ProfilePicture;
+                        }
+                        <p><img src="@imageSrc" alt="Avatar" class="avatar1" id="Picture"></p>
+                        <h1 class="section-title9">@Model.User.FirstName @Model.User.LastName</h1>
+                        @*<p for="PictureFile"><a class="change-picture">Change Picture</a></p>*@
+                        <p><a class="change-picture" href="#"><label for="PictureFile">Change Picture</label></a></p>
+                        <input class="line-input-style" asp-for="ProfilePictureFile" id="PictureFile" hidden onchange="loadProfileImg()">
+                    </div>
+                    <div class="col-md-5 padding-right">
+
+                        <div class="padding-form">
+                            <label class="change-color">First name</label>
+                            <input type="text" class="line-input-style" asp-for="User.FirstName">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Email Address</label>
+                            <input readonly type="text" class="line-input-style" asp-for="User.Email">
+                        </div>
+
+
+                        <div class="padding-form">
+                            @if (!Model.User.ExternalLogin)
+                            {
+                                <button type="button" class="change-btn" name="button" data-toggle="modal" data-target="#myModal9">Change Email Address</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="change-btn" name="button" disabled>Change Email Address</button>
+                            }
+                        </div>
+
+                        <div class="padding-form">
+                            <label class="change-color">Country Code</label>
+                            @{ 
+                                var countryCodeWithoutZeros = countryCodde.Replace("00", "+");
+                            }
+                            <label class="flag-icon flag-icon-ae">@countryCodeWithoutZeros</label>
+                        </div>
+                        <div class="padding-form">
+                            <button type="button" class="change-btn" name="button" data-toggle="modal" data-target="#myModal8">Change Mobile Number</button>
+
+                        </div>
+                        <div class="padding-form">
+                            <div class="radio-style">
+                                <label class="change-color radio-style1">Gender</label>
+                                <input type="radio" id="male" value="Male" asp-for="User.Gender">
+                                <label for="male">Male</label>
+                                <input type="radio" id="female" value="Female" asp-for="User.Gender">
+                                <label for="female">Female</label>
+                            </div>
+                        </div>
+
+                        <div class="padding-form">
+                            <label class="change-color">Nationality</label>
+                            <select class="line-input-style">
+                                <option value="">Select Nationality</option>
+                            </select>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Default Language</label>
+                            <select class="line-input-style">
+                                <option value="En">English</option>
+                                <option value="Ar">Arabic</option>
+                                <option value="Fr">Franch</option>
+                            </select>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Education</label>
+                            <select class="line-input-style change-color">
+                                <option value="En">Select one</option>
+                                <option value="Ar">Select one</option>
+                                <option value="Fr">Select one</option>
+                            </select>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Current Position</label>
+                            <input type="text" class="line-input-style" asp-for="User.CurrentPosition" placeholder="">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Industry</label>
+                            <i class=" fa fa-plus add-icon"></i>
+                            @{ 
+                                var industryName = "Type your File";
+
+                                if (!string.IsNullOrEmpty(Model.User.Industry))
+                                {
+                                    industryName = Model.User.Industry.Replace(@"\images\","");
+                                }
+
+                            }
+                            <label for="Industry" class="line-input-style profileFilesInput">@industryName</label>
+                            <input class="line-input-style" asp-for="IndustryFile" id="Industry" hidden>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-5 padding-right">
+                        <div class="padding-form">
+                            <label class="change-color">Last name</label>
+                            <input type="text" class="line-input-style" asp-for="User.LastName">
+                        </div>
+
+                        <div class="padding-form">
+
+                            <label class="change-color">Password</label>
+                            <input readonly type="password" class="line-input-style" name="" value="********" placeholder="">
+                        </div>
+
+
+                        <div class="padding-form">
+                            @if (!Model.User.ExternalLogin)
+                            {
+                                <button type="button" class="change-btn" name="button" data-toggle="modal" data-target="#myModal7">Change Password</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="change-btn" name="button" disabled>Change Password</button>
+
+                            }
+
+                            <i class="fa fa-eye-slash password-icon2" aria-hidden="true"></i>
+                        </div>
+
+
+                        <div class="padding-form">
+                            <label class="change-color">Mobile Number</label>
+                            @{
+                                var mobileNumber = "";
+                                if (!string.IsNullOrEmpty(Model.User.MobileNumber))
+                                {
+                                    mobileNumber = Model.User.MobileNumber.Substring(5);
+                                }
+                            }
+                            <input readonly type="text" class="line-input-style" value="@mobileNumber" placeholder="000000000">
+                        </div>
+                        <div class="padding-form form-padding1">
+                            <label class="change-color">Date of birth</label>
+                            <input type="date" class="line-input-style" asp-for="User.DOB" min="1950-01-01" max="2021-12-31">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Default Location</label>
+                            <select class="line-input-style change-color">
+                                <option value="En">Select one</option>
+                                <option value="Ar">Select one</option>
+                                <option value="Fr">Select one</option>
+                            </select>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Career Level</label>
+                            <select class="line-input-style change-color">
+                                <option value="En">Select one</option>
+                                <option value="Ar">Select one</option>
+                                <option value="Fr">Select one</option>
+                            </select>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Current Location</label>
+                            <input type="text" class="line-input-style" asp-for="User.CurrentLocation">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Current Company</label>
+                            <input type="text" class="line-input-style" asp-for="User.CurrentCompany">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Upload your CV</label>
+                            <i class=" fa fa-ellipsis-h add-icon"></i>
+
+                            @{
+                                var cvName = "Type your File";
+
+                                if (!string.IsNullOrEmpty(Model.User.CV))
+                                {
+                                    cvName = Model.User.CV.Replace(@"\images\", "");
+                                }
+
+                            }
+
+                            <label for="cv" class="line-input-style profileFilesInput">@cvName</label>
+                            <input class="line-input-style" asp-for="CvFile" id="cv" hidden>
+                            @*@if (!String.IsNullOrEmpty(Model.User.CV))
+            {
+                var cv = Model.User.CV.Replace(@"\", "/");
+                <p onclick='ShowCV("@cv")'><a class="change-picture">View CV</a></p>
+            }*@
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10 padding-right">
+                        <div class="padding-form">
+                            <label class="change-color">Your cover note</label>
+                            <textarea asp-for="User.CoverNote" rows="1" class="line-input-style2" cols="500"></textarea>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Privacy</label>
+                            <label class="cont2">
+                                <p class="text-style3">Hide my name and photo on my ads</p>
+                                <input type="checkbox" asp-for="User.HideInfromation">
+                                <span class="checkmark3"></span>
+                            </label>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Subscribe</label>
+                            <label class="cont2">
+                                <p class="text-style3">The weekly Insouq newsletter of the most popular steals</p>
+                                <input type="checkbox">
+                                <span class="checkmark3"></span>
+                            </label>
+                            <label class="cont2">
+                                <p class="text-style3">Amazing offers and bargains from our advertising partners</p>
+                                <input type="checkbox">
+                                <span class="checkmark3"></span>
+                            </label>
+                        </div>
+                        <div class="padding-form">
+                            <button type="submit" class="change-btn1" name="submit">UPDATE</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+        $('#Industry').change(function () {
+            var i = $(this).prev('label').clone();
+            var file = $('#Industry')[0].files[0].name;
+            $(this).prev('label').text(file);
+        });
+        $('#cv').change(function () {
+            var i = $(this).prev('label').clone();
+            var file = $('#cv')[0].files[0].name;
+            $(this).prev('label').text(file);
+        });
+
+    </script>
+
+    <script>
+
+        function loadProfileImg() {
+
+            $('#Picture').attr('src', URL.createObjectURL($("#PictureFile")[0].files[0]));
+        }
+
+
+        function ShowCV(path) {
+            $.ajax({
+                type: 'Get',
+                url: `/Users/ShowFile?path=${path}`,
+                success: function (response) {
+                    if (response == 'Report was not generated.') {
+                        alert(response);
+                    } else {
+                        window.open("/DisplayPDF/ShowPDF?path=" + response, "_blank");
+                    }
+                },
+            });
+        }
+
+        function VerifyVerficationCode() {
+            var code = $("#verificationCode").val();
+
+            var data = {
+                Code: code,
+                UserId: $("#userId").val(),
+                MobileNumber: $("#mobileNumberFromVerify").val()
+            };
+
+            $.ajax({
+                url: "/Accounts/VerifySmsCode",
+                method: "POST",
+                data: JSON.stringify(data),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (response) {
+                    if (response.isSuccess) {
+                        window.location.reload();
+                    } else {
+                        $("#verifyNumberCodeError").css("display", "block");
+                        $("#verifyNumberCodeErrorMessage").text(response.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function SendVerificationCode() {
+
+
+            //var mobileNumber = $("#mobileNumberFromChange").val();
+
+            var countryCode = $("#countryCodeFromChange").val().replace("+", "00");
+
+            //if (mobileNumber.charAt(0) == '0') {
+            //    mobileNumber = countryCode + mobileNumber.substring(1);
+            //}
+
+
+
+            var mobileNumber = countryCode + $("#mobileNumberFromChange").val();
+
+
+
+            $("#mobileNumberFromVerify").val(mobileNumber);
+
+            var data = {
+                mobileNumber: mobileNumber,
+                userId: $("#userId").val()
+            };
+
+            $.ajax({
+                url: "/Accounts/SendSmsCode",
+                method: "POST",
+                dataType: 'json',
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    if (response.isSuccess) {
+                        $("#myModal8").modal("hide");
+                        $("#VerifyCodeModal").modal("show");
+                    } else {
+                        $("#changeNumberError").css("display", "block");
+                        $("#changeNumberErrorMessage").text(response.message);
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+    </script>
+
+    @if (!Model.User.ExternalLogin)
+    {
+        <script>
+
+            function ChangePassword() {
+                var data = {
+                    currentPassword: $("#currentPassword").val(),
+                    newPassword: $("#newPassword").val(),
+                    confirmNewPassword: $("#confirmPassword").val()
+                }
+
+                $.ajax({
+                    url: "/Accounts/ChangePassword",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            $("#myModal7").modal("hide");
+                        } else {
+                            $("#changePasswordError").css("display", "block");
+                            $("#changePasswordErrorMessage").text(response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function SendEmailCode() {
+
+                var data = {
+                    email: $("#newEmailAddress").val()
+                }
+
+                if (data.email == "") {
+                    $("#sendEmailCodeError").css("display", "block");
+                    $("#sendEmailCodeErrorMessage").text("Email is required");
+                    return;
+                }
+
+                $.ajax({
+                    url: "/Accounts/SendEmailCode",
+                    method: "POST",
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            $("#myModal8").modal("hide");
+                            $("#VerifyEmailModal").modal("show");
+                        } else {
+                            $("#sendEmailCodeError").css("display", "block");
+                            $("#sendEmailCodeErrorMessage").text(response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function VerifyEmailCode() {
+                var code = $("#emailVerificationCode").val();
+
+                var data = {
+                    email: $("#newEmailAddress").val(),
+                    code: code,
+                };
+
+                $.ajax({
+                    url: "/Accounts/VerifyEmailCode",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            window.location.reload();
+                        } else {
+                            $("#verifyEmailCodeError").css("display", "block");
+                            $("#verifyEmailCodeErrorMessage").text(response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+        </script>
+    }
+}

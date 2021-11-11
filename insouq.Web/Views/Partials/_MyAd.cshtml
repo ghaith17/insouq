@@ -1,0 +1,199 @@
+﻿@using insouq.Shared.Utility
+
+@{
+    string AddDoubleQuotes(string value)
+    {
+        return "\"" + value + "\"";
+    }
+    var itemIndex = 1;
+}
+
+@foreach (var item in Model)
+{
+    <div class="featured-box2 myAdDiv" style="height: 221px;" style="height: 221px;">
+        @if (item.TypeId != StaticData.Numbers_ID)
+        {
+        <div class="col-md-3">
+
+            @{
+                var href = "#";
+
+                if (item.CategoryId == StaticData.JobWanted_ID)
+                {
+                    href = StaticData.SERVER_DOMAIN + item.CV;
+
+                }
+            }
+
+            <figure>
+                <a href="@href">
+                    <img style="border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
+                    <div class="sliderWrapper">
+                        @{
+                            var imagesUrls = new List<string>();
+
+                            var index = 0;
+
+                            var functionName = "function" + itemIndex;
+
+                            var arrayName = "array" + itemIndex;
+
+                            var firstImage = "";
+
+
+                        }
+                        @foreach (var picture in item.Pictures)
+                        {
+                            var src = StaticData.SERVER_DOMAIN + picture.ImageURL;
+                            src = src.Replace("\\", "/");
+                            imagesUrls.Add(src);
+
+                            if (index == 0)
+                            {
+                                firstImage = src;
+                            }
+
+                            var replacedSrc = AddDoubleQuotes(src);
+
+                            var functionNameWithParameters = functionName + "(" + index + "," + replacedSrc + ")";
+                            <span onclick="@functionNameWithParameters" class="sliderBtn"></span>
+                            index++;
+
+                        }
+
+                        <script>
+                        document.getElementById("slider-@itemIndex").setAttribute("src", "@firstImage");
+
+                        function @functionName (i, src) {
+                            document.getElementById("slider-@itemIndex").setAttribute("src", src);
+                        }
+
+                        </script>
+
+
+                        @{
+                            itemIndex++;
+                        }
+                    </div>
+                </a>
+            </figure>
+        </div>
+        }
+        else if (item.CategoryId == StaticData.MobileNumbers_ID)
+        {
+            var numberPhoto = StaticData.SERVER_DOMAIN + item.Photo;
+
+            <div class="col-md-3">
+                <figure>
+
+                    <div class="slider__contents1">
+                        <i class="slider__image1">
+                            <img src="@numberPhoto" alt="">
+                            <h2 class="mobile-numbers-Mylist">@item.Code @item.Number</h2>
+                        </i>
+                    </div>
+                </figure>
+            </div>
+        }
+        else if (item.CategoryId == StaticData.PlateNumbers_ID)
+        {
+            var photo = StaticData.SERVER_DOMAIN + item.Photo;
+
+            var plateCodeClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Code-Mylist";
+            var plateNumberClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Number-Mylist";
+
+            <div class="col-md-3">
+                <figure>
+                    <div class="slider__contents1">
+                        <i class="slider__image1">
+                            <img src="@photo" alt="">
+                            <h2 class="@plateCodeClass">@item.PlateCode</h2>
+                        </i>
+                        <h2 class="@plateNumberClass">@item.Number</h2>
+                    </div>
+                </figure>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-3"></div>
+        }
+
+        <div class="col-md-9">
+            <div class="col-md-8">
+                <div class="feature-content width-size">
+
+                    <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">@item.Title</a></h4>
+                    <div class="padding-form3">
+                        <h5>@item.En_Location</h5>
+                    </div>
+                    <label class="label-view">
+                        <p><i class="fa fa-eye" aria-hidden="true"></i></p>
+                        <p>@item.Views Views</p>
+                    </label>
+                    <label class="label-view">
+                        <p><i class="fa fa-comment-o" aria-hidden="true"></i></p>
+                        <p>@item.Chates Messages</p>
+                    </label>
+                    @if (item.Status == 1)
+                    {
+                        <label class="item-status">live</label>
+                    }
+                    else
+                    {
+                        <label class="item-status1">Under review</label>
+                    }
+                    @if (item.TypeId != StaticData.Jobs_ID && item.TypeId != StaticData.Services_ID)
+                    {
+                        <div>
+                            @if (item.CategoryId != StaticData.CommercialForRent_ID && item.CategoryId != StaticData.ResidentialForRent_ID)
+                            {
+                                <p class="card-price">AED @String.Format("{0:n0}", item.Price)</p>
+                            }
+                            else
+                            {
+                                <p class="card-price">AED @String.Format("{0:n0}", item.AnnualRent)</p>
+                            }
+                        </div>
+                    }
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="float-style">
+                    <div>
+                        <a href="@Url.Action("Statistics","Users",new { AdId = item.Id})" class="change-btn11 float-style" name="button">
+                            <i class="fa fa-line-chart icon-padding" aria-hidden="true"></i>Statistics
+                        </a>
+                    </div>
+                    <div class="">
+                        @{ 
+                            var typeName = StaticFunctions.GetTypeName(item.TypeId);
+                        }
+                        <button type="button" class="change-btn11 float-style" onclick="GoToEdit('@typeName', @item.Id)">
+                            <i class="fas fa-pencil-alt icon-padding" aria-hidden="true"></i>Edit
+                        </button>
+                    </div>
+                    <div class="">
+
+                        <button type="button" class="change-btn12 float-style" name="button" data-toggle="modal" data-target="#myModal10">
+                            <i onclick="DeleteAd(@item.Id)" class="far fa-trash-alt icon-padding" aria-hidden="true"></i>Delete
+                        </button>
+                    </div>
+                    <div>
+
+                    </div>
+                    <div>
+                        <span class="padding-span3 float-style"><i class="fa fa-clock-o time-end"></i>Expiring in 1 month</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="package-style">
+                <a href="#"> <i class="fa fa-plus"></i> Upgrade your package to get upto 10x more views</a>
+            </div>
+        </div>
+    </div>
+}
+

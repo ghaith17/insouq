@@ -1,0 +1,85 @@
+﻿@using insouq.Shared.Utility 
+
+@model int
+
+<div id="s1" style="display:block;">
+    <form id="addForm" asp-controller="Services" asp-action="Add" method="post">
+        <input type="hidden" value="@Model" name="categoryId" id="categoryId" />
+        <input type="hidden" required name="lat" id="lat" />
+        <input type="hidden" required name="lng" id="lng" />
+        <p class="post-p3">Let’s start with the title</p>
+        <p>Try to have an informative title that’s to be point and not very long</p>
+        <input required type="text" class="line-input-style17" maxlength="40" id="title" name="title"
+               placeholder="Dodge charger 2010 for Sale, perfect condition">
+        <p>Recommended 40 characters</p>
+        <p class="post-p3">Now let’s add your service category</p>
+
+        @if (Model == StaticData.CarLift_ID)
+        {
+            <p class="padding-p">
+                <input placeholder="Car lift from" required class="line-input-style15" name="CarLiftFrom" id="CarLiftFrom">
+            </p>
+
+            <p class="padding-p">
+                <input placeholder="Car lift To" required class="line-input-style15" name="CarLiftTo" id="CarLiftTo">
+            </p>
+        }
+        else
+        {
+            <p class="padding-p">
+                <select onclick="onSubCategoryClick()" onchange="onSubCategoryChange()" name="subCategoryId" id="subCategoryId" required class="line-input-style15">
+                    <option value="">What type is your service category?</option>
+                </select>
+            </p>
+
+            <div id="otherSubCategory" style="display:none;">
+
+            </div>
+        }
+
+        <p class="padding-p">
+            <label class="change-color">Phone Number</label>
+            <input required type="number" class="line-input-style17" value="@ViewBag.phoneNumber" name="PhoneNumber" id="PhoneNumber">
+        </p>
+
+        <br />
+
+        <textarea placeholder="Add a short description" required cols="92" rows="7" style="border:0px;" data-val="true" data-val-maxlength="The field Description must be a string or array type with a maximum length of '1000'." data-val-maxlength-max="1000" data-val-required="The Description field is required." id="description" maxlength="1000" name="description"></textarea>
+
+        <p class="padding-p">
+            <select required class="line-input-style15" id="location" name="location" onclick="onLocationClick()">
+                <option value="">Your location</option>
+            </select>
+        </p>
+
+
+        <p class="padding-p">
+            <button type="button" class="change-btn9" name="button" onclick="GetLocation()">Detect Location</button>
+            <div id="detectLocationError" style="margin-top:10px; display:none;">
+                <span id="detectLocationErrorMessage" style="color:red;"></span>
+            </div>
+        </p>
+
+        <br />
+
+        <label class="cont2">
+            <p class="text-style3">
+                By submitting this ad, I agree on <a href="#"> {Terms & Conditions}</a> and
+                <a href="#">{Privacy Policy}</a>
+            </p>
+            <input type="checkbox">
+            <span class="checkmark3" required></span>
+        </label>
+
+
+        <label class="">
+            <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+
+        </label>
+
+        <p class="padding-form padding-top">
+            @*<button type="button" class="change-btn3" name="button" onclick="window.location.href='adpackagesubscriptions0.html'">CONTINUE</button>*@
+            <button type="button" class="signin-btn9" name="button" onclick="onFormSubmit()">CONTINUE</button>
+        </p>
+    </form>
+</div>

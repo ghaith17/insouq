@@ -1,0 +1,76 @@
+﻿@using insouq.Shared.Utility
+
+@model String
+
+
+<div id="app"></div>
+
+
+
+
+<script type="text/babel">
+
+    class ApexChart extends React.Component {
+      constructor(props) {
+        super(props);
+    var arrayOfArrays = JSON.parse('@Html.Raw(Model)');
+
+    console.log(arrayOfArrays);
+        this.state = {
+
+          series: [{
+            name: "Chats",
+            data: arrayOfArrays.Yaxies
+          }],
+          options: {
+            chart: {
+              type: 'area',
+              height: 350,
+              zoom: {
+                enabled: false
+              }
+            },
+            colors: ['gray'],
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              curve: 'straight'
+            },
+
+
+            labels: arrayOfArrays.Xaxies,
+            xaxis: {
+              type: 'datetime',
+            },
+            yaxis: {
+              opposite: false
+            },
+            legend: {
+              horizontalAlign: 'left'
+            }
+          },
+
+        };
+      }
+
+
+
+      render() {
+        return (
+          <div>
+            <div id="chart">
+              <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={350} />
+            </div>
+            <div id="html-dist"></div>
+          </div>
+        );
+      }
+    }
+
+
+        const domContainer = document.querySelector('#app');
+    ReactDOM.render(React.createElement(ApexChart), domContainer);
+</script>
+
+

@@ -1,0 +1,165 @@
+﻿@using insouq.Shared.Utility
+
+@model int
+
+<div id="m1" style="display:block;">
+    <form asp-action="AddInitalMotor" method="post">
+        <input type="hidden" value="@Model" name="categoryId" id="categoryId" />
+        <p class="post-p3">Let’s start with the title</p>
+        <p>Try to have an informative title that’s to be point and not very long</p>
+        <input required type="text" class="line-input-style17" maxlength="40" id="title" name="title" value=""
+               placeholder="Dodge charger 2010 for Sale, perfect condition">
+        <p>Recommended 40 characters</p>
+        <p class="post-p3">Now let’s add your car make and model</p>
+
+
+        @if (Model == StaticData.Boats_ID || Model == StaticData.Machinery_ID
+|| Model == StaticData.Parts_ID || Model == StaticData.Bike_ID)
+        {
+            <p class="padding-p">
+                @if (Model == StaticData.Boats_ID)
+                {
+
+                    <select onclick="onSubCategoryClick()" onchange="onSubCategoryChange()" name="subCategoryId" id="subCategoryId" required class="line-input-style15">
+                        <option value="">What type is your boat category?</option>
+                    </select>
+
+                }
+                else if (Model == StaticData.Machinery_ID)
+                {
+                    <select onclick="onSubCategoryClick()" onchange="onSubCategoryChange()" name="subCategoryId" id="subCategoryId" required class="line-input-style15">
+                        <option value="">What type is your machine category?</option>
+                    </select>
+
+                }
+                else if (Model == StaticData.Parts_ID)
+                {
+                    <select onclick="onSubCategoryClick()" onchange="onSubCategoryChange()" name="subCategoryId" id="subCategoryId" required class="line-input-style15">
+                        <option value="">What type is your part category?</option>
+                    </select>
+
+                }
+                else if (Model == StaticData.Bike_ID)
+                {
+                    <select onclick="onSubCategoryClick()" onchange="onSubCategoryChange()" name="subCategoryId" id="subCategoryId" required class="line-input-style15">
+                        <option value="">What type is your bike category?</option>
+                    </select>
+
+                }
+
+
+            </p>
+
+            <div id="otherSubCategory" style="display:none">
+
+            </div>
+
+            <p class="padding-p">
+                @if (Model == StaticData.Boats_ID)
+                {
+                    <select onchange="onSubTypeChange()" name="subTypeId" id="subTypeId" required class="line-input-style15">
+                        <option value="">What type is your boat sub category?</option>
+                    </select>
+
+                }
+                else if (Model == StaticData.Machinery_ID)
+                {
+                    <select onchange="onSubTypeChange()" name="subTypeId" id="subTypeId" required class="line-input-style15">
+                        <option value="">What type is your machine sub category?</option>
+                    </select>
+
+                }
+                else if (Model == StaticData.Parts_ID)
+                {
+                    <select onchange="onSubTypeChange()" name="subTypeId" id="subTypeId" required class="line-input-style15">
+                        <option value="">What make is it?</option>
+                    </select>
+
+                }
+                else if (Model == StaticData.Bike_ID)
+                {
+                    <select onchange="onSubTypeChange()" name="subTypeId" id="subTypeId" required class="line-input-style15">
+                        <option value="">What type is your bike sub category?</option>
+                    </select>
+
+                }
+
+
+            </p>
+
+            <div id="otherSubType" style="display:none">
+
+            </div>
+        }
+
+
+
+        @if (Model == StaticData.UsedCars_ID || Model == StaticData.ExportCar_ID)
+        {
+            <p class="padding-p">
+
+                <select onclick="onMakerClick()" onchange="onMakerChange()" name="maker" id="maker" required class="line-input-style15">
+                    <option value="">What brand is your car?</option>
+                </select>
+            </p>
+
+            <div id="otherMaker" style="display:none">
+
+            </div>
+        }
+
+        @if (Model == StaticData.UsedCars_ID || Model == StaticData.ExportCar_ID)
+        {
+            <p class="padding-p">
+                <select onchange="onModelChange()" name="model" id="model" required class="line-input-style15">
+                    <option value="">What model is it?</option>
+                </select>
+            </p>
+
+            <div id="otherModel" style="display:none">
+
+            </div>
+        }
+
+
+        @if (Model == StaticData.Parts_ID)
+        {
+            <p class="padding-p">
+                <select onchange="onPartNameChange()" name="partName" id="partName" required class="line-input-style15">
+                    <option value="">In which part ?</option>
+                </select>
+            </p>
+
+            <div id="otherPartName" style="display:none">
+
+            </div>
+        }
+
+
+        @if (Model == StaticData.UsedCars_ID || Model == StaticData.Boats_ID || Model == StaticData.Machinery_ID
+|| Model == StaticData.Parts_ID || Model == StaticData.Bike_ID || Model == StaticData.ExportCar_ID)
+        {
+            var selectList =
+    new SelectList(Enumerable.Range(1900, (DateTime.Now.Year - 1900) + 1));
+    <p class="padding-p">
+        @Html.DropDownList("year", selectList, "What is the year of manufacture?",
+    new { @class = "line-input-style15", required = true })
+    </p>
+}
+
+        @if (Model == StaticData.UsedCars_ID || Model == StaticData.ExportCar_ID)
+        {
+            <p class="padding-p">
+                <select onchange="onTrimChange()" name="trim" id="trim" required class="line-input-style15">
+                    <option value="">What is the trim?</option>
+                </select>
+            </p>
+
+            <div id="otherTrim" style="display:none">
+
+            </div>
+        }
+
+        <button type="submit" class="signin-btn9" name="button">Continue</button>
+    </form>
+</div>

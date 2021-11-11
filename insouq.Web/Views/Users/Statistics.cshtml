@@ -1,0 +1,353 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model String
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+
+    <script src="./assets/price_range_script.js" type="text/javascript"></script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/fontawesome-free-5.15.3-web/css/all.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+    <link href="~/assets/css/flag-icon.css" rel="stylesheet">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>In Souq</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css">
+    <link href="~/css/site.css" rel="stylesheet" type="text/css" />
+    <link href="~/css/styles.css" rel="stylesheet" type="text/css" />
+    <style media="screen">
+        @@media only screen and (max-width: 600px) {
+            .featured-box1 {
+                width: 96%;
+                padding: 15px;
+                background: #fff;
+                box-shadow: 0px 2px 18px 0px rgb(198 198 198 / 30%);
+                margin-top: 0;
+                margin-bottom: 15px;
+                margin-left: 0;
+                display: block;
+            }
+
+            ul.social-network li {
+                display: inline;
+                margin: 8px;
+            }
+
+            ul.tabs-style {
+                list-style: none;
+                display: inline-table;
+                margin-left: 0 !important;
+                /* padding: 0; */
+                float: none;
+            }
+        }
+
+        #chart {
+            margin: 35px auto;
+        }
+    </style>
+    <link href="assets/styles.css" rel="stylesheet" />
+
+    <script>
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+            )
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+            )
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+            )
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/react@16.12/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@16.12/umd/react-dom.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prop-types@15.7.2/prop-types.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-apexcharts@1.3.6/dist/react-apexcharts.iife.min.js"></script>
+
+
+    <script>
+        // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
+        // Based on https://gist.github.com/blixt/f17b47c62508be59987b
+        var _seed = 42;
+        Math.random = function () {
+            _seed = _seed * 16807 % 2147483647;
+            return (_seed - 1) / 2147483646;
+        };
+    </script>
+
+    <script src="assets/stock-prices.js"></script>
+
+</head>
+
+
+
+
+<body>
+
+    <div class="notification-style">
+
+
+        <div id="list-view" class="tab2-pane fade active show containers trending-cat">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <h1 class="section-title5">Statictics</h1>
+                    <ol class="breadcrumb-style">
+                        <li><a href="home.html" class="breadcrumb-color">Home > </a></li>
+                        <li class="breadcrumb-color"> Statistics</li>
+                    </ol>
+
+                </div>
+
+                <!-- fillters -->
+                <div class="col-md-3">
+                    <div class="featured-box1">
+
+                        <h3 class="section-title6">Filters</h3>
+                        <p class="tex-pad">
+                            <input type="radio"  id="period1" name="period" value="1" >
+                            <label for="30days" class="change-color9">All</label>
+
+                        </p>
+                        <p class="tex-pad">
+                            <input type="radio" id="period2" name="period" value="2">
+                            <label for="30days" class="change-color9">Today</label>
+
+                        </p>
+                        <p class="tex-pad">
+                            <input type="radio" id="period3" name="period" value="3">
+                            <label for="30days" class="change-color9">This Week</label>
+
+                        </p>
+                        <p class="tex-pad">
+                            <input type="radio" id="period4" name="period" value="4">
+                            <label for="30days" class="change-color9">This Month</label>
+
+                        </p>
+                        <button type="button" class="apply-btn" onclick="getUserStatistics()" name="button">Apply Filters</button>
+                        <p class="reset-all"><a href="#">Reset All</a></p>
+                    </div>
+                </div>
+
+
+             
+
+                <!-- charts -->
+                <div class="col-md-9">
+
+
+                    <div id="exTab1" class="container">
+
+                        <!-- tabs -->
+                        <ul class="social-network tabs-style">
+                            <input type="hidden" value="5" id="SelectedType"/>
+                            <li id="type1" class="active"><a onclick="SetSelectedType(1)" data-toggle="tab"><i class="tab2-item">Chats</i></a></li>
+                            <li id="type2"><a onclick="SetSelectedType(2)" data-toggle="tab"><i class="tab2-item">Viewers</i></a></li>
+                            <li id="type4"><a onclick="SetSelectedType(4)" data-toggle="tab"><i class="tab2-item">Search</i></a></li>
+                            <li id="type3"><a onclick="SetSelectedType(3)" data-toggle="tab"><i class="tab2-item">Contact Number </i></a></li>
+                        </ul>
+
+
+                        <div class="tab-content clearfix">
+                            <div class="tab-pane active " id="c1">
+
+
+                                <div id="app"></div>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</body>
+
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="assets/js/jquery-min.js"></script>
+<script src="assets/js/popper.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.counterup.min.js"></script>
+<script src="assets/js/waypoints.min.js"></script>
+<script src="assets/js/wow.js"></script>
+<script src="assets/js/owl.carousel.min.js"></script>
+<script src="assets/js/jquery.slicknav.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</html>
+
+<script src="~/js/stock-prices.js"></script>
+
+
+<script type="text/babel">
+
+    class ApexChart extends React.Component {
+      constructor(props) {
+        super(props);
+    var arrayOfArrays = JSON.parse('@Html.Raw(Model)');
+
+    console.log(arrayOfArrays);
+        this.state = {
+
+          series: [{
+            name: "",
+            data: arrayOfArrays.Yaxies
+          }],
+          options: {
+            chart: {
+              type: 'area',
+              height: 350,
+              zoom: {
+                enabled: false
+              }
+            },
+            colors: ['gray'],
+            dataLabels: {
+              enabled: false
+            },
+            stroke: {
+              curve: 'straight'
+            },
+
+
+            labels: arrayOfArrays.Xaxies,
+            xaxis: {
+              type: 'string',
+            },
+            yaxis: {
+              opposite: false
+            },
+            legend: {
+              horizontalAlign: 'left'
+            }
+          },
+
+        };
+      }
+
+
+
+      render() {
+        return (
+          <div>
+            <div id="chart">
+              <ReactApexChart options={this.state.options} series={this.state.series} type="area" height={350} />
+            </div>
+            <div id="html-dist"></div>
+          </div>
+        );
+      }
+    }
+
+
+        const domContainer = document.querySelector('#app');
+    ReactDOM.render(React.createElement(ApexChart), domContainer);
+</script>
+
+<script>
+
+    $(document).ready(() => fillActiveState());
+
+    function getUserStatistics() {
+        let period = $('input[name="period"]:checked').val();
+        let type = $("#SelectedType").val();
+        if (period == undefined || period == null) {
+            alert("please choose a filter")
+        }
+        let currentUrl = window.location.href;
+        let currentUrlArr = currentUrl.split("&");
+        console.log("arr", currentUrlArr)
+        window.location.href = currentUrlArr[0]+ "&type=" + type + "&period=" + period;
+    }
+
+    function SetSelectedType(type) {
+        let period = $('input[name="period"]:checked').val();
+        if (period == undefined || period == null) {
+            period = 1;
+        }
+        $("#SelectedType").val(type);
+        console.log($("#SelectedType"));
+        let currentUrl = window.location.href;
+        let currentUrlArr = currentUrl.split("&");
+        console.log("arr", currentUrlArr)
+
+        window.location.href = currentUrlArr[0]+ "&type=" + type + "&period=" + period;
+    }
+
+    function fillActiveState() {
+        debugger;
+        var period = getUrlVars()["period"];
+        var type = getUrlVars()["type"];
+
+        $("#period" + period).attr("checked", true);
+        $("#type" + type).addClass("active");
+
+    }
+
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
+</script>
+
+

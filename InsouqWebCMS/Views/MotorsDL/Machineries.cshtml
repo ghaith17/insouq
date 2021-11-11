@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Motors DL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["ActivePage"] = "Motors DL";
+}
+
+@using insouq.Shared.Utility
+
+<div class="row">
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="SubCategory" asp-action="Index" asp-route-categoryId="@StaticData.Machinery_ID">
+            <div class="dl-style">
+                <p>Machinery Category</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-controller="SubType" asp-action="Index" asp-route-categoryId="@StaticData.Machinery_ID">
+            <div class="dl-style">
+                <p>Machinery Sub Category</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Capacities">
+            <div class="dl-style">
+                <p>Capacity</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="FuelTypes">
+            <div class="dl-style">
+                <p>Fuel Type</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="NoOfCylinders">
+            <div class="dl-style">
+                <p>Number Of Cylinders</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Horsepowers" asp-route-categoryId="@StaticData.Machinery_ID">
+            <div class="dl-style">
+                <p>Horse power</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Conditions" asp-route-categoryId="@StaticData.Machinery_ID">
+            <div class="dl-style">
+                <p>Body Condition</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="SellerTypes">
+            <div class="dl-style">
+                <p>Seller Type</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="MechanicalConditions">
+            <div class="dl-style">
+                <p>Mechanical Condition</p>
+            </div>
+        </a>
+    </div>
+</div>
+

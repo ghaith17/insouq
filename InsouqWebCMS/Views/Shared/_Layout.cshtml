@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>@ViewData["Title"] - InsouqWebCMS</title>
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />*@
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="jillion">
+    <link rel="shortcut icon" href="~/logo.png">
+    <script src="views/home/amcharts.js"></script>
+
+    <title>Insouq</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- page css files -->
+    <link href="~/assets/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="~/assets/css/fullcalendar.css" rel="stylesheet">
+    <link href="~/assets/css/morris.css" rel="stylesheet">
+    <link href="~/assets/css/jquery-jvectormap-1.2.2.css" rel="stylesheet">
+    <link href="~/assets/css/climacons-font.css" rel="stylesheet">
+    <link href="~/assets/css/dropzone.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.dataTables.min.css" rel="stylesheet">
+    <link href="~/assets/css/style.min.css" rel="stylesheet">
+    <!-- <link href="sortable.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="gallery-grid.css">
+
+</head>
+<body>
+
+
+
+    <div class="navbar" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="">Insouq</a>
+            </div>
+            <ul class="nav navbar-nav navbar-actions navbar-left">
+                <li><a href="#" id="main-menu-toggle"><i class="fa fa-bars"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle avatar" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
+                    <ul class="dropdown-menu">
+                        <li class="dropdown-menu-header text-center">
+                            <strong>Settings</strong>
+                        </li>
+
+                        <li onclick="logout()"><a><i class="fa fa-lock"></i> Logout</a></li>
+
+                        <li><a asp-controller="Account" asp-action="ChangePassword"><i class="fa fa-lock"></i>change password</a></li>
+                    </ul>
+                </li>
+
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="container-fluid content">
+        <div class="row">
+
+            <div class="sidebar col-md-2 col-sm-1 ">
+                <div class="sidebar-collapse collapse">
+                    <ul class="nav nav-sidebar">
+                        <li><a href="#"><i class="fa fa-bar-chart-o"></i><span class="hidden-sm text"> Dashboard</span></a></li>
+                        <li><a asp-controller="AdsManagement" asp-action="Index"><i class="fas fa-th"></i> Ads</a></li>
+                        <li><a asp-controller="Users" asp-action="Index"><i class="fas fa-users"></i> Users</a></li>
+                        <li><a asp-controller="MotorsDL" asp-action="Index"><i class="fas fa-car"></i> Motors DL</a></li>
+                        <li><a asp-controller="ServicesDL" asp-action="Index"><i class="fas fa-tools"></i> Services DL</a></li>
+                        <li><a asp-controller="BusinessDL" asp-action="Index"><i class="fas fa-briefcase"></i> Business DL</a></li>
+                        <li><a asp-controller="ClassifiedsDL" asp-action="Index"><i class="fas fa-list"></i> Classifieds DL</a></li>
+                        <li><a asp-controller="ElectronicsDL" asp-action="Index"><i class="fas fa-mobile"></i> Electronics DL</a></li>
+                        <li><a asp-controller="NumbersDL" asp-action="Index"><i class="fas fa-ellipsis-h"></i> Numbers DL</a></li>
+                    </ul>
+                </div>
+                <a href="#" id="main-menu-min" class="full visible-md visible-lg"><i class="fa fa-angle-double-left"></i></a>
+            </div>
+
+            <div class="col-md-10 col-sm-11 main" style="overflow-x: auto">
+
+                <style media="screen">
+                    .color {
+                        background: #7d6755;
+                        padding: 20px;
+                        color: #fff;
+                        width: 200px;
+                    }
+                </style>
+
+                @RenderBody()
+
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+                <script>baguetteBox.run('.tz-gallery');</script>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <footer>
+
+        <div class="row">
+
+        </div>
+    </footer>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>*@
+
+
+
+
+    <script src="~/assets/js/jquery-3.1.0.min.js"></script>
+
+    <!--<![endif]-->
+    <!--[if IE]>
+
+      <script src="~/assets/js/jquery-1.11.0.min.js"></script>
+
+    <![endif]-->
+    <!--[if !IE]>-->
+
+    <script type="text/javascript">window.jQuery || document.write("<script src='~/assets/js/jquery-3.1.0.min.js'>" + "<" + "/script>");</script>
+
+
+    <script src="~/assets/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+
+
+    <!-- page scripts -->
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script src="~/assets/js/jquery.sparkline.min.js"></script>
+    <script src="~/assets/js/fullcalendar.min.js"></script>
+    <script src="~/assets/js/dropzone.min.js"></script>
+
+    <script src="~/assets/js/jquery.flot.min.js"></script>
+    <script src="~/assets/js/jquery.flot.pie.min.js"></script>
+    <script src="~/assets/js/jquery.flot.stack.min.js"></script>
+    <script src="~/assets/js/jquery.flot.resize.min.js"></script>
+    <script src="~/assets/js/jquery.flot.time.min.js"></script>
+    <script src="~/assets/js/jquery.flot.spline.min.js"></script>
+    <script src="~/assets/js/jquery.autosize.min.js"></script>
+    <script src="~/assets/js/jquery.placeholder.min.js"></script>
+    <script src="~/assets/js/daterangepicker.min.js"></script>
+    <script src="~/assets/js/jquery.easy-pie-chart.min.js"></script>
+    <script src="~/assets/js/jquery.dataTables.min.js"></script>
+    <script src="~/assets/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/assets/js/raphael.min.js"></script>
+    <script src="~/assets/js/morris.min.js"></script>
+    <script src="~/assets/js/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/assets/js/uncompressed/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/assets/js/uncompressed/gdp-data.js"></script>
+    <script src="~/assets/js/gauge.min.js"></script>
+    <script src="~/assets/js/custom.min.js"></script>
+    <script src="~/assets/js/core.min.js"></script>
+    <script src="~/assets/js/pages/index.js"></script>
+
+    <script src="~/assets/js/bootstrap-timepicker.min.js"></script>
+    <script src="~/assets/js/bootstrap-colorpicker.min.js"></script>
+    <script src="~/assets/js/bootstrap-wysiwyg.min.js"></script>
+    <script src="~/assets/js/jquery.hotkeys.min.js"></script>
+    <script src="~/assets/js/moment.min.js"></script>
+    <script src="~/assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
+    <script src="~/assets/js/jquery.maskedinput.min.js"></script>
+    <script src="~/assets/js/jquery.chosen.min.js"></script>
+
+
+    <script src="~/assets/js/pages/form-elements.js"></script>
+    <script src="~/assets/js/jquery.cleditor.min.js"></script>
+    <script src="~/assets/js/bootstrap-datepicker.min.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+    <!-- <script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script> -->
+    <!-- <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6ah6KY277nBSRvVGm-NahI8ddSFyL_d8&callback=myMap"></script> -->
+    <!-- <script src="sortable.js"></script> -->
+    <script>
+        // $(document).ready(function () {
+        //
+        // 	$('#tableid').sortable({
+        // 		divBeforeTable: '#divbeforeid',
+        // 		divAfterTable: '#divafterid',
+        // 		initialSort: 1,
+        // 		locale: 'th',
+        // 		negativeSort: [0, 10]
+        // 	});
+        //
+        // });</script>
+
+    <script src="https://kit.fontawesome.com/05ad8591d5.js" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // Setup - add a text input to each footer cell
+            $('#example thead tr').clone(true).appendTo('#example thead');
+            $('#example thead tr:eq(1) th').each(function (i) {
+                var title = $(this).text();
+                $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+
+                $('input', this).on('keyup change', function () {
+                    if (table.column(i).search() !== this.value) {
+                        table
+                            .column(i)
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+
+            var table = $('#example').DataTable({
+                orderCellsTop: true,
+                fixedHeader: true
+            });
+        });
+
+        function logout() {
+            $.ajax({
+                url: "/Account/Logout",
+                method: "POST",
+                success: function (response) {
+                    window.location.href = "/Account/Login";
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+        }
+    </script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

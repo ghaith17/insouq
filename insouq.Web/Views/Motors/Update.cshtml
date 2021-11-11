@@ -1,0 +1,1652 @@
+﻿@using insouq.Shared.Utility;
+@model insouq.Shared.DTOS.UpdateMotorsDTO
+
+<style media="screen">
+    #files-area {
+        margin: 0 auto;
+    }
+
+    .file-block {
+        border-radius: 10px;
+        margin: 5px;
+        color: initial;
+        display: inline-flex;
+        & > span.name
+
+    {
+        padding-right: 10px;
+        width: max-content;
+        display: inline-flex;
+    }
+
+    }
+
+    .image-view {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        background: white;
+    }
+
+    .file-delete {
+        position: absolute;
+        background-color: #db0909;
+        color: white;
+        border-radius: 100%;
+        font-weight: bold;
+        margin-top: 8px;
+        justify-content: center;
+        font-size: 14px;
+        margin-right: 0;
+        padding: 0px 7px 1px 7px;
+        margin-left: 121px;
+        cursor: pointer;
+    }
+
+    .name {
+        display: none;
+    }
+
+    .img-div {
+        position: relative;
+        display: inline-block;
+        width: 18%;
+        margin-right: 5px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    :checked + label {
+        border: 5px solid;
+        border-color: #ffb01c;
+        border-radius: 15px;
+    }
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        max-width: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .icon-delete {
+        background: #db0909;
+        border: none;
+        position: absolute;
+        border-radius: 100%;
+        margin-left: -22%;
+        margin-top: 8px;
+        color: white;
+        font-size: 10px;
+        padding: 0 8px;
+    }
+
+    .img-div:hover .middle {
+        opacity: 1;
+    }
+</style>
+
+<style media="screen">
+    .ui-sortable-placeholder {
+        visibility: visible !important;
+        background: #eeeeee78 !important;
+    }
+
+        .ui-sortable-placeholder * {
+            visibility: hidden;
+        }
+
+    .RearangeBox.dragElemThumbnail {
+        opacity: 0.6;
+    }
+
+    .RearangeBox {
+        width: 180px;
+        height: 240px;
+        padding: 10px 5px;
+        cursor: all-scroll;
+        float: left;
+        font-family: sans-serif;
+        display: inline-block;
+        margin: 5px !important;
+        text-align: center;
+        color: #673ab7;
+        /*color: rgb(34, 34, 34);
+            background: #f3f2f1;     */
+    }
+
+    /*    body {
+            font-family: sans-serif;
+            margin: 0px;
+        }*/
+
+    .IMGthumbnail {
+        max-width: 168px;
+        height: 220px;
+        margin: auto;
+        background-color: #ececec;
+        padding: 2px;
+        border: none;
+    }
+
+        .IMGthumbnail img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    .imgThumbContainer {
+        margin: 4px;
+        border: solid;
+        display: inline-block;
+        justify-content: center;
+        position: relative;
+        border: 1px solid rgba(0,0,0,0.14);
+        -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 0 4px 0 rgba(0,0,0,.2);
+    }
+
+
+
+        .imgThumbContainer > .imgName {
+            text-align: center;
+            padding: 2px 6px;
+            margin-top: 4px;
+            font-size: 13px;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .imgThumbContainer > .imgRemoveBtn {
+            position: absolute;
+            color: #e91e63ba;
+            right: 2px;
+            top: 2px;
+            cursor: pointer;
+            display: none;
+        }
+
+    .RearangeBox:hover > .imgRemoveBtn {
+        display: block;
+    }
+
+    .custom-file-container__image-multi-preview {
+        position: relative;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        float: left;
+        margin: 1.858736059%;
+        width: 29.615861214%;
+        height: 190px;
+        box-shadow: 0 4px 10px 0 rgb(51 51 51 / 25%);
+    }
+</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="notification-style">
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Post an Ad</h1>
+                <ol class="breadcrumb-style">
+                    <li><a href="home.html" class="breadcrumb-color">Home > </a></li>
+                    <li class="breadcrumb-color"> Post an Ad</li>
+                </ol>
+
+            </div>
+
+            <div class="form-width">
+                <div class="col-md-3">
+                </div>
+                <div class="col-md-7">
+                    <form asp-action="Update" method="post" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.CategoryId, new { id = "categoryId" })
+                        @Html.HiddenFor(m => m.AdId)
+                        @Html.HiddenFor(m => m.Lng, new { id = "lng" })
+                        @Html.HiddenFor(m => m.Lat, new { id = "lat" })
+                        @Html.HiddenFor(m => m.ImagesToDelete, new { id = "imagesToDelete" })
+                        <input type="hidden" value="@Model.SubCategoryId" id="subCat" />
+                        <input type="hidden" value="@Model.SubTypeId" id="subType" />
+                        <input type="hidden" value="@Model.Maker" id="maker" />
+                        <input type="hidden" value="@Model.Model" id="model" />
+                        <input type="hidden" value="@Model.Trim" id="trim" />
+                        <input type="hidden" value="@Model.BodyType" id="bodyType" />
+                        <input type="hidden" value="@Model.Age" id="age" />
+                        <input type="hidden" value="@Model.Capacity" id="capacity" />
+                        <input type="hidden" value="@Model.Color" id="color" />
+                        <input type="hidden" value="@Model.Condition" id="condition" />
+                        <input type="hidden" value="@Model.Doors" id="doors" />
+                        <input type="hidden" value="@Model.EngineSize" id="engineSize" />
+                        <input type="hidden" value="@Model.FinalDriveSystem" id="finalDriveSystem" />
+                        <input type="hidden" value="@Model.FuelType" id="fuelType" />
+                        <input type="hidden" value="@Model.Horsepower" id="horsepower" />
+                        <input type="hidden" value="@Model.Length" id="length" />
+                        <input type="hidden" value="@Model.MechanicalCondition" id="mechanicalCondition" />
+                        <input type="hidden" value="@Model.PartName" id="partName" />
+                        <input type="hidden" value="@Model.NoOfCylinders" id="noOfCylinders" />
+                        <input type="hidden" value="@Model.RegionalSpecs" id="regionalSpecs" />
+                        <input type="hidden" value="@Model.SellerType" id="sellerType" />
+                        <input type="hidden" value="@Model.SteeringSide" id="steeringSide" />
+                        <input type="hidden" value="@Model.Transmission" id="transmission" />
+                        <input type="hidden" value="@Model.Usage" id="usage" />
+                        <input type="hidden" value="@Model.Wheels" id="wheels" />
+                        <input type="hidden" value="@Model.Location" id="location" />
+
+
+                        <p class="post-p3">Let’s start with the title</p>
+                        <p>Try to have an informative title that’s to be point and not very long</p>
+                        <input required type="text" class="line-input-style17" maxlength="40" id="title" asp-for="Title"
+                               placeholder="Dodge charger 2010 for Sale, perfect condition">
+                        <p>Recommended 40 characters</p>
+                        <p class="post-p3">Now let’s add your car make and model</p>
+
+
+                        @if (Model.CategoryId == StaticData.Boats_ID || Model.CategoryId == StaticData.Machinery_ID
+|| Model.CategoryId == StaticData.Parts_ID || Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                @if (Model.CategoryId == StaticData.Boats_ID)
+                                {
+
+                                    <select asp-for="SubCategoryId" id="subCategoryId" required class="line-input-style15">
+                                        <option value="">What type is your boat category?</option>
+                                    </select>
+
+                                }
+                                else if (Model.CategoryId == StaticData.Machinery_ID)
+                                {
+                                    <select asp-for="SubCategoryId" id="subCategoryId" required class="line-input-style15">
+                                        <option value="">What type is your machine category?</option>
+                                    </select>
+
+                                }
+                                else if (Model.CategoryId == StaticData.Parts_ID)
+                                {
+                                    <select asp-for="SubCategoryId" id="subCategoryId" required class="line-input-style15">
+                                        <option value="">What type is your part category?</option>
+                                    </select>
+
+                                }
+                                else if (Model.CategoryId == StaticData.Bike_ID)
+                                {
+                                    <select asp-for="SubCategoryId" id="subCategoryId" required class="line-input-style15">
+                                        <option value="">What type is your bike category?</option>
+                                    </select>
+
+                                }
+
+
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.OtherSubCategory))
+                            {
+                                <div id="otherSubCategory">
+                                    <div class='padding-form'>
+                                        <input placeholder="Other, please type here" required class="line-input-style15" asp-for="OtherSubCategory">
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div id="otherSubCategory" style="display:none">
+
+                                </div>
+                            }
+
+
+
+                            <div class="padding-form">
+                                @if (Model.CategoryId == StaticData.Boats_ID)
+                                {
+                                    <select asp-for="SubTypeId" id="subTypeId" required class="line-input-style15">
+                                        <option value="">What type is your boat sub category?</option>
+                                    </select>
+
+                                }
+                                else if (Model.CategoryId == StaticData.Machinery_ID)
+                                {
+                                    <select asp-for="SubTypeId" id="subTypeId" required class="line-input-style15">
+                                        <option value="">What type is your machine sub category?</option>
+                                    </select>
+
+                                }
+                                else if (Model.CategoryId == StaticData.Parts_ID)
+                                {
+                                    <select asp-for="SubTypeId" id="subTypeId" required class="line-input-style15">
+                                        <option value="">What make is it?</option>
+                                    </select>
+
+                                }
+                                else if (Model.CategoryId == StaticData.Bike_ID)
+                                {
+                                    <select asp-for="SubTypeId" id="subTypeId" required class="line-input-style15">
+                                        <option value="">What type is your bike sub category?</option>
+                                    </select>
+
+                                }
+
+
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.OtherSubType))
+                            {
+                                <div id="otherSubType">
+                                    <div class='padding-form'>
+                                        <input placeholder="Other, please type here" required class="line-input-style15" asp-for="OtherSubType">
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div id="otherSubType" style="display:none">
+
+                                </div>
+                            }
+
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+
+                                <select asp-for="Maker" id="makerDL" required class="line-input-style15">
+                                    <option value="">What brand is your car?</option>
+                                </select>
+                            </div>
+
+
+                            @if (!string.IsNullOrEmpty(Model.OtherMaker))
+                            {
+                                <div id="otherMaker">
+                                    <div class='padding-form'>
+                                        <input placeholder="Other, please type here" required class="line-input-style15" asp-for="OtherMaker">
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div id="otherMaker" style="display:none">
+
+                                </div>
+                            }
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+                                <select asp-for="Model" id="modelDL" required class="line-input-style15">
+                                    <option value="">What model is it?</option>
+                                </select>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.OtherModel))
+                            {
+                                <div id="otherModel">
+                                    <div class='padding-form'>
+                                        <input placeholder="Other, please type here" required class="line-input-style15" asp-for="OtherModel">
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div id="otherModel" style="display:none">
+
+                                </div>
+                            }
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.Parts_ID)
+                        {
+                            <div class="padding-form">
+                                <select asp-for="PartName" id="partNameDL" required class="line-input-style15">
+                                    <option value="">In which part ?</option>
+                                </select>
+                            </div>
+
+
+                            @if (!string.IsNullOrEmpty(Model.OtherPartName))
+                            {
+                                <div id="otherPartName">
+                                    <div class='padding-form'>
+                                        <input placeholder="Other, please type here" required class="line-input-style15" asp-for="OtherPartName">
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div id="otherPartName" style="display:none">
+
+                                </div>
+                            }
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.Boats_ID || Model.CategoryId == StaticData.Machinery_ID
+|| Model.CategoryId == StaticData.Parts_ID || Model.CategoryId == StaticData.Bike_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            var selectList =
+                    new SelectList(Enumerable.Range(1900, (DateTime.Now.Year - 1900) + 1));
+                    <div class="padding-form">
+                        @Html.DropDownListFor(m => m.Year, selectList, "What is the year of manufacture?",
+                    new { @class = "line-input-style15", required = true })
+                    </div>
+                }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+                                <select asp-for="Trim" id="trimDL" required class="line-input-style15">
+                                    <option value="">What is the trim?</option>
+                                </select>
+                            </div>
+
+                            @if (!string.IsNullOrEmpty(Model.OtherTrim))
+                            {
+                                <div id="otherTrim">
+                                    <div class='padding-form'>
+                                        <input placeholder="Other, please type here" required class="line-input-style15" asp-for="OtherTrim">
+                                    </div>
+                                </div>
+
+                            }
+                            else
+                            {
+                                <div id="otherTrim" style="display:none">
+
+                                </div>
+                            }
+                        }
+
+
+                        <div class="">
+                            <label for=''>
+                                <p class="post-p5">Pictures of your ad</p>
+                                <div class="">
+                                    <label for="images"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
+                                    <p><small>You can add upto 10 pictures</small></p>
+                                    <p style="color:#ffb01c">select your main image by click on it</p>
+                                </div>
+
+                            </label>
+                            <div class="form-group">
+                                <input type="file" asp-for="Pictures" id="images" multiple class="form-control" hidden accept="image/*">
+                                <p id="files-area">
+                                    <span id="filesList">
+                                        <span id="files-names">
+                                            @foreach (var photo in Model.Photos)
+                                            {
+                                                var imgSrc = StaticData.SERVER_DOMAIN + photo.ImageURL;
+
+                                                <span class="file-block">
+                                                    @if (photo.MainPicture)
+                                                    {
+                                                        <input type="radio" id="@photo.ImageURL" name="MainPhoto" value="@photo.ImageURL" class="chb" hidden="" checked="checked" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" id="@photo.ImageURL" name="MainPhoto" value="@photo.ImageURL" class="chb" hidden="" ch />
+                                                    }
+                                                    <label for="@photo.ImageURL">
+                                                        <img class="image-view" src="@imgSrc">
+                                                    </label>
+
+                                                    <span class="file-delete" onclick="deleteAdPhoto(@photo.Id)">
+                                                        <span>x</span>
+                                                    </span>
+
+                                                    <span class="name">@photo.ImageURL</span>
+                                                </span>
+                                            }
+
+                                        </span>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <div id="image_preview" style="width:100%;">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="padding-form">
+                            <input placeholder="Listing price" type="number" class="line-input-style16" asp-for="Price" min="0" required><label class="label-price1">AED</label>
+                        </div>
+
+                        <div class="padding-form">
+                            <label class="change-color">Phone Number</label>
+                            <input required type="number" class="line-input-style17" asp-for="PhoneNumber">
+                        </div>
+
+                        <div class="padding-form">
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                            <br>
+                            <span>0/400 words</span>
+                        </div>
+
+                        <p class="post-p4">Specifications</p>
+
+                        @if (Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="EngineSize" class="line-input-style15" id="engineSizeDL">
+                                    <option value="">Engine Size</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Machinery_ID)
+                        {
+                            <div class="padding-form">
+                                <select asp-for="Capacity" class="line-input-style15" id="capacityDL">
+                                    <option value="">Capacity</option>
+                                </select>
+                            </div>
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID
+|| Model.CategoryId == StaticData.ExportCar_ID
+|| Model.CategoryId == StaticData.Machinery_ID
+|| Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <input placeholder="Mileage (in KMS)" required class="line-input-style15" type="number" asp-for="Kilometers">
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="RegionalSpecs" class="line-input-style15" id="specificationDL">
+                                    <option value="">Regional Specification</option>
+                                </select>
+                            </div>
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID
+|| Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Color" class="line-input-style15" id="colorDL">
+                                    <option value="">Color</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Doors" class="line-input-style15" id="doorDL">
+                                    <option value="">Doors</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId != StaticData.Parts_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Warranty" class="line-input-style15">
+                                    <option value="">Warranty</option>
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Transmission" class="line-input-style15" id="transmissionDL">
+                                    <option value="">Transmission</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="BodyType" class="line-input-style15" id="bodyTypeDL">
+                                    <option value="">Body Type</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID
+|| Model.CategoryId == StaticData.ExportCar_ID
+|| Model.CategoryId == StaticData.Machinery_ID
+|| Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="FuelType" class="line-input-style15" id="fuelTypeDL">
+                                    <option value="">Fuel Type</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID
+|| Model.CategoryId == StaticData.ExportCar_ID
+|| Model.CategoryId == StaticData.Machinery_ID
+|| Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="NoOfCylinders" class="line-input-style15" id="NoOfCylindersDL">
+                                    <option value="">Number Of Cylinders</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="SteeringSide" class="line-input-style15" id="steeringSideDL">
+                                    <option value="">Steering Side</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID
+|| Model.CategoryId == StaticData.Machinery_ID || Model.CategoryId == StaticData.Boats_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Horsepower" class="line-input-style15" id="HorsepowerDL">
+                                    <option value="">Horse Power</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Wheels" class="line-input-style15" id="wheelsDL">
+                                    <option value="">wheels</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Parts_ID)
+                        {
+                            <div class="padding-form">
+                                <input placeholder="Name of part" required class="line-input-style15" type="text" asp-for="NameOfPart">
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Boats_ID || Model.CategoryId == StaticData.Parts_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Age" class="line-input-style15" id="ageDL">
+                                    <option value="">Age</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Boats_ID || Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Usage" class="line-input-style15" id="usageDL">
+                                    <option value="">Usage</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Boats_ID
+|| Model.CategoryId == StaticData.Machinery_ID
+|| Model.CategoryId == StaticData.Parts_ID)
+                        {
+                            <div class="padding-form">
+
+                                <select required asp-for="Condition" class="line-input-style15" id="conditionDL">
+                                    @if (Model.CategoryId == StaticData.Machinery_ID)
+                                    {
+                                        <option value="">Body Condition</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="">Condition</option>
+                                    }
+                                </select>
+                            </div>
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.Machinery_ID || Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="SellerType" class="line-input-style15" id="sellerTypeDL">
+                                    <option value="">Seller Type</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="FinalDriveSystem" class="line-input-style15" id="finalDriveSystemDL">
+                                    <option value="">Final Drive System</option>
+                                </select>
+                            </div>
+                        }
+
+                        @if (Model.CategoryId == StaticData.Boats_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Length" class="line-input-style15" id="lengthDL">
+                                    <option value="">Length</option>
+                                </select>
+                            </div>
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.Machinery_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="MechanicalCondition" class="line-input-style15" id="mechanicalConditionDL">
+                                    <option value="">Mechanical Condition</option>
+                                </select>
+                            </div>
+                        }
+
+                        <div class="padding-form">
+                            <select required asp-for="Location" class="line-input-style15" id="locationDL">
+                                <option value="">Your Location</option>
+                            </select>
+                        </div>
+
+
+                        <div class="padding-form">
+                            <button type="button" class="change-btn2" name="button" onclick="GetLocation()">Detect Location</button>
+
+                        </div>
+
+                        <label class="cont2">
+                            <p class="text-style3">
+                                By submitting this ad, I agree on <a href="#"> {Terms & Conditions}</a> and
+                                <a href="#">{Privacy Policy}</a>
+                            </p>
+                            <input type="checkbox">
+                            <span class="checkmark3" required></span>
+                        </label>
+
+
+                        <label class="">
+                            <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+
+                        </label>
+
+                        <div class="padding-form padding-top">
+                            <button id="submitButton" type="submit" class="change-btn3" name="button">CONTINUE</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        window.onload = function () {
+
+                var categoryId = @Model.CategoryId;
+
+                $.ajax({
+                    url: "/DropDowns/GetAllMotorMaker",
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#makerDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                        });
+
+                        $("#makerDL").append(`<option value='others'>others</option>`);
+
+
+                        var maker = $("#maker").val();
+
+                        $("#makerDL").val(maker);
+
+                        if (maker != "others") {
+                            $.ajax({
+                                url: `/DropDowns/GetAllMotorModelByMaker?maker=${maker}`,
+                                method: "GET",
+                                success: function (response) {
+                                    $.each(response.items, function (i, item) {
+                                        $("#modelDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                                    });
+
+                                    $("#modelDL").append(`<option value='others'>others</option>`);
+
+                                    var model = $("#model").val();
+
+                                    $("#modelDL").val(model);
+
+                                    if (model != "others") {
+
+                                        $.ajax({
+                                            url: `/DropDowns/GetAllMotorTrimByModel?model=${model}`,
+                                            method: "GET",
+                                            success: function (response) {
+                                                console.log(response);
+                                                $.each(response.items, function (i, item) {
+                                                    $("#trimDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                                                });
+
+                                                var trim = $("#trim").val();
+
+                                                $("#trimDL").val(trim);
+
+                                            },
+                                            error: function (error) {
+                                                alert(error.message);
+                                            }
+                                        });
+                                    } else {
+                                        $("#trimDL").append(`<option value='others'>others</option>`);
+                                        $("#trimDL").val("others");
+                                    }
+                                },
+                                error: function (error) {
+                                    alert(error.message);
+                                }
+                            });
+                        } else {
+
+                            $("#modelDL").append(`<option value='others'>others</option>`);
+
+                            $("#trimDL").append(`<option value='others'>others</option>`);
+
+                            $("#modelDL").val("others");
+
+                            $("#trimDL").val("others");
+
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+
+            $("#makerDL").on("change", function () {
+
+                $('#modelDL option').not(':first').remove();
+
+                $('#trimDL option').not(':first').remove();
+
+                $("#modelDL").val(null);
+                $("#trimDL").val(null);
+
+                $("#otherModel").html("");
+                $("#otherTrim").html("");
+
+                if ($("#makerDL").val() != "") {
+                    if ($("#makerDL").val().toLowerCase() == "others") {
+                        $("#otherMaker").css("display", "block");
+                        $("#otherMaker").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherMaker' name='OtherMaker' class="line-input-style15" type="text">
+                                    </p>`);
+
+
+                        $("#modelDL").append(`<option value='others'>others</option>`);
+
+                    } else {
+
+                        $("#otherMaker").html("");
+
+                        var maker = $("#makerDL").val();
+                        $.ajax({
+                            url: `/DropDowns/GetAllMotorModelByMaker?maker=${maker}`,
+                            method: "GET",
+                            success: function (response) {
+                                $.each(response.items, function (i, item) {
+                                    $("#modelDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                                });
+
+                                $("#modelDL").append(`<option value='others'>others</option>`);
+                            },
+                            error: function (error) {
+                                alert(error.message);
+                            }
+                        });
+                    }
+                } else {
+                    $("#otherMaker").html("");
+                }
+            });
+
+
+
+            $("#modelDL").on("change", function () {
+
+                $('#trimDL option').not(':first').remove();
+
+                $("#otherTrim").html("");
+                $("#trimDL").val(null);
+
+                if ($("#modelDL").val() != "") {
+                    if ($("#modelDL").val().toLowerCase() == "others") {
+                        $("#otherModel").css("display", "block");
+                        $("#otherModel").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherModel' name='OtherModel' class="line-input-style15" type="text">
+                                    </p>`);
+
+
+                        $("#trimDL").append(`<option id="othersTrim" value='others'>others</option>`);
+
+                    } else {
+                        $("#otherModel").html("");
+
+                        var model = $("#modelDL").val();
+                        $.ajax({
+                            url: `/DropDowns/GetAllMotorTrimByModel?model=${model}`,
+                            method: "GET",
+                            success: function (response) {
+                                console.log(response);
+                                $.each(response.items, function (i, item) {
+                                    $("#trimDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                                });
+
+                                if ($('#othersTrim').length) {
+                                } else {
+                                    $("#trimDL").append(`<option id="othersTrim" value='others'>others</option>`);
+                                }
+
+                            },
+                            error: function (error) {
+                                alert(error.message);
+                            }
+                        });
+                    }
+                } else {
+                    $("#otherModel").html("");
+                }
+
+            });
+
+
+            //$("#categoryId").on("change", function () {
+            //    $("#otherSubCategory").html("");
+            //    $("#otherSubType").html("");
+            //    $("#subCategoryId").val(null);
+            //    $("#subCategoryId option").not(':first').remove();
+            //    $("#subTypeId").val(null);
+            //    $("#subTypeId option").not(':first').remove();
+
+            //    if ($("#categoryId").val() != "") {
+            //        var categoryId = $("#categoryId").val();
+            //        $.ajax({
+            //            url: `/SubCategories/GetSubCategories?categoryId=${categoryId}`,
+            //            method: "GET",
+            //            success: function (response) {
+            //                $.each(response.items, function (i, item) {
+            //                    $("#subCategoryId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+            //                });
+
+            //                $("#subCategoryId").append(`<option value='0'>others</option>`);
+
+            //            },
+            //            error: function (error) {
+            //                alert(error.message);
+            //            }
+            //        });
+
+            //    }
+            //});
+
+
+                $.ajax({
+                    url: `/SubCategories/GetSubCategories?categoryId=${categoryId}`,
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#subCategoryId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                        });
+
+                        $("#subCategoryId").append(`<option value='0'>others</option>`);
+
+                        var subCat = $("#subCat").val();
+
+                        $("#subCategoryId").val(subCat);
+
+                        if (subCat != "") {
+                            $.ajax({
+                                url: `/SubTypes/GetSubTypes?subCategoryId=${subCat}`,
+                                method: "GET",
+                                success: function (response) {
+                                    $.each(response.items, function (i, item) {
+                                        $("#subTypeId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                                    });
+
+
+                                    $("#subTypeId").append(`<option id="othersSubType" value='0'>others</option>`);
+
+                                    var subType = $("#subType").val();
+
+
+                                    if (subType != "") {
+                                        $("#subTypeId").val(subType);
+
+                                        $.ajax({
+                                            url: `/DropDowns/GetAllParts?subTypeId=${subType}`,
+                                            method: "GET",
+                                            success: function (response) {
+                                                $.each(response.items, function (i, item) {
+                                                    $("#partNameDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                                                });
+
+
+                                                $("#partNameDL").append(`<option value='0'>others</option>`);
+
+                                                var partName = $("#partName").val();
+
+                                                $("#partNameDL").val(partName);
+                                            },
+                                            error: function (error) {
+                                                alert(error.message);
+                                            }
+                                        });
+
+                                    } else {
+                                        $("#subTypeId").val("0");
+                                        $("#partNameDL").append(`<option id="othersSubType" value='0'>others</option>`);
+                                        $("#partNameDL").val("0");
+                                    }
+
+
+                                },
+                                error: function (error) {
+                                    alert(error.message);
+                                }
+                            });
+
+                        } else {
+                            $("#subCategoryId").val("0");
+                            $("#subTypeId").append(`<option id="othersSubType" value='0'>others</option>`);
+                            $("#subTypeId").val("0");
+                            $("#partNameDL").append(`<option id="othersSubType" value='0'>others</option>`);
+                            $("#partNameDL").val("others");
+                        }
+
+
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+
+
+
+            $("#subCategoryId").on("change", function () {
+                if ($("#subCategoryId").val().toLowerCase() == "0") {
+                    console.log("asd");
+                    $("#otherSubCategory").css("display", "block");
+                    $("#otherSubCategory").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherSubCategory' name='OtherSubCategory' class="line-input-style15" type="text">
+                                    </p>`);
+
+                    $('#subTypeId option').not(':first').remove();
+
+                    $("#subTypeId").append(`<option id="othersSubType" value='0'>others</option>`);
+
+                    $('#partNameDL option').not(':first').remove();
+                    $("#partNameDL").append(`<option value='0'>others</option>`);
+
+
+                } else {
+                    $("#otherSubCategory").html("");
+                    $("#otherSubType").html("");
+                    $("#otherPartName").html("");
+                    $("#partNameDL").val(null);
+                    $("#subTypeId").val(null);
+                    $("#subTypeId option").not(':first').remove();
+                    $("#partNameDL option").not(':first').remove();
+
+                    if ($("#subCategoryId").val() != "") {
+                        var subCategoryId = $("#subCategoryId").val();
+                        $.ajax({
+                            url: `/SubTypes/GetSubTypes?subCategoryId=${subCategoryId}`,
+                            method: "GET",
+                            success: function (response) {
+                                $.each(response.items, function (i, item) {
+                                    $("#subTypeId").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+                                });
+
+
+                                $("#subTypeId").append(`<option id="othersSubType" value='0'>others</option>`);
+
+                            },
+                            error: function (error) {
+                                alert(error.message);
+                            }
+                        });
+
+                    }
+
+                }
+            });
+
+
+            $("#subTypeId").on("change", function () {
+                if ($("#subTypeId").val().toLowerCase() == "0") {
+                    $("#otherSubType").css("display", "block");
+                    $("#otherSubType").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherSubType' name='OtherSubType' class="line-input-style15" type="text">
+                                    </p>`);
+
+
+                    $('#partNameDL option').not(':first').remove();
+
+                    $("#partNameDL").append(`<option value='0'>others</option>`);
+
+                } else {
+                    $("#otherSubType").html("");
+                    $("#otherPartName").html("");
+                    $("#partNameDL").val(null);
+                    $("#partNameDL option").not(':first').remove();
+
+                    if ($("#subTypeId").val() != "") {
+                        var subTypeId = $("#subTypeId").val();
+                        $.ajax({
+                            url: `/DropDowns/GetAllParts?subTypeId=${subTypeId}`,
+                            method: "GET",
+                            success: function (response) {
+                                $.each(response.items, function (i, item) {
+                                    $("#partNameDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                                });
+
+
+                                $("#partNameDL").append(`<option value='0'>others</option>`);
+
+                            },
+                            error: function (error) {
+                                alert(error.message);
+                            }
+                        });
+
+                    }
+                }
+            });
+
+
+            $("#partNameDL").on("change", function () {
+                if ($("#partNameDL").val().toLowerCase() == "0") {
+                    $("#otherPartName").css("display", "block");
+                    $("#otherPartName").html(`<p class="padding-p">
+                            <input placeholder="Other, please type here" required id='OtherPartName' name='OtherPartName' class="line-input-style15" type="text">
+                                    </p>`);
+
+                } else {
+                    $("#otherPartName").html("");
+                }
+            });
+
+
+            $("#trimDL").on("change", function () {
+                if ($("#trimDL").val().toLowerCase() == "others") {
+                    $("#otherTrim").css("display", "block");
+                    $("#otherTrim").html(`<p class="padding-p">
+                                                <input placeholder="Other, please type here" required id='OtherTrim' name='OtherTrim' class="line-input-style15" type="text">
+                                                        </p>`);
+                } else {
+                    $("#otherTrim").html("");
+                }
+            });
+
+        }
+    </script>
+
+    <script>
+
+
+            $.ajax({
+                url: "/DropDowns/GetAllMotorRegionalSpecs",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#specificationDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var regionalSpecs = $("#regionalSpecs").val();
+
+                    $("#specificationDL").val(regionalSpecs);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllColor",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#colorDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var color = $("#color").val();
+
+                    $("#colorDL").val(color);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllDoor",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#doorDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var door = $("#doors").val();
+
+                    $("#doorDL").val(door);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllTransmission",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#transmissionDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var transmission = $("#transmission").val();
+
+                    $("#transmissionDL").val(transmission);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllBodyType",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#bodyTypeDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var bodyType = $("#bodyType").val();
+
+                    $("#bodyTypeDL").val(bodyType);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllFuelType",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#fuelTypeDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var fuelType = $("#fuelType").val();
+
+                    $("#fuelTypeDL").val(fuelType);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllNoOfCylinders",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#NoOfCylindersDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var noOfCylinders = $("#noOfCylinders").val();
+
+                    $("#NoOfCylindersDL").val(noOfCylinders);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllHorsepower?categoryId=@Model.CategoryId",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#HorsepowerDL").append(`<option value='${item.en_Text}^${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var horsepower = $("#horsepower").val();
+
+                    $("#HorsepowerDL").val(horsepower);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllCondition?categoryId=@Model.CategoryId",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#conditionDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var condition = $("#condition").val();
+
+                    $("#conditionDL").val(condition);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllMechanicalCondition",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#mechanicalConditionDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var mechanicalCondition = $("#mechanicalCondition").val();
+
+                    $("#mechanicalConditionDL").val(mechanicalCondition);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllLocation",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#locationDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var location = $("#location").val();
+
+                    $("#locationDL").val(location);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllEngineSize",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#engineSizeDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var engineSize = $("#engineSize").val();
+
+                    $("#engineSizeDL").val(engineSize);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllAge?categoryId=@Model.CategoryId",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#ageDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var age = $("#age").val();
+
+                    $("#ageDL").val(age);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllUsage?categoryId=@Model.CategoryId",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#usageDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var usage = $("#usage").val();
+
+                    $("#usageDL").val(usage);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllLength",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#lengthDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var length = $("#length").val();
+
+                    $("#lengthDL").val(length);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllSellerType",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#sellerTypeDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var sellerType = $("#sellerType").val();
+
+                    $("#sellerTypeDL").val(sellerType);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllFinalDriveSystem",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#finalDriveSystemDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var finalDriveSystem = $("#finalDriveSystem").val();
+
+                    $("#finalDriveSystemDL").val(finalDriveSystem);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+
+
+            $.ajax({
+                url: "/DropDowns/GetAllCapacity",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#capacityDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var capacity = $("#capacity").val();
+
+                    $("#capacityDL").val(capacity);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllSteeringSide",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#steeringSideDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var steeringSide = $("#steeringSide").val();
+
+                    $("#steeringSideDL").val(steeringSide);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/DropDowns/GetAllWheels",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#wheelsDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var wheels = $("#wheels").val();
+
+                    $("#wheelsDL").val(wheels);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+    </script>
+
+    <script type="text/javascript">
+        // <img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'>
+        const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
+
+        // remove old images from DOM
+        $('span.file-delete').click(function () {
+            let name = $(this).next('span.name').text();
+            $(this).parent().remove();
+
+            var imgLength = $(".image-view").length;
+
+            if (imgLength == 0) {
+                $("#submitButton").attr("disabled", "disabled");
+            } else {
+                $("#submitButton").removeAttr("disabled");
+            }
+
+        });
+
+        $("#images").on('change', function (e) {
+            for (var i = 0; i < this.files.length; i++) {
+                let fileBloc = $('<span/>', { class: 'file-block' }),
+                    fileName = $('<span/>', { class: 'name', text: this.files.item(i).name });
+                fileBloc.append('<input type="radio"  id=' + this.files.item(i).name + '  name="MainPhoto" value=' + this.files.item(i).name + ' class="chb" hidden /><label  for=' + this.files.item(i).name + ' ><img class="image-view" src=' + URL.createObjectURL(event.target.files[i]) + '></label><span class="file-delete"><span>x</span></span>').append(fileName);
+                $("#filesList > #files-names").append(fileBloc);
+                // $('#image_preview').append("<div class='img-div' id='img-div"+i+"'><input type='radio'  id='"+this.files.item(i).name+"'  name='cb' value='"+this.files.item(i).name+"' class='chb' hidden /><label  for='"+this.files.item(i).name+"' ><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'></label><div class='middle'></div><span class="file-delete"><span>x</span></span></div>");
+            };
+            // Ajout des fichiers dans l'objet DataTransfer
+            for (let file of this.files) {
+                dt.items.add(file);
+            }
+            // Mise à jour des fichiers de l'input file après ajout
+            this.files = dt.files;
+
+            $("#submitButton").removeAttr("disabled");
+
+
+            // remove new images from DOM
+            $('span.file-delete').click(function () {
+                let name = $(this).next('span.name').text();
+                // Supprimer l'affichage du nom de fichier
+                $(this).parent().remove();
+                for (let i = 0; i < dt.items.length; i++) {
+                    // Correspondance du fichier et du nom
+                    if (name === dt.items[i].getAsFile().name) {
+                        // Suppression du fichier dans l'objet DataTransfer
+                        dt.items.remove(i);
+                        continue;
+                    }
+                }
+                // Mise à jour des fichiers de l'input file après suppression
+                document.getElementById('images').files = dt.files;
+
+                var imgLength = $(".image-view").length;
+
+                if (imgLength == 0) {
+                    $("#submitButton").attr("disabled", "disabled");
+                } else {
+                    $("#submitButton").removeAttr("disabled");
+                }
+
+            });
+
+        });
+    </script>
+}

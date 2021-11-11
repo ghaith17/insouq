@@ -1,0 +1,794 @@
+﻿@using insouq.Shared.Utility
+@model insouq.Shared.DTOS.UpdatePropertyAdDTO
+
+<style media="screen">
+    #files-area {
+        margin: 0 auto;
+    }
+
+    .file-block {
+        border-radius: 10px;
+        margin: 5px;
+        color: initial;
+        display: inline-flex;
+        & > span.name
+
+    {
+        padding-right: 10px;
+        width: max-content;
+        display: inline-flex;
+    }
+
+    }
+
+    .image-view {
+        width: 150px;
+        height: 150px;
+        object-fit: contain;
+        background: white;
+    }
+
+    .file-delete {
+        position: absolute;
+        background-color: #db0909;
+        color: white;
+        border-radius: 100%;
+        font-weight: bold;
+        margin-top: 8px;
+        justify-content: center;
+        font-size: 14px;
+        margin-right: 0;
+        padding: 0px 7px 1px 7px;
+        margin-left: 121px;
+        cursor: pointer;
+    }
+
+    .name {
+        display: none;
+    }
+
+    .img-div {
+        position: relative;
+        display: inline-block;
+        width: 18%;
+        margin-right: 5px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    :checked + label {
+        border: 5px solid;
+        border-color: #ffb01c;
+        border-radius: 15px;
+    }
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        max-width: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .icon-delete {
+        background: #db0909;
+        border: none;
+        position: absolute;
+        border-radius: 100%;
+        margin-left: -22%;
+        margin-top: 8px;
+        color: white;
+        font-size: 10px;
+        padding: 0 8px;
+    }
+
+    .img-div:hover .middle {
+        opacity: 1;
+    }
+</style>
+
+<style media="screen">
+    .ui-sortable-placeholder {
+        visibility: visible !important;
+        background: #eeeeee78 !important;
+    }
+
+        .ui-sortable-placeholder * {
+            visibility: hidden;
+        }
+
+    .RearangeBox.dragElemThumbnail {
+        opacity: 0.6;
+    }
+
+    .RearangeBox {
+        width: 180px;
+        height: 240px;
+        padding: 10px 5px;
+        cursor: all-scroll;
+        float: left;
+        font-family: sans-serif;
+        display: inline-block;
+        margin: 5px !important;
+        text-align: center;
+        color: #673ab7;
+        /*color: rgb(34, 34, 34);
+            background: #f3f2f1;     */
+    }
+
+    /*    body {
+            font-family: sans-serif;
+            margin: 0px;
+        }*/
+
+    .IMGthumbnail {
+        max-width: 168px;
+        height: 220px;
+        margin: auto;
+        background-color: #ececec;
+        padding: 2px;
+        border: none;
+    }
+
+        .IMGthumbnail img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    .imgThumbContainer {
+        margin: 4px;
+        border: solid;
+        display: inline-block;
+        justify-content: center;
+        position: relative;
+        border: 1px solid rgba(0,0,0,0.14);
+        -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 0 4px 0 rgba(0,0,0,.2);
+    }
+
+
+
+        .imgThumbContainer > .imgName {
+            text-align: center;
+            padding: 2px 6px;
+            margin-top: 4px;
+            font-size: 13px;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .imgThumbContainer > .imgRemoveBtn {
+            position: absolute;
+            color: #e91e63ba;
+            right: 2px;
+            top: 2px;
+            cursor: pointer;
+            display: none;
+        }
+
+    .RearangeBox:hover > .imgRemoveBtn {
+        display: block;
+    }
+
+    .custom-file-container__image-multi-preview {
+        position: relative;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        float: left;
+        margin: 1.858736059%;
+        width: 29.615861214%;
+        height: 190px;
+        box-shadow: 0 4px 10px 0 rgb(51 51 51 / 25%);
+    }
+</style>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+<div class="notification-style">
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Post an Ad</h1>
+                <ol class="breadcrumb-style">
+                    <li><a href="home.html" class="breadcrumb-color">Home > </a></li>
+                    <li class="breadcrumb-color"> Post an Ad</li>
+                </ol>
+
+            </div>
+            <div class="form-width">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-7">
+                    <p class="post-p3">Let’s start with the title</p>
+                    <p>Try to have an informative title that’s to be point and not very long</p>
+
+                    <form asp-action="Update" method="post" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.CategoryId)
+                        @Html.HiddenFor(m => m.AdId)
+                        @Html.HiddenFor(m => m.Lng, new { id = "lng" })
+                        @Html.HiddenFor(m => m.Lat, new { id = "lat" })
+                        @Html.HiddenFor(m => m.ImagesToDelete, new { id = "imagesToDelete" })
+                        <input type="hidden" value="@Model.Furnishing" id="furnishing" />
+                        <input type="hidden" value="@Model.SubCategoryId" id="subCat" />
+                        <input type="hidden" value="@Model.Location" id="location" />
+                        <input type="hidden" value="@Model.ListedBy" id="listed" />
+
+
+                        <div class="padding-form">
+                            <input type="text" class="line-input-style17" maxlength="40" required asp-for="Title" placeholder="Dodge charger 2010 for Sale, perfect condition">
+                            <Small>Recommended 40 characters</Small>
+                            <p class="post-p4">Looks good, Now please add more details</p>
+                        </div>
+
+                        <div class="">
+                            <label for=''>
+                                <p class="post-p5">Pictures of your ad</p>
+                                <div class="">
+                                    <label for="images"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
+                                    <p><small>You can add upto 10 pictures</small></p>
+                                    <p style="color:#ffb01c">select your main image by click on it</p>
+                                </div>
+
+                            </label>
+                            <div class="form-group">
+                                <input type="file" asp-for="Pictures" id="images" multiple class="form-control" hidden accept="image/*">
+                                <p id="files-area">
+                                    <span id="filesList">
+                                        <span id="files-names">
+                                            @foreach (var photo in Model.Photos)
+                                            {
+                                                var imgSrc = StaticData.SERVER_DOMAIN + photo.ImageURL;
+
+                                                <span class="file-block">
+                                                    @if (photo.MainPicture)
+                                                    {
+                                                        <input type="radio" id="@photo.ImageURL" name="MainPhoto" value="@photo.ImageURL" class="chb" hidden="" checked="checked" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" id="@photo.ImageURL" name="MainPhoto" value="@photo.ImageURL" class="chb" hidden="" ch />
+                                                    }
+                                                    <label for="@photo.ImageURL">
+                                                        <img class="image-view" src="@imgSrc">
+                                                    </label>
+
+                                                    <span class="file-delete" onclick="deleteAdPhoto(@photo.Id)">
+                                                        <span>x</span>
+                                                    </span>
+
+                                                    <span class="name">@photo.ImageURL</span>
+                                                </span>
+                                            }
+
+                                        </span>
+                                    </span>
+                                </p>
+                            </div>
+                            <div class="form-group">
+                                <div id="image_preview" style="width:100%;">
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="padding-form">
+                            <select required asp-for="Location" class="line-input-style15" id="locationDL">
+                                <option value="">Your Location</option>
+                            </select>
+                        </div>
+
+                        <div class="padding-form">
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                            <br>
+                            <span>0/400 words</span>
+                        </div>
+
+                        <div class="padding-form">
+                            <select required asp-for="SubCategoryId" class="line-input-style15" id="subCategoryDL">
+                                <option value="">Sub Category</option>
+                            </select>
+                        </div>
+
+                        <div class="padding-form">
+                            <select required asp-for="Furnishing" class="line-input-style15">
+                                <option value="">Furnishing</option>
+                                <option value="Furnished-مفروش">Furnished</option>
+                                <option value="Not Furnished-غير مفروش">Not Furnished</option>
+                            </select>
+                        </div>
+
+                        @if (Model.CategoryId == StaticData.ResidentialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForSale_ID)
+                        {
+                            <div class="padding-form">
+                                <select asp-for="BedRooms" class="line-input-style15">
+                                    <option value="">BedRooms</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="BathRooms" class="line-input-style15">
+                                    <option value="">BathRooms</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                            </div>
+                        }
+
+
+                        <div class="padding-form">
+                            <input placeholder="Size" type="number" class="line-input-style15" asp-for="Size" min="0">
+                        </div>
+
+                        <p class="post-p4">Services</p>
+
+                        <div class="row padding-form">
+                            @if (Model.CategoryId == StaticData.ResidentialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForSale_ID)
+                            {
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="Balcony">
+                                    <label class="change-color">Balcony</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="BuiltInKitchenAppliances">
+                                    <label class="change-color">Built In Kitchen Appliances</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="BuildInWardrobes">
+                                    <label class="change-color">Build In Wardrobes</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="WalkInCloset">
+                                    <label class="change-color">Walk-In Closet</label>
+                                </div>
+                            }
+
+                            <div class="col-4">
+                                <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="CentralACAndHeating">
+                                <label class="change-color">Central A/C and Heating</label>
+                            </div>
+
+                            @if (Model.CategoryId == StaticData.ResidentialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForSale_ID)
+                            {
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="ConceirgeService">
+                                    <label class="change-color">Conceirge Service</label>
+                                </div>
+                            }
+
+                            <div class="col-4">
+                                <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="CoveredParking">
+                                <label class="change-color">Covered Parking</label>
+                            </div>
+
+                            @if (Model.CategoryId == StaticData.CommercialForRent_ID
+|| Model.CategoryId == StaticData.CommercialForSale_ID)
+                            {
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="AvailableNetworked">
+                                    <label class="change-color">Available Networked</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="ConferenceRoom">
+                                    <label class="change-color">Conference Room</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="DiningInBuilding">
+                                    <label class="change-color">Dining In Building</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="RetailInBuilding">
+                                    <label class="change-color">Retail In Building</label>
+                                </div>
+
+                            }
+
+                            @if (Model.CategoryId == StaticData.ResidentialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForSale_ID)
+                            {
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="MaidService">
+                                    <label class="change-color">Maid Service</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="MaidsRoom">
+                                    <label class="change-color">Maids Room</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="PetsAllowed">
+                                    <label class="change-color">Pets Allowed</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="PrivateGarden">
+                                    <label class="change-color">Private Garden</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="PrivateGym">
+                                    <label class="change-color">Private Gym</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="PrivateJacuzzi">
+                                    <label class="change-color">Private Jacuzzi</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="PrivatePool">
+                                    <label class="change-color">Private Pool</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="Security">
+                                    <label class="change-color">Security</label>
+                                </div>
+                            }
+
+                            <div class="col-4">
+                                <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="SharedGym">
+                                <label class="change-color">Shared Gym</label>
+                            </div>
+
+                            <div class="col-4">
+                                <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="SharedSpa">
+                                <label class="change-color">Shared Spa</label>
+                            </div>
+
+
+
+
+                            @if (Model.CategoryId == StaticData.ResidentialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForSale_ID)
+                            {
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="SharedPool">
+                                    <label class="change-color">Shared Pool</label>
+                                </div>
+
+                                <div class="col-4">
+                                    <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="StudyRoom">
+                                    <label class="change-color">Study Room</label>
+                                </div>
+                            }
+
+
+                            <div class="col-4">
+                                <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="ViewOfLandmark">
+                                <label class="change-color">View Of Landmark</label>
+
+                            </div>
+
+                            <div class="col-4">
+                                <input type="checkbox" class="custom-checkbox" style="display:inline" asp-for="ViewOfWater">
+                                <label class="change-color">View Of Water</label>
+                            </div>
+
+                        </div>
+
+                        @if (Model.CategoryId == StaticData.CommercialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForRent_ID)
+                        {
+                            <div class="padding-form">
+                                <input placeholder="Annual Rent" type="number" class="line-input-style15" asp-for="AnnualRent" min="0">
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="RentPaidIn" class="line-input-style15">
+                                    <option value="">Paid In</option>
+                                    <option value="1 Check - 1شيك">1 Check</option>
+                                    <option value="1 Check - 2شيك">2 Check</option>
+                                    <option value="1 Check - 4شيك">4 Check</option>
+                                    <option value="1 Check - 6شيك">6 Check</option>
+                                    <option value="1 Check - 12شيك">12 Check</option>
+
+                                </select>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="padding-form">
+                                <input placeholder="Listing price" type="number" class="line-input-style16" asp-for="Price" min="0"><label class="label-price1">AED</label>
+                            </div>
+                        }
+
+                        <div class="padding-form">
+                            <input placeholder="Developer" type="text" class="line-input-style15" asp-for="Developer">
+                        </div>
+
+                        <div class="padding-form">
+                            <label class="change-color">Ready to move by</label>
+                            <input type="date" class="line-input-style15" asp-for="ReadyBy">
+                        </div>
+
+                        @if (Model.CategoryId == StaticData.CommercialForSale_ID)
+                        {
+                            <div class="padding-form">
+                                <input placeholder="Total Closing Fee" type="number" class="line-input-style15" asp-for="TotalClosingFee" min="0">
+                            </div>
+
+                            <div class="padding-form">
+                                <input placeholder="Annual Community Fee" type="number" class="line-input-style15" asp-for="AnnualCommunityFee" min="0">
+                            </div>
+                        }
+
+                        <div class="padding-form">
+                            <input placeholder="Property Reference ID" type="text" class="line-input-style15" asp-for="PropertyReferenceID">
+                        </div>
+
+                        <div class="padding-form">
+                            <select required asp-for="ListedBy" class="line-input-style15" onchange="onListedByChanged()">
+                                <option value="">Listed By</option>
+                                <option value="0">LandLord</option>
+                                <option value="1">Agent</option>
+                            </select>
+                        </div>
+
+                        <div id="landlordData" style="display:none">
+                            <div class="padding-form">
+                                <input placeholder="RERA Landlord Name" type="text" class="line-input-style15" asp-for="RERALandlordName">
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="PropertyStatus" class="line-input-style15">
+                                    <option value="">Property Status</option>
+                                    <option value="Property Complete-العقار جاهز">Property Complete</option>
+                                    <option value="Property Incomplete-العقار غير جاهز">Property Incomplete</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <input placeholder="RERA Title Deed Number (complete)" type="text" class="line-input-style15" asp-for="RERATitleDeedNumber">
+                            </div>
+
+                            <div class="padding-form">
+                                <input placeholder="RERA Pre Registration Number (Incomplete)" type="text" class="line-input-style15" asp-for="RERAPreRegistrationNumber">
+                            </div>
+                        </div>
+
+                        <div id="agentData" style="display:none">
+                            <div class="padding-form">
+                                <input placeholder="RERA Broker ID Number" type="text" class="line-input-style15" asp-for="RERABrokerIDNumber">
+                            </div>
+
+                            <div class="padding-form">
+                                <input placeholder="RERA Lister Company Name" type="text" class="line-input-style15" asp-for="RERAListerCompanyName">
+                            </div>
+
+                            <div class="padding-form">
+                                <input placeholder="RERA Permit Number" type="text" class="line-input-style15" asp-for="RERAPermitNumber">
+                            </div>
+
+                            <div class="padding-form">
+                                <input placeholder="RERA Agent Name" type="text" class="line-input-style15" asp-for="RERAAgentName">
+                            </div>
+                        </div>
+
+                        <div class="padding-form">
+                            <input placeholder="Building" type="text" class="line-input-style15" asp-for="Building">
+                        </div>
+
+                        <div class="padding-form">
+                            <input placeholder="Neighborhood" type="text" class="line-input-style15" asp-for="Neighborhood">
+                        </div>
+
+                        <div class="padding-form">
+                            <button type="button" class="change-btn2" name="button" onclick="GetLocation()">Detect Location</button>
+                        </div>
+
+                        <label class="cont2">
+                            <p class="text-style3">
+                                By submitting this ad, I agree on <a href="#"> {Terms & Conditions}</a> and
+                                <a href="#">{Privacy Policy}</a>
+                            </p>
+                            <input type="checkbox">
+                            <span class="checkmark3" required></span>
+                        </label>
+
+
+                        <label class="">
+                            <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+
+                        </label>
+
+                        <div class="padding-form padding-top">
+                            @*<button type="button" class="change-btn3" name="button" onclick="window.location.href='adpackagesubscriptions0.html'">CONTINUE</button>*@
+                            <button id="submitButton" type="submit" class="change-btn3" name="button">CONTINUE</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script>
+
+        var listed = $("#listed").val();
+
+        fillListedBy(listed);
+
+        function onListedByChanged() {
+
+            var listed = $("#ListedBy").val();
+            fillListedBy(listed);
+
+        }
+
+        function fillListedBy(listedBy) {
+            if (listedBy == "0") {
+                $("#agentData").hide();
+                $("#landlordData").show();
+
+                $("#RERALandlordName").attr("required", true);
+                $("#PropertyStatus").attr("required", true);
+                $("#RERATitleDeedNumber").attr("required", true);
+                $("#RERAPreRegistrationNumber").attr("required", true);
+                $("#RERAPreRegistrationNumber").attr("required", true);
+
+
+                $("#RERABrokerIDNumber").removeAttr("required");
+                $("#RERAListerCompanyName").removeAttr("required");
+                $("#RERAPermitNumber").removeAttr("required");
+                $("#RERAAgentName").removeAttr("required");
+
+            } else if(listedBy == "1") {
+                $("#landlordData").hide();
+                $("#agentData").show();
+
+                $("#RERABrokerIDNumber").attr("required", true);
+                $("#RERAListerCompanyName").attr("required", true);
+                $("#RERAPermitNumber").attr("required", true);
+                $("#RERAAgentName").attr("required", true);
+
+                $("#RERALandlordName").removeAttr("required");
+                $("#PropertyStatus").removeAttr("required");
+                $("#RERATitleDeedNumber").removeAttr("required");
+                $("#RERAPreRegistrationNumber").removeAttr("required");
+                $("#RERAPreRegistrationNumber").removeAttr("required");
+            }
+        }
+
+            $.ajax({
+                url: "/DropDowns/GetAllLocation",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#locationDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var location = $("#location").val();
+
+                    $("#locationDL").val(location);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $.ajax({
+                url: "/SubCategories/GetSubCategories?categoryId=@Model.CategoryId",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        console.log(item);
+                        $("#subCategoryDL").append(`<option value='${item.id}'>${item.en_Name}</option>`);
+
+                        var subCat = $("#subCat").val();
+
+                        $("#subCategoryDL").val(subCat);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+    </script>
+
+    <script type="text/javascript">
+        // <img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'>
+        const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
+
+        // remove old images from DOM
+        $('span.file-delete').click(function () {
+            let name = $(this).next('span.name').text();
+            $(this).parent().remove();
+
+            var imgLength = $(".image-view").length;
+
+            if (imgLength == 0) {
+                $("#submitButton").attr("disabled", "disabled");
+            } else {
+                $("#submitButton").removeAttr("disabled");
+            }
+
+        });
+
+        $("#images").on('change', function (e) {
+            for (var i = 0; i < this.files.length; i++) {
+                let fileBloc = $('<span/>', { class: 'file-block' }),
+                    fileName = $('<span/>', { class: 'name', text: this.files.item(i).name });
+                fileBloc.append('<input type="radio"  id=' + this.files.item(i).name + '  name="MainPhoto" value=' + this.files.item(i).name + ' class="chb" hidden /><label  for=' + this.files.item(i).name + ' ><img class="image-view" src=' + URL.createObjectURL(event.target.files[i]) + '></label><span class="file-delete"><span>x</span></span>').append(fileName);
+                $("#filesList > #files-names").append(fileBloc);
+                // $('#image_preview').append("<div class='img-div' id='img-div"+i+"'><input type='radio'  id='"+this.files.item(i).name+"'  name='cb' value='"+this.files.item(i).name+"' class='chb' hidden /><label  for='"+this.files.item(i).name+"' ><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'></label><div class='middle'></div><span class="file-delete"><span>x</span></span></div>");
+            };
+            // Ajout des fichiers dans l'objet DataTransfer
+            for (let file of this.files) {
+                dt.items.add(file);
+            }
+            // Mise à jour des fichiers de l'input file après ajout
+            this.files = dt.files;
+
+            $("#submitButton").removeAttr("disabled");
+
+
+            // remove new images from DOM
+            $('span.file-delete').click(function () {
+                let name = $(this).next('span.name').text();
+                // Supprimer l'affichage du nom de fichier
+                $(this).parent().remove();
+                for (let i = 0; i < dt.items.length; i++) {
+                    // Correspondance du fichier et du nom
+                    if (name === dt.items[i].getAsFile().name) {
+                        // Suppression du fichier dans l'objet DataTransfer
+                        dt.items.remove(i);
+                        continue;
+                    }
+                }
+                // Mise à jour des fichiers de l'input file après suppression
+                document.getElementById('images').files = dt.files;
+
+                var imgLength = $(".image-view").length;
+
+                if (imgLength == 0) {
+                    $("#submitButton").attr("disabled", "disabled");
+                } else {
+                    $("#submitButton").removeAttr("disabled");
+                }
+
+            });
+
+        });
+    </script>
+}

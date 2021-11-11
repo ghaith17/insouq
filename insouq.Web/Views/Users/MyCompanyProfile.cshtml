@@ -1,0 +1,166 @@
+﻿@using insouq.Shared.Utility 
+
+@model insouq.Web.ViewModels.UpdateCompanyProfileVM
+
+<div class="notification-style" >
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title5">Company Profile</h1>
+                <ol class="breadcrumb-style">
+                    <li><a href="home.html" class="breadcrumb-color">Home > </a></li>
+                    <li><a href="editprofile.html" class="breadcrumb-color"> My Profile > </a></li>
+                    <li><a href="jopdashboard.html" class="breadcrumb-color"> Jobs dashboard > </a></li>
+                    <li class="breadcrumb-color"> Company Profile</li>
+                </ol>
+
+            </div>
+            <div class="form-width">
+                <form asp-action="UpdateCompanyProfile" method="post" enctype="multipart/form-data">
+                    @Html.HiddenFor(m => m.CategoryId)
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="col-md-2">
+                        @{
+                            var imageSrc = "";
+                            var marginTop = "70px;";
+                            if (Model.CompanyProfile != null)
+                            {
+                                if (!string.IsNullOrEmpty(Model.CompanyProfile.Picture))
+                                {
+                                    imageSrc = StaticData.SERVER_DOMAIN + Model.CompanyProfile.Picture;
+                                    marginTop = "0px";
+                                }
+                            }
+                        }
+                        <p><img src="@imageSrc" alt=" " class="avatar1" id="CompanyPicture"></p>
+                        <p><a class="change-picture3" style="margin-top:@marginTop" href="#"><label for="ProfilePictureFile">Change Picture</label></a></p>
+                        <input type="file" class="line-input-style4" asp-for="ProfilePicture" id="ProfilePictureFile" onchange="loadCompanyPricture()" hidden>
+                    </div>
+                    <div class="col-md-5 padding-right">
+                        <div class="padding-form">
+                            <label class="change-color">Company name</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Name">
+                        </div>
+                    </div>
+
+                    <div class="col-md-5 padding-right">
+                        <div class="padding-form">
+                            <label class="change-color">Email address</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Email">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-10 padding-right padding-form">
+                        <div class="padding-form">
+                            <label class="change-color">Description</label>
+                            <textarea asp-for="CompanyProfile.Description" rows="1" class="line-input-style2" cols="500"></textarea>
+                        </div>
+                        @{
+                            var length = 0;
+                            if (!string.IsNullOrEmpty(Model.CompanyProfile?.Description))
+                            {
+                                length = Model.CompanyProfile.Description.Length;
+                            }
+                        }
+                        <label class="change-color10">@length/400 words</label>
+                    </div>
+
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-5 padding-right">
+                        <div class="padding-form">
+                            <label class="change-color">Trade license number</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.TradeLicenseNumber">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Contact name</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.ContactNumber">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Company size</label>
+                            <select class="line-input-style4" asp-for="CompanyProfile.Size">
+                                <option value="Sm">Small</option>
+                                <option value="Me">Medium</option>
+                                <option value="La">Large</option>
+                            </select>
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Company website</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Website">
+                        </div>
+                        @*<div class="padding-form">
+                            <label class="change-color">Company profile status</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.ProfileStatus">
+                        </div>*@
+                    </div>
+
+                    <div class="col-md-5 padding-right">
+                        <div class="padding-form">
+                            <label class="change-color">Trade license copy</label>
+                            <i class=" fa fa-ellipsis-h add-icon"></i>
+
+                            @{
+                                var licenseCopy = "chose your file";
+
+                                if (Model.CompanyProfile != null)
+                                {
+                                    if (!string.IsNullOrEmpty(Model.CompanyProfile.TradeLicenseCopy)) {
+                                        licenseCopy = Model.CompanyProfile.TradeLicenseCopy.Replace(@"\images\", "");
+                                    }
+                                }
+                            }
+
+
+                            <label for="licenseCopy" class="line-input-style4 profileFilesInput">@licenseCopy</label>
+                            <input type="file" class="line-input-style4" asp-for="TradeLicenseFile" id="licenseCopy" hidden>
+
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color">Contact number</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.ContactNumber">
+                        </div>
+                        @*<div class="padding-form">
+                            <label class="change-color">Company industry</label>
+                            <select class="line-input-style change-color" asp-for="CompanyProfile.Industry">
+                                <option value="">Select one</option>
+                                <option value="">Select one</option>
+                                <option value="">Select one</option>
+                            </select>
+                        </div>*@
+                        <div class="padding-form">
+                            <label class="change-color">Company Location</label>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Location">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-10 padding-right">
+                            <div class="padding-form">
+                                <button type="submit" class="change-btn1" name="button">UPDATE</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function loadCompanyPricture() {
+            $('#CompanyPicture').attr('src', URL.createObjectURL($("#ProfilePictureFile")[0].files[0]));
+            $(".change-picture3").css("margin-top", "0px");
+        }
+
+        $('#licenseCopy').change(function () {
+            var i = $(this).prev('label').clone();
+            var file = $('#licenseCopy')[0].files[0].name;
+            $(this).prev('label').text(file);
+        });
+
+    </script>
+}

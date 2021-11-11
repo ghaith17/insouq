@@ -1,0 +1,453 @@
+﻿@using insouq.Shared.Utility;
+@using insouq.Services.IServices;
+@using System.Security.Claims;
+
+@inject IAdsService _adsService
+
+@{
+    var itemIndex = 1;
+
+    string AddDoubleQuotes(string value)
+    {
+        return "\"" + value + "\"";
+    }
+
+    var itemsCount = Model.Count;
+
+    var c = 1;
+    var b = 0;
+    var itemsPerPage = 0;
+
+    if (itemsCount < 5)
+    {
+        itemsPerPage = itemsCount;
+
+    }
+}
+
+
+@while (itemsCount > 0)
+{
+    var id = "pageItems" + c;
+
+    var to = itemsPerPage;
+
+    if (itemsPerPage == 0)
+    {
+        if (b + 5 > Model.Count)
+        {
+            to = Model.Count;
+        }
+        else
+        {
+            to = b + 5;
+        }
+    }
+
+    var display = "none";
+
+    if (c == 1)
+    {
+        display = "block";
+    }
+
+    <div class="pageAds" id="@id" style="display:@display">
+
+        @for (int i = b; i < to; i++)
+        {
+            var item = Model[i];
+
+            <div class="featured-box2">
+                @if (item.TypeId != StaticData.Numbers_ID)
+                {
+                    <div class="col-md-5">
+                        <i class="fas fa-crown prai-icon3"></i>
+
+                        @{
+                            var href = "#";
+
+                            if (item.CategoryId == StaticData.JobWanted_ID)
+                            {
+                                href = StaticData.SERVER_DOMAIN + item.CV;
+
+                            }
+                        }
+
+                        <figure>
+                            <a href="@href">
+                                <img style="border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
+                                <div class="sliderWrapper">
+                                    @{
+                                        var imagesUrls = new List<string>();
+
+                                        var index = 0;
+
+                                        var functionName = "function" + itemIndex;
+
+                                        var arrayName = "array" + itemIndex;
+
+                                        var firstImage = "";
+
+
+                                    }
+                                    @foreach (var picture in item.Pictures)
+                                    {
+                                        var src = StaticData.SERVER_DOMAIN + picture.ImageURL;
+                                        src = src.Replace("\\", "/");
+                                        imagesUrls.Add(src);
+
+                                        if (index == 0)
+                                        {
+                                            firstImage = src;
+                                        }
+
+                                        var replacedSrc = AddDoubleQuotes(src);
+
+                                        var functionNameWithParameters = functionName + "(" + index + "," + replacedSrc + ")";
+                                        <span onclick="@functionNameWithParameters" class="sliderBtn"></span>
+                                        index++;
+
+                                    }
+
+                                    <script>
+                        document.getElementById("slider-@itemIndex").setAttribute("src", "@firstImage");
+
+                        function @functionName (i, src) {
+                            document.getElementById("slider-@itemIndex").setAttribute("src", src);
+                        }
+
+                                    </script>
+
+
+                                    @{
+                                        itemIndex++;
+                                    }
+                                </div>
+                            </a>
+                        </figure>
+
+                    </div>
+                }
+                else if (item.CategoryId == StaticData.PlateNumbers_ID)
+                {
+                    var numberPhoto = StaticData.SERVER_DOMAIN + item.Photo;
+
+                    var plateCodeClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Code";
+                    var plateNumberClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Number";
+
+                    <div class="col-md-5">
+                        <figure>
+                            <div class="slider__contents1">
+                                <i class="slider__image1">
+                                    <img src="@numberPhoto" alt="">
+                                    <h2 class="@plateCodeClass">@item.PlateCode</h2>
+                                </i>
+                                <h2 class="@plateNumberClass">@item.Number</h2>
+                            </div>
+                        </figure>
+                    </div>
+                }
+                else if (item.CategoryId == StaticData.MobileNumbers_ID)
+                {
+                    var numberPhoto = StaticData.SERVER_DOMAIN + item.Photo;
+
+                    <div class="col-md-5">
+                        <figure>
+
+                            <div class="slider__contents1">
+                                <i class="slider__image1">
+                                    <img src="@numberPhoto" alt="">
+                                    <h2 class="mobile-numbers">@item.Code @item.Number</h2>
+                                </i>
+                            </div>
+                        </figure>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-5"></div>
+                }
+
+                <div class="col-md-7">
+                    <div class="col-md-8" style="margin-left: -26px;">
+                        <div class="feature-content width-size">
+
+                            <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">@item.Title</a></h4>
+                            <div class="padding-form3">
+                                <h5><i style="font-family:fontawesome; " class="fa fa-map-marker" aria-hidden="true"></i> Located > @item.En_Location <span class="padding-span4 "> @HelperFunctions.GetTime(item.PostDate)</span></h5>
+                            </div>
+
+                            <div class="label-whidth1">
+                                @if (item.TypeId == StaticData.Motors_ID)
+                                {
+                                    <label class="label-view3">
+                                        @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID
+                    || item.CategoryId == StaticData.Machinery_ID
+|| item.CategoryId == StaticData.Bike_ID)
+                                        {
+                                            @*<p>@String.Format("{0:n0}", item.Kilometers) KM</p>*@
+                                            <p><i><img src="~/assets/img/36.png" alt=""> </i>@String.Format("{0:n0}", item.Kilometers) KM</p>
+                                        }
+                                        else if (item.CategoryId == StaticData.Boats_ID)
+                                        {
+                                            @*<p>@item.Length m</p>*@
+                                            <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Length</p>
+                                        }
+                                        else if (item.CategoryId == StaticData.Parts_ID)
+                                        {
+                                            @*<p>@item.En_Maker</p>*@
+                                            <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.NameOfPart</p>
+                                        }
+
+                                    </label>
+                                    <label class="label-view3">
+
+                                        <p><i><img src="~/assets/img/37.png" alt=""></i>@item.Year</p>
+                                        @*<p>@item.Year</p>*@
+
+                                    </label>
+                                    <label class="label-view2">
+                                        @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID
+|| item.CategoryId == StaticData.Bike_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Color</p>
+                                            @*<p>@item.En_Color</p>*@
+
+                                        }
+                                        else if (item.CategoryId == StaticData.Boats_ID || item.CategoryId == StaticData.Parts_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Age</p>
+                                            @*<p>@item.Age year</p>*@
+                                        }
+                                        else if (item.CategoryId == StaticData.Machinery_ID)
+                                        {
+                                            @*<p>@String.Format("{0:n0}", item.Horsepower) HP</p>*@
+                                            <p><i><img src="~/assets/img/38.png" alt=""></i>@String.Format("{0:n0}", item.En_Horsepower)</p>
+                                        }
+
+
+                                    </label>
+
+                                }
+                                else if (item.TypeId == StaticData.Properties_ID)
+                                {
+                                    <label class="label-view3">
+                                        <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Furnishing</p>
+
+                                    </label>
+                                    <label class="label-view3">
+                                        <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Size sqft</p>
+                                    </label>
+                                    <label class="label-view2">
+                                        <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.ReadyBy.ToString("dd/MM/yyyy")</p>
+                                    </label>
+
+                                }
+                                else if (item.TypeId == StaticData.Jobs_ID)
+                                {
+                                    <label class="label-view3">
+                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_JobType</p>
+                                    </label>
+                                    <label class="label-view3">
+                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_CareerLevel</p>
+
+                                    </label>
+                                    <label class="label-view2">
+
+                                        @if (item.CategoryId == StaticData.JobWanted_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_WorkExperience</p>
+
+                                        }
+                                        else if (item.CategoryId == StaticData.JobOpening_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MinWorkExperience</p>
+                                        }
+
+                                    </label>
+
+                                }
+                                else if (item.TypeId == StaticData.Services_ID)
+                                {
+                                    <label class="label-view3">
+                                        <p><i>@*<img src="~/assets/img/36.png" alt="">*@ </i></p>
+                                        @*@item.En_JobType*@
+                                    </label>
+                                }
+                                else if (item.TypeId == StaticData.Business_ID)
+                                {
+                                    @*var categoryName = item.OtherCategoryName != null ? item.OtherCategoryName : item.CategoryEnName;
+
+
+                                        <div class="padding-form3">
+                                            <h5>@item.En_Location</h5>
+
+                                            <h5>Business / @categoryName</h5>
+                                        </div>*@
+
+                                    <label class="label-view3">
+                                        @*@item.En_JobType*@
+                                    </label>
+                                }
+                                else if (item.TypeId == StaticData.Classifieds_ID)
+                                {
+                                    if (item.En_Usage != null)
+                                    {
+                                        <label class="label-view3">
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
+                                        </label>
+                                    }
+
+                                    if (item.En_Age != null)
+                                    {
+                                        <label class="label-view3">
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
+                                        </label>
+                                    }
+
+                                    if (item.En_Condition != null)
+                                    {
+                                        <label class="label-view2">
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Condition</p>
+                                        </label>
+                                    }
+
+                                }
+                                else if (item.TypeId == StaticData.Numbers_ID)
+                                {
+                                    <label class="label-view3">
+                                        @if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Emirate</p>
+
+                                        }
+                                        else if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MobileNumberPlan</p>
+                                        }
+                                    </label>
+                                    <label class="label-view3">
+                                        @if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Operator</p>
+
+                                        }
+                                        else if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                        {
+                                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_PlateType</p>
+                                        }
+                                    </label>
+                                    <label class="label-view2">
+                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.Number</p>
+                                    </label>
+
+                                }
+                                else if (item.TypeId == StaticData.Electronics_ID)
+                                {
+                                    <label class="label-view3">
+                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Color</p>
+
+                                    </label>
+                                    <label class="label-view3">
+                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
+
+                                    </label>
+                                    <label class="label-view2">
+                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
+                                    </label>
+                                }
+
+                            </div>
+                            @if (item.TypeId != StaticData.Jobs_ID && item.TypeId != StaticData.Services_ID)
+                            {
+                                <div>
+                                    @if (item.CategoryId != StaticData.CommercialForRent_ID && item.CategoryId != StaticData.ResidentialForRent_ID)
+                                    {
+                                        <p class="card-price"><span class="pr">price:</span> AED @String.Format("{0:n0}", item.Price)</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-price"><span class="pr">price:</span> AED @String.Format("{0:n0}", item.AnnualRent)</p>
+                                    }
+                                </div>
+                            }
+                            else if (item.CategoryId == StaticData.JobWanted_ID)
+                            {
+                                <p class="card-price"><span class="pr">price:</span> AED @String.Format("{0:n0}", item.ExpectedMonthlySalary)</p>
+
+                            }
+
+                            <div class="posted-style1">
+                                @{
+                                    var userImageSrc = StaticData.SERVER_DOMAIN + item.UserImage;
+                                }
+                                <a asp-controller="Users" asp-action="LiveAds" asp-route-userId="@item.UserId"><img style="width: 32px; border-radius:100%;" src="@userImageSrc"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="float-style">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+
+                                <div class="heart-style3">
+                                    @{
+                                        var claimsIdentity = (ClaimsIdentity)User.Identity;
+                                        var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+                                        var userId = Int32.Parse(claims.Value);
+
+                                        var isInFavorite = await _adsService.IsInFavorite(userId, item.Id);
+                                    }
+
+                                    @if (isInFavorite)
+                                    {
+                                        <i style="cursor:pointer;color:red;" id="favorite-@item.Id" onclick="RemoveFromFavorite(@item.Id)" class="fas fa-heart" aria-hidden="true"></i>
+                                    }
+                                    else
+                                    {
+                                        <i style="cursor:pointer;" id="favorite-@item.Id" onclick="AddToFavorite(@item.Id)" class="far fa-heart" aria-hidden="true"></i>
+                                    }
+
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        }
+
+    </div>
+    b += 5;
+    c++;
+    itemsCount -= 5;
+}
+
+
+@{
+    int pageCount = Model.Count;
+}
+
+@if (pageCount != 0)
+{
+    <div class="pagination" style="display:none">
+        <a href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        @{
+            var pagee = 1;
+        }
+
+
+        @while (pageCount > 0)
+        {
+            <a onclick="ShowPageItems(@pagee)">@pagee</a>
+
+            pagee++;
+
+            pageCount -= 5;
+        }
+
+        <a href="#"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </div>
+}

@@ -1,0 +1,74 @@
+﻿
+@model List<insouq.Models.SavedSearch>
+
+<div class="notification-style">
+
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Saved Searches</h1>
+                <ol class="breadcrumb-style">
+                    <li><a asp-controller="Home" asp-action="Index" class="breadcrumb-color">Home > </a></li>
+                    <li><a href="editprofile.html" class="breadcrumb-color"> My Profile > </a></li>
+                    <li class="breadcrumb-color"> Saved searches</li>
+                </ol>
+
+            </div>
+            <div class="col-md-12">
+
+
+
+                <ul class="social-network5 social-circle">
+                    <li ><a  onclick="GetSavedSearch(-1)" class="icoRss" data-toggle="tab" title="Rss"><i>All</i></a></li>
+                    <li><a onclick="GetSavedSearch(1)" data-toggle="tab" class="icocar"><i class="fa fa-car"></i></a></li>
+                    <li><a onclick="GetSavedSearch(2)" data-toggle="tab" class="icoTwitter" title="Twitter"><i class="fa fa-home"></i></a></li>
+                    <li><a onclick="GetSavedSearch(3)" data-toggle="tab" class="icoGoogle" title="Google +"><i class="fa fa-user"></i></a></li>
+                    <li><a onclick="GetSavedSearch(4)" data-toggle="tab" class="icoLinkedin" title="Linkedin"><i class="fa fa-wrench"></i></a></li>
+                    <li><a onclick="GetSavedSearch(5)" data-toggle="tab" class="icobag" title="Rss"><i class="fa fa-briefcase"></i></a></li>
+                    <li><a onclick="GetSavedSearch(6)" data-toggle="tab" class="icopa" title="Facebook"><i class="fa fa-list"></i></a></li>
+                    <li><a onclick="GetSavedSearch(7)" data-toggle="tab" class="icope" title="Twitter"><i class="fa fa-ellipsis-h"></i></a></li>
+                    <li><a onclick="GetSavedSearch(8)" data-toggle="tab" class="icoya" title="Google +"><i class="fa fa-square"></i></a></li>
+                </ul>
+
+                <div class="tab-content clearfix" id="mySreach">
+                    @foreach (var Search in Model)
+                    {
+                        <partial name="~/Views/Shared/Components/User/SavedSearchCard.cshtml" model="Search" />
+                    }
+
+                    @if (Model.Count<1)
+                        {
+                        <h3>There are no Saved Searches Yet</h3>
+                        }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+    function GetSavedSearch(typeId) {
+        $.ajax({
+            url: `/Ads/GetMySearches?typeId=${typeId}`,
+            method: "get",
+            success: function (response) {
+                $(`#mySreach`).empty();
+                $(`#mySreach`).html(response);
+            },
+            error: function (error) {
+                alert(error.message);
+                console.log(error);
+            }
+        });
+    }
+
+</script>
+
+
+
+
+

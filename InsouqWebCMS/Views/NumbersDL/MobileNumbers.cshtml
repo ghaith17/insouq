@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Numbers DL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["ActivePage"] = "Numbers DL";
+}
+
+@using insouq.Shared.Utility
+
+<div class="row">
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Operators">
+            <div class="dl-style">
+                <p>Operator</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="MobileCodes">
+            <div class="dl-style">
+                <p>Mobile Code</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="NumberPlans">
+            <div class="dl-style">
+                <p>Number Plan</p>
+            </div>
+        </a>
+    </div>
+</div>
+

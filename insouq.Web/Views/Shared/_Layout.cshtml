@@ -1,0 +1,1292 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css" type="text/css" media="all" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <link href="~/assets/css/flag-icon.css" rel="stylesheet">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/fontawesome-free-5.15.3-web/css/all.css">
+
+    @RenderSection("Css", required: false)
+
+    <style>
+        .not-dot {
+            border: 1px solid red;
+            position: absolute;
+            margin-left: -1.5%;
+            margin-top: 2px;
+            padding: 2.5px;
+            background: red;
+            border-radius: 100%;
+        }
+    </style>
+    <title>In Souq</title>
+</head>
+<body>
+
+    <header id="header-wrap">
+
+        @RenderSection("Nav", required: false);
+
+        <!-- Navbar Start -->
+        <nav id="mainHeaderNav" class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        <span class="lni-menu"></span>
+                        <span class="lni-menu"></span>
+                        <span class="lni-menu"></span>
+                    </button>
+                    <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/assets/img/55.png" alt=""></a>
+                </div>
+                <div class="collapse navbar-collapse" id="main-navbar">
+                    @(await Component.InvokeAsync("HeaderCategories"))
+                    <div class="men-icon inline-view">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-controller="Users" asp-action="SavedSearches"><i class="far fa-bookmark"></i></a>
+                            <a asp-controller="Users" asp-action="MyFavorites"><i class="far fa-heart"></i></a>
+                            <a asp-controller="Users" asp-action="Chat"><i class="far fa-comment"></i></a>
+                            <a asp-controller="Users" asp-action="Notifications" id="notiIcon"><i class="far fa-bell"></i></a>
+                        }
+
+                        <a href="#">Eng</a>
+                    </div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a class="tg-btn inline-view" asp-controller="Ads" asp-action="PostAnAd">
+                            <i class="fa fa-plus"></i> Post an Ad
+                        </a>
+                    }
+                    <ul class="sign-in">
+                        <li class="nav-item dropdown inline-view">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                @(await Component.InvokeAsync("User"))
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-controller="Users" asp-action="MyProfile"> Edit My Profile</a>
+                                    <a class="dropdown-item" asp-controller="Users" asp-action="JobsDashBoard"> Jobs Dashboard</a>
+                                    <a class="dropdown-item" asp-controller="Users" asp-action="MyList"> My List</a>
+                                    <a class="dropdown-item" asp-controller="Users" asp-action="Chat"> Chat</a>
+                                    <a class="dropdown-item" asp-controller="Users" asp-action="Notifications"> Notifications</a>
+                                    <form asp-controller="Accounts" asp-action="Logout" method="post">
+                                        <button class="dropdown-item" type="submit">Logout</button>
+                                    </form>
+                                </div>
+                            }
+                            else
+                            {
+                                <p>
+                                    <a class="nav-link dropdown-toggle" data-toggle="modal" data-target="#myModal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Register Signin
+                                    </a><img src="~/assets/img/56.png" alt="Avatar" class="avatar">
+                                </p>
+                            }
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <!-- Mobile Menu Start -->
+            <!-- Mobile Menu End -->
+
+        </nav>
+
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <div class="container">
+
+                <!-- Trigger the modal with a button -->
+                <!-- Modal -->
+                <div class="modal fade" id="myModal20" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal-style">
+                            <div class="modal-header-style modal-logo">
+                                <img src="assets/img/81.png" alt="">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <section>
+                                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <!-- Wrapper for carousel items -->
+                                        <div class="carousel-inner">
+                                            <div class="item carousel-item active">
+                                                <ul class="social-network social-circle">
+                                                    <li><a href="" class="" data-toggle="tab" title="Rss"><i style="font-size: 45px;" class="fa fa-check-circle" aria-hidden="true"></i></a></li>
+                                                </ul>
+                                                <p style="font-size: 18px;" class="testimoniall">Your registration is completes sucessfully, you can now enjoy an extraordinary experience</p>
+                                            </div>
+                                        </div>
+                                </section>
+                                <section>
+                                    <button type="button" class="signin-btn" name="button" onclick="LoginAfterReg()">continue</button>
+
+                                </section>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal fade" id="myModal19" role="dialog">
+                <div class="modal-dialog dialog-padding">
+
+                    <!-- Modal content-->
+                    <div class="modal-style">
+                        <div class="modal-header-style modal-logo">
+                            <img src="assets/img/81.png" alt="">
+                            <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                        </div>
+                        <div class="modal-body">
+
+                            <section>
+                                <button id="googleSignIn" type="button" class="register-btn" name="button">
+                                    <img style="width: 7%;margin-right: 10px;" src="assets/img/1.svg"></img> Continue With Google
+                                </button>
+                                <div id="googleLoginError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                    <span id="googleLoginErrorMessage" style="color:red;"></span>
+                                </div>
+                                <button onclick="fb_login()" type="button" class="register-btn" name="button">
+                                    <img style="width: 7%;margin-right: 10px;margin-left: 13px;" src="assets/img/2.svg"></img>Continue With Facebook
+                                </button>
+                                <div id="facebookLoginError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                    <span id="facebookLoginErrorMessage" style="color:red;"></span>
+                                </div>
+                                <button type="button" class="register-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">
+                                    <img style="width: 7%;margin-right: 10px;margin-left: -15px;" src="assets/img/3.svg"></img>Continue With Appale
+                                </button>
+                                <button type="button" class="signin-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">Continue With Email</button>
+
+
+                            </section>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="container">
+
+                <!-- Trigger the modal with a button -->
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal-style">
+                            <div class="modal-header-style modal-logo">
+                                <img src="~/assets/img/81.png" alt="">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <section>
+                                    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                                        </ol> <!-- Wrapper for carousel items -->
+                                        <div class="carousel-inner">
+                                            <div class="item carousel-item active">
+                                                <ul class="social-network social-circle">
+                                                    <li><a href="" class="icoRsss" data-toggle="tab" title="Rss"><i><img src="~/assets/img/18.png" alt=""></i></a></li>
+                                                </ul>
+                                                <p class="testimoniall">List the items you want to sell and start getting offers in minutes.</p>
+
+                                                <div class="star-rating"> </div>
+                                            </div>
+                                            <div class="item carousel-item">
+                                                <ul class="social-network social-circle">
+                                                    <li><a href="" class="icoRsss" data-toggle="tab" title="Rss"><i><img src="~/assets/img/18.png" alt=""></i></a></li>
+                                                </ul>
+                                                <p class="testimoniall">List the items you want to sell and start getting offers in minutes.</p>
+                                                <div class="star-rating"> </div>
+                                            </div>
+                                            <div class="item carousel-item">
+                                                <ul class="social-network social-circle">
+                                                    <li><a href="" class="icoRsss" data-toggle="tab" title="Rss"><i><img src="~/assets/img/18.png" alt=""></i></a></li>
+                                                </ul>
+                                                <p class="testimoniall">List the items you want to sell and start getting offers in minutes.</p>
+                                                <div class="star-rating"> </div>
+                                            </div>
+
+                                        </div>
+                                </section>
+                                <section>
+                                    <button type="button" class="signin-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal1">Sign In</button>
+                                    <button type="button" class="register-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal19">Register</button>
+
+                                </section>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="container">
+
+                <!-- Trigger the modal with a button -->
+                <!-- Modal -->
+                <div class="modal fade" id="myModal1" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal-styles">
+                            <div class="modal-header-styles modal-logo">
+                                <img src="~/assets/img/81.png" alt="">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="signin-style">
+                                    <input class="signin-email" id="LoginEmailOrPhone" placeholder="Email or phone number">
+                                    @*<i class="fa fa-check check-icon" aria-hidden="true"></i>*@
+                                </div>
+                                <input class="signin-input" type="password" id="LoginPassword" placeholder="Password">
+                                <i onclick="togglePassword(1)" class="eyePassword fa fa-eye-slash password-icon" aria-hidden="true"></i>
+                                <div id="loginError" style="display: none; margin-left: 65px; margin-bottom: 10px; background: #ffffff78; width: 72%; padding: 10px;">
+                                    <span id="loginErrorMessage" style="color:red;"></span>
+                                </div>
+                                <button type="button" onclick="Login()" class="signin-btn" name="button">Sign In</button>
+                                <x>OR</x>
+                                <p class="p-style">Sign up with</p>
+                                <button type="button" class="facebook-btn" name="button" onclick="fb_login()"><img src="~/assets/img/20.png" alt="" onclick="fb_login()"> facebook</button>
+                                <button type="button" class="gmail-btn" name="button" id="googleSignIn"><img src="~/assets/img/21.png" alt=""> gmail</button>
+                                <p class="p2-style">By signing in, I agree on their <a asp-controller="Home" asp-action="Terms"> Terms and Conditions </a>and <a asp-controller="Home" asp-action="PrivacyPolicy"> Privacy Policy</a></p>
+                                <button type="button" class="forgot-password" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal2">FORGOT your password?</button>
+                                <button type="button" class="create-account" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">CREATE ACCOUNT</button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container">
+
+                <!-- Trigger the modal with a button -->
+                <!-- Modal -->
+                <div class="modal fade" id="myModal2" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal-styles">
+                            <div class="modal-header-styles modal-logo">
+                                <img src="~/assets/img/81.png" alt="">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <form class="" action="" method="post">
+                                    <div class="lock-style">
+                                        <i class="fa fa-lock" aria-hidden="true"></i>
+                                        <h4 class="forget-style">Forgot your password?</h4>
+                                        <p>Kindly enter your registered email address below to receive a link to reset your password.</p>
+                                    </div>
+                                    <div class="email-style">
+                                        <input class="signin-email" type="text" name="" value="" placeholder="Your Email" id="forgotPasswordEmail">
+                                        @*<i class="fa fa-check check-icon1" aria-hidden="true"></i>*@
+                                    </div>
+                                    <div id="forgotPasswordError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                        <span id="forgotPasswordErrorMessage" style="color:red;"></span>
+                                    </div>
+                                    <button type="button" class="signin-btn" name="button" onclick="ForgotPassword()">Continue</button>
+                                    <button type="button" class="back-to-login" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal1">BACK TO login</button>
+                                    <p class=""><a href="#"></a></p>
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container">
+
+                <!-- Trigger the modal with a button -->
+                <!-- Modal -->
+                <div class="modal fade" id="OtpVerificationRegister" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal5-styles">
+                            <div class="modal5-header-styles">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <form class="" action="" method="post">
+                                    <div class="phone-style">
+                                        <ul class="ico-network ico-circle">
+                                            <li><a href="#" class="icoRss" data-toggle="tab" title="Rss"><i class="fa fa-mobile"></i></a></li>
+                                        </ul>
+                                        <h4 class="sign-text">OTP Verification</h4>
+                                        <input id="otpUserId" type="hidden" />
+                                        <input id="otpMobileNumber" type="hidden" />
+                                        <p>Please enter the 6 digit OTP code sent to your registered mobile number</p>
+                                    </div>
+                                    <div class="digits-style" id="vcode">
+                                        <input id="firstCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="secondCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="thirdCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="forthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="fifthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="sixthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                    </div>
+
+                                    <div id="otpVerificationRegError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                        <span id="otpVerificationRegErrorMessage" style="color:red;"></span>
+                                    </div>
+
+                                    <button type="button" class="signin-btn" name="button" onclick="CheckVerficationCode()">Verify</button>
+                                    <button type="button" class="back" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">BACK</button>
+                                    <p class=""><a href="#"></a></p>
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="container">
+
+                <!-- Trigger the modal with a button -->
+                <!-- Modal -->
+                <div class="modal fade" id="OtpVerificationForgotPassword" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal5-styles">
+                            <div class="modal5-header-styles">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <form class="" action="" method="post">
+                                    <div class="phone-style">
+                                        <ul class="ico-network ico-circle">
+                                            <li><a href="#" class="icoRss" data-toggle="tab" title="Rss"><i class="fa fa-mobile"></i></a></li>
+                                        </ul>
+                                        <h4 class="sign-text">OTP Verification</h4>
+                                        <p>Please enter the 6 digit OTP code sent to your registered email</p>
+                                    </div>
+                                    <div class="digits-style" id="vcode2">
+                                        <input id="forgotFirstCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="forgotSecondCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="forgotThirdCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="forgotForthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="forgotFifthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        <input id="forgotSixthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                    </div>
+
+                                    <div id="verifyForgotPasswordError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                        <span id="verifyForgotPasswordErrorMessage" style="color:red;"></span>
+                                    </div>
+
+                                    <button type="button" class="signin-btn" name="button" onclick="VerifyForgotPasswordCode()">Verify</button>
+                                    <button type="button" class="back" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal2">BACK</button>
+                                    <p class=""><a href="#"></a></p>
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Register Modal-->
+            <div class="container">
+                <!-- Trigger the modal with a button -->
+                <!-- Modal -->
+                <div class="modal fade" id="myModal3" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+                        <!-- Modal content-->
+                        <div class="modal-styles">
+                            <div class="modal-header-styles modal-logo">
+                                <img src="~/assets/img/81.png" alt="">
+                                <button type="button" class="close-style" id="closeModal" data-dismiss="modal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                @*<form class="" action="" method="post">*@
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input class="signin-input" placeholder="First Name" id="FirstName">
+
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input class="signin-input last-name" placeholder="Last Name" id="LastName">
+
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <select class="select-input" name="countryCode" id="countryCode">
+                                            <option value="+962">+962</option>
+                                            <option value="+966">+966</option>
+                                            <option value="+971">+971</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <input type="number" class="signin-input  mobile-number" placeholder="Mobile Number" id="MobileNumber" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="9">
+
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="signin-style">
+                                    <input class="signin-email" type="text" placeholder="Your Email" id="Email">
+                                    @*<i class="fa fa-check check-icon3" aria-hidden="true"></i>*@
+                                </div>
+                                <input class="signin-input" type="password" placeholder="Your password" id="Password">
+                                @*<i onclick="togglePassword(2)" class="fa fa-eye-slash password-icon1" aria-hidden="true"></i>*@
+                                <i style="top: 223px;" onclick="togglePassword(2)" class="eyePassword fa fa-eye-slash password-icon1" aria-hidden="true"></i>
+                                @*<button type="button" class="signin-btn" onclick="window.location.href='home.html'" name="button">Sign UP</button>*@
+                                <div id="registerError" style="display: none; margin-left: 65px; margin-bottom: 10px; background: #ffffff78; width: 72%; padding: 10px;">
+                                    <span id="registerErrorMessage" style="color:red;"></span>
+                                </div>
+                                <button type="button" class="signin-btn" name="button" onclick="Register()">Sign UP</button>
+                                @*<x>OR</x>
+                                    <p class="p-style">Sign up with</p>
+                                    <button type="button" class="facebook-btn" name="button" onclick="fb_login()"><img src="~/assets/img/20.png" alt=""> facebook</button>
+                                    <button type="button" class="gmail-btn" name="button" id="googleSignIn"><img src="~/assets/img/21.png" alt=""> gmail</button>*@
+                                <label class="cont1">
+                                    <p class="p2-style">By signing in, I agree on their <a asp-controller="Home" asp-action="Terms"> Terms and Conditions </a>and <a asp-controller="Home" asp-action="Terms"> Privacy Policy</a></p>
+                                    <input type="checkbox" id="checkboxRegister">
+                                    <span class="checkmark1"></span>
+                                </label>
+                                @*</form>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container">
+
+                <!-- Modal -->
+                <div class="modal fade" id="newPasswordModal" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal5-styles">
+                            <div class="modal5-header-styles">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <div class="phone-style">
+                                    <ul class="ico-network ico-circle">
+                                        <li><a href="#" class="icoRss1" data-toggle="tab" title="Rss"><i class="fa fa-lock"></i></a></li>
+                                    </ul>
+                                    <h4 id="resetPasswordUserName">Hey Anissa</h4>
+                                    <p>Type in a new password that you can remember</p>
+                                </div>
+                                <div class="new-password-style">
+                                    <input type="hidden" id="resetPasswordToken">
+                                    <input class="" type="password" name="" value="" placeholder="New password" id="newPassword">
+                                    <input class="" type="password" name="" value="" placeholder="Confirm your password" id="confirmPassword">
+                                </div>
+
+                                <div id="resetPasswordError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                    <span id="resetPasswordErrorMessage" style="color:red;"></span>
+                                </div>
+
+                                <button type="button" class="signin-btn" name="button" onclick="ResetPassword()">Continue</button>
+                                <p class="back"><a href="#">BACK</a></p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="container">
+
+                <!-- Modal -->
+                <div class="modal fade" id="phoneNumberModal" role="dialog">
+                    <div class="modal-dialog dialog-padding">
+
+                        <!-- Modal content-->
+                        <div class="modal-styles">
+                            <div class="modal-header-styles">
+                                <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                            </div>
+                            <div class="modal-body">
+                                <form class="" action="" method="post">
+                                    <div class="lock-style">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <h4>One last step</h4>
+                                        <p>Kindly enter your mobile number  below to complete your registration procces.</p>
+                                    </div>
+                                    <input class="signin-input" type="text" name="" value="" placeholder="Mobile Number" id="phonenumberLastStep">
+
+                                    <div id="sendSmsCodeError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                        <span id="sendSmsCodeErrorMessage" style="color:red;"></span>
+                                    </div>
+                                    <button type="button" class="signin-btn" name="button" onclick="SendSmsCode()">Continue</button>
+
+                                </form>
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        }
+
+
+    </header>
+
+    <input type="hidden" id="hiddenReportAdId" />
+
+    @RenderBody()
+
+    @if (IsSectionDefined(name: "FooterSection"))
+    {
+        @RenderSection(name: "FooterSection")
+    }
+    else
+    {
+        <footer>
+            <!-- Footer Area Start -->
+            <section class="footer-Content">
+                <div class="containers">
+                    @*<a href="#" class="agency-link"><h1>register your agency! <i class="fa fa-arrow-right" aria-hidden="true"></i></h1></a>*@
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <img src="~/assets/img/55.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <h3 class="block-title">About</h3>
+                                <ul class="menu">
+                                    <li><a asp-controller="Home" asp-action="AboutInsouq">About Insouq</a></li>
+                                    <li><a asp-controller="Home" asp-action="HowItWorks">How it works</a></li>
+                                    <li><a asp-controller="Home" asp-action="FAQ">FAQs</a></li>
+                                    <li><a asp-controller="Home" asp-action="ContactUs">Contact us</a></li>
+                                    <li><a asp-controller="Home" asp-action="Advertisors">advertisers</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <h3 class="block-title">Posting an Ad</h3>
+                                <ul class="menu">
+                                    <li><a asp-controller="Ads" asp-action="PostAnAd">Listing an Ad</a></li>
+                                    <li><a asp-controller="Home" asp-action="SellingGuidelines">Selling guidelines</a></li>
+                                    <li><a asp-controller="Home" asp-action="PrivacyPolicy">Privacy Policy</a></li>
+                                    <li><a asp-controller="Home" asp-action="Terms">Term & Conditions</a></li>
+
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <h3 class="block-title">Account</h3>
+                                <ul class="menu">
+                                    <li><a asp-controller="Users" asp-action="MyProfile">Profile</a></li>
+                                    <li><a asp-controller="Users" asp-action="MyFavorites">Favorites</a></li>
+                                    <li><a asp-controller="Users" asp-action="MyAds">Ads list</a></li>
+                                    <li><a asp-controller="Users" asp-action="SavedSearches">Saved searches</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <h3 class="block-title">UAE</h3>
+                                <ul class="menu">
+                                    <li><a href="">Abu Dhabi</a></li>
+                                    <li><a href="">Dubai</a></li>
+                                    <li><a href="">Sharjha</a></li>
+                                    <li><a href="">Ras al Khaimah</a></li>
+                                    <li><a href="">Ajman</a></li>
+                                    <li><a href="">Fujairah</a></li>
+                                    <li><a href="">Umm al Quwain</a></li>
+                                    <li><a href="">Al Ain</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="widget">
+                                <h3 class="block-title">Get our app</h3>
+                                <ul class="contact-footer">
+                                    <li>
+                                        <a href="#"><img src="~/assets/img/11.png" alt=""></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><img src="~/assets/img/12.png" alt=""></a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- Footer area End -->
+            <!-- Copyright Start  -->
+            <div id="copyright">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="footer-border"></div>
+                            <div class="site-info float-left">
+                                <!-- <p>Copy right &copy; 2021,All Rights Reserved.By <a href="http://www.hudhudit.com" target="_blank">HUDHUDIT</a></p> -->
+                            </div>
+                            <div class="float-right">
+                                <ul class="footer-social">
+                                    <li><a href="#"><i class="lni-facebook-filled"></i></a></li>
+                                    <li><a href="#"><i class="lni lni-instagram"></i></a></li>
+                                    <li><a href="#"><i class="lni-twitter-filled"></i></a></li>
+                                    <li><a href="#"><i class="fa fa-snapchat-ghost"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Copyright End -->
+
+        </footer>
+    }
+
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/jquery.slicknav.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    @*<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>*@
+    <script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js" integrity="sha384-a9xOd0rz8w0J8zqj1qJic7GPFfyMfoiuDjC9rqXlVOcGO/dmRqzMn34gZYDTel8k" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
+
+    @if (!User.Identity.IsAuthenticated)
+    {
+        <script src="https://apis.google.com/js/platform.js?onload=onLoadGoogleCallback" async defer></script>
+        <script>
+
+
+
+            function Register() {
+
+                if (!$("#checkboxRegister").prop("checked")) {
+                    $("#registerError").css("display", "block");
+                    $("#registerErrorMessage").text("Please approve to our conditions");
+                    return;
+                }
+
+
+                var countryCode = $("#countryCode").val().replace("+", "00");
+
+                var firstName = $('#FirstName').val();
+                var lastName = $('#LastName').val();
+                var mobileNumber = countryCode + $('#MobileNumber').val();
+                var email = $('#Email').val();
+                var password = $('#Password').val();
+
+                const userData = {
+                    FirstName: firstName,
+                    LastName: lastName,
+                    MobileNumber: mobileNumber,
+                    Email: email,
+                    Password: password
+                };
+
+
+                $.ajax({
+                    url: "/Accounts/Register",
+                    method: "POST",
+                    data: JSON.stringify(userData),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (!response.isSuccess) {
+                            //alert(response.message);
+
+                            if (response.status == 4) {
+                                //<i class="fa fa-check check-icon" aria-hidden="true"></i>
+                                if ($("#errorRegisterIcon").length == 0) {
+                                    if ($("#successRegisterIcon").length != 0) {
+                                        $("#successRegisterIcon").remove();
+                                    }
+                                    $("#Email").after('<i id="errorRegisterIcon" class="fa fa-times check-icons" aria-hidden="true"></i>');
+                                }
+                            }
+
+                            $("#registerError").css("display", "block");
+                            $("#registerErrorMessage").text(response.message);
+
+                        } else {
+                            //alert(response.message);
+                            $("#myModal3").modal("hide");
+                            $("#OtpVerificationRegister").modal('show');
+                            $("#otpUserId").val(response.userId);
+                            $("#otpMobileNumber").val(userData.MobileNumber);
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                        console.log(error);
+                    }
+                });
+            }
+
+            function CheckVerficationCode() {
+                var code = $("#firstCodeNumber").val() + $("#secondCodeNumber").val() + $("#thirdCodeNumber").val() + $("#forthCodeNumber").val() + $("#fifthCodeNumber").val() + $("#sixthCodeNumber").val();
+
+                var data = {
+                    Code: code,
+                    UserId: $("#otpUserId").val(),
+                    MobileNumber: $("#otpMobileNumber").val(),
+                };
+
+                $.ajax({
+                    url: "/Accounts/VerifySmsCode",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+
+                        if (response.isSuccess) {
+                            $("#OtpVerificationRegister").modal('hide');
+                            $("#myModal20").modal('show');
+                        } else {
+                            $("#otpVerificationRegError").css("display", "block");
+                            $("#otpVerificationRegErrorMessage").text(response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+
+            function Login() {
+                var userData = {
+                    EmailOrPhone: $("#LoginEmailOrPhone").val(),
+                    Password: $("#LoginPassword").val()
+                };
+
+                $.ajax({
+                    url: "/Accounts/Login",
+                    method: "POST",
+                    data: JSON.stringify(userData),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (!response.isSuccess) {
+                            //alert(response.message);
+
+                            if (response.status == 4) {
+                                //<i class="fa fa-check check-icon" aria-hidden="true"></i>
+
+                                if ($("#errorLoginIcon").length == 0) {
+                                    if ($("#successLoginIcon").length != 0) {
+                                        $("#successLoginIcon").remove();
+                                    }
+                                    $("#LoginEmailOrPhone").after('<i id="errorLoginIcon" class="fa fa-times check-icons" aria-hidden="true"></i>');
+                                    $("#loginError").css("display", "block");
+                                    $("#loginErrorMessage").text(response.message);
+                                }
+                            }
+
+                            if (response.status == 2) {
+                                // show verification modal
+                                $("#myModal1").modal("hide");
+                                $("#OtpVerificationRegister").modal('show');
+                                $("#otpUserId").val(response.userId);
+                                $("#otpMobileNumber").val(response.phoneNumber);
+                            }
+                        } else {
+                            window.location.reload();
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function ForgotPassword() {
+                var data = {
+                    email: $("#forgotPasswordEmail").val()
+                };
+
+                $.ajax({
+                    url: "/Accounts/ForgotPassword",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            $("#myModal2").modal("hide");
+                            $("#OtpVerificationForgotPassword").modal("show");
+                        } else {
+                            //alert(response.message);
+
+                            //<i class="fa fa-check check-icon" aria-hidden="true"></i>
+                            if ($("#errorforgotPasswordEmailIcon").length == 0) {
+                                if ($("#successforgotPasswordEmailIcon").length != 0) {
+                                    $("#successforgotPasswordEmailIcon").remove();
+                                }
+                                $("#forgotPasswordEmail").after('<i id="errorforgotPasswordEmailIcon" class="fa fa-times check-icons" aria-hidden="true"></i>');
+                                $("#forgotPasswordError").css("display", "block");
+                                $("#forgotPasswordErrorMessage").text(response.message);
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function VerifyForgotPasswordCode() {
+                var code = $("#forgotFirstCodeNumber").val() + $("#forgotSecondCodeNumber").val() + $("#forgotThirdCodeNumber").val() + $("#forgotForthCodeNumber").val() + $("#forgotFifthCodeNumber").val() + $("#forgotSixthCodeNumber").val();
+
+                var data = {
+                    email: $("#forgotPasswordEmail").val(),
+                    code: code
+                };
+
+                $.ajax({
+                    url: "/Accounts/VerifyForgotPasswordCode",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            $("#resetPasswordToken").val(response.resetPasswordToken);
+                            $("#resetPasswordUserName").text("Hey " + response.username);
+                            $("#OtpVerificationForgotPassword").modal("hide");
+                            $("#newPasswordModal").modal("show");
+                        } else {
+                            $("#verifyForgotPasswordError").css("display", "block");
+                            $("#verifyForgotPasswordErrorMessage").text(response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function ResetPassword() {
+
+                var data = {
+                    email: $("#forgotPasswordEmail").val(),
+                    resetPasswordToken: $("#resetPasswordToken").val(),
+                    newPassword: $("#newPassword").val(),
+                    confirmNewPassword: $("#confirmPassword").val(),
+                };
+
+                $.ajax({
+                    url: "/Accounts/ResetPassword",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            window.location.reload();
+                        } else {
+                            $("#resetPasswordError").css("display", "block");
+                            $("#resetPasswordErrorMessage").text(response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+
+            function SendSmsCode() {
+
+                var data = {
+                    mobileNumber: $("#phonenumberLastStep").val(),
+                    userId: $("#otpUserId").val()
+                };
+
+                $.ajax({
+                    url: "/Accounts/SendSmsCode",
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (response.isSuccess) {
+                            $("#phoneNumberModal").modal("hide");
+                            $("#OtpVerificationRegister").modal("show");
+                            $("#otpMobileNumber").val(data.mobileNumber);
+                        } else {
+                            $("#sendSmsCodeError").css("display", "block");
+                            $("#sendSmsCodeErrorMessage").text(response.message);
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+                //phonenumberLastStep
+            }
+
+
+            function LoginAfterReg() {
+                $.ajax({
+                    url: "/Accounts/LoginAfterReg?email=" + $("#Email").val(),
+                    method: "POST",
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+
+                        console.log("response", response);
+                        if (response.isSuccess) {
+                            window.location.reload();
+                        }
+                    },
+                    error: function (error) {
+                        console.log("error", error);
+
+                        console.log(error);
+                    }
+                });
+            }
+
+
+        </script>
+
+
+
+        <script>
+            window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1044688766336296',
+                    cookie: false,
+                    xfbml: true,
+                    version: 'v11.0'
+                });
+            };
+
+            function fb_login() {
+                FB.login(function (response) {
+
+                    if (response.authResponse) {
+                        access_token = response.authResponse.accessToken;
+
+                        $.ajax({
+                            url: `/Accounts/FacebookLogin?accessToken=${access_token}`,
+                            method: "POST",
+                            //data: JSON.stringify(data),
+                            dataType: 'json',
+                            contentType: "application/json",
+                            success: function (response) {
+                                if (response.isSuccess) {
+                                    if (response.status == 3) {
+                                        $("#myModal3").modal("hide");
+                                        $("#myModal20").modal('show');
+                                        $("#Email").val(response.email);
+                                    } else if (response.status == 1) {
+                                        window.location.reload();
+                                    }
+                                } else {
+                                    $("#facebookLoginError").css("display", "block");
+                                    $("#facebookLoginErrorMessage").text(response.message);
+                                }
+                            },
+                            error: function (error) {
+                                console.log(error);
+                            }
+                        });
+                    }
+                });
+            }
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) { return; }
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+
+            function checkLoginState() {
+                FB.getLoginStatus(function (response) {
+                    $("#authStatus").html("<code>" + JSON.stringify(response, null, 2) + "</code>");
+                });
+            }
+
+        </script>
+
+        <script>
+            function onLoadGoogleCallback() {
+                gapi.load('auth2', function () {
+                    auth2 = gapi.auth2.init({
+                        client_id: '347827155629-55umcequ7jk4s0mv6lg7u7kthrc03cgr.apps.googleusercontent.com',
+                        cookiepolicy: 'single_host_origin',
+                        scope: 'profile'
+                    });
+
+                    auth2.attachClickHandler(element, {},
+                        function (user) {
+
+                            console.log(user.getAuthResponse());
+                            const token = user.getAuthResponse().id_token;
+
+                            $.ajax({
+                                url: `/Accounts/GmailLogin?idToken=${token}`,
+                                method: "POST",
+                                //data: JSON.stringify(data),
+                                dataType: 'json',
+                                contentType: "application/json",
+                                success: function (response) {
+                                    if (response.isSuccess) {
+                                        if (response.status == 3) {
+                                            $("#myModal19").modal("hide");
+                                            $("#myModal20").modal('show');
+                                            $("#Email").val(response.email);
+                                        } else if (response.status == 1) {
+                                            window.location.reload();
+                                        }
+                                    } else {
+                                        $("#googleLoginError").css("display", "block");
+                                        $("#googleLoginErrorMessage").text(response.message);
+                                    }
+                                },
+                                error: function (error) {
+                                    console.log(error);
+                                }
+                            });
+                        }, function (error) {
+                            console.log('Sign-in error', error);
+                        }
+                    );
+                });
+
+                element = document.getElementById('googleSignIn');
+            }
+
+
+
+            function togglePassword(target) {
+
+                if ($(".eyePassword").hasClass("fa-eye-slash")) {
+                    $(".eyePassword").removeClass("fa-eye-slash");
+                    $(".eyePassword").addClass("fa-eye");
+                    if (target == 1) {
+                        $("#LoginPassword").removeAttr("type");
+                        $("#LoginPassword").attr("type", "text");
+                    } else {
+                        $("#Password").removeAttr("type");
+                        $("#Password").attr("type", "text");
+                    }
+                } else {
+                    $(".eyePassword").removeClass("fa-eye");
+                    $(".eyePassword").addClass("fa-eye-slash");
+
+                    if (target == 1) {
+                        $("#LoginPassword").removeAttr("type");
+                        $("#LoginPassword").attr("type", "password");
+                    } else {
+                        $("#Password").removeAttr("type");
+                        $("#Password").attr("type", "password");
+                    }
+                }
+
+            }
+
+
+        </script>
+    }
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function noti() {
+            console.log("in 55 ", 55);
+            $.ajax({
+                url: "/Ads/NotiCont",
+                method: "GET",
+                success: function (response) {
+                    if (!!response.isSuccess) {
+                        console.log("in 55 ", 5);
+                        $("#notiIcon").empty();
+
+                        $("#notiIcon").html('<i class="far fa-bell"></i> <span class="not-dot"></span>');
+                    } else {
+                        console.log("in 55 ", 0);
+                        $("#notiIcon").empty();
+                        $("#notiIcon").html('<i class="far fa-bell"></i>');
+                    }
+                },
+                error: function (error) {
+                    console.log("in 55 ", -1);
+
+                }
+            });
+
+        });
+
+        var vcode = (function () {
+            //cache dom
+            var $inputs = $("#vcode").find("input");
+
+            //bind events
+            $inputs.on('keyup', processInput);
+
+            //define methods
+            function processInput(e) {
+                var x = e.charCode || e.keyCode;
+                if ((x == 8 || x == 46) && this.value.length == 0) {
+                    var indexNum = $inputs.index(this);
+                    if (indexNum != 0) {
+                        $inputs.eq($inputs.index(this) - 1).focus();
+                    }
+                }
+
+                if (ignoreChar(e))
+                    return false;
+                else if (this.value.length == this.maxLength) {
+                    $(this).next('input').focus();
+                }
+            }
+            function ignoreChar(e) {
+                var x = e.charCode || e.keyCode;
+                if (x == 37 || x == 38 || x == 39 || x == 40)
+                    return true;
+                else
+                    return false
+            }
+
+        })();
+
+        var vcode2 = (function () {
+            //cache dom
+            var $inputs = $("#vcode2").find("input");
+
+            //bind events
+            $inputs.on('keyup', processInput);
+
+            //define methods
+            function processInput(e) {
+                var x = e.charCode || e.keyCode;
+                if ((x == 8 || x == 46) && this.value.length == 0) {
+                    var indexNum = $inputs.index(this);
+                    if (indexNum != 0) {
+                        $inputs.eq($inputs.index(this) - 1).focus();
+                    }
+                }
+
+                if (ignoreChar(e))
+                    return false;
+                else if (this.value.length == this.maxLength) {
+                    $(this).next('input').focus();
+                }
+            }
+            function ignoreChar(e) {
+                var x = e.charCode || e.keyCode;
+                if (x == 37 || x == 38 || x == 39 || x == 40)
+                    return true;
+                else
+                    return false
+            }
+
+        })();
+
+
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

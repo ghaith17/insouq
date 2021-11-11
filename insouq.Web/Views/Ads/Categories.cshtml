@@ -1,0 +1,139 @@
+﻿@using insouq.Shared.DTOS.CategoryDTOS
+@using insouq.Shared.Utility
+@model List<CategoryDTO>
+
+
+
+<div class="row">
+    <div class="col-md-2">
+        <div class="bann-left-sub">
+            <img src="~/assets/img/86.png" alt="">
+        </div>
+    </div>
+    <div class="col-md-8 bann-marge">
+        <div class="bann-top">
+
+            <img src="~/assets/img/88.png" alt="">
+        </div>
+
+
+        <section class="section-padding">
+            <div class="-card text-center wow  wow fadeInUp">
+                <h1 class="section-title1">@StaticFunctions.GetTypeName(ViewBag.TypeId)</h1>
+                <div class="row">
+                    @foreach (var category in Model)
+                    {
+                        var color = StaticFunctions.GetColorByTypeId(ViewBag.TypeId);
+                        <div class="col-md-4 items">
+                            <span class="motors-color-1" style="background:@color;">@category.NumberOfAds</span>
+                            <a asp-controller="Ads" asp-action="All" asp-route-typeId="@ViewBag.TypeId" asp-route-categoryId="@category.Id">
+                                <div class="subcategory-box" style="border:1px solid @color;">
+                                    <p><img style="height: 50px;" src="@category.FirstImage" alt=""><p>
+                                    <p class="subcategory-p">@category.En_Name</p>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+
+    </div>
+    <div class="col-md-2">
+        <div class="bann-right-sub">
+            <img src="~/assets/img/84.png" alt="">
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    $(Document).ready(() => {
+        console.log("in location ");
+        $.ajax({
+            url: "/DropDowns/GetAllLocation",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+
+                    $("#locationDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    });
+    var makerDLloaded = false;
+    $("#makerDL").on("click", function () {
+        if (makerDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllMotorMaker",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#makerDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        makerDLloaded = true;
+    });
+    $("#makerDL").on("change", function () {
+        $('#modelDL option').remove();
+        $("#modelDL").append(`<option value=''>All Models</option>`);
+        $("#modelDL").val(null);
+        var maker = $("#makerDL").val();
+        $.ajax({
+            url: `/DropDowns/GetAllMotorModelByMaker?maker=${maker}`,
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#modelDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    });
+    $("#modelDL").on("change", function () {
+        $("#trimDL").val(null);
+        var model = $("#modelDL").val();
+        $.ajax({
+            url: `/DropDowns/GetAllMotorTrimByModel?model=${model}`,
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#trimDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    });
+    $("#cat1").on("change", function () {
+        console.log("cat dddd");
+        var cat = $("#cat1").val();
+        console.log("cat 1 =", cat);
+        if (cat == 2 || cat == 8) {
+            $("#moreFilters").fadeIn()
+        } else {
+            $("#moreFilters").fadeOut()
+        }
+    });
+    function toggleMore() {
+        console.log("toggleMore")
+    }

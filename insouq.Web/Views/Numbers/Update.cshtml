@@ -1,0 +1,371 @@
+﻿@using insouq.Shared.Utility
+@model insouq.Shared.DTOS.NumberAdDTO
+
+<div class="notification-style">
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Post an Ad</h1>
+                <ol class="breadcrumb-style">
+                    <li><a href="home.html" class="breadcrumb-color">Home > </a></li>
+                    <li class="breadcrumb-color"> Post an Ad</li>
+                </ol>
+
+            </div>
+            <div class="form-width">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-7">
+                    <form asp-action="Update" method="post">
+                        @Html.HiddenFor(m => m.CategoryId)
+                        @Html.HiddenFor(m => m.AdId)
+                        @Html.HiddenFor(m => m.Lng, new { id = "lng" })
+                        @Html.HiddenFor(m => m.Lat, new { id = "lat" })
+
+                        <input type="hidden" value="@Model.Emirate" id="emirate" />
+                        <input type="hidden" value="@Model.Code" id="mobileCode" />
+                        <input type="hidden" value="@Model.MobileNumberPlan" id="mobileNumberPlan" />
+                        <input type="hidden" value="@Model.Operator" id="operator" />
+                        <input type="hidden" value="@Model.PlateCode" id="plateCode" />
+                        <input type="hidden" value="@Model.PlateType" id="plateType" />
+                        <input type="hidden" value="@Model.Location" id="location" />
+
+                        <p class="post-p3">Let’s start with the title</p>
+                        <p>Try to have an informative title that’s to be point and not very long</p>
+                        <div class="padding-form">
+                            <input type="text" class="line-input-style17" maxlength="40" required asp-for="Title" placeholder="Dodge charger 2010 for Sale, perfect condition">
+                            <Small>Recommended 40 characters</Small>
+                            <p class="post-p4">Looks good, Now please add more details</p>
+                        </div>
+
+                        <div class="padding-form">
+                            <input placeholder="Listing price" type="number" class="line-input-style16" asp-for="Price" min="0"><label class="label-price1">AED</label>
+                        </div>
+
+                        <div class="padding-form">
+                            <label class="change-color">Phone Number</label>
+                            <input required type="number" class="line-input-style17" asp-for="PhoneNumber">
+                        </div>
+
+                        <div class="padding-form">
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                            <br>
+                            <span>0/400 words</span>
+                        </div>
+
+                        <p class="post-p4">Specifications</p>
+
+                        @if (Model.CategoryId == StaticData.PlateNumbers_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Emirate" class="line-input-style15" id="emirateDL">
+                                    <option value="">Emirate</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="PlateType" class="line-input-style15" id="plateTypeDL">
+                                    <option value="">Plate Type</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select asp-for="PlateCode" class="line-input-style15" id="plateCodeDL">
+                                    <option value="">Plate Code</option>
+                                </select>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="Operator" class="line-input-style15" id="operatorDL">
+                                    <option value="">Operator</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="Code" class="line-input-style15" id="codeDL">
+                                    <option value="">Code</option>
+                                </select>
+                            </div>
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.PlateNumbers_ID)
+                        {
+                            <div class="padding-form">
+                                <input placeholder="Number" type="number" class="line-input-style15" asp-for="Number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5">
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="padding-form">
+                                <input placeholder="Number" type="number" class="line-input-style15" asp-for="Number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7">
+                            </div>
+                        }
+
+
+                        @if (Model.CategoryId == StaticData.MobileNumbers_ID)
+                        {
+                            <div class="padding-form">
+                                <select required asp-for="MobileNumberPlan" class="line-input-style15" id="numberPlanDL">
+                                    <option value="">Number Plan</option>
+                                </select>
+                            </div>
+                        }
+
+
+                        <div class="padding-form">
+                            <select required asp-for="Location" class="line-input-style15" id="locationDL">
+                                <option value="">Your Location</option>
+                            </select>
+                        </div>
+
+                        <!--<div class="padding-form">
+                            <label class="change-color">Listing price</label>
+                            <input type="number" class="line-input-style14" asp-for="Price" min="0"><label class="label-price">AED</label>
+                        </div>
+
+                        <p>Add a short description</p>
+                        <div class="featured-box5">
+                            <textarea required asp-for="Description" cols="77" style="border:0px;"></textarea>-->
+                        @*<p class="stylep">Car has most of the regular service and repair done by VW Dubai and last few service done outside VW agency.</p>
+                            <p class="stylep">Car has Panamera sunroof in good working condition but the curtain.</p>*@
+                        <!--</div>
+                        <span>0/400 words</span>-->
+
+                        <div class="padding-form">
+                            <button type="button" class="change-btn2" name="button" onclick="GetLocation()">Detect Location</button>
+                        </div>
+
+                        <label class="cont2">
+                            <p class="text-style3">
+                                By submitting this ad, I agree on <a href="#"> {Terms & Conditions}</a> and
+                                <a href="#">{Privacy Policy}</a>
+                            </p>
+                            <input type="checkbox">
+                            <span class="checkmark3" required></span>
+                        </label>
+
+
+                        <label class="">
+                            <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+
+                        </label>
+
+                        <div class="padding-form padding-top">
+                            @*<button type="button" class="change-btn3" name="button" onclick="window.location.href='adpackagesubscriptions0.html'">CONTINUE</button>*@
+                            <button type="submit" class="change-btn3" name="button">CONTINUE</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @if (Model.CategoryId == StaticData.PlateNumbers_ID)
+    {
+        <script>
+            $.ajax({
+                url: "/DropDowns/GetAllEmirate",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#emirateDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var emirate = $("#emirate").val();
+
+                    $("#emirateDL").val(emirate);
+
+                    $.ajax({
+                        url: `/DropDowns/GetAllPlateTypeByEmirate?emirate=${emirate}`,
+                        method: "GET",
+                        success: function (response) {
+                            $.each(response.items, function (i, item) {
+                                $("#plateTypeDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                            });
+
+                            var plateType = $("#plateType").val();
+
+                            $("#plateTypeDL").val(plateType);
+
+                            $.ajax({
+                                url: `/DropDowns/GetAllPlateCode?plateType=${plateType}&emirate=${emirate}`,
+                                method: "GET",
+                                success: function (response) {
+                                    $.each(response.items, function (i, item) {
+                                        $("#plateCodeDL").append(`<option value='${item.value}'>${item.value}</option>`);
+                                    });
+
+                                    var plateCode = $("#plateCode").val();
+
+                                    $("#plateCodeDL").val(plateCode);
+                                },
+                                error: function (error) {
+                                    alert(error.message);
+                                }
+                            });
+                        },
+                        error: function (error) {
+                            alert(error.message);
+                        }
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $("#emirateDL").on("change", function () {
+                $("#plateTypeDL option").not(':first').remove();
+                $("#plateCodeDL option").not(':first').remove();
+                var emirate = $("#emirateDL").val();
+                $.ajax({
+                    url: `/DropDowns/GetAllPlateTypeByEmirate?emirate=${emirate}`,
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#plateTypeDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                        });
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+
+            });
+
+
+            $("#plateTypeDL").on("change", function () {
+                $("#plateCodeDL option").not(':first').remove();
+                var emirate = $("#emirateDL").val();
+                var plateType = $("#plateTypeDL").val();
+                $.ajax({
+                    url: `/DropDowns/GetAllPlateCode?plateType=${plateType}&emirate=${emirate}`,
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#plateCodeDL").append(`<option value='${item.value}'>${item.value}</option>`);
+                        });
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+            });
+
+
+        </script>
+    }
+
+    @if (Model.CategoryId == StaticData.MobileNumbers_ID)
+    {
+        <script>
+
+            $.ajax({
+                url: "/DropDowns/GetAllNumberPlans",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#numberPlanDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+
+                    var mobileNumberPlan = $("#mobileNumberPlan").val();
+
+                    $("#numberPlanDL").val(mobileNumberPlan);
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+
+            $.ajax({
+                url: "/DropDowns/GetAllOperator",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#operatorDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    var operator = $("#operator").val();
+
+                    $("#operatorDL").val(operator);
+
+                    $.ajax({
+                        url: `/DropDowns/GetAllMobileNumberCodeByOperator?operatorName=${operator}`,
+                        method: "GET",
+                        success: function (response) {
+                            $.each(response.items, function (i, item) {
+                                $("#codeDL").append(`<option value='${item.value}'>${item.value}</option>`);
+                            });
+
+                            var mobileCode = $("#mobileCode").val();
+
+                            $("#codeDL").val(mobileCode);
+                        },
+                        error: function (error) {
+                            alert(error.message);
+                        }
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+
+            $("#operatorDL").on("change", function () {
+                $("#codeDL option").not(':first').remove();
+                var operator = $("#operatorDL").val();
+                $.ajax({
+                    url: `/DropDowns/GetAllMobileNumberCodeByOperator?operatorName=${operator}`,
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#codeDL").append(`<option value='${item.value}'>${item.value}</option>`);
+                        });
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+            });
+
+
+        </script>
+        }
+
+     <script>
+         $.ajax({
+             url: "/DropDowns/GetAllLocation",
+             method: "GET",
+             success: function (response) {
+                 $.each(response.items, function (i, item) {
+                     $("#locationDL").append(`<option value='${item.en_Text}-${item.ar_Text}'>${item.en_Text}</option>`);
+
+                 });
+
+                 var location = $("#location").val();
+
+                 $("#locationDL").val(location);
+             },
+             error: function (error) {
+                 alert(error.message);
+             }
+         });
+     </script>
+    }

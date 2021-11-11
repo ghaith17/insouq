@@ -1,0 +1,43 @@
+﻿@model insouq.Shared.DTOS.AccountsDTOS.LoginDTO
+
+<div class="container">
+
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal-styles">
+                <div class="modal-header-styles modal-logo">
+                    <img src="~/assets/img/81.png" alt="">
+                    <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form class="" asp-controller="Accounts" asp-action="login" method="post">
+                        <div class="signin-style">
+                            <input class="signin-email" id="LoginEmailOrPhone" placeholder="Your Email or phone number">
+                            <i class="fa fa-check check-icon" aria-hidden="true"></i>
+                        </div>
+                        <input class="signin-input" type="password" id="LoginPassword" placeholder="Your password">
+                        <i class="fa fa-eye-slash password-icon" aria-hidden="true"></i>
+                        <button type="submit" class="signin-btn" name="button">Sign In</button>
+                        <x>OR</x>
+                        <p class="p-style">Sign up with</p>
+                        <button type="button" class="facebook-btn" name="button"><img src="~/assets/img/20.png" alt=""> facebook</button>
+                        <button type="button" class="gmail-btn" name="button"><img src="~/assets/img/21.png" alt=""> gmail</button>
+                        <p class="p2-style">By signing in, I agree on their <a href="ourterms.html"> Terms and Conditions </a>and <a href="privacy.html"> Privacy Policy</a></p>
+                        <button type="button" class="forgot-password" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal2">FORGOT your password?</button>
+                        <button type="button" class="create-account" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">CREATE ACCOUNT</button>
+                    </form>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

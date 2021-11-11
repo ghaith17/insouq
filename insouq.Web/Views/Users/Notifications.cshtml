@@ -1,0 +1,171 @@
+﻿@using insouq.Shared.Utility;
+@using insouq.Models
+@model List<Notification>
+
+
+<style>
+    .span-style {
+        padding-top: 63px;
+        font-size: 12px;
+        float: right;
+        margin-right: -13px;
+    }
+
+    #list-view .featured-box .feature-content {
+        float: left;
+        text-align: left;
+        width: 50.667%;
+        margin-top: -29px;
+    }
+
+    .adupdate-style p {
+        margin-top: 40px;
+    }
+</style>
+
+<div class="notification-style">
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="featured-box1">
+
+                    <h3 class="section-title6">Filters</h3>
+                    <h3 class="section-title7">Notification Type</h3>
+                    <label class="cont2">
+                        <p class="section-title8">Chat Messages</a></p>
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                    <label class="cont2">
+                        <p class="section-title8"> Ad Updates</a></p>
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                    <label class="cont2">
+                        <p class="section-title8">Announcements</a></p>
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                    <button type="button" class="apply-btn" name="button">Apply Filters</button>
+                    <p class="reset-all"><a href="#">Reset All</a></p>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <h1 class="section-title5">Notification  <span id="count">(@Model.Count)</span> </h1>
+
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+
+                        <!-------------------------------------------------->
+                        <div class="col-md-12" id="_@item.Id">
+                            <div class="featured-box">
+                                <div class="col-md-4">
+                                    <figure>
+
+                                        @if (item.CategoryId != StaticData.PlateNumbers_ID && item.CategoryId != StaticData.MobileNumbers_ID)
+                                        {
+
+
+
+                                            var imgUrl = StaticData.SERVER_DOMAIN + item.ImageUrl;
+                                            if (item.ImageUrl == "")
+                                            {
+                                                imgUrl = "https://t3.ftcdn.net/jpg/01/84/81/64/360_F_184816468_sXO2m7Xhy2xqENls5YxrKlmFg3Ii82Mr.jpg";
+                                            }
+
+
+                                            <a href="#"><img class="img-fluid" src="@imgUrl" alt=""></a>
+                                        }
+
+                                        else if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                        {
+                                            var numberPhoto = StaticData.SERVER_DOMAIN + item.ImageUrl;
+
+                                                    <div class="slider__contents1">
+                                                        <div class="slider__image1">
+                                                            <img src="@numberPhoto" alt="">
+                                                            <h2 class="mobile-numbers-Mylist">@item.Code @item.Number</h2>
+                                                        </div>
+                                                    </div>
+                                               
+                                        }
+                                        else if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                        {
+                                            var photo = StaticData.SERVER_DOMAIN + item.ImageUrl;
+
+                                            var plateCodeClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Code-Mylist";
+                                            var plateNumberClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Number-Mylist";
+
+                                                    <div class="slider__contents1">
+                                                        <div class="slider__image1">
+                                                            <img src="@photo" alt="">
+                                                            <h2 class="@plateCodeClass">@item.PlateCode</h2>
+                                                        </div>
+                                                        <h2 class="@plateNumberClass">@item.Number</h2>
+                                                   
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-md-3"></div>
+                                        }
+
+                                    </figure>
+                                </div>
+                                <div class="col-md-8">
+                                    <button type="button" onclick="deleteNoti('@item.Id')" class="close-style1">&times;</button>
+                                    <div class="feature-content" style="margin-top: 10px;">
+
+                                        <h4>
+                                            <a href="@Url.Action("Details","Ads", new { adId = item.AdId, typeId = item.Ad.TypeId})">
+                                                You received a new offer on your ad “@item.Ad.Title”
+                                            </a>
+                                        </h4>
+                                        <div class="adupdate-style">
+                                            <p><a href="adslist.html">Ad Updates</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="span-style">
+                                        <span>@HelperFunctions.GetTime(item.Date)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function deleteNoti(id) {
+        console.log("delete NOtificaiton")
+        $.ajax({
+            url: "/Users/DeleteNotification?id=" + id,
+            method: "GET",
+            success: function (response) {
+                console.log(response);
+                if (response.error) {
+                    ShowLogin();
+                }
+
+                if (response.isSuccess) {
+                    $("#_" + id).hide();
+                    //document.getElementById("_" + id).style.display = "none";
+                    $('#count').html(response.message);
+                    alert("Deleted Successfully");
+                }
+            },
+            error: function (error) {
+                alert(error.message);
+                console.log(error);
+            }
+        });
+
+    }
+</script>

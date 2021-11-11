@@ -1,0 +1,2911 @@
+﻿@using insouq.Shared.Utility
+@model insouq.Web.ViewModels.AdDetailsVM
+
+
+@section Css {
+    <style>
+        #Div2 {
+            display: none;
+        }
+
+        #Div3 {
+            display: none;
+        }
+
+        .containers {
+            width: 100%;
+            padding-right: 150px;
+            padding-left: 150px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .change-btn15 {
+            background: #ffffff;
+            padding: 17px 80px;
+            border-radius: 5px;
+            color: black;
+            border: none;
+            border-right: 1px solid #EBEBEB;
+        }
+    </style>
+}
+
+@section Nav {
+    <nav class="navbar navbar-expand-lg fixed-top scrolling-navbar">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                    <span class="lni-menu"></span>
+                    <span class="lni-menu"></span>
+                    <span class="lni-menu"></span>
+                </button>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/assets/img/55.png" alt=""></a>
+            </div>
+            <div class="collapse navbar-collapse" id="main-navbar">
+                @(await Component.InvokeAsync("HeaderCategories"))
+                <div class="men-icon inline-view">
+
+                    <button type="button" class="change-btn-17 map-point-sm" name="button" data-show=".darwin">
+                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
+                    </button>
+
+
+                    <button class="change-btn28" id="Div3"><label class="">@Model.User.MobileNumber</label></button>
+
+                    <button type="button" class="change-btn15" name="button" onclick="switchVisible();" id="Button2">
+                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
+                    </button>
+
+                    @*<button type="button" class="change-btn-17 map-point-sm" name="button" data-show=".darwin">
+                            <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
+                        </button>
+                        <button type="button" class="change-btn-17" name="button">
+                            <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
+                        </button>*@
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Menu Start -->
+        <!-- Mobile Menu End -->
+
+    </nav>
+}
+
+@{
+    string GetStringCondition(bool value)
+    {
+        if (value) return "Yes";
+        return "No";
+    }
+
+    string GetTypeName()
+    {
+        if (Model.Ad.TypeId == StaticData.Motors_ID) return "Motors";
+        if (Model.Ad.TypeId == StaticData.Properties_ID) return "Properties";
+        if (Model.Ad.TypeId == StaticData.Jobs_ID) return "Jobs";
+        if (Model.Ad.TypeId == StaticData.Business_ID) return "Business";
+        if (Model.Ad.TypeId == StaticData.Classifieds_ID) return "Classifieds";
+        if (Model.Ad.TypeId == StaticData.Electronics_ID) return "Electronics";
+        if (Model.Ad.TypeId == StaticData.Numbers_ID) return "Numbers";
+        if (Model.Ad.TypeId == StaticData.Services_ID) return "Services";
+
+        return "";
+    }
+}
+
+
+<!-- start modal -->
+<div class="container">
+
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal156" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal5-styles">
+                <div class="modal-header-styles2">
+                    <h4 class="title-dir">Share This Listing</h4>
+                    <button type="button" id="closeCopyModal" class="close-style7" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <form class="" action="" method="post">
+
+                        <div class="new-password-style">
+                            <input style="width:60%;white;margin-left: 30px;" id="CurrentUrl" class="" type="text" name="" value="" placeholder="Link ">
+                            <button style="width:20%; margin-left: 10px;" onclick="CopyLink()" type="button" name="button" class="signin-btn5">Copy</button>
+
+                        </div>
+                    </form>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- End modal -->
+<div class="notification-style" style="padding-top: 75px;">
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="section-title10"><img style="margin-right: 5px;" src="~/assets/img/32.png" alt="">@Model.Ad.Title</h1>
+                <ol class="breadcrumb-style">
+                    <li><a asp-controller="Home" asp-action="Index" class="breadcrumb-color">Home &gt; </a></li>
+                    <li><a href="#" class="breadcrumb-color"> @GetTypeName()  &gt; </a></li>
+                    <li><a href="#" class="breadcrumb-color"> @Model.Ad.CategoryEnName  &gt; </a></li>
+                    <li class="breadcrumb-color"> Details</li>
+                </ol>
+            </div>
+            <div class="col-md-8">
+                @if (Model.Ad.TypeId != StaticData.Numbers_ID)
+                {
+                    <div class="container mt-5">
+                        @{
+                            var href = "#";
+
+                            if (Model.Ad.CategoryId == StaticData.JobWanted_ID)
+                            {
+                                href = StaticData.SERVER_DOMAIN + Model.Ad.CV;
+
+                            }
+                        }
+                        <div class="carousel-container position-relative row">
+
+                                <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                    <a href="@href">
+                                        <div class="carousel-inner">
+                                            @{
+                                                var index = 0;
+                                            }
+                                            @for (index = 0; index < Model.Ad.Pictures.Count; index++)
+                                            {
+                                                if (index == 6) break;
+
+                                                var src = StaticData.SERVER_DOMAIN + Model.Ad.Pictures[index].ImageURL;
+
+                                                var active = "";
+
+                                                if (index == 0)
+                                                {
+                                                    active = "active";
+                                                }
+                                                <div class="carousel-item @active" data-slide-number="@index">
+                                                    <img style="height: 490px;" src="@src" class="d-block w-100" alt="..." data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+                                                </div>
+
+                                            }
+
+                                        </div>
+                                    </a>
+                                </div>
+
+                                <!-- Carousel Navigation -->
+                                <div id="carousel-thumbs" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <div class="row mx-0">
+                                                @{
+                                                    var indexx = 0;
+                                                }
+                                                @foreach (var item in Model.Ad.Pictures)
+                                                {
+                                                    if (indexx == 6) break;
+
+                                                    var selected = "";
+                                                    if (indexx == 0)
+                                                    {
+                                                        selected = "selected";
+                                                    }
+                                                    var src = StaticData.SERVER_DOMAIN + item.ImageURL;
+                                                    <div id="carousel-selector-@indexx" class="thumb col-4 col-sm-2 px-1 py-2 @selected" data-target="#myCarousel" data-slide-to="@indexx">
+                                                        <img style="height: 90px;" src="@src" class="img-fluid" alt="...">
+                                                    </div>
+
+                                                    indexx++;
+                                                }
+
+                                            </div>
+                                        </div>
+                                        @if (Model.Ad.TypeId != StaticData.Numbers_ID)
+                                        {
+                                            if (index < Model.Ad.Pictures.Count)
+                                            {
+                                                <div class="carousel-item">
+                                                    <div class="row mx-0">
+                                                        @for (int i = index; i < Model.Ad.Pictures.Count; i++)
+                                                        {
+                                                            var src = StaticData.SERVER_DOMAIN + Model.Ad.Pictures[i].ImageURL;
+                                                            <div id="carousel-selector-@i" class="thumb col-4 col-sm-2 px-1 py-2" data-target="#myCarousel" data-slide-to="6">
+                                                                <img style="height: 90px;" src="@src" class="img-fluid" alt="...">
+                                                            </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+
+
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carousel-thumbs" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"> <i class="fa fa-caret-left" aria-hidden="true"></i></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carousel-thumbs" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                        </div> <!-- /row -->
+                    </div>
+                }
+
+                else if (Model.Ad.CategoryId == StaticData.PlateNumbers_ID)
+                {
+                    var numberPhoto = "";
+                    if (!string.IsNullOrEmpty(Model.Ad.Photo2))
+                    {
+                        numberPhoto = StaticData.SERVER_DOMAIN + Model.Ad.Photo2;
+
+                    }
+                    else
+                    {
+                        numberPhoto = StaticData.SERVER_DOMAIN + Model.Ad.Photo;
+
+                    }
+
+                    var plateCodeClass = Model.Ad.En_Emirate.Replace(" ", "") + "-" + Model.Ad.En_PlateType.Substring(0, 1) + "Code-Details";
+                    var plateNumberClass = Model.Ad.En_Emirate.Replace(" ", "") + "-" + Model.Ad.En_PlateType.Substring(0, 1) + "Number-Details";
+
+                    <div class="container mt-5">
+                        <div class="carousel-container position-relative row">
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" data-slide-number="0">
+                                        <img src="@numberPhoto" class="d-block w-100">
+                                        <h2 class="@plateCodeClass">@Model.Ad.PlateCode</h2>
+                                        <h2 class="@plateNumberClass">@Model.Ad.Number</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+                else if (Model.Ad.CategoryId == StaticData.MobileNumbers_ID)
+                {
+
+                    var numberPhoto = StaticData.SERVER_DOMAIN + Model.Ad.Photo;
+
+                    <div class="container mt-5">
+                        <div class="carousel-container position-relative row">
+                            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active" data-slide-number="0">
+                                        <img src="@numberPhoto" class="d-block w-100">
+                                        <h2 class="mobile-Details">@Model.Ad.Code @Model.Ad.Number</h2>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+
+                <div class="warp-title-style">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (Model.IsInFavorite)
+                        {
+
+                            <button type="button" class="change-btn14 float-style" name="button" style="cursor:pointer;" onclick="DetailsRemoveFromFavorite('@Model.Ad.Id')">
+                                <i class="icon-padding fas fa-heart" aria-hidden="true"></i>Remove From Favorite
+                            </button>
+
+                        }
+                        else
+                        {
+                            <button type="button" class="change-btn14 float-style" name="button" style="cursor:pointer;" onclick="DetailsAddToFavorite('@Model.Ad.Id')">
+                                <i style="font-family: 'FontAwesome';" class="icon-padding fa fa-heart-o" aria-hidden="true"></i>Add To Favorite
+                            </button>
+                        }
+                    }
+                    else
+                    {
+                        <button type="button" class="change-btn14 float-style" name="button" style="cursor:pointer;" onclick="ShowLogin()">
+                            <i style="font-family: 'FontAwesome';" class="icon-padding fa fa-heart-o" aria-hidden="true"></i>Add To Favorite
+                        </button>
+                    }
+
+
+                    <button type="button" class="change-btn14 float-style" name="button" href="#" data-toggle="modal" data-target="#myModal156">
+                        <i class="icon-padding fa fa-share-alt" aria-hidden="true"> </i>Share
+                    </button>
+
+                    <p><i style="font-family: 'FontAwesome';" class="fa fa-map-marker"></i>@Model.Ad.En_Location</p>
+                </div>
+                @{
+                    var formatedValue = "";
+                    var className = "span-post-price";
+                }
+
+
+                @if (Model.Ad.TypeId != StaticData.Jobs_ID && Model.Ad.TypeId != StaticData.Services_ID && Model.Ad.CategoryId != StaticData.ResidentialForRent_ID
+&& Model.Ad.CategoryId != StaticData.CommercialForRent_ID)
+                {
+                    formatedValue = "AED " + String.Format("{0:n0}", Model.Ad.Price);
+                }
+                else if (Model.Ad.CategoryId == StaticData.ResidentialForRent_ID
+                  || Model.Ad.CategoryId == StaticData.CommercialForRent_ID)
+                {
+                    formatedValue = "AED " + String.Format("{0:n0}", Model.Ad.AnnualRent);
+                }
+                else if (Model.Ad.CategoryId == StaticData.JobWanted_ID)
+                {
+                    formatedValue = "AED " + String.Format("{0:n0}", Model.Ad.ExpectedMonthlySalary);
+                }
+                else if (Model.Ad.CategoryId == StaticData.JobOpening_ID)
+                {
+                    className = "span-post-without-price";
+
+                }
+
+                <span class="@className"> @Model.Ad.PostDate.ToString("dd MMM yyyy"), @Model.Ad.PostDate.ToString("HH:mm")</span>
+
+                <h1 class="section-title15 payment-price1">@formatedValue</h1>
+
+                <div class="featured-box9">
+                    <div class="warp-title-style1">
+                        <p>Specifications</p>
+                    </div>
+                    <div class="col-md-6 spe-border">
+                        <div class="col-md-12 spe-margin">
+                            <div class="statictic-style">
+                                @if (Model.Ad.TypeId == StaticData.Motors_ID)
+                                {
+                                    @if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-7">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Maker
+                                                </p>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Maker</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Model
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Model</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Trim
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Trim</p>
+
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID
+                                        || Model.Ad.CategoryId == StaticData.Machinery_ID
+                            || Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Kilometers
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@String.Format("{0:n0}", Model.Ad.Kilometers)</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID
+|| Model.Ad.CategoryId == StaticData.Machinery_ID || Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="far fa-calendar"></i>
+                                                Year
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.Year</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-globe"></i>
+                                                Specs
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_RegionalSpecs</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID
+                                        || Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-fill"></i>
+                                                Color
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Color</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <img class="spe-icon" src="~/assets/img/46.png" alt="">
+                                                Doors
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Doors</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId != StaticData.Parts_ID && Model.Ad.CategoryId != StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-medal"></i>
+                                                Warranty
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.Warranty)</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Boats_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-medal"></i>
+                                                Condition
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Condition</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Boats_ID || Model.Ad.CategoryId == StaticData.Parts_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-medal"></i>
+                                                Age
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Age</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Parts_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-medal"></i>
+                                                Name Of Part
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.NameOfPart</p>
+                                        </div>
+                                    }
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Properties_ID)
+                                {
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                SubCategory
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.SubCategoryEn_Name</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Furnishing
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Furnishing</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Size
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.Size</p>
+                                        </div>
+                                    </div>
+
+
+
+                                    if (Model.Ad.CategoryId == StaticData.CommercialForRent_ID
+|| Model.Ad.CategoryId == StaticData.ResidentialForRent_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Rent Paid In
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_RentPaidIn</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Developer
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.Developer</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Ready By
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.ReadyBy.ToString("dd MMM yyyy")</p>
+                                        </div>
+                                    </div>
+
+                                    @if (Model.Ad.CategoryId == StaticData.CommercialForSale_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Total Closing Fee
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.TotalClosingFee</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Annual Community Fee
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.AnnualCommunityFee</p>
+                                            </div>
+                                        </div>
+
+                                    }
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Property Reference ID
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.PropertyReferenceID</p>
+                                        </div>
+                                    </div>
+
+                                    if (Model.Ad.ListedBy == "0")
+                                    {
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    RERA Landlord Name
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.RERALandlordName</p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Property Status
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_PropertyStatus</p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    RERA Title Deed Number
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.RERATitleDeedNumber</p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    RERA Pre Registration Number
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.RERAPreRegistrationNumber</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    RERA Broker ID Number
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.RERABrokerIDNumber</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    RERA Lister Company Name
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.RERAListerCompanyName</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    RERA Permit Number
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.RERAPermitNumber</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    RERA Agent Name
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.RERAAgentName</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Building
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.Building</p>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Neighborhood
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@Model.Ad.Neighborhood</p>
+                                        </div>
+                                    </div>
+
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Electronics_ID)
+                                {
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Age
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Age</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Usage
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Usage</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Condition
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Color</p>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Services_ID)
+                                {
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Service Type
+                                            </p>
+                                        </div>
+                                        @{
+                                            var serviceType = Model.Ad.OtherServiceType != null ? Model.Ad.OtherServiceType : Model.Ad.ServiceTypeEn_Name;
+                                        }
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">@serviceType</p>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Business_ID)
+                                {
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Category Name
+                                            </p>
+                                        </div>
+                                        @{
+                                            var categoryName = Model.Ad.OtherCategoryName != null ? Model.Ad.OtherCategoryName : Model.Ad.CategoryEnName;
+                                        }
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">@categoryName</p>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Classifieds_ID)
+                                {
+                                    if (Model.Ad.En_Age != null)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Age
+                                                </p>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Age</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @if (Model.Ad.En_Usage != null)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Usage
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Usage</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @if (Model.Ad.En_Condition != null)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Condition
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Condition</p>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Numbers_ID)
+                                {
+                                    if (Model.Ad.CategoryId == StaticData.MobileNumbers_ID)
+                                    {
+
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Operator
+                                                </p>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Operator</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Number Plan
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_MobileNumberPlan</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model.Ad.CategoryId == StaticData.PlateNumbers_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Emirate
+                                                </p>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Emirate</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Plate Type
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_PlateType</p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Jobs_ID)
+                                {
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Job Type
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_JobType</p>
+                                        </div>
+                                    </div>
+
+                                    if (Model.Ad.CategoryId == StaticData.JobWanted_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Phone Number
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.PhoneNumber</p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Gender
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Gender</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Nationality
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Nationality</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Current Location
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_CurrentLocation</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Education Level
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_EducationLevel</p>
+                                            </div>
+                                        </div>
+
+                                    }
+                                    else if (Model.Ad.CategoryId == StaticData.JobOpening_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Career Level
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_CareerLevel</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Employment Type
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_EmploymentType</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-8">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Min Work Experience
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_MinWorkExperience</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-8">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Min Education Level
+                                                </p>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_MinEducationLevel</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-12 spe-margin">
+                            <div class="statictic-style">
+                                @if (Model.Ad.TypeId == StaticData.Motors_ID)
+                                {
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Transmission
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Transmission</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-car"></i>
+                                                Body Type
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_BodyType</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID
+                                        || Model.Ad.CategoryId == StaticData.Machinery_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-gas-pump"></i>
+                                                Fuel Type
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_FuelType</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID
+                                        || Model.Ad.CategoryId == StaticData.ExportCar_ID
+                                        || Model.Ad.CategoryId == StaticData.Machinery_ID
+                                        || Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fab fa-sourcetree"></i>
+                                                No Of Cylinders
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_NoOfCylinders</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID
+                                        || Model.Ad.CategoryId == StaticData.Machinery_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-horse-head"></i>
+                                                Horsepower
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Horsepower</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.UsedCars_ID || Model.Ad.CategoryId == StaticData.ExportCar_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-horse-head"></i>
+                                                Steering Side
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_SteeringSide</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Machinery_ID || Model.Ad.CategoryId == StaticData.Parts_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Condition
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Condition</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Machinery_ID || Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Seller Type
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_SellerType</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Final Drive System
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_FinalDriveSystem</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Machinery_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Mechanical Condition
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_MechanicalCondition</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Machinery_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Capacity
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Capacity</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Engine Size
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_EngineSize</p>
+                                        </div>
+                                    }
+
+
+                                    if (Model.Ad.CategoryId == StaticData.Boats_ID || Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Usage
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Usage</p>
+                                        </div>
+                                    }
+
+
+                                    if (Model.Ad.CategoryId == StaticData.Boats_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Length
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Length</p>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.Bike_ID)
+                                    {
+                                        <div class="col-md-7">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-cog"></i>
+                                                Wheels
+                                            </p>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <p class="spe-p details-spe-font">@Model.Ad.En_Wheels</p>
+                                        </div>
+                                    }
+                                }
+
+                                else if (Model.Ad.TypeId == StaticData.Properties_ID)
+                                {
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Central AC And Heating
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">
+                                                @GetStringCondition(Model.Ad.CentralACAndHeating)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Covered Parking
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">
+                                                @GetStringCondition(Model.Ad.CoveredParking)
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    if (Model.Ad.CategoryId == StaticData.ResidentialForRent_ID
+|| Model.Ad.CategoryId == StaticData.ResidentialForSale_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    BedRooms
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.BedRooms</p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    BathRooms
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@Model.Ad.BathRooms</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Balcony
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.Balcony)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Built In Kitchen Appliances
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.BuiltInKitchenAppliances)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Build In Wardrobes
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.BuildInWardrobes)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Walk In Closet
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.WalkInCloset)</p>
+                                            </div>
+                                        </div>
+
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Conceirge Service
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.ConceirgeService)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Maid Service
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.MaidService)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Maids Room
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.MaidsRoom)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Pets Allowed
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.PetsAllowed)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Private Garden
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.PrivateGarden)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Private Gym
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.PrivateGym)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Private Jacuzzi
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.PrivateJacuzzi)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Private Pool
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.PrivatePool)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Security
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.Security)</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Shared Pool
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.SharedPool)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Study Room
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.StudyRoom)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    if (Model.Ad.CategoryId == StaticData.CommercialForRent_ID
+|| Model.Ad.CategoryId == StaticData.CommercialForSale_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Available Networked
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.AvailableNetworked)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Conference Room
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.ConferenceRoom)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Dining In Building
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.DiningInBuilding)
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-9">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Retail In Building
+                                                </p>
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <p class="spe-p details-spe-font">
+                                                    @GetStringCondition(Model.Ad.RetailInBuilding)
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Shared Gym
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+
+                                            <p class="spe-p details-spe-font">
+                                                @GetStringCondition(Model.Ad.SharedGym)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Shared Spa
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+
+                                            <p class="spe-p details-spe-font">
+                                                @GetStringCondition(Model.Ad.SharedSpa)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                View Of Landmark
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+
+                                            <p class="spe-p details-spe-font">
+                                                @GetStringCondition(Model.Ad.ViewOfLandmark)
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                View Of Water
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+
+                                            <p class="spe-p details-spe-font">
+                                                @GetStringCondition(Model.Ad.ViewOfWater)
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Electronics_ID)
+                                {
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Warranty
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Ad.Warranty)</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Sub Category
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @{
+                                                var subCategory = Model.Ad.OtherSubCategory != null ? Model.Ad.OtherSubCategory : Model.Ad.SubCategoryEn_Name;
+                                            }
+                                            <p class="spe-p details-spe-font">@subCategory</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-9">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Sub Type
+                                            </p>
+                                        </div>
+                                        <div class="col-md-3">
+                                            @{
+                                                var subType = Model.Ad.OtherSubType != null ? Model.Ad.OtherSubType : Model.Ad.SubTypeEn_Name;
+                                            }
+                                            <p class="spe-p details-spe-font">@subType</p>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Jobs_ID)
+                                {
+                                    if (Model.Ad.CategoryId == StaticData.JobWanted_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Current Position
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.CurrentPosition</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Work Experience
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_WorkExperience</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Commitment
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_Commitment</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Notice Period
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_NoticePeriod</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Visa Status
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.En_VisaStatus</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model.Ad.CategoryId == StaticData.JobOpening_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Company Name
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.CompanyName</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Classifieds_ID)
+                                {
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Sub Category
+                                            </p>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            @{
+                                                var subCategory = Model.Ad.OtherSubCategory != null ? Model.Ad.OtherSubCategory : Model.Ad.SubCategoryEn_Name;
+                                            }
+                                            <p class="spe-p details-spe-font">@subCategory</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="col-md-6">
+                                            <p class="spe-p details-spe-font">
+                                                <i class="fas fa-tachometer-alt"></i>
+                                                Sub Type
+                                            </p>
+                                        </div>
+                                        <div class="col-md-6">
+                                            @{
+                                                var subType = Model.Ad.OtherSubType != null ? Model.Ad.OtherSubType : Model.Ad.SubTypeEn_Name;
+                                            }
+                                            <p class="spe-p details-spe-font">@subType</p>
+                                        </div>
+                                    </div>
+                                }
+                                else if (Model.Ad.TypeId == StaticData.Numbers_ID)
+                                {
+                                    if (Model.Ad.CategoryId == StaticData.MobileNumbers_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Mobile Code
+                                                </p>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.Code</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Mobile Number
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.Number</p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else if (Model.Ad.CategoryId == StaticData.PlateNumbers_ID)
+                                    {
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Plate Code
+                                                </p>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.PlateCode</p>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">
+                                                    <i class="fas fa-tachometer-alt"></i>
+                                                    Plate Number
+                                                </p>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <p class="spe-p details-spe-font">@Model.Ad.Number</p>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+
+
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="featured-box9">
+                    <div class="warp-title-style1">
+                        <p>Description</p>
+                    </div>
+                    <div class="col-md-12 spe-border des-p">
+                        <p>@Model.Ad.Description</p>
+                        @*<p>Audi S5 2017 with two liter turbo petrol engine with perfect condition.  </p>
+                            <p>Car has most of the regular service and repair done by VW Dubai and last few service done outside VW agency.</p>
+                            <p>Car has Panamera sunroof in good working condition but the curtain is not working.The roof has fully tinted with</p>*@
+                    </div>
+
+
+                </div>
+
+                <div class="featured-box9">
+                    <div class="warp-title-style1">
+                        <p>Location Map</p>
+                    </div>
+                    <div class="col-md-12 spe-border ">
+                        <section id="google-map-area">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        @*<div style="height: 400px; width:100%;" id="map"></div>*@
+                                        <iframe src="https://maps.google.com/maps?q=@Model.Ad.Lat,@Model.Ad.Lng&hl=ar&z=15&amp;output=embed"
+                                                width="888" height="350" allowfullscreen="" loading="lazy" style="border: 0; margin-left: -30px; width: 106.5%;"></iframe>
+
+                                        <p class="location-p">Arabian Ranches 3, Dubailand, Dubai</p>
+                                        <button type="button" class="location-btn" name="button"><img src="~/assets/img/50.png" alt=""> Get Directions</button>
+                                        <div class="container">
+
+                                            <!-- Trigger the modal with a button -->
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="reportAdModal" role="dialog">
+                                                <div class="modal-dialog dialog-padding">
+
+                                                    <!-- Modal content-->
+                                                    <div class="modal5-styles">
+                                                        <div class="modal-header-styles2">
+                                                            <h4 class="title-dir">Report This Ad</h4>
+                                                            <button type="button" class="close-style7" id="closeReportAdModal" data-dismiss="modal">&times;</button>
+
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="new-password-style">
+                                                                <select id="reportReason">
+                                                                    <option value="Reason1">Reason1</option>
+                                                                    <option value="Reason2">Reason2</option>
+                                                                    <option value="Reason3">Reason3</option>
+                                                                    <option value="Reason4">Reason4</option>
+                                                                    <option value="Reason5">Reason5</option>
+                                                                    <option value="Reason6">Reason6</option>
+
+                                                                </select>
+                                                                <input class="" type="text" placeholder="Description of reporting" id="reportDescription">
+                                                            </div>
+
+                                                            <div id="reportAdError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                                                <span id="reportAdErrorMessage" style="color:red;"></span>
+                                                            </div>
+
+                                                            <button type="button" class="signin-btn5" name="button" onclick="ReportAd()">Submit</button>
+
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <a class="repo-ad" href="#" data-toggle="modal" data-target="#reportAdModal" onclick="setReportAdId(@Model.Ad.Id)">Rebort AD</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="col-md-4 pad-top">
+                <div class="featured-box10 inline-view">
+                    <div class="order-border1">
+                        <h3 class="section-title19">Contact seller</h3>
+                    </div>
+                    <div class="order-border">
+                        @{
+                            var profileImageSrc = StaticData.SERVER_DOMAIN + Model.User.ProfilePicture;
+
+                        }
+                        <p class=" avatar-seller"><img src="@profileImageSrc" alt="Avatar" class="avatar1"></p>
+                        @{
+                            string getStars(string name)
+                            {
+                                var stars = "";
+                                for (int i = 1; i < name.Length - 1; i++)
+                                {
+                                    stars += "*";
+                                }
+
+                                return stars;
+                            }
+
+                            var name = Model.User.FirstName + " " + Model.User.LastName;
+
+                            if (Model.User.HideInfromation)
+                            {
+                                var firstLetter = name.Substring(0, 1);
+                                var lastLetter = name.Substring(name.Length - 1, 1);
+                                name = firstLetter + getStars(name) + lastLetter;
+                            }
+                        }
+                        <h1 class="section-title11">@name</h1>
+                        <p class="date-title">Member since @Model.User.MemberSince.ToString("MMM dd yyyy") </p>
+
+                        @if (Model.Ad.TypeId != StaticData.Jobs_ID && Model.Ad.TypeId != StaticData.Properties_ID
+                    && Model.Ad.TypeId != StaticData.Services_ID)
+                        {
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                if (Model.IsProcessDone == 0)
+                                {
+                                    <div class="container">
+
+                                        <!-- Trigger the modal with a button -->
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="makeAnOfferModal" role="dialog">
+                                            <div class="modal-dialog dialog-padding">
+
+                                                <!-- Modal content-->
+                                                <div class="modal5-styles">
+                                                    <div class="modal-header-styles2">
+                                                        <h4 class="title-dir">Make an offer</h4>
+                                                        <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="par-style">
+                                                            <p>Asking price by seeler is</p>
+                                                            <p class="offer-p"><sup>AED</sup> @String.Format("{0:n0}", Model.Ad.Price)</p>
+                                                            <p>Enter your price</p>
+                                                        </div>
+                                                        <div class="padding-form">
+                                                            <input type="number" min="1" max="@Model.Ad.Price" class="offer-input-style" id="offerPrice">
+                                                        </div>
+                                                        <div id="makeAnOfferError" style="display:none;margin-left:65px;margin-bottom:10px;">
+                                                            <span id="makeAnOfferErrorMessage" style="color:red;"></span>
+                                                        </div>
+                                                        <button type="button" class="signin-btn5" name="button" onclick="MakeAnOffer('@Model.Ad.Id')">Continue</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button type="button" class="offer-btn" name="button" data-toggle="modal" data-target="#makeAnOfferModal">+ MAKE AN OFFER</button>
+
+                                }
+                                else if (Model.IsProcessDone == 1)
+                                {
+                                    <button disabled type="button" class="offer-btn" name="button">OFFER MAKED</button>
+                                }
+                            }
+                            else
+                            {
+                                <button type="button" class="offer-btn" name="button" onclick="ShowLogin()">+ MAKE AN OFFER</button>
+                            }
+
+
+
+                        }
+                        else if (Model.Ad.TypeId == StaticData.Properties_ID)
+                        {
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="container">
+
+                                    <!-- Trigger the modal with a button -->
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="myModal21" role="dialog">
+                                        <div class="modal-dialog dialog-padding">
+
+                                            <!-- Modal content-->
+                                            <div class="modal5-styles">
+                                                <div class="modal-header-styles2">
+                                                    <h4 class="title-dir">Make an offer</h4>
+                                                    <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="par-style">
+                                                        <p>Asking price by seeler is</p>
+                                                        <p class="offer-p"><sup>AED</sup> 154,000</p>
+                                                        <p>Enter your price</p>
+                                                    </div>
+                                                    <form class="" action="" method="post">
+                                                        <div class="padding-form">
+                                                            <input type="number" min="1" class="offer-input-style" name="" value="">
+                                                        </div>
+                                                        <button type="button" class="signin-btn5" name="button">Continue</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="offer-btn" name="button">+ MAKE AN INQUIRY</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="offer-btn" name="button" onclick="ShowLogin()">+ MAKE AN INQUIRY</button>
+                            }
+
+                        }
+                        else if (Model.Ad.CategoryId == StaticData.JobOpening_ID)
+                        {
+                            if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="container">
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="ApplyForJobModal" role="dialog">
+                                        <div class="modal-dialog dialog-padding">
+
+                                            <!-- Modal content-->
+                                            <div class="modal6-styles">
+                                                <div class="modal-header-styles2">
+                                                    <h4 class="title-dir">Apply for this job</h4>
+                                                    <p class="par-dir">@Model.Ad.Title</p>
+                                                    <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <h6 class="par-dir2">Lets start</h6>
+                                                    <p class="par-dir1">Now please add any missing details about yourself to complete the application</p>
+                                                    <div class="col-md-12">
+
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Default Language</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select asp-for="User.DefaultLanguage" class="popup-line-input" id="defaultLanguage">
+                                                                    <option value="UAE">All UAE</option>
+                                                                    <option value="Ad">Abu Dhabi</option>
+                                                                    <option value="Aa">Al Ain</option>
+                                                                    <option value="Du">Dubai</option>
+                                                                    <option value="Fu">Fujairah</option>
+                                                                    <option value="Rk">Ras Al Khaimah</option>
+                                                                    <option value="Sh">Sharjah</option>
+                                                                    <option value="Uq">Um Al Quwain</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-12">
+
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Phone Number</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" class="popup-line-input" asp-for="User.MobileNumber"
+                                                                       id="mobileNumber">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="featured-box4">
+                                                            <p><a class="text-style3" href="#"><label class="add-your-cv" for="addcv" id="cvText">ADD YOUR CV</label></a></p>
+                                                            <i class=" add-cv-style"></i>
+                                                            <i class="lni lni-plus add-cv-icon"></i>
+                                                            <input type="file" class="line-input-style4" id="addcv" hidden="" onchange="OnCvChanged()">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Date of birth</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="date" asp-for="User.DOB" class="popup-line-date" min="1950-01-01" max="2021-12-31" id="DOB">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Cover Note</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <textarea name="name" asp-for="User.CoverNote" rows="1" class="popup-line-input" cols="500" id="coverNote"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Gender</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select asp-for="User.Gender" class="popup-line-input" id="gender">
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Nationality</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select asp-for="User.Nationality" class="popup-line-input" id="nationality">
+                                                                    <option value=""></option>
+                                                                    <option value="Male">Male</option>
+                                                                    <option value="Female">Female</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Education Level</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="popup-line-input" id="educationLevel">
+                                                                    <option value=""></option>
+                                                                    <option value="Education Level1">Education Level1</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Current Company</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" class="popup-line-input" asp-for="User.CurrentCompany" id="currentCompany">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Current Position</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <input type="text" class="popup-line-input" value="@Model.User.CurrentPosition" id="currentPosition">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Work Experience</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="popup-line-input" id="workExperience">
+                                                                    <option value=""></option>
+                                                                    <option value="Work Experience1">Work Experience1</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Commitment</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="popup-line-input" id="commitment">
+                                                                    <option value="commitment1"></option>
+                                                                    <option value="commitment2">Commitment</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Notice Period</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="popup-line-input" id="noticePeriod">
+                                                                    <option value=""></option>
+                                                                    <option value="Notice Period1">Notice Period</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Visa Status</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select class="popup-line-input" id="visaStatus">
+                                                                    <option value=""></option>
+                                                                    <option value="Visa Status1">Visa Status</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-form">
+                                                            <div class="col-md-4">
+                                                                <p class="par-dir1">Career Level</p>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <select asp-for="User.CareerLevel" class="popup-line-input" id="careerLevel">
+                                                                    <option value=""></option>
+                                                                    <option value="careerLevel1">careerLevel1</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="padding-checkbox">
+                                                            <label class="cont2">
+                                                                <p class="text-style3">
+                                                                    By submitting this ad,
+                                                                    I agree on <a href="#"> {Terms & Conditions}</a> and <a href="#"> {Privacy Policy}</a>
+                                                                </p>
+                                                                <input type="checkbox">
+                                                                <span class="checkmark3"></span>
+                                                            </label>
+                                                            <label class="cont3">
+                                                                <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-6">
+                                                            <button type="button" class="signin-btn6" name="button" onclick="ApplyForJob('@Model.Ad.Id')">Submit</button>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <button type="button" class="signin-btn7" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="offer-btn" name="button" data-toggle="modal" data-target="#ApplyForJobModal">+ APPLY FOR THIS JOB</button>
+
+                            }
+                            else
+                            {
+                                <button type="button" class="offer-btn" name="button" onclick="ShowLogin()">+ APPLY FOR THIS JOB</button>
+                            }
+
+
+                        }
+
+                    </div>
+
+                    <button type="button" class="change-btn15 map-point-sm" name="button" data-show=".darwin">
+                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
+                    </button>
+                    <button class="change-btn28" id="Div2"><label class="label-btn-28">@Model.User.MobileNumber</label></button>
+
+
+                    <button type="button" class="change-btn15" name="button" onclick="switchVisible();" id="Button1">
+                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
+                    </button>
+
+
+
+                </div>
+
+                @if (Model.SimilarAds.Count != 0)
+                {
+                    <h4 class="section-title8">You might also like these listings</h4>
+
+                    @foreach (var item in Model.SimilarAds)
+                    {
+                        var formatedPrice = "";
+
+                        @if (item.TypeId != StaticData.Jobs_ID && item.TypeId != StaticData.Services_ID &&
+                    item.CategoryId != StaticData.ResidentialForRent_ID
+&& item.CategoryId != StaticData.CommercialForRent_ID)
+                        {
+                            formatedPrice = "AED " + String.Format("{0:n0}", Model.Ad.Price);
+                        }
+                        else if (item.CategoryId == StaticData.ResidentialForRent_ID
+                          || item.CategoryId == StaticData.CommercialForRent_ID)
+                        {
+                            formatedPrice = "AED " + String.Format("{0:n0}", Model.Ad.AnnualRent);
+                        }
+
+                        else if (item.CategoryId == StaticData.JobWanted_ID)
+                        {
+                            formatedPrice = "AED " + String.Format("{0:n0}", Model.Ad.ExpectedMonthlySalary);
+                        }
+                        <div class="featured-box10">
+                            <div class="col-md-5">
+                                @if (item.TypeId != StaticData.Jobs_ID && item.TypeId != StaticData.Numbers_ID)
+                                {
+                                    var src = StaticData.SERVER_DOMAIN + item.Pictures[0].ImageURL;
+                                    <figure>
+                                        <a href="#"><img style="height:115px;" class="img-fluid like-img" src="@src" alt=""></a>
+                                    </figure>
+                                }
+
+                            </div>
+                            <div class="col-md-7">
+
+                                <p class="like-p like-img"><a href="">@item.Title</a></p>
+                                <p>@item.En_Location</p>
+                                <h1 class="section-title15 payment-price2">@formatedPrice</h1>
+                                <div class="post-date">
+                                    <p>@item.PostDate.ToString("dd MMM yyyy"), @item.PostDate.ToString("HH:mm")</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="darwin hide">
+
+    <div class="container">
+
+
+
+        <div class="row">
+            <div class="chatbox chatbox22 chatbox--tray">
+                <div class="chatbox__title">
+                    <img src="https://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <h5><a href="">Leave a message</a></h5>
+                    <i class="fa fa-info-circle" aria-hidden="true"></i>
+                    <button class="chatbox__title__tray">
+                        <span></span>
+                    </button>
+                    <button class="chatbox__title__close">
+                        <span>
+                            <svg viewBox="0 0 12 12" width="12px" height="12px">
+                                <line stroke="#FFFFFF" x1="11.75" y1="0.25" x2="0.25" y2="11.75"></line>
+                                <line stroke="#FFFFFF" x1="11.75" y1="11.75" x2="0.25" y2="0.25"></line>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                <div class="chatbox__body">
+
+                    <div class="chatbox__body__message chatbox__body__message--left">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </li>
+                            </ul>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                    </div>
+                    <p class="check-seen">Seen</p>
+                    <div class="chatbox__body__message chatbox__body__message--right">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li class="replies">
+                                    <p>When you're backed against the wall, break the god damn thing down.<span>8:21</span></p>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="chatbox__body__message chatbox__body__message--left">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </li>
+                            </ul>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                    </div>
+                    <p class="check-seen">Seen</p>
+                    <div class="chatbox__body__message chatbox__body__message--right">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li class="replies">
+                                    <p>When you're backed against the wall, break the god damn thing down.<span>8:21</span></p>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <div class="chatbox__body__message chatbox__body__message--left">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </li>
+                            </ul>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                    </div>
+                    <p class="check-seen">Seen</p>
+                    <div class="chatbox__body__message chatbox__body__message--right">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li class="replies">
+                                    <p>When you're backed against the wall, break the god damn thing down.<span>8:21</span></p>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                    <div class="chatbox__body__message chatbox__body__message--left">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. </li>
+                            </ul>
+                            <div class="clearfix"></div>
+
+                        </div>
+
+                    </div>
+                    <p class="check-seen">Seen</p>
+                    <div class="chatbox__body__message chatbox__body__message--right">
+
+                        <div class="chatbox_timing">
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <div class="ul_section_full">
+                            <ul class="ul_msg">
+                                <li class="replies">
+                                    <p>When you're backed against the wall, break the god damn thing down.<span>8:21</span></p>
+                                </li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="panel-footer">
+
+                    <div class="input-group">
+                        <i class="fa fa-paperclip chat-file" aria-hidden="true"></i>
+                        <i class=" chat-file1 fa fa-map-marker" aria-hidden="true"></i>
+                        <input id="btn-input" type="text" class="chat-input" placeholder="Type your message here..." />
+
+                        <span class="btn-chat">
+                            <button class="btn bt_bg btn-sm"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAL17i1jhJAq_5nIi4fx4DLvcCSvDgiIuM&callback=initMap&libraries=&v=weekly"
+            async></script>-->
+    @*<link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>*@
+
+    <script>
+
+        $("#mainHeaderNav").removeClass("scrolling-navbar");
+
+        const wrapper = document.getElementsByClassName('wrapper');
+        const button = document.getElementById('click');
+        const button2 = document.getElementById('click2');
+
+        button.addEventListener('click', clicked);
+        button2.addEventListener('click', clicked2);
+        let scroll = 0;
+
+        wrapper[0].addEventListener("scroll", function (event) {
+            scroll = wrapper[0].scrollLeft;
+        });
+
+        function clicked() {
+            scroll = scroll += 500;
+            wrapper[0].scrollTo({
+                left: scroll,
+                behavior: 'smooth'
+            });
+            scroll = wrapper[0].scrollLeft + 50;
+            console.log(wrapper[0].scrollLeft);
+        }
+
+        function clicked2() {
+            scroll = scroll -= 500;
+            wrapper[0].scrollTo({
+                left: scroll,
+                behavior: 'smooth'
+            });
+            scroll = wrapper[0].scrollLeft + 50;
+            console.log(wrapper[0].scrollLeft);
+        }
+
+        $(document).ready(function () {
+            $('#no-limit .select2').select2({
+                multiple: "multiple",
+            });
+
+            $('#limit-2 .select2').select2({
+                multiple: "multiple",
+                maximumSelectionLength: 2,
+            });
+
+            $('#limit-2-custom-message .select2').select2({
+                multiple: "multiple",
+                maximumSelectionLength: 2,
+                language: {
+                    maximumSelected: (args) => args.maximum + ' 件しか選べないよ！'
+                }
+            });
+        });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.js"></script>
+    <script>
+        function CopyLink() {
+            /* Get the text field */
+            var copyText = document.getElementById("CurrentUrl");
+
+            /* Select the text field */
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+            /* Copy the text inside the text field */
+            navigator.clipboard.writeText(copyText.value);
+            document.getElementById("closeCopyModal").click();
+        }
+
+        $('#myCarousel').carousel({
+            interval: false
+        });
+        $('#carousel-thumbs').carousel({
+            interval: false
+        });
+
+        // handles the carousel thumbnails
+        // https://stackoverflow.com/questions/25752187/bootstrap-carousel-with-thumbnails-multiple-carousel
+        $('[id^=carousel-selector-]').click(function () {
+            var id_selector = $(this).attr('id');
+            var id = parseInt(id_selector.substr(id_selector.lastIndexOf('-') + 1));
+            $('#myCarousel').carousel(id);
+        });
+        // Only display 3 items in nav on mobile.
+        if ($(window).width() < 575) {
+            $('#carousel-thumbs .row div:nth-child(4)').each(function () {
+                var rowBoundary = $(this);
+                $('<div class="row mx-0">').insertAfter(rowBoundary.parent()).append(rowBoundary.nextAll().addBack());
+            });
+            $('#carousel-thumbs .carousel-item .row:nth-child(even)').each(function () {
+                var boundary = $(this);
+                $('<div class="carousel-item">').insertAfter(boundary.parent()).append(boundary.nextAll().addBack());
+            });
+        }
+        // Hide slide arrows if too few items.
+        if ($('#carousel-thumbs .carousel-item').length < 2) {
+            $('#carousel-thumbs [class^=carousel-control-]').remove();
+            $('.machine-carousel-container #carousel-thumbs').css('padding', '0 5px');
+        }
+        // when the carousel slides, auto update
+        $('#myCarousel').on('slide.bs.carousel', function (e) {
+            var id = parseInt($(e.relatedTarget).attr('data-slide-number'));
+            $('[id^=carousel-selector-]').removeClass('selected');
+            $('[id=carousel-selector-' + id + ']').addClass('selected');
+        });
+        // when user swipes, go next or previous
+        $('#myCarousel').swipe({
+            fallbackToMouseEvents: true,
+            swipeLeft: function (e) {
+                $('#myCarousel').carousel('next');
+            },
+            swipeRight: function (e) {
+                $('#myCarousel').carousel('prev');
+            },
+            allowPageScroll: 'vertical',
+            preventDefaultEvents: false,
+            threshold: 75
+        });
+        /*
+        $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+        });
+        */
+
+        $('#myCarousel .carousel-item img').on('click', function (e) {
+            var src = $(e.target).attr('data-remote');
+            if (src) $(this).ekkoLightbox();
+        });
+    </script>
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                //fill share modal
+                var currentUrl = window.location.href;
+                $("#CurrentUrl").val(currentUrl);
+
+
+                var $chatbox = $('.chatbox'),
+                    $chatboxTitle = $('.chatbox__title'),
+                    $chatboxTitleClose = $('.chatbox__title__close'),
+                    $chatboxCredentials = $('.chatbox__credentials');
+                $chatboxTitle.on('click', function () {
+                    $chatbox.toggleClass('chatbox--tray');
+                });
+                $chatboxTitleClose.on('click', function (e) {
+                    e.stopPropagation();
+                    $chatbox.addClass('chatbox--closed');
+                });
+                $chatbox.on('transitionend', function () {
+                    if ($chatbox.hasClass('chatbox--closed')) $chatbox.remove();
+                });
+
+            });
+        })(jQuery);
+    </script>
+
+    <script>
+        $(document).on('click', '.map-point-sm', function () {
+            var show = $(this).data('show');
+            $(show).removeClass("hide").siblings();
+        });
+    </script>
+
+    <script>
+        @*// Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            const uluru = { lat: @Model.Ad.Lat, lng: @Model.Ad.Lng };
+            // The map, centered at Uluru
+            const map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 4,
+                center: uluru,
+            });
+            // The marker, positioned at Uluru
+            const marker = new google.maps.Marker({
+                position: uluru,
+                map: map,
+            });
+        }*@
+
+        function MakeAnOffer(adId) {
+            var type = getUrlVars()["typeId"];
+            const data = {
+                Price: $('#offerPrice').val(),
+                AdId: adId,
+                TypeId: (type == null || type == undefined) ? 1 : type
+            };
+
+            $.ajax({
+                url: "/Ads/MakeAnOffer",
+                method: "POST",
+                data: JSON.stringify(data),
+                dataType: 'json',
+                contentType: "application/json",
+                success: function (response) {
+                    if (!response.isSuccess) {
+                        $("#makeAnOfferError").css("display", "block");
+                        $("#makeAnOfferErrorMessage").text(response.message);
+                    } else {
+                        window.location.reload();
+                    }
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+
+
+
+        function ApplyForJob(adId) {
+
+            var formData = new FormData();
+
+            formData.append('defaultLanguage', $("#defaultLanguage").val());
+            formData.append('phoneNumber', $("#mobileNumber").val());
+            formData.append('DOB', $("#DOB").val());
+            formData.append('CvFile', $("#addcv")[0].files[0]);
+            formData.append('coverNote', $("#coverNote").val());
+            formData.append('gender', $("#gender").val());
+            formData.append('nationality', $("#nationality").val());
+            formData.append('educationLevel', $("#educationLevel").val());
+            formData.append('currentCompany', $("#currentCompany").val());
+            formData.append('currentPosition', $("#currentPosition").val());
+            formData.append('workExperience', $("#workExperience").val());
+            formData.append('commitment', $("#commitment").val());
+            formData.append('noticePeriod', $("#noticePeriod").val());
+            formData.append('visaStatus', $("#visaStatus").val());
+            formData.append('careerLevel', $("#careerLevel").val());
+            formData.append('adId', adId);
+
+
+            $.ajax({
+                type: "POST",
+                enctype: 'multipart/form-data',
+                url: "/Ads/ApplyForJob",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+                    if (data.isSuccess) {
+                        window.location.reload();
+                    }
+                    //alert(data.message);
+                },
+                error: function (e) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+
+        }
+
+        function OnCvChanged() {
+            $("#cvText").text("CHANGE YOUR CV");
+        }
+
+    </script>
+
+    <script>
+        function switchVisible() {
+            if (document.getElementById('Button1')) {
+
+                if (document.getElementById('Button1').style.display == 'none') {
+                    document.getElementById('Button1').style.display = 'block';
+                    document.getElementById('Div2').style.display = 'none';
+                }
+                else {
+                    document.getElementById('Button1').style.display = 'none';
+                    document.getElementById('Div2').style.display = 'inherit';
+                }
+            }
+            if (document.getElementById('Button2')) {
+
+                if (document.getElementById('Button2').style.display == 'none') {
+                    document.getElementById('Button2').style.display = 'block';
+                    document.getElementById('Div3').style.display = 'none';
+                }
+                else {
+                    document.getElementById('Button2').style.display = 'none';
+                    document.getElementById('Div3').style.display = 'inline-block';
+                }
+            }
+        }
+
+
+
+
+        function getUrlVars() {
+            var vars = [], hash;
+            var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+            for (var i = 0; i < hashes.length; i++) {
+                hash = hashes[i].split('=');
+                vars.push(hash[0]);
+                vars[hash[0]] = hash[1];
+            }
+            return vars;
+        }
+    </script>
+}
+
+
+
+

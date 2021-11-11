@@ -1,0 +1,40 @@
+﻿@model insouq.Shared.DTOS.UserDTOS.AddUserDTO
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal3" role="dialog">
+        <div class="modal-dialog dialog-padding">
+            <!-- Modal content-->
+            <div class="modal-styles">
+                <div class="modal-header-styles modal-logo">
+                    <img src="assets/img/81.png" alt="">
+                    <button type="button" class="close-style" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    @*<form class="" action="" method="post">*@
+                    <input class="signin-input" asp-for="FirstName" placeholder="First Name" id="FirstName">
+                    <input class="signin-input" asp-for="MobileNumber" placeholder="Mobile Number" id="MobileNumber">
+                    <div class="signin-style">
+                        <input class="signin-email" type="text" asp-for="Email" placeholder="Your Email" id="Email">
+                        <i class="fa fa-check check-icon3" aria-hidden="true"></i>
+                    </div>
+                    <input class="signin-input" type="password" asp-for="Password" placeholder="Your password" id="Password">
+                    <i class="fa fa-eye-slash password-icon1" aria-hidden="true"></i>
+                    @*<button type="button" class="signin-btn" onclick="window.location.href='home.html'" name="button">Sign UP</button>*@
+                    @*<button type="button" class="signin-btn" onclick="Register()" name="button">Sign UP</button>*@
+                    <button type="button" class="signin-btn" name="button" onclick="Register()">Sign UP</button>
+                    <x>OR</x>
+                    <p class="p-style">Sign up with</p>
+                    <button type="button" class="facebook-btn" name="button"><img src="assets/img/20.png" alt=""> facebook</button>
+                    <button type="button" class="gmail-btn" name="button"><img src="assets/img/21.png" alt=""> gmail</button>
+                    <label class="cont1">
+                        <p class="p2-style">By signing in, I agree on their <a href="ourterms.html"> Terms and Conditions </a>and <a href="privacy.html"> Privacy Policy</a></p>
+                        <input type="checkbox">
+                        <span class="checkmark1"></span>
+                    </label>
+                    @*</form>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

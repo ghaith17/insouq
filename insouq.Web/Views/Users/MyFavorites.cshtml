@@ -1,0 +1,53 @@
+﻿<div class="notification-style" >
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">My Favorite</h1>
+                <ol class="breadcrumb-style">
+                    <li><a asp-controller="Home" asp-action="Index"  class="breadcrumb-color">Home > </a></li>
+                    <li class="breadcrumb-color"> My Favorite</li>
+                </ol>
+
+            </div>
+            <div class="col-md-12">
+                <ul class="social-network5 social-circle">
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(1)" data-toggle="tab" class="icocar"><i class="fa fa-car"></i></a></li>
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(2)" data-toggle="tab" class="icoTwitter"><i class="fa fa-home"></i></a></li>
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(3)" data-toggle="tab" class="icoGoogle"><i class="fa fa-user"></i></a></li>
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(4)" data-toggle="tab" class="icoLinkedin"><i class="fa fa-wrench"></i></a></li>
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(5)" data-toggle="tab" class="icobag"><i class="fa fa-briefcase"></i></a></li>
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(6)" data-toggle="tab" class="icopa"><i class="fa fa-list"></i></a></li>
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(7)" data-toggle="tab" class="icope"><i class="fa fa-ellipsis-h"></i></a></li>
+                    <li><a href="#myFav" onclick="GetMyFavoriteAds(8)" data-toggle="tab" class="icoya"><i class="fa fa-square"></i></a></li>
+
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active " id="myFav">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function GetMyFavoriteAds(typeId) {
+            console.log("asdasdsad");
+            $.ajax({
+                url: `/Ads/GetMyFavoriteAds?typeId=${typeId}`,
+                method: "get",
+                success: function (response) {
+                    $("#myFav").empty();
+                    $("#myFav").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+}

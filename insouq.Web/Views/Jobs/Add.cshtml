@@ -1,0 +1,572 @@
+﻿@using insouq.Shared.Utility
+@model insouq.Shared.DTOS.JobAdDTO
+
+<div class="notification-style">
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">Post an Ad</h1>
+                <ol class="breadcrumb-style">
+                    <li><a href="home.html" class="breadcrumb-color">Home > </a></li>
+                    <li class="breadcrumb-color"> Post an Ad</li>
+                </ol>
+
+            </div>
+            <div class="form-width">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-7">
+                    <p class="post-p3">Let’s start with the title</p>
+                    <p>Try to have an informative title that’s to be point and not very long</p>
+
+                    <form id="addForm" asp-action="Add" method="post" enctype="multipart/form-data">
+                        @Html.HiddenFor(m => m.CategoryId)
+                        @Html.HiddenFor(m => m.Lng, new { id = "lng" })
+                        @Html.HiddenFor(m => m.Lat, new { id = "lat" })
+
+                        <div class="padding-form">
+                            <input type="text" class="line-input-style17" maxlength="40" required asp-for="Title" placeholder="Senior Product Designer">
+                            <Small>Recommended 40 characters</Small>
+                            <p class="post-p4">Looks good, Now please add more details about this job</p>
+                        </div>
+
+                        <div class="padding-form">
+                            <select required asp-for="JobType" class="line-input-style15" id="jobTypeDL">
+                                @*onchange="onJobTypeChanged()"*@
+                                <option value="">Job Type</option>
+                            </select>
+                        </div>
+
+                        <div id="otherJobType" style="display:none">
+
+                        </div>
+                        <div class="padding-form">
+                            <select required asp-for="Location" class="line-input-style15" id="locationDL">
+                                <option value="">Your Location</option>
+                            </select>
+                        </div>
+
+                        <div class="padding-form">
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                            <br>
+                            <span>0/400 words</span>
+                        </div>
+
+                        <div class="padding-form6 padding-top">
+                            <label class="change-color">Phone Number</label>
+                            <input placeholder="Phone Number" required type="number" class="line-input-style15" asp-for="PhoneNumber" value="@ViewBag.phoneNumber">
+                        </div>
+
+                        @if (Model.CategoryId == StaticData.JobOpening_ID)
+                        {
+                            <div class="padding-form padding-top">
+                                <select required asp-for="CareerLevel" class="line-input-style15" id="careerLevelDL">
+                                    <option value="">Carrer Level</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="EmploymentType" class="line-input-style15" id="employmentTypeDL">
+                                    <option value="">Employment Type</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="MinWorkExperience" class="line-input-style15" id="minWorkExperienceDL">
+                                    <option value="">Minimum Work Experience</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="MinEducationLevel" class="line-input-style15" id="minEducationLevelDL">
+                                    <option value="">Minimum Education Level</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <input placeholder="Company Name" required type="text" class="line-input-style15" asp-for="CompanyName">
+                            </div>
+
+                        }
+
+                        else if (Model.CategoryId == StaticData.JobWanted_ID)
+                        {
+
+                            <div class="featured-boxCv" style="margin-top:20px;">
+                                <p><a class="text-style3" href="#"><label style="top:715px;" class="add-your-cv1" for="addcv" id="cvText">ADD YOUR CV</label></a></p>
+                                <i id="cvCircle" style="top:710px;" class="add-cv-style1"></i>
+                                <i id="cvPlus" style="top:710px;" class="lni lni-plus add-cv-icon1"></i>
+                                <input class="line-input-style4" asp-for="CvFile" id="addcv" hidden onchange="OnCvChanged()">
+                            </div>
+
+                            <div class="padding-form padding-top">
+                                <select required asp-for="Gender" class="line-input-style15">
+                                    <option value="">Gender</option>
+                                    <option value="Male - ذكر">Male</option>
+                                    <option value="Female - انثى">Female</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="Nationality" class="line-input-style15" id="nationalityDL">
+                                    <option value="">Nationality</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="CurrentLocation" class="line-input-style15" id="currentLocationDL">
+                                    <option value="">Current Location</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="EducationLevel" class="line-input-style15" id="educationLevelDL">
+                                    <option value="">Education Level</option>
+                                </select>
+                            </div>
+
+                            @*<div class="padding-form">
+                <label class="change-color">Current Company</label>
+                <input type="text" class="line-input-style8" asp-for="CurrentCompany">
+            </div>*@
+
+                            <div class="padding-form">
+                                <input placeholder="Current Position" required type="text" class="line-input-style15" asp-for="CurrentPosition">
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="WorkExperience" class="line-input-style15" id="workExperienceDL">
+                                    <option value="">Work Experience</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="Commitment" class="line-input-style15" id="commitmentDL">
+                                    <option value="">Commitment</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="NoticePeriod" class="line-input-style15" id="noticePeriodDL">
+                                    <option value="">Notice Period</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="VisaStatus" class="line-input-style15" id="visaStatusDL">
+                                    <option value="">Visa Status</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="CareerLevel" class="line-input-style15" id="careerLevelDL">
+                                    <option value="">Carrer Level</option>
+                                </select>
+                            </div>
+
+                            <div class="padding-form">
+                                <select required asp-for="ExpectedMonthlySalary" class="line-input-style15" id="monthlySalaryDL">
+                                    <option value="">Expected Monthly Salary (AED)</option>
+                                </select>
+                            </div>
+                        }
+
+
+                    <div class="padding-form">
+                        <button type="button" class="change-btn2" name="button" onclick="GetLocation()">Detect Location</button>
+                        <div id="detectLocationError" style="margin-top:10px; display:none;">
+                            <span id="detectLocationErrorMessage" style="color:red;"></span>
+                        </div>
+                    </div>
+
+                        <label class="cont2">
+                            <p class="text-style3">
+                                By submitting this ad, I agree on <a href="#"> {Terms & Conditions}</a> and
+                                <a href="#">{Privacy Policy}</a>
+                            </p>
+                            <input type="checkbox">
+                            <span class="checkmark3" required></span>
+                        </label>
+
+
+                        <label class="">
+                            <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+
+                        </label>
+
+                        <div class="padding-form padding-top">
+                            @*<button type="button" class="change-btn3" name="button" onclick="window.location.href='adpackagesubscriptions0.html'">CONTINUE</button>*@
+                            <button type="button" class="change-btn3" name="button" onclick="onFormSubmit()">CONTINUE</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-2">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+
+        function OnCvChanged() {
+            $("#cvText").text("CHANGE YOUR CV");
+        }
+
+        var jobTypeDLloaded = false;
+        $("#jobTypeDL").on("click", function () {
+            if (jobTypeDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllJobType",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#jobTypeDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    $("#jobTypeDL").append(`<option id="othersJobType" value='others'>others</option>`);
+
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            jobTypeDLloaded = true;
+        });
+
+        $("#jobTypeDL").on("change", function () {
+
+            if ($("#jobTypeDL").val().toLowerCase() == "others") {
+                $("#otherJobType").css("display", "block");
+                $("#otherJobType").html(`<div class='padding-form'>
+                                    <input placeholder="Other, please type here" required class="line-input-style15" id="OtherJobType" name="OtherJobType">
+                                </div>`);
+
+                $("#cvText").css("top", "765px");
+                $("#cvCircle").css("top", "760px");
+                $("#cvPlus").css("top", "760px");
+
+            } else {
+                $("#otherJobType").html("");
+
+                $("#cvText").css("top", "715px");
+                $("#cvCircle").css("top", "710px");
+                $("#cvPlus").css("top", "710px");
+            }
+
+        });
+
+        var careerLevelDLloaded = false;
+        $("#careerLevelDL").on("click", function () {
+            if (careerLevelDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllCareerLevel",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#careerLevelDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                    $("#jobTypeDL").append(`<option id="othersJobType" value='others'>others</option>`);
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            careerLevelDLloaded = true;
+        });
+
+        var employmentTypeDLloaded = false;
+        $("#employmentTypeDL").on("click", function () {
+            if (employmentTypeDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllEmploymentType",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#employmentTypeDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            employmentTypeDLloaded = true;
+        });
+
+        var minWorkExperienceDLloaded = false;
+        $("#minWorkExperienceDL").on("click", function () {
+            if (minWorkExperienceDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllWorkExperience",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#minWorkExperienceDL").append(`<option value='${item.en_Text} ^ ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            minWorkExperienceDLloaded = true;
+        });
+
+        var minEducationLevelDLloaded = false;
+        $("#minEducationLevelDL").on("click", function () {
+            if (minEducationLevelDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllEducationLevel",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#minEducationLevelDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            minEducationLevelDLloaded = true;
+        });
+
+        var educationLevelDLloaded = false;
+        $("#educationLevelDL").on("click", function () {
+            if (educationLevelDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllEducationLevel",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#educationLevelDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            educationLevelDLloaded = true;
+        });
+
+        var monthlySalaryDLloaded = false;
+        $("#monthlySalaryDL").on("click", function () {
+            if (monthlySalaryDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllMonthlySalary",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#monthlySalaryDL").append(`<option value='${item.value}'>${item.value}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            monthlySalaryDLloaded = true;
+        });
+
+        var companySizeDLloaded = false;
+        $("#companySizeDL").on("click", function () {
+            if (companySizeDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllCompanySize",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#companySizeDL").append(`<option value='${item.value}'>${item.value}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            companySizeDLloaded = true;
+        });
+
+        var companyIndustryDLloaded = false;
+        $("#companyIndustryDL").on("click", function () {
+            if (companyIndustryDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllCompanyIndustry",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#companyIndustryDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            companyIndustryDLloaded = true;
+        });
+
+        var locationDLloaded = false;
+        $("#locationDL").on("click", function () {
+            if (locationDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllLocation",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#locationDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            locationDLloaded = true;
+        });
+
+        var nationalityDLloaded = false;
+        $("#nationalityDL").on("click", function () {
+            if (nationalityDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllNationality",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#nationalityDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            nationalityDLloaded = true;
+        });
+
+        var currentLocationDLloaded = false;
+        $("#currentLocationDL").on("click", function () {
+            if (currentLocationDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllLocation",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#currentLocationDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            currentLocationDLloaded = true;
+        });
+
+
+        var workExperienceDLloaded = false;
+        $("#workExperienceDL").on("click", function () {
+            if (workExperienceDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllWorkExperience",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#workExperienceDL").append(`<option value='${item.en_Text} ^ ${item.ar_Text}'>${item.en_Text}</option>`);
+                    });
+
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            workExperienceDLloaded = true;
+        });
+
+
+        var commitmentDLloaded = false;
+        $("#commitmentDL").on("click", function () {
+            if (commitmentDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllCommitment",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#commitmentDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            commitmentDLloaded = true;
+        });
+
+        var noticePeriodDLloaded = false;
+        $("#noticePeriodDL").on("click", function () {
+            if (noticePeriodDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllNoticePeriod",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#noticePeriodDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            noticePeriodDLloaded = true;
+        });
+
+        var visaStatusDLloaded = false;
+        $("#visaStatusDL").on("click", function () {
+            if (visaStatusDLloaded)
+                return;
+            $.ajax({
+                url: "/DropDowns/GetAllVisaStatus",
+                method: "GET",
+                success: function (response) {
+                    $.each(response.items, function (i, item) {
+                        $("#visaStatusDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+
+                    });
+                },
+                error: function (error) {
+                    alert(error.message);
+                }
+            });
+            visaStatusDLloaded = true;
+        });
+
+
+    </script>
+}

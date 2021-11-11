@@ -1,0 +1,187 @@
+﻿<div class="container">
+
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal10" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal5-styles">
+                <div class="modal-header-styles2">
+                    <h4 class="title-dir">Delete Ad Confirmation</h4>
+                    <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="par-style">
+                        <p>Your ad has been deleted, we would love to know the reason for deleting your ad.</p>
+                    </div>
+
+                        <p class="tex-pad4">
+                            <input type="radio" id="30days" name="days" value="30days">
+                            <label for="30days" class="change-color2">I sold it on Insouq</label>
+
+                        </p>
+                        <p class="tex-pad4">
+                            <input type="radio" id="30days" name="days" value="30days">
+                            <label for="30days" class="change-color2">I sold it somewhere else</label>
+
+                        </p>
+                        <p class="tex-pad4">
+                            <input type="radio" id="30days" name="days" value="30days">
+                            <label for="30days" class="change-color2">I am no longer interested to sell it</label>
+
+                        </p>
+                        <p class="tex-pad4">
+                            <input type="radio" id="30days" name="days" value="30days">
+                            <label for="30days" class="change-color2">No specific reason</label>
+
+                        </p>
+
+                </div>
+
+                <button type="button" class="signin-btn2" name="button">Continue</button>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="container">
+
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="myModal13" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal5-styles">
+                <div class="modal-header-styles2">
+                    <h4 class="title-dir">Edit Ad Confirmation</h4>
+                    <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+
+                </div>
+                <div class="modal-body">
+                    <div class="par-style">
+                        <p>Your ad is under review, we will notify you when the ad is active</p>
+                    </div>
+                    <form class="" action="" method="post">
+                        <div class="padding-form">
+                            <label class="change-color-label">Ad Title</label>
+                            <input type="text" class="noline-input-style" name="" value="" placeholder="Ad Title">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color-label">Type</label>
+                            <input type="text" class="noline-input-style" name="" value="" placeholder="Ad Type">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color-label">Category </label>
+                            <input type="text" class="noline-input-style" name="" value="" placeholder="Ad Category">
+                        </div>
+                        <div class="padding-form">
+                            <label class="change-color-label">Ad Reference</label>
+                            <input type="text" class="noline-input-style" name="" value="" placeholder="Ad Reference">
+                        </div>
+
+                        <button type="button" class="signin-btn5" name="button">Continue</button>
+
+
+                    </form>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="notification-style" >
+
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-12">
+
+                <h1 class="section-title5">My Ads List</h1>
+                <ol class="breadcrumb-style">
+                    <li><a asp-controller="Home" asp-action="Index"  class="breadcrumb-color">Home > </a></li>
+                    <li><a asp-controller="Users" asp-action="MyProfile"  class="breadcrumb-color"> My Profile > </a></li>
+                    <li class="breadcrumb-color"> My Ads</li>
+                </ol>
+
+            </div>
+            <div class="col-md-12">
+                <ul class="social-network social-circle">
+                    <li><a href="#ads" onclick="GetMyAds(1)" data-toggle="tab" class="icocar"><i class="fa fa-car"></i></a></li>
+                    <li><a href="#ads" onclick="GetMyAds(2)" data-toggle="tab" class="icoTwitter"><i class="fa fa-home"></i></a></li>
+                    <li><a href="#ads" onclick="GetMyAds(3)" data-toggle="tab" class="icoGoogle"><i class="fa fa-user"></i></a></li>
+                    <li><a href="#ads" onclick="GetMyAds(4)" data-toggle="tab" class="icoLinkedin"><i class="fa fa-wrench"></i></a></li>
+                    <li><a href="#ads" onclick="GetMyAds(5)" data-toggle="tab" class="icobag"><i class="fa fa-briefcase"></i></a></li>
+                    <li><a href="#ads" onclick="GetMyAds(6)" data-toggle="tab" class="icopa"><i class="fa fa-list"></i></a></li>
+                    <li><a href="#ads" onclick="GetMyAds(7)" data-toggle="tab" class="icope"><i class="fa fa-ellipsis-h"></i></a></li>
+                    <li><a href="#ads" onclick="GetMyAds(8)" data-toggle="tab" class="icoya"><i class="fa fa-square"></i></a></li>
+
+                </ul>
+
+                <div class="tab-content clearfix">
+                    <div class="tab-pane active " id="ads">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function GetMyAds(typeId) {
+            $.ajax({
+                url: `/Ads/GetMyAds?typeId=${typeId}`,
+                method: "get",
+                success: function (response) {
+                    $("#ads").empty();
+                    $("#ads").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+        function DeleteAd(adId) {
+
+            var result = confirm("Are you sure you want to delete this ad ?");
+            if (result) {
+                var data = {
+                    adId: adId
+                };
+
+                $.ajax({
+                    url: `/Ads/Delete`,
+                    method: "POST",
+                    data: JSON.stringify(data),
+                    dataType: 'json',
+                    contentType: "application/json",
+                    success: function (response) {
+                        if (!response.isSuccess) {
+                            alert(response.message);
+                        } else {
+                            window.location.reload();
+                        }
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                        console.log(error);
+                    }
+                });
+            }
+        }
+    </script>
+}

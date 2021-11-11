@@ -1,0 +1,131 @@
+﻿@using insouq.Shared.Utility
+@model insouq.Web.ViewModels.LiveAdsVM
+
+
+@{
+    var count = 0;
+
+    foreach (var item in Model.NoOfAds)
+    {
+        count += item.Count;
+    }
+}
+
+<div class="container">
+    <!-- Trigger the modal with a button -->
+    <!-- Modal -->
+    <div class="modal fade" id="reportAdModal" role="dialog">
+        <div class="modal-dialog dialog-padding">
+
+            <!-- Modal content-->
+            <div class="modal5-styles">
+                <div class="modal-header-styles2">
+                    <h4 class="title-dir">Report This Ad</h4>
+
+                    <button type="button" id="closeReportAdModal" class="close-style7" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body">
+                    <div class="new-password-style">
+                        <select id="reportReason">
+                            <option value="reason1">Reason for reporting</option>
+                            <option value="reason2">Reason for reporting</option>
+                            <option value="reason3">Reason for reporting</option>
+                            <option value="reason4">Reason for reporting</option>
+                            <option value="reason5">Reason for reporting</option>
+                            <option value="reason6">Reason for reporting</option>
+
+                        </select>
+                        <input class="" type="text" id="reportDescription" placeholder="Description of reporting">
+                    </div>
+
+                    <button type="button" class="signin-btn5" name="button" onclick="ReportAd()">Submit</button>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="notification-style">
+    @Html.HiddenFor(m => m.User.Id, new { id = "userId" })
+    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+        <div class="row">
+            <div class="col-md-4 pad-top">
+                <div class="featured-box10 inline-view">
+                    <div class="order-border1">
+                        <h3 class="section-title19">Contact seller</h3>
+                    </div>
+                    <div class="order-border">
+                        @{
+                            var profileImageSrc = StaticData.SERVER_DOMAIN + Model.User.ProfilePicture;
+
+                        }
+                        <p class=" avatar-seller"><img src="@profileImageSrc" alt="Avatar" class="avatar1"></p>
+                        <h1 class="section-title11">@Model.User.FirstName @Model.User.LastName</h1>
+                        <p class="date-title">Member since @Model.User.MemberSince.ToString("MMM dd yyyy")</p>
+                    </div>
+
+                    <button type="button" class="change-btn22" name="button">
+                        <p><i class="icon-padding" aria-hidden="true"></i></p>
+                        <p class="user-post-p">@Model.User.MemberSince.ToString("MMM dd yyyy")</p>
+                        <p>Member since</p>
+                    </button>
+
+                    <button type="button" class="change-btn23" name="button">
+                        <p><i class="icon-padding" aria-hidden="true"></i></p>
+                        <p class="user-post-p">@count</p>
+                        <p>Ads</p>
+                    </button>
+                </div>
+
+            </div>
+            <div class="col-md-8">
+                <h1 class="section-title10">Live Ads <span>(@count)</span></h1>
+                <br />
+                <ul class="social-network social-circle">
+                    <li><a href="#ads" onclick="GetUserAds(1)" data-toggle="tab" class="icocar"><i class="fa fa-car"></i></a></li>
+                    <li><a href="#ads" onclick="GetUserAds(2)" data-toggle="tab" class="icoTwitter"><i class="fa fa-home"></i></a></li>
+                    <li><a href="#ads" onclick="GetUserAds(3)" data-toggle="tab" class="icoGoogle"><i class="fa fa-user"></i></a></li>
+                    <li><a href="#ads" onclick="GetUserAds(4)" data-toggle="tab" class="icoLinkedin"><i class="fa fa-wrench"></i></a></li>
+                    <li><a href="#ads" onclick="GetUserAds(5)" data-toggle="tab" class="icobag"><i class="fa fa-briefcase"></i></a></li>
+                    <li><a href="#ads" onclick="GetUserAds(6)" data-toggle="tab" class="icopa"><i class="fa fa-list"></i></a></li>
+                    <li><a href="#ads" onclick="GetUserAds(7)" data-toggle="tab" class="icope"><i class="fa fa-ellipsis-h"></i></a></li>
+                    <li><a href="#ads" onclick="GetUserAds(8)" data-toggle="tab" class="icoya"><i class="fa fa-square"></i></a></li>
+
+                </ul>
+                <br /><br />
+
+                <div id="ads">
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function GetUserAds(typeId) {
+            var userId = $("#userId").val();
+            $.ajax({
+                url: `/Ads/GetUserAds?userId=${userId}&typeId=${typeId}`,
+                method: "get",
+                success: function (response) {
+                    $("#ads").empty();
+                    $("#ads").html(response);
+                },
+                error: function (error) {
+                    alert(error.message);
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+} 

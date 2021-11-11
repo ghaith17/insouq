@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.53.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\insouq.EntityFramework\insouq.EntityFramework.csproj" />
+    <ProjectReference Include="..\insouq.Models\insouq.Models.csproj" />
+    <ProjectReference Include="..\insouq.Shared\insouq.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
