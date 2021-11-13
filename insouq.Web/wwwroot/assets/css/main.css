@@ -34,7 +34,12 @@ Domain Path:      /languages/
 
 
 
-@import url("https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700");
+/* @import url("https://fonts.googleapis.com/css?family=objectivity:300,400,500,700"); */
+@font-face {
+    font-family: "Objectivity";
+    src: url("//db.onlinewebfonts.com/t/d9f88f2e3a055dbb47c50c51043ace74.eot");
+    src: url("//db.onlinewebfonts.com/t/d9f88f2e3a055dbb47c50c51043ace74.eot?#iefix") format("embedded-opentype"), url("//db.onlinewebfonts.com/t/d9f88f2e3a055dbb47c50c51043ace74.woff2") format("woff2"), url("//db.onlinewebfonts.com/t/d9f88f2e3a055dbb47c50c51043ace74.woff") format("woff"), url("//db.onlinewebfonts.com/t/d9f88f2e3a055dbb47c50c51043ace74.ttf") format("truetype"), url("//db.onlinewebfonts.com/t/d9f88f2e3a055dbb47c50c51043ace74.svg#Objectivity") format("svg");
+}
 
 html {
     overflow-x: hidden;
@@ -44,7 +49,7 @@ body {
     background: #fff;
     font-size: 14px;
     font-weight: 400;
-    font-family: "Quicksand", sans-serif;
+    font-family: "objectivity", sans-serif;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -59,7 +64,7 @@ body {
 h1, h2, h3, h4 {
     font-size: 36px;
     font-weight: 700;
-    font-family: "Quicksand", sans-serif;
+    font-family: "objectivity", sans-serif;
 }
 
 a {
@@ -79,7 +84,7 @@ a {
 
 p {
     font-weight: 400;
-    font-family: "Quicksand", sans-serif;
+    font-family: "objectivity", sans-serif;
     margin: 0px;
     font-size: 14px;
 }
@@ -226,11 +231,11 @@ ul, ol {
     .btn:active {
         box-shadow: none;
         outline: none;
-        color: #8c63e7;
+        color: #7255F1;
     }
 
 .btn-common {
-    background-color: #8c63e7;
+    background-color: #7255F1;
     position: relative;
     color: #fff;
     z-index: 1;
@@ -552,7 +557,7 @@ a.back-to-top {
     }
 
         .top-nav-collapse .navbar-nav .nav-link:hover {
-            color: #8C63E7 !important;
+            color: #7255F1 !important;
         }
 
     .top-nav-collapse .navbar-nav li.active a.nav-link {
@@ -583,11 +588,12 @@ a.back-to-top {
 .navbar-expand-lg .navbar-nav li a:focus {
     outline: none;
     cursor: pointer;
-    background: linear-gradient(to right, #8C63E7, #5d4afa);
+    background: linear-gradient(to right, #8c63e7, #7255F1);
     font-weight: bolder;
     -webkit-background-clip: text;
     color: transparent;
 }
+
 .navbar {
     padding: 0px 75px;
 }
@@ -672,7 +678,7 @@ a.back-to-top {
 .dropdown .dropdown-item:focus,
 .dropdown .dropdown-item:hover,
 .dropdown .dropdown-item.active {
-    background: linear-gradient(to right, #8C63E7, #5d4afa);
+    background: linear-gradient(to right, #8c63e7, #7255F1);
     font-weight: 900;
     -webkit-background-clip: text;
     color: transparent;
@@ -689,7 +695,7 @@ a.back-to-top {
     padding: 7px 23px 7px;
     margin-left: 10px;
     position: relative;
-    background-image: linear-gradient(to right, #8C63E7, #5d4afa);
+    background-image: linear-gradient(to right, #8c63e7, #7255F1);
     text-align: center;
     border-radius: 30px;
     display: inline-block;
@@ -698,7 +704,7 @@ a.back-to-top {
 
     .tg-btn:hover {
         color: #fff !important;
-        background-image: linear-gradient(to right, #8C63E7, #5d4afa);
+        background-image: linear-gradient(to right, #8c63e7, #7255F1);
     }
 
     .tg-btn i {
@@ -728,7 +734,7 @@ a.back-to-top {
         }
 
             .sign-in li .nav-link:hover {
-                color: #8C63E7 !important;
+                color: #7255F1 !important;
             }
 
             .sign-in li .nav-link i {
@@ -980,7 +986,7 @@ a.back-to-top {
         position: absolute;
         border-radius: 10px;
         color: #ffffff;
-        background: #8c63e7;
+        background: #7255F1;
         font-weight: 700;
         letter-spacing: 0.5px;
         transition: all 0.4s ease-in-out;
@@ -1908,7 +1914,7 @@ a.back-to-top {
 
 /* Trending Categories Section Start */
 .trending-cat {
-    background: #F6F6F9;
+    background: #F6F7F9;
 }
 
 .contents-ctg {
@@ -3373,7 +3379,7 @@ Dashboard My Ads
         }
 
 .card {
-    background: #F6F6F9;
+    background: #F6F7F9;
     margin-bottom: 10px;
     padding: 10px;
     height: 100%;
@@ -4264,7 +4270,7 @@ footer .menu {
         }
 
             footer .menu li a:hover {
-                color: #8c63e7;
+                color: #7255F1;
             }
 
 .contact-footer {
@@ -4316,7 +4322,7 @@ footer .menu {
     }
 
     .footer-social li :hover {
-        background-color: #8c63e7;
+        background-color: #7255F1;
         color: #ffffff;
     }
 
@@ -4366,7 +4372,7 @@ footer .menu {
         }
 
             #copyright p a:hover {
-                color: #8c63e7;
+                color: #7255F1;
             }
 
 .social-icon .facebook:hover {
@@ -4718,7 +4724,7 @@ footer .menu {
 .men-icon a {
     font-size: 16px;
     font-weight: 500;
-    color: #8c63e7;
+    color: #7255F1;
 }
 
 .avatar {
@@ -4777,11 +4783,11 @@ ul.social-network {
     }
 
 .social-network a.icoTwitter {
-    border: 1px solid #FFC456;
+    border: 1px solid #FF8A04;
 }
 
     .social-network a.icoTwitter:hover {
-        background-color: #FFC456;
+        background-color: #FF8A04;
     }
 
         .social-network a.icoTwitter:hover i {
@@ -4789,7 +4795,7 @@ ul.social-network {
         }
 
     .social-network a.icoTwitter i {
-        color: #FFC456;
+        color: #FF8A04;
     }
 
 .social-network a.icoGoogle {
@@ -5011,7 +5017,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
     .items-bold1 i {
-        color: #FFC456;
+        color: #FF8A04;
     }
 
 .items-bold2 {
@@ -5087,13 +5093,13 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .card-price {
-    color: #FF8A04;
+    color: #FFB01C;
     font-size: 20px;
     font-weight: bold;
 }
 
 .card4-price {
-    color: #FF8A04;
+    color: #FFB01C;
     font-size: 20px;
     font-weight: bold;
 }
@@ -5131,7 +5137,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
     .section-title3 i {
-        color: #FF8A04;
+        color: #FFB01C;
         padding-right: 10px;
         font-size: 25px;
     }
@@ -5160,7 +5166,7 @@ a.socialIcon:hover, .socialHoverClass {
     font-weight: 700;
     text-align: right;
     position: relative;
-    color: #8c63e7;
+    color: #7255F1;
 }
 
 .link-more {
@@ -5169,13 +5175,13 @@ a.socialIcon:hover, .socialHoverClass {
     text-align: right;
     position: relative;
     top: -30px;
-    color: #8c63e7;
+    color: #7255F1;
     margin-right: 6%;
 }
 
     .link-more i {
         font-size: 18px;
-        color: #8c63e7;
+        color: #7255F1;
         font-weight: 700;
         padding-left: 10px;
         text-align: right;
@@ -5207,7 +5213,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .about-title span {
-    color: #8c63e7;
+    color: #7255F1;
 }
 
 .about-title h1 {
@@ -5231,7 +5237,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .sell-title span {
-    color: #8c63e7;
+    color: #7255F1;
     padding-bottom: 20px;
 }
 
@@ -5261,7 +5267,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .how-title span {
-    color: #8c63e7;
+    color: #7255F1;
     padding-bottom: 20px;
     text-align: left;
 }
@@ -5438,7 +5444,7 @@ a.socialIcon:hover, .socialHoverClass {
         position: absolute;
         border-radius: 10px;
         color: #ffffff;
-        background: #8c63e7;
+        background: #7255F1;
         font-weight: 700;
         letter-spacing: 0.5px;
         transition: all 0.4s ease-in-out;
@@ -5612,7 +5618,7 @@ a.socialIcon:hover, .socialHoverClass {
         position: absolute;
         border-radius: 10px;
         color: #ffffff;
-        background: #8c63e7;
+        background: #7255F1;
         font-weight: 700;
         letter-spacing: 0.5px;
         transition: all 0.4s ease-in-out;
@@ -5774,7 +5780,7 @@ a.socialIcon:hover, .socialHoverClass {
         position: absolute;
         border-radius: 10px;
         color: #ffffff;
-        background: #8c63e7;
+        background: #7255F1;
         font-weight: 700;
         letter-spacing: 0.5px;
         transition: all 0.4s ease-in-out;
@@ -5923,7 +5929,7 @@ a.socialIcon:hover, .socialHoverClass {
         position: absolute;
         border-radius: 10px;
         color: #ffffff;
-        background: #8c63e7;
+        background: #7255F1;
         font-weight: 700;
         letter-spacing: 0.5px;
         transition: all 0.4s ease-in-out;
@@ -6066,7 +6072,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .btn-style {
-    background-color: #8c63e7;
+    background-color: #7255F1;
     position: absolute;
     width: 83%;
     height: 56px;
@@ -6817,7 +6823,7 @@ x {
 
 .modal5-styles {
     position: relative;
-    background-color: #F6F6F9;
+    background-color: #F6F7F9;
     background-clip: padding-box;
     border: 1px solid #999;
     border: 1px solid rgba(0,0,0,.2);
@@ -6860,7 +6866,7 @@ x {
 
 .modal5-styles {
     position: relative;
-    background-color: #F6F6F9;
+    background-color: #F6F7F9;
     background-clip: padding-box;
     border: 1px solid #999;
     border: 1px solid rgba(0,0,0,.2);
@@ -7173,7 +7179,7 @@ button.close-style1 {
 
 /* When the checkbox is checked, add a blue background */
 .cont2 input:checked ~ .checkmark2 {
-    background-color: #8c63e7;
+    background-color: #7255F1;
 }
 
 /* Create the checkmark/indicator (hidden when not checked) */
@@ -7275,7 +7281,7 @@ button.close-style1 {
 }
 
 .change-picture {
-    color: #8c63e7;
+    color: #7255F1;
     font-size: 12px;
     font-weight: 700;
     text-align: left;
@@ -7285,7 +7291,7 @@ button.close-style1 {
 }
 
 .change-picture3 {
-    color: #8c63e7;
+    color: #7255F1;
     font-size: 12px;
     font-weight: 700;
     text-align: left;
@@ -7402,11 +7408,11 @@ button.close-style1 {
 }
 
 .cont2 input:checked ~ .checkmark3 {
-    background-color: #8c63e7;
+    background-color: #7255F1;
 }
 
 .cont3 input:checked ~ .checkmark4 {
-    background-color: #8c63e7;
+    background-color: #7255F1;
 }
 
 .cont2 .checkmark3:after {
@@ -7513,7 +7519,7 @@ ul.social-network5 {
     }
 
 .social-network5 a.icoTwitter {
-    border: 1px solid #FFC456;
+    border: 1px solid #FF8A04;
 }
 
 .social-network5 a.icocar {
@@ -7521,7 +7527,7 @@ ul.social-network5 {
 }
 
 .social-network5 a.icoTwitter:hover {
-    background-color: #FFC456;
+    background-color: #FF8A04;
 }
 
 .social-network5 a.icocar:hover {
@@ -7537,7 +7543,7 @@ ul.social-network5 {
 }
 
 .social-network5 a.icoTwitter i {
-    color: #FFC456;
+    color: #FF8A04;
 }
 
 .social-network5 a.icocar i {
@@ -7823,7 +7829,7 @@ input:checked + .slider:before {
     top: 86px;
     text-align: center;
     width: 60%;
-    background: #8c63e7;
+    background: #7255F1;
     color: #fff;
     font-weight: bold;
     padding: 7px 0px;
@@ -7833,12 +7839,12 @@ input:checked + .slider:before {
 }
 
 .icon-box1 {
-    border: 1px solid #FF8A04;
+    border: 1px solid #FFB01C;
     display: inline-block;
     text-align: center;
     width: 100px;
     height: 100px;
-    background: #FF8A04;
+    background: #FFB01C;
     color: #fff;
     font-size: 34px;
     line-height: 100px;
@@ -8613,7 +8619,7 @@ img:after {
 
 .modal6-styles {
     position: relative;
-    background-color: #F6F6F9;
+    background-color: #F6F7F9;
     background-clip: padding-box;
     border: 1px solid #999;
     border: 1px solid rgba(0,0,0,.2);
@@ -8793,7 +8799,7 @@ img:after {
         }
 
 #contents div {
-    display: none;
+    /* display: none; */
     //hides all div elements
 }
 
@@ -8915,7 +8921,7 @@ img:after {
         text-align: center;
         padding-top: 25px;
         font-size: 25px;
-        color: #FFC456;
+        color: #FF8A04;
         margin-bottom: 20px;
         margin-right: 10px;
     }
@@ -8926,8 +8932,8 @@ img:after {
         }
 
         .list-property li i:hover {
-            border: 1px solid #FFC456;
-            background: #FFC456;
+            border: 1px solid #FF8A04;
+            background: #FF8A04;
             width: 120px;
             height: 120px;
             text-align: center;
@@ -9140,7 +9146,7 @@ img:after {
 }
 
 .change-picture4 {
-    color: #8c63e7;
+    color: #7255F1;
     font-size: 18px;
     font-weight: 700;
     text-align: center;
@@ -9323,7 +9329,7 @@ img:after {
     margin-bottom: 30px;
 }
 
-.featured-boxCv{
+.featured-boxCv {
     width: 83%;
     padding: 25px;
     background: #fff;
@@ -9471,7 +9477,7 @@ img:after {
     ;
     font-size: 15px;
     text-align: center;
-    color: #8c63e7;
+    color: #7255F1;
     background-color: #fff;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
@@ -9490,7 +9496,7 @@ img:after {
 }
 
 .tab-item.active {
-    background: #8C63E7;
+    background: #7255F1;
     opacity: 1;
     border-radius: 30px;
     color: white;
@@ -9901,7 +9907,7 @@ img:after {
 }
 
 .ui-widget-header {
-    background: #8C63E7;
+    background: #7255F1;
 }
 
 .price-range-search {
@@ -9923,7 +9929,7 @@ img:after {
     background-color: #f9f9f9;
     border: 1px solid #6e6666;
     color: black;
-    font-family: myFont;
+    font-family: "objectivity";
     font: normal 14px Arial, Helvetica, sans-serif;
     border-radius: 5px;
     height: 26px;
@@ -9937,7 +9943,7 @@ img:after {
 }
 
 .ui-state-default, .ui-widget-content .ui-state-default {
-    border: 4px solid #8C63E7;
+    border: 4px solid #7255F1;
     border-radius: 50%;
     background: #ffffff;
     font-weight: normal;
@@ -9959,6 +9965,7 @@ img:after {
     /* float: right; */
     color: #6C7B8A;
     margin-left: 22px;
+    font-size: 12px;
 }
 
 .line-input-style12 {
@@ -9971,6 +9978,7 @@ img:after {
     float: right;
     color: #6C7B8A;
     margin-right: 22px;
+    font-size: 12px;
 }
 
 .range-span {
@@ -9985,7 +9993,7 @@ img:after {
 
 .filter-title1 {
     color: black;
-    font-size: 15px;
+    font-size: 14px;
     padding-left: 20px;
 }
 
@@ -10106,7 +10114,7 @@ img:after {
     }
 
         .pagination a:hover:not(.active) {
-            background-color: #8c63e7 !important;
+            background-color: #7255F1 !important;
             border: none !important;
             border-radius: 50% !important;
             color: #fff;
@@ -10157,7 +10165,7 @@ img:after {
         }
 
     #carousel-thumbs .selected img {
-        border-color: #8C63E7;
+        border-color: #7255F1;
         border-radius: 15px;
     }
 
@@ -10205,7 +10213,7 @@ img:after {
 
 .span-post-price {
     padding-left: 34px;
-    font-size: 10px;
+    font-size: 14px;
     position: absolute;
     margin-top: -7px;
     left: 14px;
@@ -10219,17 +10227,16 @@ img:after {
 
 .change-btn14 {
     margin-top: 9px;
-    background: none;
+    background: white;
     padding: 3px 12px;
     border-radius: 5px;
     border: none;
     margin: 10px;
-    color: #ffb01c;
     font-size: 18px;
 }
 
 .payment-price1 {
-    font-size: 40px;
+    font-size: 22px;
     font-weight: bolder;
     color: #FFB01C;
     padding: 10px 0px 0px 0px;
@@ -10271,7 +10278,7 @@ img:after {
 .location-btn {
     text-align: center;
     width: 30%;
-    background: #8c63e7;
+    background: #7255F1;
     color: #fff;
     padding: 7px 0px;
     border: 0px;
@@ -10308,9 +10315,9 @@ img:after {
     height: 60px;
 }
 
-    .post-date p {
-        font-size: 10px
-    }
+.post-date p {
+    font-size: 10px
+}
 
 element.style {
 }
@@ -10517,7 +10524,7 @@ element.style {
     right: 18px;
     text-align: center;
     width: 17%;
-    background: #8c63e7;
+    background: #7255F1;
     color: #fff;
     font-weight: bold;
     padding: 7px 0px;
@@ -11136,7 +11143,7 @@ element.style {
     width: 100%;
     height: 60px;
     line-height: 60px;
-    background: #8C63E7;
+    background: #7255F1;
     color: white;
 }
 
@@ -11244,7 +11251,7 @@ element.style {
     }
 
     #frame .content .messages ul li.replies p {
-        background: #8c63e7;
+        background: #7255F1;
         color: #f5f5f5;
         float: right;
         margin-bottom: 75px;
@@ -11338,7 +11345,7 @@ element.style {
     right: 20px;
     padding: 14px 0;
     cursor: pointer;
-    background: #8c63e7;
+    background: #7255F1;
     color: #f5f5f5;
     border-radius: 50%;
 }
@@ -11390,7 +11397,7 @@ element.style {
 }
 
 .tab2-item.active {
-    color: #8C63E7;
+    color: #7255F1;
 }
 
 .tab2-item {
@@ -11410,7 +11417,7 @@ element.style {
 .tab2-item:hover {
     border-color: rgba(194, 53, 100, 0.1);
     border-radius: 30px;
-    color: #8c63e7;
+    color: #7255F1;
 }
 
 ul.tabs-style {
@@ -11432,7 +11439,7 @@ ul.tabs-style {
     width: 350px;
     height: 500px;
     background-color: #fff;
-    font-family: 'Lato', sans-serif;
+    font-family: 'objectivity', sans-serif;
     -webkit-transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
     transition: all 600ms cubic-bezier(0.19, 1, 0.22, 1);
     z-index: 999;
@@ -11462,7 +11469,7 @@ ul.tabs-style {
 .chatbox__title {
     min-height: 50px;
     padding-right: 10px;
-    background-color: #8C63E7;
+    background-color: #7255F1;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     cursor: pointer;
@@ -11552,7 +11559,7 @@ ul.tabs-style {
     right: 20px;
     padding: 4px 36px 1px 0px;
     cursor: pointer;
-    background: #8c63e7;
+    background: #7255F1;
     color: #f5f5f5;
     border-radius: 50%;
 }
@@ -11715,7 +11722,7 @@ ul.tabs-style {
     margin-bottom: 15px;
     border-radius: 15px 15px 0px 14px;
     font-size: 14px;
-    background-color: #8c63e7;
+    background-color: #7255F1;
     color: white;
     -webkit-box-shadow: 1px 1px rgb(100 100 100 / 10%);
     box-shadow: 1px 1px rgb(100 100 100 / 10%);
@@ -11903,7 +11910,7 @@ ul.tabs-style {
 }
 
 .trending-cat1 {
-    background: #F6F6F9;
+    background: #F6F7F9;
     width: 103%;
     padding: 0% 3% 0% 3%;
     margin-left: -1%;
@@ -11968,7 +11975,7 @@ ul.tabs-style {
 }
 
 .trending-cat2 {
-    background: #f6f6f9;
+    background: #F6F7F9;
 }
 
 .dawnload-footer {
@@ -12084,7 +12091,7 @@ font-size: 15px;
 
 .homepage-card-section {
     margin: 16px 0;
-    font-family: proxima-nova,noto,helvetica,arial,sans-serif;
+    font-family: 'objectivity',noto,helvetica,arial,sans-serif;
     font-size: 27px;
     font-weight: 600;
     line-height: .89;
@@ -12094,7 +12101,7 @@ font-size: 15px;
 .recent-listing-wrapper {
     display: -ms-flexbox;
     display: flex;
-    font-family: proxima-nova,noto,helvetica,arial,sans-serif;
+    font-family: 'objectivity',noto,helvetica,arial,sans-serif;
     width: 90%;
     margin-left: 5%;
 }
@@ -12133,7 +12140,7 @@ font-size: 15px;
             font-size: 16px;
             font-weight: 600;
             line-height: 1.5;
-            color: #FF8A04;
+            color: #FFB01C;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
@@ -12152,7 +12159,7 @@ font-size: 15px;
         }
 
         .recent-listing-wrapper .recent-listing .recent-listing-details {
-            font-size: 14px;
+            font-size: 16px;
             line-height: 1.43;
             color: #626465;
             max-width: 216px;
@@ -12246,11 +12253,11 @@ ul.social-networks {
     }
 
 .social-networks a.icoTwitter {
-    border: 1px solid #FFC456;
+    border: 1px solid #FF8A04;
 }
 
     .social-networks a.icoTwitter:hover {
-        background-color: #FFC456;
+        background-color: #FF8A04;
     }
 
         .social-networks a.icoTwitter:hover i {
@@ -12258,7 +12265,7 @@ ul.social-networks {
         }
 
     .social-networks a.icoTwitter i {
-        color: #FFC456;
+        color: #FF8A04;
     }
 
 .social-networks a.icoGoogle {
@@ -12424,7 +12431,7 @@ a.socialIcon:hover, .socialHoverClass {
 }
 
 .tab-count {
-    background: #8c63e7;
+    background: #7255F1;
     border-radius: 30px;
     padding: 0px 15px 1px 15px;
     color: white;
@@ -12447,7 +12454,7 @@ a.socialIcon:hover, .socialHoverClass {
     border-radius: 0px !important;
     color: black !important;
     font-weight: bold;
-    border-bottom: 5px solid #8C63E7;
+    border-bottom: 5px solid #7255F1;
 }
 
 .tab-item1:hover {
@@ -12456,7 +12463,7 @@ a.socialIcon:hover, .socialHoverClass {
     border-radius: 0px !important;
     color: black !important;
     font-weight: bold;
-    border-bottom: 5px solid #8C63E7;
+    border-bottom: 5px solid #7255F1;
 }
 
 .tab-item1 {
@@ -12619,7 +12626,7 @@ input[type="checkbox"] {
 
 .repo-ad {
     margin-left: 15px;
-    font-size: 25px;
+    font-size: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
@@ -12628,7 +12635,7 @@ input[type="checkbox"] {
 
     .repo-ad:hover {
         margin-left: 15px;
-        font-size: 25px;
+        font-size: 20px;
         margin-top: 10px;
         margin-bottom: 10px;
         font-weight: bold;
@@ -12685,7 +12692,7 @@ input[type="checkbox"] {
 }
 
 .item-status1 {
-    background: #FF8A04;
+    background: #FFB01C;
     border-radius: 15px;
     padding: 1px 20px;
     color: white;
@@ -12701,7 +12708,7 @@ input[type="checkbox"] {
     border-radius: 0px !important;
     color: black !important;
     font-weight: bold;
-    border-bottom: 5px solid #8C63E7;
+    border-bottom: 5px solid #7255F1;
 }
 
 .tab-ad {
@@ -12728,7 +12735,7 @@ input[type="checkbox"] {
         border-radius: 0px !important;
         color: black !important;
         font-weight: bold;
-        border-bottom: 5px solid #8C63E7;
+        border-bottom: 5px solid #7255F1;
     }
 
 .tabad {
@@ -12742,7 +12749,7 @@ input[type="checkbox"] {
     top: 86px;
     text-align: center;
     width: 60%;
-    background: #8c63e7;
+    background: #7255F1;
     color: #fff;
     font-weight: bold;
     padding: 7px 0px;
@@ -12760,7 +12767,7 @@ input[type="checkbox"] {
     z-index: 1;
     margin-top: 4%;
     margin-left: 4%;
-    color: #ff951b;
+    color: #FFB01C;
 }
 
 .bord-pri {
@@ -12773,11 +12780,11 @@ input[type="checkbox"] {
     z-index: 1;
     margin-top: 4%;
     margin-left: 4%;
-    color: #8c63e7;
+    color: #7255F1;
 }
 
 .bord-pri1 {
-    border-left: 5px solid #8c63e7;
+    border-left: 5px solid #7255F1;
     padding-left: 3px;
 }
 
@@ -12831,7 +12838,7 @@ input[type="checkbox"] {
     z-index: 1;
     margin-top: 4%;
     margin-left: 9%;
-    color: #ff951b;
+    color: #FFB01C;
 }
 
 .prai-icon4 {
@@ -12839,7 +12846,7 @@ input[type="checkbox"] {
     z-index: 1;
     margin-top: 4%;
     margin-left: 8%;
-    color: #8c63e7;
+    color: #7255F1;
 }
 
 .checkmark5 {
@@ -12855,7 +12862,7 @@ input[type="checkbox"] {
 }
 
 .cont2 input:checked ~ .checkmark5 {
-    background-color: #8c63e7;
+    background-color: #7255F1;
 }
 
 .cont2 .checkmark5:after {
@@ -12890,7 +12897,7 @@ input[type="checkbox"] {
 
 .free-po {
     float: right;
-    color: #8c63e7;
+    color: #7255F1;
     font-size: 20px;
     font-weight: bold;
     text-transform: uppercase;
@@ -12911,7 +12918,7 @@ input[type="checkbox"] {
 
 .block-btn {
     border: none;
-    background: #8c63e7;
+    background: #7255F1;
     height: 10px;
     display: block;
 }
@@ -13171,7 +13178,7 @@ input:focus-visible {
     background: #ffffff;
     padding: 27px 64px;
     /* border-radius: 5px; */
-    color: #8c63e7;
+    color: #7255F1;
     border: none;
     border-right: 1px solid #EBEBEB;
 }
@@ -13234,6 +13241,7 @@ input:focus-visible {
     padding-top: 0;
     padding-bottom: 0;
     margin-right: -185px;
+    font-size: 14px;
 }
 
 .posted-style1 {
@@ -13249,6 +13257,7 @@ input:focus-visible {
 .label-view3 p {
     color: black;
     font-weight: bold;
+    font-size: 14px;
 }
 
 .pr {
@@ -13322,7 +13331,7 @@ input::-webkit-inner-spin-button {
     border: none;
     border-bottom: none;
     width: 83%;
-    height: 40px;
+    height: 40px !important;
     font-weight: bold;
     background: #fff;
     float: right;
@@ -13418,7 +13427,7 @@ input::-webkit-inner-spin-button {
     font-weight: 400;
 }
 
-.Dubai-PCode{
+.Dubai-PCode {
     font-family: 'myFirstFont';
     font-size: 65px !important;
     background: transparent;
@@ -14709,7 +14718,7 @@ input::-webkit-inner-spin-button {
         font-weight: 400;
     }
 
-    .RasalKhaimah-PCode-Details{
+    .RasalKhaimah-PCode-Details {
         font-family: 'beba';
         font-size: 160px !important;
         background: transparent;
@@ -15591,7 +15600,7 @@ input::-webkit-inner-spin-button {
         font-weight: 400;
     }
 
-    .RasalKhaimah-PCode-Details{
+    .RasalKhaimah-PCode-Details {
         font-family: 'beba';
         font-size: 147px !important;
         background: transparent;
@@ -16484,7 +16493,7 @@ input::-webkit-inner-spin-button {
         font-weight: 400;
     }
 
-    .RasalKhaimah-PCode-Details{
+    .RasalKhaimah-PCode-Details {
         font-family: 'beba';
         font-size: 135px !important;
         background: transparent;
@@ -17365,7 +17374,7 @@ input::-webkit-inner-spin-button {
         font-weight: 400;
     }
 
-    .RasalKhaimah-PCode-Details{
+    .RasalKhaimah-PCode-Details {
         font-family: 'beba';
         font-size: 121px !important;
         background: transparent;
@@ -17849,7 +17858,7 @@ input::-webkit-inner-spin-button {
 
 
 .pagination a.active {
-    background-color: #8c63e7 !important;
+    background-color: #7255F1 !important;
     border: none !important;
     border-radius: 50% !important;
     color: #fff;
@@ -17857,7 +17866,7 @@ input::-webkit-inner-spin-button {
 
 
 .details-spe-font {
-    font-size: 11px;
+    font-size: 14px;
 }
 
 
@@ -17913,7 +17922,7 @@ input::-webkit-inner-spin-button {
 .proparity-color {
     color: #fff;
     font-weight: bold;
-    background: #ffc456;
+    background: #FF8A04;
     padding: 0px 8px;
     border-radius: 100%;
     position: absolute;
@@ -18113,6 +18122,7 @@ input::-webkit-inner-spin-button {
 .subcat-home {
     color: black !important;
     font-weight: normal !important;
+    font-size: 16px;
 }
 
 .bann-right-sub img {
@@ -18156,7 +18166,7 @@ input::-webkit-inner-spin-button {
 .Properties-color-1 {
     color: #fff !important;
     font-weight: bold;
-    background: #FFC456;
+    background: #FF8A04;
     padding: 0px 13px;
     position: absolute;
     margin-left: 20px;
@@ -18170,7 +18180,7 @@ input::-webkit-inner-spin-button {
     padding: 10px;
     text-align: center;
     cursor: pointer;
-    border: 1px solid #FFC456;
+    border: 1px solid #FF8A04;
     height: 120px;
 }
 
@@ -18333,9 +18343,9 @@ input::-webkit-inner-spin-button {
 }
 
 .social-circle li:hover .proparity-color {
-    color: #ffc456;
+    color: #FF8A04;
     font-weight: bold;
-    border: 1px solid #ffc456;
+    border: 1px solid #FF8A04;
     background: #fff;
     padding: 0px 8px;
     border-radius: 100%;
@@ -18424,4 +18434,12 @@ input::-webkit-inner-spin-button {
     height: 60px;
     display: flex !important;
     justify-content: center;
+}
+
+.col-h-2 {
+    max-width: 13.666667%;
+}
+
+.col-h-8 {
+    max-width: 72.666667%;
 }

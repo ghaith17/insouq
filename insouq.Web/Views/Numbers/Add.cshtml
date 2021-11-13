@@ -116,17 +116,17 @@
                         </div>
 
                         <!--<div class="padding-form">
-        <label class="change-color">Listing price</label>
-        <input type="number" class="line-input-style14" asp-for="Price" min="0"><label class="label-price">AED</label>
-    </div>
+                            <label class="change-color">Listing price</label>
+                            <input type="number" class="line-input-style14" asp-for="Price" min="0"><label class="label-price">AED</label>
+                        </div>
 
-    <p>Add a short description</p>
-    <div class="featured-box5">
-        <textarea required asp-for="Description" cols="77" style="border:0px;"></textarea>-->
+                        <p>Add a short description</p>
+                        <div class="featured-box5">
+                            <textarea required asp-for="Description" cols="77" style="border:0px;"></textarea>-->
                         @*<p class="stylep">Car has most of the regular service and repair done by VW Dubai and last few service done outside VW agency.</p>
-        <p class="stylep">Car has Panamera sunroof in good working condition but the curtain.</p>*@
+                            <p class="stylep">Car has Panamera sunroof in good working condition but the curtain.</p>*@
                         <!--</div>
-    <span>0/400 words</span>-->
+                        <span>0/400 words</span>-->
 
                         <div class="padding-form">
                             <button type="button" class="change-btn2" name="button" onclick="GetLocation()">Detect Location</button>
@@ -225,8 +225,7 @@
         $("#viewButtonN").on("click", function () {
             if ($("#codeDL option:selected").val() === "" || $("#operatorDL option:selected").val() === "" || $('#MbNum').val() === "")
                 return;
-        else
-            {
+            else {
 
                 $('#MobileImg').attr('src', null);
                 $('#MobileNum').text(null);
@@ -247,8 +246,7 @@
         $("#viewButtonP").on("click", function () {
             if ($("#emirateDL option:selected").val() === "" || $("#plateTypeDL option:selected").val() === "" || $('#Number').val() === "")
                 return;
-        else
-            {
+            else {
                 $('#plateNum').text(null);
                 $('#plateC').text(null);
                 $('#palteImg').attr('src', null);
@@ -289,7 +287,7 @@
 
 
         });
-     
+
         var numberPlanDLloaded = false;
         $("#numberPlanDL").on("click", function () {
             if (numberPlanDLloaded)
@@ -426,4 +424,5 @@
         });
 
     </script>
+   
 }

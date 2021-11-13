@@ -184,7 +184,7 @@
                                                     active = "active";
                                                 }
                                                 <div class="carousel-item @active" data-slide-number="@index">
-                                                    <img style="height: 490px;" src="@src" class="d-block w-100" alt="..." data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+                                                    <img style="object-fit: cover;object-position: center; height: 490px;" src="@src"  class="d-block w-100" alt="..." data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
                                                 </div>
 
                                             }
@@ -212,7 +212,7 @@
                                                     }
                                                     var src = StaticData.SERVER_DOMAIN + item.ImageURL;
                                                     <div id="carousel-selector-@indexx" class="thumb col-4 col-sm-2 px-1 py-2 @selected" data-target="#myCarousel" data-slide-to="@indexx">
-                                                        <img style="height: 90px;" src="@src" class="img-fluid" alt="...">
+                                                        <img style="height: 90px; object-fit: cover; object-position: center;" src="@src" class="img-fluid" alt="...">
                                                     </div>
 
                                                     indexx++;
@@ -230,7 +230,7 @@
                                                         {
                                                             var src = StaticData.SERVER_DOMAIN + Model.Ad.Pictures[i].ImageURL;
                                                             <div id="carousel-selector-@i" class="thumb col-4 col-sm-2 px-1 py-2" data-target="#myCarousel" data-slide-to="6">
-                                                                <img style="height: 90px;" src="@src" class="img-fluid" alt="...">
+                                                                <img style="height: 90px; object-fit: cover; object-position: center;" src="@src" class="img-fluid" alt="...">
                                                             </div>
                                                         }
                                                     </div>

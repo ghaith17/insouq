@@ -75,7 +75,7 @@
 
                         <figure>
                             <a href="@href">
-                                <img style="border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
+                                <img style="border-left: 4px solid #ff951b; padding-left: 3px; width: 100%; height: 167px; object-fit: cover; object-position: center;" src="" alt="" id="slider-@itemIndex">
                                 <div class="sliderWrapper">
                                     @{
                                         var imagesUrls = new List<string>();
@@ -174,7 +174,7 @@
 
                             <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">@item.Title</a></h4>
                             <div class="padding-form3">
-                                <h5><i style="font-family:fontawesome; " class="fa fa-map-marker" aria-hidden="true"></i> Located > @item.En_Location <span class="padding-span4 "> @HelperFunctions.GetTime(item.PostDate)</span></h5>
+                                <h5 style="font-family:fontawesome;"><i style="font-family:fontawesome; " class="fa fa-map-marker" aria-hidden="true"><span style="font-size:14px;"> Located > @item.En_Location</span> </i><span class="padding-span4 "> @HelperFunctions.GetTime(item.PostDate)</span></h5>
                             </div>
 
                             <div class="label-whidth1">
@@ -401,7 +401,7 @@
 
                                     @if (isInFavorite)
                                     {
-                                        <i style="cursor:pointer;color:red;" id="favorite-@item.Id" onclick="RemoveFromFavorite(@item.Id)" class="fas fa-heart" aria-hidden="true"></i>
+                                        <i style="cursor: pointer; color: #FF633B;" id="favorite-@item.Id" onclick="RemoveFromFavorite(@item.Id)" class="fas fa-heart" aria-hidden="true"></i>
                                     }
                                     else
                                     {
