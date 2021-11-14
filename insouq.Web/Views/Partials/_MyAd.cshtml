@@ -13,71 +13,71 @@
     <div class="featured-box2 myAdDiv" style="height: 221px;" style="height: 221px;">
         @if (item.TypeId != StaticData.Numbers_ID)
         {
-        <div class="col-md-3">
+            <div class="col-md-3">
 
-            @{
-                var href = "#";
+                @{
+                    var href = "#";
 
-                if (item.CategoryId == StaticData.JobWanted_ID)
-                {
-                    href = StaticData.SERVER_DOMAIN + item.CV;
+                    if (item.CategoryId == StaticData.JobWanted_ID)
+                    {
+                        href = StaticData.SERVER_DOMAIN + item.CV;
 
+                    }
                 }
-            }
 
-            <figure>
-                <a href="@href">
-                    <img style="border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
-                    <div class="sliderWrapper">
-                        @{
-                            var imagesUrls = new List<string>();
+                <figure>
+                    <a href="@href">
+                        <img style=" object-fit: cover; object-position: center; border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
+                        <div class="sliderWrapper">
+                            @{
+                                var imagesUrls = new List<string>();
 
-                            var index = 0;
+                                var index = 0;
 
-                            var functionName = "function" + itemIndex;
+                                var functionName = "function" + itemIndex;
 
-                            var arrayName = "array" + itemIndex;
+                                var arrayName = "array" + itemIndex;
 
-                            var firstImage = "";
+                                var firstImage = "";
 
 
-                        }
-                        @foreach (var picture in item.Pictures)
-                        {
-                            var src = StaticData.SERVER_DOMAIN + picture.ImageURL;
-                            src = src.Replace("\\", "/");
-                            imagesUrls.Add(src);
-
-                            if (index == 0)
+                            }
+                            @foreach (var picture in item.Pictures)
                             {
-                                firstImage = src;
+                                var src = StaticData.SERVER_DOMAIN + picture.ImageURL;
+                                src = src.Replace("\\", "/");
+                                imagesUrls.Add(src);
+
+                                if (index == 0)
+                                {
+                                    firstImage = src;
+                                }
+
+                                var replacedSrc = AddDoubleQuotes(src);
+
+                                var functionNameWithParameters = functionName + "(" + index + "," + replacedSrc + ")";
+                                <span onclick="@functionNameWithParameters" class="sliderBtn"></span>
+                                index++;
+
                             }
 
-                            var replacedSrc = AddDoubleQuotes(src);
-
-                            var functionNameWithParameters = functionName + "(" + index + "," + replacedSrc + ")";
-                            <span onclick="@functionNameWithParameters" class="sliderBtn"></span>
-                            index++;
-
-                        }
-
-                        <script>
+                            <script>
                         document.getElementById("slider-@itemIndex").setAttribute("src", "@firstImage");
 
                         function @functionName (i, src) {
                             document.getElementById("slider-@itemIndex").setAttribute("src", src);
                         }
 
-                        </script>
+                            </script>
 
 
-                        @{
-                            itemIndex++;
-                        }
-                    </div>
-                </a>
-            </figure>
-        </div>
+                            @{
+                                itemIndex++;
+                            }
+                        </div>
+                    </a>
+                </figure>
+            </div>
         }
         else if (item.CategoryId == StaticData.MobileNumbers_ID)
         {
@@ -125,7 +125,7 @@
 
                     <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId">@item.Title</a></h4>
                     <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
+                        <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
                     </div>
                     <label class="label-view">
                         <p><i class="fa fa-eye" aria-hidden="true"></i></p>
@@ -167,7 +167,7 @@
                         </a>
                     </div>
                     <div class="">
-                        @{ 
+                        @{
                             var typeName = StaticFunctions.GetTypeName(item.TypeId);
                         }
                         <button type="button" class="change-btn11 float-style" onclick="GoToEdit('@typeName', @item.Id)">

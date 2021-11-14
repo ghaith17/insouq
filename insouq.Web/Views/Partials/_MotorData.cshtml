@@ -3,7 +3,7 @@
 @model int
 
 <div id="m1" style="display:block;">
-    <form asp-action="AddInitalMotor" method="post">
+    <form asp-action="AddInitalMotor" method="post" >
         <input type="hidden" value="@Model" name="categoryId" id="categoryId" />
         <p class="post-p3">Let’s start with the title</p>
         <p>Try to have an informative title that’s to be point and not very long</p>
@@ -163,3 +163,52 @@
         <button type="submit" class="signin-btn9" name="button">Continue</button>
     </form>
 </div>
+@section Scripts {
+    <script>
+        window.onload = function () {
+
+        $("button").on("click", function () {
+            var input_text = $("input[type='text']");
+            if (!input_text.val()) {
+                input_text.css("border", "1px solid red");
+            }
+            var input_number = $("input[type='number']");
+            if (!input_number.val()) {
+                input_number.css("border", "1px solid red");
+            }
+            var select = $("select");
+            if (!select.val()) {
+                select.css("border", "1px solid red");
+            }
+            var textarea = $("textarea");
+            if (!textarea.val()) {
+                textarea.css("border", "1px solid red");
+            }
+
+        });
+        $('input').on("change", function () {
+            var input = $("input");
+            if (input.val()) {
+                input.css("border", "none");
+            }
+            var input_text = $("input[type='text']");
+            if (!input_text.val()) {
+                input_text.css("border", "none");
+            }
+            var input_number = $("input[type='number']");
+            if (!input_number.val()) {
+                input_number.css("border", "none");
+            }
+            var select = $("select");
+            if (!select.val()) {
+                select.css("border", "none");
+            }
+            var textarea = $("textarea");
+            if (!textarea.val()) {
+                textarea.css("border", "none");
+            }
+        });
+        };
+
+    </script>
+}

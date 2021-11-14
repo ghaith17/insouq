@@ -831,7 +831,7 @@ a.back-to-top {
         height: 100%;
         top: 0px;
         left: 0px;
-        background: rgba(246, 247, 249, 0.5);
+        background: #F6F7F9;
     }
 
     #hero-area .contents {
@@ -13242,6 +13242,7 @@ input:focus-visible {
     padding-bottom: 0;
     margin-right: -185px;
     font-size: 14px;
+    font-family: 'Objectivity';
 }
 
 .posted-style1 {
@@ -13261,7 +13262,7 @@ input:focus-visible {
 }
 
 .pr {
-    font-size: 13px;
+    font-size: 14px;
     color: gray;
     margin-right: 7px;
 }
@@ -18442,4 +18443,10 @@ input::-webkit-inner-spin-button {
 
 .col-h-8 {
     max-width: 72.666667%;
+}
+.filled {
+    border: 2px solid green;
+}
+.empty {
+    border: 1px solid red;
 }

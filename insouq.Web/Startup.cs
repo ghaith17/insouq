@@ -135,7 +135,7 @@ Path.Combine(env.WebRootPath, "images")),
             });
 
             app.UseRouting();
-
+            app.UseHttpsRedirection();
             app.UseAuthentication();
 
             app.UseAuthorization();

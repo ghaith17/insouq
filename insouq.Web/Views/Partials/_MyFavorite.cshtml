@@ -10,530 +10,530 @@
 
 @foreach (var item in Model)
 {
-<div class="featured-box2" style="height: 221px;">
-    @if (item.TypeId != StaticData.Numbers_ID)
-    {
-    <div class="col-md-3">
+    <div class="featured-box2" style="height: 221px;">
+        @if (item.TypeId != StaticData.Numbers_ID)
+        {
+            <div class="col-md-3">
 
-        @{
-            var href = "#";
+                @{
+                    var href = "#";
 
-            if (item.CategoryId == StaticData.JobWanted_ID)
-            {
-                href = StaticData.SERVER_DOMAIN + item.CV;
-
-            }
-        }
-        <figure>
-            <a href="@href">
-                <img style="border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
-                <div class="sliderWrapper">
-                    @{
-                        var imagesUrls = new List<string>();
-
-                        var index = 0;
-
-                        var functionName = "function" + itemIndex;
-
-                        var arrayName = "array" + itemIndex;
-
-                        var firstImage = "";
-
-
-                    }
-                    @foreach (var picture in item.Pictures)
+                    if (item.CategoryId == StaticData.JobWanted_ID)
                     {
-                        var src = StaticData.SERVER_DOMAIN + picture.ImageURL;
-                        src = src.Replace("\\", "/");
-                        imagesUrls.Add(src);
-
-                        if (index == 0)
-                        {
-                            firstImage = src;
-                        }
-
-                        var replacedSrc = AddDoubleQuotes(src);
-
-                        var functionNameWithParameters = functionName + "(" + index + "," + replacedSrc + ")";
-                        <span onclick="@functionNameWithParameters" class="sliderBtn"></span>
-                        index++;
+                        href = StaticData.SERVER_DOMAIN + item.CV;
 
                     }
+                }
+                <figure>
+                    <a href="@href">
+                        <img style=" object-fit: cover; object-position: center; border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
+                        <div class="sliderWrapper">
+                            @{
+                                var imagesUrls = new List<string>();
 
-                    <script>
+                                var index = 0;
+
+                                var functionName = "function" + itemIndex;
+
+                                var arrayName = "array" + itemIndex;
+
+                                var firstImage = "";
+
+
+                            }
+                            @foreach (var picture in item.Pictures)
+                            {
+                                var src = StaticData.SERVER_DOMAIN + picture.ImageURL;
+                                src = src.Replace("\\", "/");
+                                imagesUrls.Add(src);
+
+                                if (index == 0)
+                                {
+                                    firstImage = src;
+                                }
+
+                                var replacedSrc = AddDoubleQuotes(src);
+
+                                var functionNameWithParameters = functionName + "(" + index + "," + replacedSrc + ")";
+                                <span onclick="@functionNameWithParameters" class="sliderBtn"></span>
+                                index++;
+
+                            }
+
+                            <script>
                         document.getElementById("slider-@itemIndex").setAttribute("src", "@firstImage");
 
                         function @functionName (i, src) {
                             document.getElementById("slider-@itemIndex").setAttribute("src", src);
                         }
 
-                    </script>
+                            </script>
 
 
-                    @{
-                        itemIndex++;
+                            @{
+                                itemIndex++;
+                            }
+                        </div>
+                    </a>
+                </figure>
+            </div>
+        }
+        else if (item.CategoryId == StaticData.MobileNumbers_ID)
+        {
+            var numberPhoto = StaticData.SERVER_DOMAIN + item.Photo;
+
+            <div class="col-md-3">
+                <figure>
+
+                    <div class="slider__contents1">
+                        <i class="slider__image1">
+                            <img src="@numberPhoto" alt="">
+                            <h2 class="mobile-numbers-Mylist">@item.Code @item.Number</h2>
+                        </i>
+                    </div>
+                </figure>
+            </div>
+        }
+        else if (item.CategoryId == StaticData.PlateNumbers_ID)
+        {
+            var photo = StaticData.SERVER_DOMAIN + item.Photo;
+
+            var plateCodeClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Code-Mylist";
+            var plateNumberClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Number-Mylist";
+
+            <div class="col-md-3">
+                <figure>
+                    <div class="slider__contents1">
+                        <i class="slider__image1">
+                            <img src="@photo" alt="">
+                            <h2 class="@plateCodeClass">@item.PlateCode</h2>
+                        </i>
+                        <h2 class="@plateNumberClass">@item.Number</h2>
+                    </div>
+                </figure>
+            </div>
+        }
+        else
+        {
+            <div class="col-md-3"></div>
+        }
+
+
+        @{
+            string GetSubCatName()
+            {
+                if (item.OtherSubCategory != null) return "/ " + item.OtherSubCategory;
+
+                if (item.SubCategoryEn_Name != null) return "/ " + item.SubCategoryEn_Name;
+
+                return "";
+            }
+
+            string GetServiceTypeName()
+            {
+                if (item.OtherServiceType != null) return "/ " + item.OtherServiceType;
+
+                if (item.ServiceTypeEn_Name != null) return "/ " + item.ServiceTypeEn_Name;
+
+                return "";
+            }
+
+            string GetSubTypeName()
+            {
+                if (item.OtherSubType != null) return "/ " + item.OtherSubType;
+
+                if (item.SubTypeEn_Name != null) return "/ " + item.SubTypeEn_Name;
+
+                return "";
+            }
+        }
+
+        <div class="col-md-9">
+            <div class="col-md-8">
+                <div class="feature-content width-size">
+
+                    <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId"><img src="~/assets/img/32.png" class="star-style" alt=""> @item.Title</a></h4>
+
+                    @if (item.TypeId == StaticData.Motors_ID)
+                    {
+                        var categoryName = "/ " + item.CategoryEnName;
+
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
+
+                            <h5>Motors  @categoryName</h5>
+
+                            @if (item.CategoryId != StaticData.Parts_ID && item.CategoryId != StaticData.ExportCar_ID)
+                            {
+                                var isChecked = item.Warranty ? "checked" : "";
+
+                                <label class="cont2">
+                                    <p class="text-style3">Under Warranty </p>
+                                    <input type="checkbox" @isChecked disabled>
+                                    <span class="checkmark3"></span>
+                                </label>
+                            }
+
+                        </div>
+                        <div class="label-whidth">
+
+                            <label class="label-view1">
+                                @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID
+                               || item.CategoryId == StaticData.Machinery_ID
+                               || item.CategoryId == StaticData.Bike_ID)
+                                {
+                                    @*<p>@String.Format("{0:n0}", item.Kilometers) KM</p>*@
+                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@String.Format("{0:n0}", item.Kilometers) KM</p>
+                                }
+                                else if (item.CategoryId == StaticData.Boats_ID)
+                                {
+                                    @*<p>@item.Length m</p>*@
+                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Length</p>
+                                }
+                                else if (item.CategoryId == StaticData.Parts_ID)
+                                {
+                                    @*<p>@item.En_Maker</p>*@
+                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.NameOfPart</p>
+                                }
+
+                            </label>
+                            <label class="label-view1">
+
+                                <p><i><img src="~/assets/img/37.png" alt=""></i>@item.Year</p>
+                                @*<p>@item.Year</p>*@
+
+                            </label>
+                            <label class="label-view1">
+                                @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID
+                               || item.CategoryId == StaticData.Bike_ID)
+                                {
+                                    <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Color</p>
+                                    @*<p>@item.En_Color</p>*@
+
+                                }
+                                else if (item.CategoryId == StaticData.Boats_ID || item.CategoryId == StaticData.Parts_ID)
+                                {
+                                    <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Age</p>
+                                    @*<p>@item.Age year</p>*@
+                                }
+                                else if (item.CategoryId == StaticData.Machinery_ID)
+                                {
+                                    @*<p>@String.Format("{0:n0}", item.Horsepower) HP</p>*@
+                                    <p><i><img src="~/assets/img/38.png" alt=""></i>@String.Format("{0:n0}", item.En_Horsepower)</p>
+                                }
+
+                            </label>
+                            <label class="label-view1">
+
+                                @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID)
+                                {
+                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_Transmission</p>
+                                    @*<p>@item.En_Transmission</p>*@
+                                }
+                                else if (item.CategoryId == StaticData.Boats_ID || item.CategoryId == StaticData.Parts_ID)
+                                {
+                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_Condition</p>
+
+                                    @*<p>@item.En_Usage</p>*@
+                                }
+                                else if (item.CategoryId == StaticData.Bike_ID)
+                                {
+                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_FinalDriveSystem</p>
+
+                                    @*<p>@item.En_FinalDriveSystem</p>*@
+                                }
+                                else if (item.CategoryId == StaticData.Machinery_ID)
+                                {
+                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_FuelType</p>
+
+                                    @*<p>@item.En_FuelType</p>*@
+                                }
+
+                            </label>
+                        </div>
                     }
-                </div>
-            </a>
-        </figure>
-    </div>
-    }
-    else if (item.CategoryId == StaticData.MobileNumbers_ID)
-    {
-        var numberPhoto = StaticData.SERVER_DOMAIN + item.Photo;
+                    else if (item.TypeId == StaticData.Properties_ID)
+                    {
 
-        <div class="col-md-3">
-            <figure>
+                        var categoryName = "/ " + item.CategoryEnName;
 
-                <div class="slider__contents1">
-                    <i class="slider__image1">
-                        <img src="@numberPhoto" alt="">
-                        <h2 class="mobile-numbers-Mylist">@item.Code @item.Number</h2>
-                    </i>
-                </div>
-            </figure>
-        </div>
-    }
-    else if (item.CategoryId == StaticData.PlateNumbers_ID)
-    {
-        var photo = StaticData.SERVER_DOMAIN + item.Photo;
+                        var subCategoryName = "/ " + item.SubCategoryEn_Name;
 
-        var plateCodeClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Code-Mylist";
-        var plateNumberClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Number-Mylist";
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
 
-        <div class="col-md-3">
-            <figure>
-                <div class="slider__contents1">
-                    <i class="slider__image1">
-                        <img src="@photo" alt="">
-                        <h2 class="@plateCodeClass">@item.PlateCode</h2>
-                    </i>
-                    <h2 class="@plateNumberClass">@item.Number</h2>
-                </div>
-            </figure>
-        </div>
-    }
-    else
-    {
-        <div class="col-md-3"></div>
-    }
+                            <h5>Property  @categoryName @subCategoryName </h5>
+                        </div>
+                        <div class="label-whidth">
+
+                            <label class="label-view1">
+                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Furnishing</p>
+
+                            </label>
+                            <label class="label-view1">
+                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Size sqft</p>
+                            </label>
+                            <label class="label-view1">
+                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.ReadyBy.ToString("dd/MM/yyyy")</p>
+                            </label>
+                            <label class="label-view1">
+                                @if (item.ListedBy == "0")
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i> LandLord</p>
+                                }
+                                else
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i> Agent</p>
+                                }
+
+                            </label>
+                        </div>
+                    }
+                    else if (item.TypeId == StaticData.Jobs_ID)
+                    {
+
+                        var categoryName = "/ " + item.CategoryEnName;
 
 
-    @{
-        string GetSubCatName()
-        {
-            if (item.OtherSubCategory != null) return "/ " + item.OtherSubCategory;
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
 
-            if (item.SubCategoryEn_Name != null) return "/ " + item.SubCategoryEn_Name;
+                            <h5>Jobs  @categoryName</h5>
+                        </div>
+                        <div class="label-whidth">
 
-            return "";
-        }
+                            <label class="label-view1">
+                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_JobType</p>
+                            </label>
+                            <label class="label-view1">
+                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_CareerLevel</p>
 
-        string GetServiceTypeName()
-        {
-            if (item.OtherServiceType != null) return "/ " + item.OtherServiceType;
+                            </label>
+                            <label class="label-view1">
 
-            if (item.ServiceTypeEn_Name != null) return "/ " + item.ServiceTypeEn_Name;
+                                @if (item.CategoryId == StaticData.JobWanted_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_WorkExperience year</p>
 
-            return "";
-        }
+                                }
+                                else if (item.CategoryId == StaticData.JobOpening_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MinWorkExperience year</p>
+                                }
 
-        string GetSubTypeName()
-        {
-            if (item.OtherSubType != null) return "/ " + item.OtherSubType;
+                            </label>
+                            <label class="label-view1">
 
-            if (item.SubTypeEn_Name != null) return "/ " + item.SubTypeEn_Name;
+                                @if (item.CategoryId == StaticData.JobWanted_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_NoticePeriod</p>
+                                }
+                                else if (item.CategoryId == StaticData.JobOpening_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_EmploymentType</p>
+                                }
 
-            return "";
-        }
-    }
+                            </label>
+                        </div>
+                    }
+                    else if (item.TypeId == StaticData.Services_ID)
+                    {
 
-    <div class="col-md-9">
-        <div class="col-md-8">
-            <div class="feature-content width-size">
+                        var categoryName = "/ " + item.CategoryEnName;
 
-                <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId"><img src="~/assets/img/32.png" class="star-style" alt=""> @item.Title</a></h4>
+                        var subCategoryName = GetServiceTypeName();
 
-                @if (item.TypeId == StaticData.Motors_ID)
-                {
-                    var categoryName = "/ " + item.CategoryEnName;
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
 
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
+                            <h5>Service  @categoryName @subCategoryName </h5>
+                        </div>
+                    }
+                    else if (item.TypeId == StaticData.Business_ID)
+                    {
+                        var categoryName = item.OtherCategoryName != null ? item.OtherCategoryName : item.CategoryEnName;
 
-                        <h5>Motors  @categoryName</h5>
 
-                        @if (item.CategoryId != StaticData.Parts_ID && item.CategoryId != StaticData.ExportCar_ID)
-                        {
-                            var isChecked = item.Warranty ? "checked" : "";
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
+
+                            <h5>Business / @categoryName</h5>
+                        </div>
+                    }
+                    else if (item.TypeId == StaticData.Classifieds_ID)
+                    {
+                        var categoryName = "/ " + item.CategoryEnName;
+
+                        var subCategoryName = GetSubCatName();
+
+                        var subTypeName = GetSubTypeName();
+
+
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
+
+                            <h5>Classifieds  @categoryName @subCategoryName @subTypeName</h5>
+
+                        </div>
+                        <div class="label-whidth">
+
+
+                            @if (item.En_Usage != null)
+                            {
+                                <label class="label-view1">
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
+                                </label>
+                            }
+
+                            @if (item.En_Age != null)
+                            {
+                                <label class="label-view1">
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
+                                </label>
+                            }
+
+                            @if (item.En_Condition != null)
+                            {
+                                <label class="label-view1">
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Condition</p>
+                                </label>
+                            }
+
+                        </div>
+                    }
+                    else if (item.TypeId == StaticData.Numbers_ID)
+                    {
+
+                        var categoryName = "/ " + item.CategoryEnName;
+
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
+
+                            <h5>Number @categoryName</h5>
+                        </div>
+                        <div class="label-whidth">
+                            <label class="label-view1">
+                                @if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Emirate</p>
+                                }
+                                else if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MobileNumberPlan</p>
+                                }
+                            </label>
+                            <label class="label-view1">
+                                @if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Operator</p>
+
+                                }
+                                else if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_PlateType</p>
+                                }
+                            </label>
+                            <label class="label-view1">
+                                @if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                {
+                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.Code</p>
+                                }
+                                else if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                {
+                                    if (!string.IsNullOrEmpty(item.PlateCode))
+                                    {
+                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.PlateCode</p>
+                                    }
+                                    else
+                                    {
+                                        <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
+                                    }
+                                }
+                            </label>
+                            @if (!string.IsNullOrEmpty(item.PlateCode))
+                            {
+                                <label class="label-view1">
+                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
+                                </label>
+                            }
+                        </div>
+                    }
+                    else if (item.TypeId == StaticData.Electronics_ID)
+                    {
+                        var categoryName = "/ " + item.CategoryEnName;
+
+                        var subCategoryName = GetSubCatName();
+
+                        var subTypeName = GetSubTypeName();
+
+                        <div class="padding-form3">
+                            <h5 style="font-size: 14px; font-family: 'Objectivity'">@item.En_Location</h5>
+
+                            <h5>Electronics @categoryName @subCategoryName @subTypeName</h5>
+
+                            @{
+                                var isChecked = item.Warranty ? "checked" : "";
+                            }
 
                             <label class="cont2">
                                 <p class="text-style3">Under Warranty </p>
                                 <input type="checkbox" @isChecked disabled>
                                 <span class="checkmark3"></span>
                             </label>
-                        }
-
-                    </div>
-                    <div class="label-whidth">
-
-                        <label class="label-view1">
-                            @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID
-                            || item.CategoryId == StaticData.Machinery_ID
-                            || item.CategoryId == StaticData.Bike_ID)
-                            {
-                                @*<p>@String.Format("{0:n0}", item.Kilometers) KM</p>*@
-                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@String.Format("{0:n0}", item.Kilometers) KM</p>
-                            }
-                            else if (item.CategoryId == StaticData.Boats_ID)
-                            {
-                                @*<p>@item.Length m</p>*@
-                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Length</p>
-                            }
-                            else if (item.CategoryId == StaticData.Parts_ID)
-                            {
-                                @*<p>@item.En_Maker</p>*@
-                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.NameOfPart</p>
-                            }
-
-                        </label>
-                        <label class="label-view1">
-
-                            <p><i><img src="~/assets/img/37.png" alt=""></i>@item.Year</p>
-                            @*<p>@item.Year</p>*@
-
-                        </label>
-                        <label class="label-view1">
-                            @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID
-                            || item.CategoryId == StaticData.Bike_ID)
-                            {
-                                <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Color</p>
-                                @*<p>@item.En_Color</p>*@
-
-                            }
-                            else if (item.CategoryId == StaticData.Boats_ID || item.CategoryId == StaticData.Parts_ID)
-                            {
-                                <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Age</p>
-                                @*<p>@item.Age year</p>*@
-                            }
-                            else if (item.CategoryId == StaticData.Machinery_ID)
-                            {
-                                @*<p>@String.Format("{0:n0}", item.Horsepower) HP</p>*@
-                                <p><i><img src="~/assets/img/38.png" alt=""></i>@String.Format("{0:n0}", item.En_Horsepower)</p>
-                            }
-
-                        </label>
-                        <label class="label-view1">
-
-                            @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID)
-                            {
-                                <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_Transmission</p>
-                                @*<p>@item.En_Transmission</p>*@
-                            }
-                            else if (item.CategoryId == StaticData.Boats_ID || item.CategoryId == StaticData.Parts_ID)
-                            {
-                                <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_Condition</p>
-
-                                @*<p>@item.En_Usage</p>*@
-                            }
-                            else if (item.CategoryId == StaticData.Bike_ID)
-                            {
-                                <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_FinalDriveSystem</p>
-
-                                @*<p>@item.En_FinalDriveSystem</p>*@
-                            }
-                            else if (item.CategoryId == StaticData.Machinery_ID)
-                            {
-                                <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_FuelType</p>
-
-                                @*<p>@item.En_FuelType</p>*@
-                            }
-
-                        </label>
-                    </div>
-                }
-                else if (item.TypeId == StaticData.Properties_ID)
-                {
-
-                    var categoryName = "/ " + item.CategoryEnName;
-
-                    var subCategoryName = "/ " + item.SubCategoryEn_Name;
-
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
-
-                        <h5>Property  @categoryName @subCategoryName </h5>
-                    </div>
-                    <div class="label-whidth">
-
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Furnishing</p>
-
-                        </label>
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Size sqft</p>
-                        </label>
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.ReadyBy.ToString("dd/MM/yyyy")</p>
-                        </label>
-                        <label class="label-view1">
-                            @if (item.ListedBy == "0")
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i> LandLord</p>
-                            }
-                            else
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i> Agent</p>
-                            }
-
-                        </label>
-                    </div>
-                }
-                else if (item.TypeId == StaticData.Jobs_ID)
-                {
-
-                    var categoryName = "/ " + item.CategoryEnName;
+                        </div>
 
 
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
+                        <div class="label-whidth">
+                            <label class="label-view1">
+                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Color</p>
 
-                        <h5>Jobs  @categoryName</h5>
-                    </div>
-                    <div class="label-whidth">
-
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_JobType</p>
-                        </label>
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_CareerLevel</p>
-
-                        </label>
-                        <label class="label-view1">
-
-                            @if (item.CategoryId == StaticData.JobWanted_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_WorkExperience year</p>
-
-                            }
-                            else if (item.CategoryId == StaticData.JobOpening_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MinWorkExperience year</p>
-                            }
-
-                        </label>
-                        <label class="label-view1">
-
-                            @if (item.CategoryId == StaticData.JobWanted_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_NoticePeriod</p>
-                            }
-                            else if (item.CategoryId == StaticData.JobOpening_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_EmploymentType</p>
-                            }
-
-                        </label>
-                    </div>
-                }
-                else if (item.TypeId == StaticData.Services_ID)
-                {
-
-                    var categoryName = "/ " + item.CategoryEnName;
-
-                    var subCategoryName = GetServiceTypeName();
-
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
-
-                        <h5>Service  @categoryName @subCategoryName </h5>
-                    </div>
-                }
-                else if (item.TypeId == StaticData.Business_ID)
-                {
-                    var categoryName = item.OtherCategoryName != null ? item.OtherCategoryName : item.CategoryEnName;
-
-
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
-
-                        <h5>Business / @categoryName</h5>
-                    </div>
-                }
-                else if (item.TypeId == StaticData.Classifieds_ID)
-                {
-                    var categoryName = "/ " + item.CategoryEnName;
-
-                    var subCategoryName = GetSubCatName();
-
-                    var subTypeName = GetSubTypeName();
-
-
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
-
-                        <h5>Classifieds  @categoryName @subCategoryName @subTypeName</h5>
-
-                    </div>
-                    <div class="label-whidth">
-
-
-                        @if (item.En_Usage != null)
-                        {
+                            </label>
                             <label class="label-view1">
                                 <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
-                            </label>
-                        }
 
-                        @if (item.En_Age != null)
-                        {
+                            </label>
                             <label class="label-view1">
                                 <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
                             </label>
-                        }
+                        </div>
+                    }
 
-                        @if (item.En_Condition != null)
-                        {
-                            <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Condition</p>
-                            </label>
-                        }
-
-                    </div>
-                }
-                else if (item.TypeId == StaticData.Numbers_ID)
-                {
-
-                    var categoryName = "/ " + item.CategoryEnName;
-
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
-
-                        <h5>Number @categoryName</h5>
-                    </div>
-                    <div class="label-whidth">
-                        <label class="label-view1">
-                            @if (item.CategoryId == StaticData.PlateNumbers_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Emirate</p>
-                            }
-                            else if (item.CategoryId == StaticData.MobileNumbers_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MobileNumberPlan</p>
-                            }
-                        </label>
-                        <label class="label-view1">
-                            @if (item.CategoryId == StaticData.MobileNumbers_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Operator</p>
-
-                            }
-                            else if (item.CategoryId == StaticData.PlateNumbers_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_PlateType</p>
-                            }
-                        </label>
-                        <label class="label-view1">
-                            @if (item.CategoryId == StaticData.MobileNumbers_ID)
-                            {
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.Code</p>
-                            }
-                            else if (item.CategoryId == StaticData.PlateNumbers_ID)
-                            {
-                                if (!string.IsNullOrEmpty(item.PlateCode))
-                                {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.PlateCode</p>
-                                }
-                                else
-                                {
-                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
-                                }
-                            }
-                        </label>
-                        @if (!string.IsNullOrEmpty(item.PlateCode))
-                        {
-                            <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
-                            </label>
-                        }
-                    </div>
-                }
-                else if (item.TypeId == StaticData.Electronics_ID)
-                {
-                    var categoryName = "/ " + item.CategoryEnName;
-
-                    var subCategoryName = GetSubCatName();
-
-                    var subTypeName = GetSubTypeName();
-
-                    <div class="padding-form3">
-                        <h5>@item.En_Location</h5>
-
-                        <h5>Electronics @categoryName @subCategoryName @subTypeName</h5>
-
-                        @{
-                            var isChecked = item.Warranty ? "checked" : "";
-                        }
-
-                        <label class="cont2">
-                            <p class="text-style3">Under Warranty </p>
-                            <input type="checkbox" @isChecked disabled>
-                            <span class="checkmark3"></span>
-                        </label>
-                    </div>
-
-
-                    <div class="label-whidth">
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Color</p>
-
-                        </label>
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
-
-                        </label>
-                        <label class="label-view1">
-                            <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
-                        </label>
-                    </div>
-                }
-
-                @{
-                    var userImageSrc = StaticData.SERVER_DOMAIN + item.UserImage;
-                }
-                <span class="padding-span3 "><a asp-controller="Users" asp-action="LiveAds" asp-route-userId="@item.UserId"><img src="@userImageSrc" alt=""></a>  @HelperFunctions.GetTime(item.PostDate)</span>
+                    @{
+                        var userImageSrc = StaticData.SERVER_DOMAIN + item.UserImage;
+                    }
+                    <span class="padding-span3 "><a asp-controller="Users" asp-action="LiveAds" asp-route-userId="@item.UserId"><img src="@userImageSrc" alt=""></a>  @HelperFunctions.GetTime(item.PostDate)</span>
+                </div>
             </div>
-        </div>
-        <div class="col-md-4">
-            <div class="float-style">
-                @if (item.TypeId != StaticData.Jobs_ID && item.TypeId != StaticData.Services_ID)
-                {
-                    <div>
-                        @if (item.CategoryId != StaticData.CommercialForRent_ID && item.CategoryId != StaticData.ResidentialForRent_ID)
-                        {
-                            <p class="card-price">AED @String.Format("{0:n0}", item.Price)</p>
-                        }
-                        else
-                        {
-                            <p class="card-price">AED @String.Format("{0:n0}", item.AnnualRent)</p>
-                        }
-                    </div>
-                }
-                else if (item.CategoryId == StaticData.JobWanted_ID)
-                {
-                    <p class="card-price">AED @String.Format("{0:n0}", item.ExpectedMonthlySalary)</p>
-                }
-                @*else if (item.CategoryId == StaticData.JobOpening_ID)
+            <div class="col-md-4">
+                <div class="float-style">
+                    @if (item.TypeId != StaticData.Jobs_ID && item.TypeId != StaticData.Services_ID)
                     {
-                        <p class="card-price">AED @String.Format("{0:n0}", item.MonthlySalary)</p>
-                    }*@
-                <div class="heart-style1">
-                    <i class="fa fa-heart-o " aria-hidden="true"></i>
-                    <!-- <i class="fa fa-flag " aria-hidden="true" data-toggle="modal" data-target="#myModal17"></i> -->
+                        <div>
+                            @if (item.CategoryId != StaticData.CommercialForRent_ID && item.CategoryId != StaticData.ResidentialForRent_ID)
+                            {
+                                <p class="card-price">AED @String.Format("{0:n0}", item.Price)</p>
+                            }
+                            else
+                            {
+                                <p class="card-price">AED @String.Format("{0:n0}", item.AnnualRent)</p>
+                            }
+                        </div>
+                    }
+                    else if (item.CategoryId == StaticData.JobWanted_ID)
+                    {
+                        <p class="card-price">AED @String.Format("{0:n0}", item.ExpectedMonthlySalary)</p>
+                    }
+                    @*else if (item.CategoryId == StaticData.JobOpening_ID)
+                        {
+                            <p class="card-price">AED @String.Format("{0:n0}", item.MonthlySalary)</p>
+                        }*@
+                    <div class="heart-style1">
+                        <i class="fa fa-heart-o " aria-hidden="true"></i>
+                        <!-- <i class="fa fa-flag " aria-hidden="true" data-toggle="modal" data-target="#myModal17"></i> -->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 }

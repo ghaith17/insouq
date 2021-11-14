@@ -435,8 +435,8 @@
             if ($("#subCategoryDL").val().toLowerCase() == "0") {
                 $("#otherSubCategory").css("display", "block");
                 $("#otherSubCategory").html(`<div class='padding-form'>
-                                                        <input placeholder="Other, please type here" required id='OtherSubCategory' name='OtherSubCategory' class="line-input-style15" type="text">
-                                                                </div>`);
+                                                            <input placeholder="Other, please type here" required id='OtherSubCategory' name='OtherSubCategory' class="line-input-style15" type="text">
+                                                                    </div>`);
 
                 $('#subTypeDL option').not(':first').remove();
 
@@ -478,8 +478,8 @@
             if ($("#subTypeDL").val().toLowerCase() == "0") {
                 $("#otherSubType").css("display", "block");
                 $("#otherSubType").html(`<div class='padding-form'>
-                                                        <input placeholder="Other, please type here" required id='OtherSubType' name='OtherSubType' class="line-input-style15" type="text">
-                                                                </div>`);
+                                                            <input placeholder="Other, please type here" required id='OtherSubType' name='OtherSubType' class="line-input-style15" type="text">
+                                                                    </div>`);
 
             } else {
                 $("#otherSubType").html("");
@@ -687,5 +687,52 @@
 
         });
     </script>
+
+    <script>
+
+        $("button").on("click", function () {
+            var input_text = $("input[type='text']");
+            if (!input_text.val()) {
+                input_text.css("border", "1px solid red");
+            }
+            var input_number = $("input[type='number']");
+            if (!input_number.val()) {
+                input_number.css("border", "1px solid red");
+            }
+            var select = $("select");
+            if (!select.val()) {
+                select.css("border", "1px solid red");
+            }
+            var textarea = $("textarea");
+            if (!textarea.val()) {
+                textarea.css("border", "1px solid red");
+            }
+
+        });
+        $('input').on("change", function () {
+            var input = $("input");
+            if (input.val()) {
+                input.css("border", "none");
+            }
+            var input_text = $("input[type='text']");
+            if (!input_text.val()) {
+                input_text.css("border", "none");
+            }
+            var input_number = $("input[type='number']");
+            if (!input_number.val()) {
+                input_number.css("border", "none");
+            }
+            var select = $("select");
+            if (!select.val()) {
+                select.css("border", "none");
+            }
+            var textarea = $("textarea");
+            if (!textarea.val()) {
+                textarea.css("border", "none");
+            }
+        });
+
+    </script>
+}
 }
 
