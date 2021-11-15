@@ -402,7 +402,7 @@ function getColorByTypeId(typeId) {
         return "#FF0073";
     }
     if (typeId == Properties_ID) {
-        return "#FFC456";
+        return "#FFBA04";
     }
     if (typeId == Jobs_ID) {
         return "#FF665B";

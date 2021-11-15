@@ -4787,15 +4787,15 @@ ul.social-network {
 }
 
     .social-network a.icoTwitter:hover {
-        background-color: #FF8A04;
+        background-color: #FFB01C;
     }
 
         .social-network a.icoTwitter:hover i {
-            color: #fff;
+            color: #FFB01C;
         }
 
     .social-network a.icoTwitter i {
-        color: #FF8A04;
+        color: #FFB01C;
     }
 
 .social-network a.icoGoogle {

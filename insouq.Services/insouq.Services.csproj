@@ -12,6 +12,7 @@
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="Google.Apis.Auth" Version="1.53.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="SaidOut.AspNetCore.HttpsWithStrictTransportSecurity" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>

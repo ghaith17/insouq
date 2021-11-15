@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using SaidOut.AspNetCore.HttpsWithStrictTransportSecurity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -135,6 +136,7 @@ Path.Combine(env.WebRootPath, "images")),
             });
 
             app.UseRouting();
+            
             app.UseHttpsRedirection();
             app.UseAuthentication();
 
