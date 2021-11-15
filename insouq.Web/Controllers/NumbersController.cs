@@ -65,6 +65,7 @@ namespace insouq.Web.Controllers
 
             return RedirectToAction("PackagesSubsicription", "Ads");
         }
+       
 
 
         public async Task<IActionResult> Update(int adId)

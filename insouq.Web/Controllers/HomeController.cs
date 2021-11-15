@@ -46,7 +46,7 @@ namespace insouq.Web.Controllers
         {
             return View();
         }
-        [RequireHttps]
+       
         public async Task<IActionResult> Index()
         {
 

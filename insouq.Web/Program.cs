@@ -22,8 +22,6 @@ namespace insouq.Web
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls("https://localhost:53228");
-
 
                 });
    

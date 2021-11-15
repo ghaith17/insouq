@@ -25,23 +25,23 @@
                         @Html.HiddenFor(m => m.Lat, new { id = "lat" })
                         <p class="post-p3">Let’s start with the title</p>
                         <p>Try to have an informative title that’s to be point and not very long</p>
-                        <div class="form-group">
+                        <div class="padding-form">
                             <input type="text" class="line-input-style17" maxlength="40" required asp-for="Title" placeholder="Dodge charger 2010 for Sale, perfect condition" id="name">
                             <Small>Recommended 40 characters</Small>
                             <p class="post-p4">Looks good, Now please add more details</p>
                         </div>
 
-                        <div class="form-group">
+                        <div class="padding-form">
                             <input placeholder="Listing price" type="number" class="line-input-style16" asp-for="Price" min="0"><label class="label-price1">AED</label>
                         </div>
 
-                        <div class="form-group">
+                        <div class="padding-form">
                             <label class="change-color">Phone Number</label>
                             <input required type="number" class="line-input-style17" asp-for="PhoneNumber" value="@ViewBag.phoneNumber">
                         </div>
 
-                        <div class="form-group">
-                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                        <div class="padding-form">
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="80" rows="7" style="border:0px;"></textarea>
                             <br>
                             <span>0/400 words</span>
                         </div>
@@ -50,19 +50,19 @@
 
                         @if (Model.CategoryId == StaticData.PlateNumbers_ID)
                         {
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <select required asp-for="Emirate" class="line-input-style15" id="emirateDL">
                                     <option value="">Emirate</option>
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <select required asp-for="PlateType" class="line-input-style15" id="plateTypeDL">
                                     <option value="">Plate Type</option>
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <select asp-for="PlateCode" class="line-input-style15" id="plateCodeDL">
                                     <option value="">Plate Code</option>
                                 </select>
@@ -71,13 +71,13 @@
                         }
                         else
                         {
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <select required asp-for="Operator" class="line-input-style15" id="operatorDL">
                                     <option value="">Operator</option>
                                 </select>
                             </div>
 
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <select required asp-for="Code" class="line-input-style15" id="codeDL">
                                     <option value="">Code</option>
                                 </select>
@@ -87,13 +87,13 @@
 
                         @if (Model.CategoryId == StaticData.PlateNumbers_ID)
                         {
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <input placeholder="Number" type="number" class="line-input-style15" asp-for="Number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5">
                             </div>
                         }
                         else
                         {
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <input placeholder="Number" id="MbNum" type="number" class="line-input-style15" asp-for="Number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7">
                             </div>
                         }
@@ -101,7 +101,7 @@
 
                         @if (Model.CategoryId == StaticData.MobileNumbers_ID)
                         {
-                            <div class="form-group">
+                            <div class="padding-form">
                                 <select required asp-for="MobileNumberPlan" class="line-input-style15" id="numberPlanDL">
                                     <option value="">Number Plan</option>
                                 </select>
@@ -109,7 +109,7 @@
                         }
 
 
-                        <div class="form-group">
+                        <div class="padding-form">
                             <select required asp-for="Location" class="line-input-style15" id="locationDL">
                                 <option value="">Your Location</option>
                             </select>
@@ -128,7 +128,7 @@
                         <!--</div>
                         <span>0/400 words</span>-->
 
-                        <div class="form-group">
+                        <div class="padding-form">
                             <button type="button" class="change-btn2" name="button" onclick="GetLocation()">Detect Location</button>
                             <div id="detectLocationError" style="margin-top:10px; display:none;">
                                 <span id="detectLocationErrorMessage" style="color:red;"></span>
@@ -159,6 +159,7 @@
                                     <div class="col-md-7"></div>
                                 </div>
                             </div>
+                            <br />
 
                         }
                         else
@@ -183,6 +184,8 @@
                                     <div class="col-md-7"></div>
                                 </div>
                             </div>
+
+                            <br />
                         }
 
 
@@ -207,8 +210,8 @@
 
                         </div>
                         <div class="padding-form padding-top">
-                            @*<button type="button" class="change-btn3" name="button" onclick="window.location.href='adpackagesubscriptions0.html'">CONTINUE</button>*@
-                            <button type="submit" onclick="onFormSubmit();" class="change-btn3" name="button">CONTINUE</button>
+                            <button type="button" class="change-btn3" name="button" onclick="onFormSubmit();">CONTINUE</button>
+                            @*<button type="button" onclick="onFormSubmit();" class="change-btn3" name="button">CONTINUE</button>*@
                         </div>
                     </form>
                 </div>

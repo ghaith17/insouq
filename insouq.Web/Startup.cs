@@ -105,7 +105,7 @@ namespace insouq.Web
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            
 
             app.UseCors(x => x
 .AllowAnyOrigin()

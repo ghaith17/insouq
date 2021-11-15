@@ -3,7 +3,7 @@
 <style>
   
 
-    input:invalid {
+   /* input:invalid {
         border-color: red;
         box-shadow: 0 0 0 1px tomato
     }
@@ -14,7 +14,7 @@
     input[value=""] {
        
         border-color: none;
-    }
+    }*/
 </style>
 <div class="notification-style">
     <div id="list-view" class="tab-pane fade active show containers trending-cat">
@@ -69,7 +69,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
-       
+        
+    
         var makerDLloaded = false;
         var subCategoryIdloaded = false;
         var locationloaded = false;
@@ -82,6 +83,7 @@
                 success: function (response) {
                     if (response.count == 0) {
                         window.location.href = `/${typeName}/Add`;
+                        
                     } else {
                         $("#categoriesList").remove();
                         $(`<div id="categoriesList"><p class="post-p2">What exactly would you like to list in ${typeName} ?</p>
@@ -140,7 +142,8 @@
                         var color = getColorByTypeId(id);
 
 
-                            $("head").append('<style type="text/css"></style>');
+                        $("head").append('<style type="text/css"></style>');
+                       
                             var newStyleElement = $("head").children(':last');
                             newStyleElement.html(`.icon-motors-${item.id} {
                                 background: url("${firstImageSrc}") no-repeat !important;
@@ -184,6 +187,25 @@ background-color: ${color} !important;
                     $("#contents").css("display", "block");
                     $("#contents").empty();
                     $("#contents").html(response);
+                    $("button").on("click", function () {
+                        var input_text = $("input[type='text']");
+                        if (!input_text.val()) {
+                            input_text.css("border", "1px solid red");
+                        }
+                        var input_number = $("input[type='number']");
+                        if (!input_number.val()) {
+                            input_number.css("border", "1px solid red");
+                        }
+                        var select = $("select");
+                        if (!select.val()) {
+                            select.css("border", "1px solid red");
+                        }
+                        var textarea = $("textarea");
+                        if (!textarea.val()) {
+                            textarea.css("border", "1px solid red");
+                        }
+
+                    });
                 },
                 error: function (error) {
                     alert(error.message);

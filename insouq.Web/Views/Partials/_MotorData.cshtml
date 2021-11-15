@@ -160,10 +160,19 @@
             </div>
         }
 
-        <button type="submit" class="signin-btn9" name="button">Continue</button>
+        <button type="button" class="signin-btn9" name="button">Continue</button>
     </form>
 </div>
 @section Scripts {
+    
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#button").live('click', function () {
+                    alert('button clicked');
+                });
+             });
+    </script>
+
     <script>
         window.onload = function () {
 

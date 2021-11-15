@@ -541,6 +541,7 @@ function onFormSubmit() {
        
     } else {
         $("#addForm").submit();
+      /*  $(location).prop('href', '/Ads/adpackagesubscriptions.html')*/
     }
    
     

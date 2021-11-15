@@ -556,7 +556,7 @@
 @section Scripts {
 
     <script type="text/javascript">
-        $("button").on("click", function () {
+        $("input").change(function () {
             var input_text = $("input[type='text']");
             if (!input_text.val()) {
                 input_text.css("border", "1px solid red");
@@ -573,6 +573,8 @@
             if (!textarea.val()) {
                 textarea.css("border", "1px solid red");
             }
+        }).trigger("change");
+           
 
         });
         $('input').on("change", function () {
