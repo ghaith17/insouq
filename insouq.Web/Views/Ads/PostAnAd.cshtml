@@ -1,6 +1,21 @@
 ﻿@using insouq.Shared.Utility
 @model List<insouq.Shared.DTOS.TypeDTOS.TypeDTO>
+<style>
+  
 
+    input:invalid {
+        border-color: red;
+        box-shadow: 0 0 0 1px tomato
+    }
+    select:invalid {
+        border-color: red;
+        box-shadow: 0 0 0 1px tomato
+    }
+    input[value=""] {
+       
+        border-color: none;
+    }
+</style>
 <div class="notification-style">
     <div id="list-view" class="tab-pane fade active show containers trending-cat">
         <div class="row">
@@ -50,53 +65,11 @@
 </div>
 
 @section Scripts {
-<script>
-    $("button").on("click", function () {
-        var input_text = $("input[type='text']");
-        if (!input_text.val()) {
-            input_text.css("border", "1px solid red");
-        }
-        var input_number = $("input[type='number']");
-        if (!input_number.val()) {
-            input_number.css("border", "1px solid red");
-        }
-        var select = $("select");
-        if (!select.val()) {
-            select.css("border", "1px solid red");
-        }
-        var textarea = $("textarea");
-        if (!textarea.val()) {
-            textarea.css("border", "1px solid red");
-        }
 
-    });
-    $('input').on("change", function () {
-        var input = $("input");
-        if (input.val()) {
-            input.css("border", "none");
-        }
-        var input_text = $("input[type='text']");
-        if (!input_text.val()) {
-            input_text.css("border", "none");
-        }
-        var input_number = $("input[type='number']");
-        if (!input_number.val()) {
-            input_number.css("border", "none");
-        }
-        var select = $("select");
-        if (!select.val()) {
-            select.css("border", "none");
-        }
-        var textarea = $("textarea");
-        if (!textarea.val()) {
-            textarea.css("border", "none");
-        }
-    });
-</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script>
-     
+       
         var makerDLloaded = false;
         var subCategoryIdloaded = false;
         var locationloaded = false;
@@ -632,49 +605,5 @@ background-color: ${color} !important;
         }
 
     </script>
-<script>
-    $("button").on("click", function () {
-        var input_text = $("input[type='text']");
-        if (!input_text.val()) {
-            input_text.css("border", "1px solid red");
-        }
-        var input_number = $("input[type='number']");
-        if (!input_number.val()) {
-            input_number.css("border", "1px solid red");
-        }
-        var select = $("select");
-        if (!select.val()) {
-            select.css("border", "1px solid red");
-        }
-        var textarea = $("textarea");
-        if (!textarea.val()) {
-            textarea.css("border", "1px solid red");
-        }
-
-    });
-    $('input').on("change", function () {
-        var input = $("input");
-        if (input.val()) {
-            input.css("border", "none");
-        }
-        var input_text = $("input[type='text']");
-        if (!input_text.val()) {
-            input_text.css("border", "none");
-        }
-        var input_number = $("input[type='number']");
-        if (!input_number.val()) {
-            input_number.css("border", "none");
-        }
-        var select = $("select");
-        if (!select.val()) {
-            select.css("border", "none");
-        }
-        var textarea = $("textarea");
-        if (!textarea.val()) {
-            textarea.css("border", "none");
-        }
-    });
-
-</script>
 
 }
