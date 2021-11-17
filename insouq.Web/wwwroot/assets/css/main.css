@@ -18449,3 +18449,21 @@ input::-webkit-inner-spin-button {
 .empty {
     border: 1px solid red;
 }
+.line-input-textarea1 {
+    display: block;
+    border: none;
+    border-bottom: none;
+    width: 83%;
+    font-weight: bold;
+    background: #fff;
+    float: right;
+    margin-right: 130px;
+    color: black;
+    margin-bottom: 20px;
+}
+.paost-align-cat {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
