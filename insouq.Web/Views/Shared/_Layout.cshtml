@@ -102,11 +102,15 @@
                             }
                             else
                             {
-                            <p>
-                                <a class="nav-link dropdown-toggle" data-toggle="modal" data-target="#myModal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Register Signin
-                                </a><img src="~/assets/img/56.png" alt="Avatar" class="avatar">
-                            </p>
+                        <p>
+                            <a class="nav-link dropdown-toggle" data-toggle="modal" data-target="#myModal1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Signin
+                            </a>
+                            <br />
+                            <a class="nav-link dropdown-toggle" data-toggle="modal" data-target="#myModal19" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Register 
+                            </a><img src="~/assets/img/56.png" alt="Avatar" class="avatar">
+                        </p>
                             }
                         </li>
                     </ul>
@@ -286,7 +290,7 @@
                             </div>
                             <input class="signin-input" type="password" id="LoginPassword" placeholder="Password">
                             <i onclick="togglePassword(1)" class="eyePassword fa fa-eye-slash password-icon" aria-hidden="true"></i>
-                            <div id="loginError" style="display: none; margin-left: 65px; margin-bottom: 10px; background: #ffffff78; width: 72%; padding: 10px;">
+                            <div id="loginError" style="display: none; margin-left: 65px; margin-bottom: 10px;  width: 72%; padding: 10px;">
                                 <span id="loginErrorMessage" style="color:#FFB01C;"></span>
                             </div>
                             <button type="button" onclick="Login()" class="signin-btn" name="button">Sign In</button>
@@ -1195,47 +1199,7 @@
 
 
         $(document).ready(function noti() {
-            $("button").on("click", function () {
-                var input_text = $("input[type='text']");
-                if (!input_text.val()) {
-                    input_text.css("border", "1px solid red");
-                }
-                var input_number = $("input[type='number']");
-                if (!input_number.val()) {
-                    input_number.css("border", "1px solid red");
-                }
-                var select = $("select");
-                if (!select.val()) {
-                    select.css("border", "1px solid red");
-                }
-                var textarea = $("textarea");
-                if (!textarea.val()) {
-                    textarea.css("border", "1px solid red");
-                }
-
-            });
-            $('input').on("change", function () {
-                var input = $("input");
-                if (input.val()) {
-                    input.css("border", "none");
-                }
-                var input_text = $("input[type='text']");
-                if (!input_text.val()) {
-                    input_text.css("border", "none");
-                }
-                var input_number = $("input[type='number']");
-                if (!input_number.val()) {
-                    input_number.css("border", "none");
-                }
-                var select = $("select");
-                if (!select.val()) {
-                    select.css("border", "none");
-                }
-                var textarea = $("textarea");
-                if (!textarea.val()) {
-                    textarea.css("border", "none");
-                }
-            });
+            
             console.log("in 55 ", 55);
             $.ajax({
                 url: "/Ads/NotiCont",
@@ -1328,13 +1292,7 @@
 
 
     </script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#button").live('click', function () {
-                alert('button clicked');
-            });
-        });
-    </script>
+  
 
     @RenderSection("Scripts", required: false)
 </body>

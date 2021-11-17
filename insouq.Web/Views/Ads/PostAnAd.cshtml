@@ -188,24 +188,32 @@ background-color: ${color} !important;
                     $("#contents").empty();
                     $("#contents").html(response);
                     $("button").on("click", function () {
-                        var input_text = $("input[type='text']");
-                        if (!input_text.val()) {
-                            input_text.css("border", "1px solid red");
-                        }
-                        var input_number = $("input[type='number']");
-                        if (!input_number.val()) {
-                            input_number.css("border", "1px solid red");
-                        }
-                        var select = $("select");
-                        if (!select.val()) {
-                            select.css("border", "1px solid red");
-                        }
-                        var textarea = $("textarea");
-                        if (!textarea.val()) {
-                            textarea.css("border", "1px solid red");
-                        }
+
+                        $(".label").remove();
+                        $('#addForm input,select').each(function () {
+                            if (!$(this).val()) {
+                                $(this).css("border", "1px solid red");    
+                                $("<span class='label label-important' style='color:red ;display:  table-caption ; margin-top: -14px' >" + "This field is mandatory" + '</span>').insertAfter(this);
+                            } else {
+                                $(this).removeClass("label label-important");
+
+
+                            }
+                        });
+
+
 
                     });
+                    $('#addForm input,select').each(function () {
+
+                        $(this).on("change", function () {
+                            if ($(this).val()) {
+                                $(this).next('span').remove();
+                                $(this).css("border", "");
+                            }
+                        });
+                    });
+
                 },
                 error: function (error) {
                     alert(error.message);
@@ -223,6 +231,32 @@ background-color: ${color} !important;
                     $("#contents").css("display", "block");
                     $("#contents").empty();
                     $("#contents").html(response);
+                    $("button").on("click", function () {
+
+                        $(".label").remove();
+                        $('#addForm input,select').each(function () {
+                            if (!$(this).val()) {
+                                $(this).css("border", "1px solid red");
+                                $("<span class='label label-important' style='color:red ;display:  table-caption ; margin-top: -14px' >" + "This field is mandatory" + '</span>').insertAfter(this);
+                            } else {
+                                $(this).removeClass("label label-important");
+
+
+                            }
+                        });
+
+
+
+                    });
+                    $('#addForm input,select').each(function () {
+
+                        $(this).on("change", function () {
+                            if ($(this).val()) {
+                                $(this).next('span').remove();
+                                $(this).css("border", "");
+                            }
+                        });
+                    });
                 },
                 error: function (error) {
                     alert(error.message);
@@ -241,6 +275,32 @@ background-color: ${color} !important;
                     $("#contents").html(response);
                     $("#categoriesList").remove();
                     $(".tab-pane").css("display", "block");
+                    $("button").on("click", function () {
+
+                        $(".label").remove();
+                        $('#addForm input,select').each(function () {
+                            if (!$(this).val()) {
+                                $(this).css("border", "1px solid red");
+                                $("<span class='label label-important' style='color:red ;display:  table-caption ; margin-top: -14px' >" + "This field is mandatory" + '</span>').insertAfter(this);
+                            } else {
+                                $(this).removeClass("label label-important");
+
+
+                            }
+                        });
+
+
+
+                    });
+                    $('#addForm input,select').each(function () {
+
+                        $(this).on("change", function () {
+                            if ($(this).val()) {
+                                $(this).next('span').remove();
+                                $(this).css("border", "");
+                            }
+                        });
+                    });
                 },
                 error: function (error) {
                     alert(error.message);
@@ -256,6 +316,33 @@ background-color: ${color} !important;
                     $("#contents").css("display", "block");
                     $("#contents").empty();
                     $("#contents").html(response);
+                    $("button").on("click", function () {
+                        
+                        $(".label").remove();
+                        $('#addForm input,select').each(function () {
+                            if (!$(this).val()) {
+                                $(this).css("border", "1px solid red");
+                                $("<span class='label label-important' style='color:red ;display:  table-caption ; margin-top: -14px' >" + "This field is mandatory" + '</span>').insertAfter(this);
+                            } else {
+                                $(this).removeClass("label label-important");
+                              
+
+                            }
+                        });
+                       
+                       
+
+                    });
+                    $('#addForm input,select').each(function () {
+                       
+                        $(this).on("change", function () {
+                            if ($(this).val()) {
+                                $(this).next('span').remove();
+                                $(this).css("border", "");
+                            }
+                        });
+                    });
+                    
                 },
                 error: function (error) {
                     alert(error.message);

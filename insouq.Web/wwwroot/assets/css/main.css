@@ -12626,7 +12626,7 @@ input[type="checkbox"] {
 
 .repo-ad {
     margin-left: 15px;
-    font-size: 20px;
+    font-size: 14px;
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
@@ -13333,14 +13333,13 @@ input::-webkit-inner-spin-button {
     border-bottom: none;
     width: 83%;
     height: 40px !important;
-    font-weight: bold;
+    
     background: #fff;
     float: right;
     margin-right: 130px;
-    color: black;
+    color: #6C7B8A;
     margin-bottom: 20px;
 }
-
 .line-input-style16 {
     display: block;
     border: none;

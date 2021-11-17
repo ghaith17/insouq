@@ -39,12 +39,12 @@
 
         <p class="padding-p">
             <label class="change-color">Phone Number</label>
-            <input required type="number" class="line-input-style17" value="@ViewBag.phoneNumber" name="PhoneNumber" id="PhoneNumber">
+            <input required  type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "11" class="line-input-style17" value="@ViewBag.phoneNumber" name="PhoneNumber" id="PhoneNumber" maxlength="11" min="11">
         </p>
 
         <br />
 
-        <textarea placeholder="Add a short description" required cols="92" rows="7" style="border:0px;" data-val="true" data-val-maxlength="The field Description must be a string or array type with a maximum length of '1000'." data-val-maxlength-max="1000" data-val-required="The Description field is required." id="description" maxlength="1000" name="description"></textarea>
+        <textarea placeholder="Add a short description" required cols="80" rows="7" style="border:0px;" data-val="true" data-val-maxlength="The field Description must be a string or array type with a maximum length of '1000'." data-val-maxlength-max="1000" data-val-required="The Description field is required." id="description" maxlength="1000" name="description"></textarea>
 
         <p class="padding-p">
             <select required class="line-input-style15" id="location" name="location" onclick="onLocationClick()">

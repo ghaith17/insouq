@@ -1,5 +1,5 @@
 ﻿<div id="j1" style="display:block;">
-    <form asp-action="AddInitalJobWanted" method="post">
+    <form id="addForm" asp-action="AddInitalJobWanted" method="post">
         <p class="post-p3">Let’s start with the title</p>
         <p>Try to have an informative title that’s to be point and not very long</p>
         <input required type="text" class="line-input-style17" maxlength="40" id="title" name="title" value=""
@@ -20,11 +20,12 @@
 
         <p class="padding-p">
             <label class="change-color">Phone Number</label>
-            <input required type="number" class="line-input-style17" value="@ViewBag.phoneNumber" name="PhoneNumber" id="PhoneNumber">
+            <input required type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "11" class="line-input-style17" value="@ViewBag.phoneNumber" name="PhoneNumber" id="PhoneNumber"  min="11">
         </p>
 
         <p class="padding-p">
-            <input placeholder="Job Title" required class="line-input-style15" name="JobTitle" id="JobTitle">
+            <label class="change-color"></label>
+            <input type='text' placeholder="Job Title" required class="line-input-style15" name="JobTitle" id="JobTitle">
         </p>
 
         <button type="submit" class="signin-btn9" name="button">Continue</button>

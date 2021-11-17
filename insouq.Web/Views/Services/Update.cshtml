@@ -36,11 +36,11 @@
 
                         <div class="padding-form">
                             <label class="change-color">Phone Number</label>
-                            <input required type="number" class="line-input-style17" asp-for="PhoneNumber">
+                            <input required  type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength = "11" class="line-input-style17" asp-for="PhoneNumber" maxlength="11" min="11">
                         </div>
 
                         <div class="padding-form">
-                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="80" rows="7" style="border:0px;"></textarea>
                             <br>
                             <span>@Model.Description.Length/400 words</span>
                         </div>

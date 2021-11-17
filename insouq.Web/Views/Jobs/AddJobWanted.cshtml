@@ -29,7 +29,7 @@
 
 
                         <div class="padding-form">
-                            <textarea placeholder="Add a short description" required asp-for="Description" cols="92" rows="7" style="border:0px;"></textarea>
+                            <textarea placeholder="Add a short description" required asp-for="Description" cols="80" rows="7" style="border:0px;"></textarea>
                             <br>
                             <span>0/400 words</span>
                         </div>
@@ -373,46 +373,32 @@
 
     <script>
 
+
         $("button").on("click", function () {
-            var input_text = $("input[type='text']");
-            if (!input_text.val()) {
-                input_text.css("border", "1px solid red");
-            }
-            var input_number = $("input[type='number']");
-            if (!input_number.val()) {
-                input_number.css("border", "1px solid red");
-            }
-            var select = $("select");
-            if (!select.val()) {
-                select.css("border", "1px solid red");
-            }
-            var textarea = $("textarea");
-            if (!textarea.val()) {
-                textarea.css("border", "1px solid red");
-            }
+
+            $(".label").remove();
+            $('#addForm input,select').each(function () {
+                if (!$(this).val()) {
+                    $(this).css("border", "1px solid red");
+                    $("<span class='label label-important' style='color:red ;display:  table-caption ; margin-top: -14px' >" + "This field is mandatory" + '</span>').insertAfter(this);
+                } else {
+                    $(this).removeClass("label label-important");
+
+
+                }
+            });
+
+
 
         });
-        $('input').on("change", function () {
-            var input = $("input");
-            if (input.val()) {
-                input.css("border", "none");
-            }
-            var input_text = $("input[type='text']");
-            if (!input_text.val()) {
-                input_text.css("border", "none");
-            }
-            var input_number = $("input[type='number']");
-            if (!input_number.val()) {
-                input_number.css("border", "none");
-            }
-            var select = $("select");
-            if (!select.val()) {
-                select.css("border", "none");
-            }
-            var textarea = $("textarea");
-            if (!textarea.val()) {
-                textarea.css("border", "none");
-            }
+        $('#addForm input,select').each(function () {
+
+            $(this).on("change", function () {
+                if ($(this).val()) {
+                    $(this).next('span').remove();
+                    $(this).css("border", "");
+                }
+            });
         });
 
     </script>
