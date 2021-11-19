@@ -832,6 +832,7 @@ a.back-to-top {
         top: 0px;
         left: 0px;
         background: #F6F7F9;
+        z-index: -1;
     }
 
     #hero-area .contents {
@@ -5003,6 +5004,7 @@ a.socialIcon:hover, .socialHoverClass {
     .items a {
         color: #7255F1;
         font-weight: bold;
+        font-size: 13px;
     }
 
 
@@ -9864,7 +9866,7 @@ img:after {
 
     .label-view2 p {
         border-radius: 5px;
-        color: black;
+        color: gray;
         font-weight: bold;
     }
 
@@ -13211,14 +13213,11 @@ input:focus-visible {
     margin-bottom: 20px;
 }
 
-..label-view3 p {
-    border-radius: 5px;
-    color: black;
-    font-weight: bold;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
+    .label-view3 p {
+        color: gray;
+        font-weight: bold;
+        font-size: 14px;
+    }
 
 .label-view3 i {
     padding-right: 5px;
@@ -13255,11 +13254,7 @@ input:focus-visible {
         padding-left: 24px;
     }
 
-.label-view3 p {
-    color: black;
-    font-weight: bold;
-    font-size: 14px;
-}
+
 
 .pr {
     font-size: 14px;
@@ -18120,11 +18115,10 @@ input::-webkit-inner-spin-button {
 }
 
 .subcat-home {
-    color: black !important;
+    color: gray !important;
     font-weight: normal !important;
-    font-size: 16px;
+    font-size: 12px;
 }
-
 .bann-right-sub img {
     width: 96%;
     margin-top: 219px;

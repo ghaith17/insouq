@@ -139,8 +139,7 @@
                         {
 
                             <div class="co-md-12">
-                                <p><button type="button" class="signin-btn9" name="button" id="viewButtonP">view in plate</button></p>
-
+                  
                                 <div class="row" style="margin:0;">
 
 
@@ -165,8 +164,7 @@
                         else
                         {
                             <div class="co-md-12">
-                                <p><button type="button" class="signin-btn9" name="button" id="viewButtonN">view in plate</button></p>
-
+                               
                                 <div class="row" style="margin:0;">
 
 
@@ -230,71 +228,71 @@
 
        
 
-        $("#viewButtonN").on("click", function () {
-            if ($("#codeDL option:selected").val() === "" || $("#operatorDL option:selected").val() === "" || $('#MbNum').val() === "")
-                return;
-            else {
+        //$("#codeDL").on("change", function () {
+        //    if ($("#codeDL option:selected").val() === "" || $("#operatorDL option:selected").val() === "" || $('#MbNum').val() === "")
+        //        return;
+        //    else {
 
-                $('#MobileImg').attr('src', null);
-                $('#MobileNum').text(null);
-                var _url_MB = 'https://insouq.com/images/' + $("#operatorDL option:selected").text().charAt(0) + 'Number.png';
-                $('#MobileImg').attr('src', _url_MB);
-                $('#MobileNum').text($('#codeDL option:selected').val() + $('#MbNum').val());
-                function imgLoadCallback() {
-                    $('#MobileImg').show();
-                    $('#MobileNum').show();
-                }
+        //        $('#MobileImg').attr('src', null);
+        //        $('#MobileNum').text(null);
+        //        var _url_MB = 'https://insouq.com/images/' + $("#operatorDL option:selected").text().charAt(0) + 'Number.png';
+        //        $('#MobileImg').attr('src', _url_MB);
+        //        $('#MobileNum').text($('#codeDL option:selected').val() + $('#MbNum').val());
+        //      //  function imgLoadCallback() {
+        //            $('#MobileImg').css("display", "block");
+        //            $('#MobileNum').css("display", "block");
+        //      //  }
 
-                var img = new Image();
-                img.addEventListener('load', imgLoadCallback, false);
-                img.src = _url_MB;
-            }
-        });
+        //        //var img = new Image();
+        //        //img.addEventListener('load', imgLoadCallback, false);
+        //        //img.src = _url_MB;
+        //    }
+        //});
 
-        $("#viewButtonP").on("click", function () {
-            if ($("#emirateDL option:selected").val() === "" || $("#plateTypeDL option:selected").val() === "" || $('#Number').val() === "")
-                return;
-            else {
-                $('#plateNum').text(null);
-                $('#plateC').text(null);
-                $('#palteImg').attr('src', null);
-
-
-                var plateType = $("#plateTypeDL option:selected").text();
-                var _url = 'https://insouq.com/images/plates/';
-                var plateEmirate = $("#emirateDL option:selected").text() + '-';
-                var ext = '.png';
-                var url = _url + plateEmirate + plateType + ext;
-                $('#palteImg').attr('src', url);
+        //$("#emirateDL").on("change", function () {
+        //    if ($("#emirateDL option:selected").val() === "" || $("#plateTypeDL option:selected").val() === "" || $('#Number').val() === "")
+        //        return;
+        //    else {
+        //        $('#plateNum').text(null);
+        //        $('#plateC').text(null);
+        //        $('#palteImg').attr('src', null);
 
 
-                if (plateType != "") {
-                    plateType = plateType.split("-")[0];
-                }
-
-                var _classP = $("#emirateDL option:selected").text().replace(/\s/g, '') + '-' + plateType.charAt(0) + 'Number';
-                $('#plateNum').attr('class', _classP);
-                var _classC = $("#emirateDL option:selected").text().replace(/\s/g, '') + '-' + plateType.charAt(0) + 'Code';
-                $('#plateC').attr('class', _classC);
+        //        var plateType = $("#plateTypeDL option:selected").text();
+        //        var _url = 'https://insouq.com/images/plates/';
+        //        var plateEmirate = $("#emirateDL option:selected").text() + '-';
+        //        var ext = '.png';
+        //        var url = _url + plateEmirate + plateType + ext;
+        //        $('#palteImg').attr('src', url);
 
 
-                $('#plateNum').text($('#Number').val());
-                $('#plateC').text($("#plateCodeDL option:selected").val());
+        //        if (plateType != "") {
+        //            plateType = plateType.split("-")[0];
+        //        }
 
-                function imgLoadCallback() {
-                    $('#palteImg').show();
-                    $('#plateNum').show();
-                    $('#plateC').show();
-                }
-
-                var img = new Image();
-                img.addEventListener('load', imgLoadCallback, false);
-                img.src = url;
-
-            }
+        //        var _classP = $("#emirateDL option:selected").text().replace(/\s/g, '') + '-' + plateType.charAt(0) + 'Number';
+        //        $('#plateNum').attr('class', _classP);
+        //        var _classC = $("#emirateDL option:selected").text().replace(/\s/g, '') + '-' + plateType.charAt(0) + 'Code';
+        //        $('#plateC').attr('class', _classC);
 
 
-        });
+        //        $('#plateNum').text($('#Number').val());
+        //        $('#plateC').text($("#plateCodeDL option:selected").val());
+
+        //       // function imgLoadCallback() {
+        //            $('#palteImg').css("display", "block");
+        //            $('#plateNum').css("display", "block");
+        //            $('#plateC').css("display", "block");
+        //      //  }
+
+        //        //var img = new Image();
+        //        //img.addEventListener('load', imgLoadCallback, false);
+        //        //img.src = url;
+
+        //    }
+
+
+        //});
 
         var numberPlanDLloaded = false;
         $("#numberPlanDL").on("click", function () {
@@ -340,6 +338,7 @@
             $("#plateTypeDL option").not(':first').remove();
             $("#plateCodeDL option").not(':first').remove();
             var emirate = $("#emirateDL").val();
+
             $.ajax({
                 url: `/DropDowns/GetAllPlateTypeByEmirate?emirate=${emirate}`,
                 method: "GET",
@@ -359,6 +358,32 @@
             $("#plateCodeDL option").not(':first').remove();
             var emirate = $("#emirateDL").val();
             var plateType = $("#plateTypeDL").val();
+
+            $('#plateNum').text(null);
+            $('#plateC').text(null);
+            $('#palteImg').attr('src', null);
+            $('#palteImg').css("display", "none");
+            $('#Number').val(null);
+
+
+            var plateT = $("#plateTypeDL option:selected").text();
+            var _url = 'https://insouq.com/images/plates/';
+            var plateEmirate = $("#emirateDL option:selected").text() + '-';
+            var ext = '.png';
+            var url = _url + plateEmirate + plateT + ext;
+            $('#palteImg').attr('src', url);
+
+
+            if (plateT != "") {
+                plateT = plateT.split("-")[0];
+            }
+
+            var _classP = $("#emirateDL option:selected").text().replace(/\s/g, '') + '-' + plateT.charAt(0) + 'Number';
+            $('#plateNum').attr('class', _classP);
+            var _classC = $("#emirateDL option:selected").text().replace(/\s/g, '') + '-' + plateT.charAt(0) + 'Code';
+            $('#plateC').attr('class', _classC);
+            $('#palteImg').css("display", "block");
+            
             $.ajax({
                 url: `/DropDowns/GetAllPlateCode?plateType=${plateType}&emirate=${emirate}`,
                 method: "GET",
@@ -368,7 +393,7 @@
                     });
                 },
                 error: function (error) {
-                    alert(error.message);
+                    console.write(error.message);
                 }
             });
         });
@@ -457,6 +482,23 @@
             if ($(this).val()) {
                 $(this).next('span').remove();
                 $(this).css("border", "");
+                console.log($(this).attr('id'));
+                if ($(this).attr('id') == "Number") {
+
+                    if (!$('#palteImg').is(':hidden')) {
+                        $('#plateNum').text($('#Number').val());
+                        $('#plateNum').css("display", "block");
+                    }
+                   
+
+                }
+                if ($(this).attr('id') == "plateCodeDL") {
+                    if (!$('#palteImg').is(':hidden')) {
+                        $('#plateC').text($("#plateCodeDL option:selected").val());
+                        $('#plateC').css("display", "block");
+
+                    }
+                }
             }
         });
     });

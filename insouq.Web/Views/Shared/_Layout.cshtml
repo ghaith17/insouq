@@ -102,13 +102,10 @@
                             }
                             else
                             {
+                      
                         <p>
-                            <a class="nav-link dropdown-toggle" data-toggle="modal" data-target="#myModal1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                 Signin
-                            </a>
-                            <br />
                             <a class="nav-link dropdown-toggle" data-toggle="modal" data-target="#myModal19" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Register 
+                                Register Signin
                             </a><img src="~/assets/img/56.png" alt="Avatar" class="avatar">
                         </p>
                             }
@@ -194,8 +191,17 @@
                             <button type="button" class="register-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">
                                 <img style="width: 7%;margin-right: 10px;margin-left: -15px;" src="assets/img/3.svg"></img>Continue With Appale
                             </button>
-                            <button type="button" class="signin-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">Continue With Email</button>
+                            @*<button type="button" class="signin-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">Continue With Email</button>*@
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <button type="button" class="signin-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">Register</button>
 
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" style="margin-left: 0;" class="signin-btn" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal1">Signin</button>
+
+                                </div>
+                            </div>
 
                         </section>
                     </div>
@@ -294,11 +300,11 @@
                                 <span id="loginErrorMessage" style="color:#FFB01C;"></span>
                             </div>
                             <button type="button" onclick="Login()" class="signin-btn" name="button">Sign In</button>
-                            <x>OR</x>
+                            @*<x>OR</x>
                             <p class="p-style">Sign up with</p>
                             <button type="button" class="facebook-btn" name="button" onclick="fb_login()"><img src="~/assets/img/20.png" alt="" onclick="fb_login()"> facebook</button>
                             <button type="button" class="gmail-btn" name="button" id="googleSignIn"><img src="~/assets/img/21.png" alt=""> gmail</button>
-                            <p class="p2-style">By signing in, I agree on their <a asp-controller="Home" asp-action="Terms"> Terms and Conditions </a>and <a asp-controller="Home" asp-action="PrivacyPolicy"> Privacy Policy</a></p>
+                            <p class="p2-style">By signing in, I agree on their <a asp-controller="Home" asp-action="Terms"> Terms and Conditions </a>and <a asp-controller="Home" asp-action="PrivacyPolicy"> Privacy Policy</a></p>*@
                             <button type="button" class="forgot-password" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal2">FORGOT your password?</button>
                             <button type="button" class="create-account" name="button" data-dismiss="modal" data-toggle="modal" data-target="#myModal3">CREATE ACCOUNT</button>
 

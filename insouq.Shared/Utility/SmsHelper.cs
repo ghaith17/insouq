@@ -22,7 +22,7 @@ namespace insouq.Shared.Utility
                 {
                     mobileNumber = mobileNumber.Substring(2, mobileNumber.Length - 2);
                     WebClient client = new WebClient();
-                    string baseurl = "https://mshastra.com/sendurl.aspx?user=20101102&pwd=kdzd26&senderid=AD-INSOUQ&mobileno=+" + mobileNumber + "&msgtext=" + code + "&priority=High&CountryCode=ALL";
+                    string baseurl = "https://mshastra.com/sendurl.aspx?user=20101102&pwd=kdzd26&senderid=AD-INSOUQ&mobileno=+" + mobileNumber + "&msgtext=" + code +" Is your INSOUQ account verification code." + "&priority=High&CountryCode=ALL";
                     Stream data = client.OpenRead(baseurl);
                     StreamReader reader = new StreamReader(data);
                     string s = reader.ReadToEnd();

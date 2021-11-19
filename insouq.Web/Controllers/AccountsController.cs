@@ -61,18 +61,18 @@ namespace insouq.Web.Controllers
                 return Json(addUserResponse);
             }
 
-            //var sendSmsCodeDTO = new SendSmsCodeDTO
-            //{
-            //    MobileNumber = model.MobileNumber,
-            //    UserId = addUserResponse.UserId
-            //};
+            var sendSmsCodeDTO = new SendSmsCodeDTO
+            {
+                MobileNumber = model.MobileNumber,
+                UserId = addUserResponse.UserId
+            };
 
-            //var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
-           
-            //if (!sendCodeResponse.IsSuccess)
-            //{
-            //    return Json(sendCodeResponse);
-            //}
+            var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
+
+            if (!sendCodeResponse.IsSuccess)
+            {
+                return Json(sendCodeResponse);
+            }
 
             return Json(new { isSuccess = true, message = "User Registered Successfully", userId = addUserResponse.UserId });
         }
