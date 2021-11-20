@@ -1,0 +1,93 @@
+﻿@model insouq.Models.StaticData.FAQS
+
+@{
+    ViewData["Title"] = "FAQS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+
+
+
+
+<div class="row mb-2">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @if (Model.Id == 0)
+                {
+                    <h2 style="color:#000;"><strong>Add</strong> New Item</h2>
+                }
+                else
+                {
+                    <h2 style="color:#000;"><strong>Edit</strong> Item</h2>
+                }
+            </div>
+            <div class="panel-body">
+
+                <form asp-action="FAQS" method="POST" enctype="multipart/form-data" name="myForm">
+                    @Html.HiddenFor(m => m.Id)
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input required type="text" asp-for="Question" placeholder="Question (ENG)" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <input required type="text" asp-for="Answer" placeholder="Answer (ENG)" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input required type="text" asp-for="Ar_Question" placeholder="Question (AR)" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <input required type="text" asp-for="Ar_Answer" placeholder="Answer (AR)" class="form-control">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group" align="right">
+                        <a class="btn btn-danger btn-sm" type="button" asp-action="AllFAQS">Cancel</a>
+                        @if (Model.Id == 0)
+                        {
+                            <input type="submit" name="save" value="Add Item" class="btn btn-primary btn-sm">
+                        }
+                        else
+                        {
+                            <input type="submit" name="save" value="Edit Item" class="btn btn-primary btn-sm">
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

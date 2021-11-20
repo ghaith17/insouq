@@ -29,7 +29,7 @@
     <link href="https://cdn.datatables.net/fixedheader/3.1.6/css/fixedHeader.dataTables.min.css" rel="stylesheet">
     <link href="~/assets/css/style.min.css" rel="stylesheet">
     <!-- <link href="sortable.css" rel="stylesheet"> -->
-    <link rel="stylesheet" href="gallery-grid.css">
+    <link rel="stylesheet" href="~/gallery-grid.css">
 
 </head>
 <body>
@@ -75,7 +75,7 @@
             <div class="sidebar col-md-2 col-sm-1 ">
                 <div class="sidebar-collapse collapse">
                     <ul class="nav nav-sidebar">
-                        <li><a href="#"><i class="fa fa-bar-chart-o"></i><span class="hidden-sm text"> Dashboard</span></a></li>
+                        @*<li><a href="#"><i class="fa fa-bar-chart-o"></i><span class="hidden-sm text"> Dashboard</span></a></li>*@
                         <li><a asp-controller="AdsManagement" asp-action="Index"><i class="fas fa-th"></i> Ads</a></li>
                         <li><a asp-controller="Users" asp-action="Index"><i class="fas fa-users"></i> Users</a></li>
                         <li><a asp-controller="MotorsDL" asp-action="Index"><i class="fas fa-car"></i> Motors DL</a></li>
@@ -84,6 +84,9 @@
                         <li><a asp-controller="ClassifiedsDL" asp-action="Index"><i class="fas fa-list"></i> Classifieds DL</a></li>
                         <li><a asp-controller="ElectronicsDL" asp-action="Index"><i class="fas fa-mobile"></i> Electronics DL</a></li>
                         <li><a asp-controller="NumbersDL" asp-action="Index"><i class="fas fa-ellipsis-h"></i> Numbers DL</a></li>
+                        <li><a asp-controller="JobsDL" asp-action="Index"><i class="fa fa-user"></i> Jobs DL</a></li>
+                        <li><a asp-controller="CommonDL" asp-action="Index"><i class="fas fa-caret-square-down"></i> Common DL</a></li>
+                        <li><a asp-controller="WebsiteStaticData" asp-action="Index"><i class="fas fa-database"></i> Static Data</a></li>
                     </ul>
                 </div>
                 <a href="#" id="main-menu-min" class="full visible-md visible-lg"><i class="fa fa-angle-double-left"></i></a>
@@ -96,7 +99,7 @@
                         background: #7d6755;
                         padding: 20px;
                         color: #fff;
-                        width: 200px;
+                        /*width: 200px;*/
                     }
                 </style>
 

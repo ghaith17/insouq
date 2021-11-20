@@ -108,6 +108,8 @@ namespace insouq.Shared.DTOS
 
         public string UserImage { get; set; }
 
+        public string JobTitle { get; set; }
+
         public List<AdPictureDTO> Pictures { get; set; }
     }
 }

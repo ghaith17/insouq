@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace InsouqWebCMS.Controllers
 {
-    [Authorize(Roles = StaticData.Admin_Role)]
+    //[Authorize(Roles = StaticData.Admin_Role)]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

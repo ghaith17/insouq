@@ -57,6 +57,6 @@ namespace insouq.Models
         public List<FavoriteAd> Favorites { get; set; }
 
         [NotMapped]
-        public double Price { get; set; }
+        public double? Price { get; set; }
     }
 }

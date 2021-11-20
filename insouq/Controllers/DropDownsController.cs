@@ -451,7 +451,7 @@ namespace insouq.Controllers
         //}
 
         [HttpPost(nameof(GetAllPlateCode))]
-        public async Task<IActionResult> GetAllPlateCode([FromBody] PlateCodeDTO dto)
+        public async Task<IActionResult> GetAllPlateCode([FromForm] PlateCodeDTO dto)
         {
             var list = await _dropDownService.GetAllPlateCode(dto.plateType, dto.emirate);
 

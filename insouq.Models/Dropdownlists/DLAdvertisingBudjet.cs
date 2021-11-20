@@ -8,7 +8,7 @@ namespace insouq.Models.Dropdownlists
     {
         public int Id { get; set; }
 
-        public double  FromValue { get; set; }
-        public double  ToValue { get; set; }
+        public string En_Text { get; set; }
+        public string Ar_Text { get; set; }
     }
 }

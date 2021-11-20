@@ -43,10 +43,9 @@ namespace insouq.Controllers
             return Ok(ad);
         }
 
-        [Authorize]
         [HttpPost]
         [Route("AddInitialMotor")]
-        public async Task<IActionResult> AddInitialMotor([FromForm] AddInitalMotor dataModel)
+        public async Task<IActionResult> AddInitialMotor([FromBody] AddInitalMotor dataModel)
         {
             var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 
@@ -68,7 +67,6 @@ namespace insouq.Controllers
             return BadRequest(response);
         }
 
-        [Authorize]
         [HttpPost]
         [Route("AddFullMotor")]
         public async Task<IActionResult> AddFullMotor([FromForm] MotorsAdDTO dataModel)

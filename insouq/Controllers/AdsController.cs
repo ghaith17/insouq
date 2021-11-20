@@ -288,7 +288,7 @@ namespace insouq.Controllers
         }
 
         [HttpGet]
-        [Route("GetUserAdsCount")]
+        [Route("GetMyAdsCount")]
         public async Task<IActionResult> GetMyAdsCount()
         {
             var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();

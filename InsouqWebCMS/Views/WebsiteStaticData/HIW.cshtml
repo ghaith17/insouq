@@ -1,0 +1,137 @@
+﻿@model InsouqWebCMS.Models.UpsertHIWVM
+
+@{
+    ViewData["Title"] = "How It Works";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row mb-2">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                @if (Model.HIW.Id == 0)
+                {
+                    <h2 style="color:#000;"><strong>Add</strong> New Item</h2>
+                }
+                else
+                {
+                    <h2 style="color:#000;"><strong>Edit</strong> Item</h2>
+                }
+            </div>
+            <div class="panel-body">
+
+                <form asp-action="HIW" method="POST" enctype="multipart/form-data" name="myForm">
+                    @Html.HiddenFor(m => m.HIW.Id)
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <textarea required asp-for="HIW.paragraph1" rows="6" placeholder="First Paragraph (ENG)" class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea required asp-for="HIW.Ar_paragraph1" rows="6" placeholder="First Paragraph (AR)" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <textarea required asp-for="HIW.paragraph2" rows="6" placeholder="Second Paragraph (ENG)" class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea required asp-for="HIW.Ar_paragraph2" rows="6" placeholder="Second Paragraph (AR)" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <textarea required asp-for="HIW.paragraph3" rows="6" placeholder="Third Paragraph (ENG)" class="form-control"></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <textarea required asp-for="HIW.Ar_paragraph3" rows="6" placeholder="Third Paragraph (AR)" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input required asp-for="HIW.VIDUrl" rows="6" placeholder="Video Url" class="form-control"/>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (Model.HIW.Id == 0)
+                                {
+                                    <input required type="file" asp-for="File">
+                                }
+                                else
+                                {
+                                    <input type="file" asp-for="File">
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-12">
+                                @if (Model.HIW.Id == 0)
+                                {
+                                    <input required type="file" asp-for="File2">
+                                }
+                                else
+                                {
+                                    <input type="file" asp-for="File2">
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" align="right">
+                        <a class="btn btn-danger btn-sm" type="button" asp-action="AllHIW">Cancel</a>
+                        @if (Model.HIW.Id == 0)
+                        {
+                            <input type="submit" name="save" value="Add Item" class="btn btn-primary btn-sm">
+                        }
+                        else
+                        {
+                            <input type="submit" name="save" value="Edit Item" class="btn btn-primary btn-sm">
+                        }
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

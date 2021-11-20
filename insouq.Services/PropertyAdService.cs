@@ -36,7 +36,7 @@ namespace insouq.Services
         {
             var ad = await _db.PropertyAds.Include(a => a.Ad).Include(a => a.Ad.Pictures).Include(a => a.Ad.Category)
                 .Include(a => a.SubCategory)
-                .Where(a => a.Ad.Status == 1)
+                .Where(a => a.Ad.Status == 1 || a.Ad.Status == 2)
                 .Select(property => new GetPropertyAdDTO
                 {
                     TypeId = StaticData.Properties_ID,

@@ -5809,4 +5809,279 @@ border-color: #5d4afa !important;
   width: 95%;
 border-radius: 7px !important;
 }
+@font-face {
+  font-family: 'beba';
+  src: url('font/BebasKai.ttf');
+}
+@font-face {
+  font-family: 'myFirstFont';
+  src: url('font/GlNummernschildMtl-LrZZ.ttf');
+}
 
+.AbuDhabi-MNumber {
+    font-family: 'myFirstFont';
+    font-size: 26px !important;
+    background: transparent;
+    margin-top: -32px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+.AbuDhabi-MCode {
+    font-family: 'myFirstFont';
+    position: absolute;
+    font-size: 25px !important;
+    background: transparent;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-top: -58px;
+    margin-left: 131px;
+}
+.AbuDhabi-CNumber {
+    font-family: 'myFirstFont';
+    font-size: 25px !important;
+    background: transparent;
+    margin-top: -31px;
+    font-style: initial;
+    color: #fff;
+    font-weight: 400;
+}
+.AbuDhabi-CCode {
+    font-family: 'myFirstFont';
+    font-size: 20px !important;
+    background: transparent;
+    margin-top: -50px;
+    float: left;
+    position: absolute;
+    margin-left: 57px;
+    font-style: initial;
+    color: #fff;
+    font-weight: 400;
+}
+.AbuDhabi-PNumber {
+    font-family: 'myFirstFont';
+    font-size: 26px !important;
+    background: transparent;
+    margin-top: -32px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+
+
+.AbuDhabi-PCode {
+    font-family: 'myFirstFont';
+    font-size: 23px !important;
+    background: transparent;
+    margin-top: -51px;
+    float: left;
+    position: absolute;
+    margin-left: 58px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+
+.Ajman-PNumber {
+    font-family: 'myFirstFont';
+    font-size: 29px !important;
+    background: transparent;
+    margin-top: -55px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 22px;
+}
+.Ajman-PCode {
+    font-family: 'myFirstFont';
+    position: absolute;
+    font-size: 28px !important;
+    background: transparent;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-top: -54px;
+    margin-left: 57px;
+}
+.Dubai-MNumber {
+    font-family: 'beba';
+    font-size: 24px !important;
+    background: transparent;
+    margin-top: -34px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 35px;
+}
+.Dubai-MCode {
+    font-family: 'beba';
+    font-size: 20px !important;
+    background: transparent;
+    margin-top: -55px;
+    float: left;
+    position: absolute;
+    margin-left: 64px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+.Dubai-CNumber {
+    font-family: 'beba';
+    font-size: 24px !important;
+    background: transparent;
+    margin-top: -40px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 35px;
+}
+.Dubai-PCode {
+    font-family: 'beba';
+    font-size: 20px !important;
+    background: transparent;
+    margin-top: -52px;
+    float: left;
+    position: absolute;
+    margin-left: 136px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+.Dubai-PNumber {
+    font-family: 'beba';
+    font-size: 27px !important;
+    background: transparent;
+    margin-top: -35px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 1px;
+}
+.Fujairah-PCode {
+    font-family: 'beba';
+    font-size: 20px !important;
+    background: transparent;
+    margin-top: -52px;
+    float: left;
+    position: absolute;
+    margin-left: 136px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+.Fujairah-PNumber {
+    font-family: 'beba';
+    font-size: 27px !important;
+    background: transparent;
+    margin-top: -35px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 1px;
+}
+.RasalKhaimah-CNumber {
+    font-family: 'myFirstFont';
+    font-size: 25px !important;
+    background: transparent;
+    margin-top: -31px;
+    font-style: initial;
+    color: #fff;
+    font-weight: 400;
+}
+.RasalKhaimah-PCode {
+    font-family: 'beba';
+    font-size: 20px !important;
+    background: transparent;
+    margin-top: -52px;
+    float: left;
+    position: absolute;
+    margin-left: 136px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+.RasalKhaimah-PNumber {
+    font-family: 'beba';
+    font-size: 27px !important;
+    background: transparent;
+    margin-top: -35px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 1px;
+}
+.Sharjah-PNumber {
+    font-family: 'beba';
+    font-size: 27px !important;
+    background: transparent;
+    margin-top: -41px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 1px;
+}
+.Sharjah-PCode {
+    font-family: 'beba';
+    font-size: 14px !important;
+    background: transparent;
+    margin-top: -52px;
+    float: left;
+    position: absolute;
+    margin-left: 97px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+.UmmalQuwain-PCode {
+    font-family: 'beba';
+    font-size: 20px !important;
+    background: transparent;
+    margin-top: -51px;
+    float: left;
+    position: absolute;
+    margin-left: 58px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+}
+.UmmalQuwain-PNumber {
+    font-family: 'beba';
+    font-size: 27px !important;
+    background: transparent;
+    margin-top: -35px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: 1px;
+}
+.dubai-privet {
+  font-family: 'myFirstFont';
+  font-size: 26px !important;
+  background: transparent;
+  margin-top: -32px;
+  font-style: initial;
+  color: #1c1e1f;
+  font-weight: 400;
+}
+
+.Sharjah-CNumber {
+    font-family: 'beba';
+    font-size: 22px !important;
+    background: transparent;
+    margin-top: -32px;
+    font-style: initial;
+    color: #fff;
+    font-weight: 400;
+    margin-left: 1px;
+}
+
+
+.mobile-numbers{
+  font-family: 'beba';
+    font-size: 17px !important;
+    background: transparent;
+    margin-top: -37px;
+    font-style: initial;
+    color: #1c1e1f;
+    font-weight: 400;
+    margin-left: -9px;
+}

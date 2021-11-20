@@ -5,6 +5,7 @@ using System.Text;
 using insouq.Models;
 using insouq.Models.Dropdownlists;
 using insouq.Models.IdentityConfiguration;
+using insouq.Models.StaticData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -109,6 +110,9 @@ namespace insouq.EntityFramework
         public DbSet<User> Users { get; set; }
         public DbSet<Models.Type> Types { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<FAQS> FQAS { get; set; }
+        public DbSet<AboutUs> AboutUs { get; set; }
+        public DbSet<HIW> HIW { get; set; }
         public DbSet<SubCategory> SubCategories { get; set; }
         public DbSet<SubType> SubTypes { get; set; }
         public DbSet<Ad> Ads { get; set; }
@@ -131,6 +135,10 @@ namespace insouq.EntityFramework
         public DbSet<FavoriteAd> Favorites { get; set; }
         public DbSet<JobApplication> JobApplications { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Banner> Banners { get; set; }
+        public DbSet<AdvertisingReason> AdvertisingReasons { get; set; }
+        public DbSet<SME> SMEs { get; set; }
+        public DbSet<AdvertisorImages> AdvertisorImages { get; set; }
 
 
         //DLs

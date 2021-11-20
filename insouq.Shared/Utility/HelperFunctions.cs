@@ -42,7 +42,22 @@ namespace insouq.Shared.Utility
                 return null;
             }
         }
-
+        public static string GetNotificationTextByStatus(int status)
+        {
+            if(status == 1)
+            {
+                return "The Admin Accepted your ad ";
+            }
+            else if(status == 4)
+            {
+                return "The Admin Rejected your ad ";
+            }
+            else if (status == 3)
+            {
+                return "The Admin Deleted your ad ";
+            }
+            return "";
+        }
         public static string GenerateJwtToken(int id, string email, string secretKey)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();

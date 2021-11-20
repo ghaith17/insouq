@@ -38,7 +38,7 @@ namespace insouq.Services
         public async Task<JobAdDTO> GetJobAd(int adId)
         {
             var ad = await _db.JobAds.Include(a => a.Ad).Include(a => a.Ad.Pictures).Include(a => a.Ad.Category)
-                .Where(a => a.Ad.Status == 1)
+                .Where(a => a.Ad.Status == 1 || a.Ad.Status == 2)
                 .Select(job => new GetJobAdDTO
                 {
                     TypeId = StaticData.Jobs_ID,
@@ -188,6 +188,7 @@ namespace insouq.Services
                 {
                     En_JobType = en_jobType,
                     Ar_JobType = ar_jobType,
+                    JobTitle = model.JobTitle,
                     AdId = ad.Id,
                 };
 

@@ -248,7 +248,7 @@ namespace insouq.Services
 
             var ad = await _db.ServiceAds.Include(a => a.Ad).Include(a => a.Ad.Pictures).Include(a => a.Ad.Category)
                 .Include(a => a.SubCategory)
-                .Where(a => a.Ad.Id == adId && a.Ad.Status == 1)
+                .Where(a => a.Ad.Id == adId && a.Ad.Status == 1 || a.Ad.Status == 2)
                 .Select(service => new GetServiceAdDTO
                 {
                     TypeId = StaticData.Services_ID,

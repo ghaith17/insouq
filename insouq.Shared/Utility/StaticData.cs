@@ -15,13 +15,11 @@ namespace insouq.Shared.Utility
 
         public const string ServerError_Message = "Internal Server Error";
 
-        public const string DefaultUser_Image = @"/images/userImage.png";
+        public const string DefaultUser_Image = @"\images\userImage.png";
 
         public const string SERVER_DOMAIN = "https://insouq.com";
 
         //public const string SERVER_DOMAIN = "http://hasanjaser-001-site1.dtempurl.com";
-
-        //public const string SERVER_DOMAIN = "http://localhost:53228";
 
         //public const string SERVER_DOMAIN = "https://localhost:44356";
 

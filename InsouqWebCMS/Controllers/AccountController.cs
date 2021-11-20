@@ -58,7 +58,7 @@ namespace InsouqWebCMS.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        [Authorize(Roles = StaticData.Admin_Role)]
+        //[Authorize(Roles = StaticData.Admin_Role)]
         public IActionResult ChangePassword()
         {
             return View();

@@ -149,23 +149,23 @@ namespace insouq.Services
                     return response;
                 }
 
-                //if (!applicationUser.PhoneNumberConfirmed)
-                //{
-                //    var sendSmsDto = new SendSmsCodeDTO
-                //    {
-                //        MobileNumber = applicationUser.PhoneNumber,
-                //        UserId = applicationUser.Id
-                //    };
+                if (!applicationUser.PhoneNumberConfirmed)
+                {
+                    var sendSmsDto = new SendSmsCodeDTO
+                    {
+                        MobileNumber = applicationUser.PhoneNumber,
+                        UserId = applicationUser.Id
+                    };
 
-                //    var sendSmsResponse = await SendSmsCode(sendSmsDto);
+                    var sendSmsResponse = await SendSmsCode(sendSmsDto);
 
-                //    response.IsSuccess = false;
-                //    response.Message = "Phone Number not confirmed";
-                //    response.Status = AuthStatus.MOBILE_NUMBER_NOT_CONFIRMED;
-                //    response.UserId = applicationUser.Id;
-                //    response.PhoneNumber = applicationUser.PhoneNumber;
-                //    return response;
-                //}
+                    response.IsSuccess = false;
+                    response.Message = "Phone Number not confirmed";
+                    response.Status = AuthStatus.MOBILE_NUMBER_NOT_CONFIRMED;
+                    response.UserId = applicationUser.Id;
+                    response.PhoneNumber = applicationUser.PhoneNumber;
+                    return response;
+                }
 
                 var result = await _signInManager
                     .PasswordSignInAsync(applicationUser.Email, model.Password, true, lockoutOnFailure: false);

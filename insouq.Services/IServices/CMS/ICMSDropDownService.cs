@@ -10,6 +10,54 @@ namespace insouq.Services.IServices.CMS
 {
     public interface ICMSDropDownService
     {
+        Task<List<DLAdvertisingBudjet>> GetAllAdvertisingBudjet();
+        Task<BaseResponse> AddAdvertisingBudjet(TextDropDownDTO model);
+        Task<BaseResponse> UpdateAdvertisingBudjet(TextDropDownDTO model);
+        Task<BaseResponse> DeleteAdvertisingBudjet(int id);
+
+        Task<BaseResponse> AddLocation(TextDropDownDTO model);
+        Task<BaseResponse> UpdateLocation(TextDropDownDTO model);
+        Task<BaseResponse> DeleteLocation(int id);
+
+        Task<BaseResponse> AddMonthlySalary(ValueDropDownDTO model);
+        Task<BaseResponse> UpdateMonthlySalary(ValueDropDownDTO model);
+        Task<BaseResponse> DeleteMonthlySalary(int id); 
+        
+        Task<BaseResponse> AddVisaStatus(TextDropDownDTO model);
+        Task<BaseResponse> UpdateVisaStatus(TextDropDownDTO model);
+        Task<BaseResponse> DeleteVisaStatus(int id);
+        
+        Task<BaseResponse> AddNoticePeriod(TextDropDownDTO model);
+        Task<BaseResponse> UpdateNoticePeriod(TextDropDownDTO model);
+        Task<BaseResponse> DeleteNoticePeriod(int id);
+
+        Task<BaseResponse> AddCommitment(TextDropDownDTO model);
+        Task<BaseResponse> UpdateCommitment(TextDropDownDTO model);
+        Task<BaseResponse> DeleteCommitment(int id);
+        
+        Task<BaseResponse> AddNationality(TextDropDownDTO model);
+        Task<BaseResponse> UpdateNationality(TextDropDownDTO model);
+        Task<BaseResponse> DeleteNationality(int id);
+
+        Task<BaseResponse> AddJobType(TextDropDownDTO model);
+        Task<BaseResponse> UpdateJobType(TextDropDownDTO model);
+        Task<BaseResponse> DeleteJobType(int id);
+        
+        Task<BaseResponse> AddEmploymentType(TextDropDownDTO model);
+        Task<BaseResponse> UpdateEmploymentType(TextDropDownDTO model);
+        Task<BaseResponse> DeleteEmploymentType(int id);
+
+        Task<BaseResponse> AddCareerLevel(TextDropDownDTO model);
+        Task<BaseResponse> UpdateCareerLevel(TextDropDownDTO model);
+        Task<BaseResponse> DeleteCareerLevel(int id);
+
+        Task<BaseResponse> AddWorkExperience(TextDropDownDTO model);
+        Task<BaseResponse> UpdateWorkExperience(TextDropDownDTO model);
+        Task<BaseResponse> DeleteWorkExperience(int id);
+        
+        Task<BaseResponse> AddEducationLevel(TextDropDownDTO model);
+        Task<BaseResponse> UpdateEducationLevel(TextDropDownDTO model);
+        Task<BaseResponse> DeleteEducationLevel(int id);
 
         Task<BaseResponse> AddOperator(TextDropDownDTO model);
         Task<BaseResponse> UpdateOperator(TextDropDownDTO model);

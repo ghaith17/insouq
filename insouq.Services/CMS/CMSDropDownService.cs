@@ -3358,5 +3358,1114 @@ namespace insouq.Services.CMS
                 return response;
             }
         }
+
+        public async Task<BaseResponse> AddJobType(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLJobType()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLJobTypes.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateJobType(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLJobTypes.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteJobType(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLJobTypes.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddCareerLevel(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLCareerLevel()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLCareerLevels.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateCareerLevel(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLCareerLevels.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteCareerLevel(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLCareerLevels.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddWorkExperience(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLWorkExperience()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLWorkExperiences.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateWorkExperience(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLWorkExperiences.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteWorkExperience(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLWorkExperiences.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddEducationLevel(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLEducationLevel()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLEducationLevels.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateEducationLevel(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLEducationLevels.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteEducationLevel(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLEducationLevels.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddEmploymentType(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLEmploymentType()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLEmploymentTypes.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateEmploymentType(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLEmploymentTypes.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteEmploymentType(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLEmploymentTypes.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddNationality(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLNationality()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLNationalities.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateNationality(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLNationalities.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteNationality(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLNationalities.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddCommitment(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLCommitment()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLCommitments.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateCommitment(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLCommitments.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteCommitment(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLCommitments.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddNoticePeriod(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLNoticePeriod()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLNoticePeriods.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateNoticePeriod(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLNoticePeriods.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteNoticePeriod(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLNoticePeriods.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddVisaStatus(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLVisaStatus()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLVisaStatuses.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateVisaStatus(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLVisaStatuses.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteVisaStatus(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLVisaStatuses.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddMonthlySalary(ValueDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLMonthlySalary()
+                {
+                    Value = model.Value
+                };
+
+                _db.DLMonthlySalaries.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateMonthlySalary(ValueDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLMonthlySalaries.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Value = model.Value;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteMonthlySalary(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLMonthlySalaries.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> AddLocation(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLLocation()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLLocations.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateLocation(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLLocations.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteLocation(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLLocations.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<List<DLAdvertisingBudjet>> GetAllAdvertisingBudjet()
+        {
+            var list = await _db.DLAdvertisingBudjets.AsNoTracking().ToListAsync();
+
+            return list;
+        }
+
+        public async Task<BaseResponse> AddAdvertisingBudjet(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLAdvertisingBudjet()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLAdvertisingBudjets.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> UpdateAdvertisingBudjet(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLAdvertisingBudjets.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
+
+        public async Task<BaseResponse> DeleteAdvertisingBudjet(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLAdvertisingBudjets.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+        }
     }
 }

@@ -250,7 +250,7 @@ namespace insouq.Services
         public async Task<UpdateBusinessAdDTO> GetBusinessAd(int adId)
         {
             var ad = await _db.BussinesAds.Include(a => a.Ad).Include(a => a.Ad.Pictures).Include(a => a.Ad.Category)
-                .Where(a => a.Ad.Status == 1)
+                .Where(a => a.Ad.Status == 1 || a.Ad.Status == 2)
                .Select(business => new GetBussinesAdDTO
                {
                    TypeId = StaticData.Business_ID,

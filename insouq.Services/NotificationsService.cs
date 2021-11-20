@@ -23,7 +23,9 @@ namespace insouq.Services
 
         public List<Notification> GetNotifications(int userId)
         {
-            var Notifications= _db.Notifications.Where(n => n.UserId == userId).Include(a => a.Ad).ToList();
+            var Notifications= _db.Notifications.Where(n => n.UserId == userId).Include(a => a.Ad)
+                .ThenInclude(a=>a.Pictures.Where(p=>p.MainPicture==true))
+                .ToList();
 
             return UpdateToOpend(Notifications);
         }

@@ -13,7 +13,6 @@ namespace InsouqWebCMS.Controllers
     [Authorize(Roles = StaticData.Admin_Role)]
     public class AdsManagement : Controller
     {
-
         private ICMSAds _CMSAds { get; set; }
 
         public AdsManagement(ICMSAds CMSAds)
@@ -28,26 +27,45 @@ namespace InsouqWebCMS.Controllers
             return View(PendingAds);
         }
 
+        public async Task<IActionResult> Gallary(int adId)
+        {
+            var pictures = await _CMSAds.GetAdPictures(adId);
+
+            return View(pictures);
+        }
+
+        public async Task<IActionResult> Details(int adId, int typeId)
+        {
+            var ad = await _CMSAds.GetAd(adId, typeId);
+
+            return View(ad);
+        }
 
 
         #region Apis
 
         [HttpGet]
-        public bool RejectAd(int AdId)
+        public async Task<bool> RejectAd(int AdId)
         {
-          return  _CMSAds.updateAdStatus(AdId, 4);
+            var result = await _CMSAds.updateAdStatus(AdId, 4);
+
+            return result;
         }
 
         [HttpGet]
-        public bool DeleteAd(int AdId)
+        public async Task<bool> DeleteAd(int AdId)
         {
-            return _CMSAds.updateAdStatus(AdId, 3);
+            var result = await _CMSAds.updateAdStatus(AdId, 3);
+
+            return result;
         }
 
         [HttpGet]
-        public bool AcceptAdd(int AdId)
+        public async Task<bool> AcceptAdd(int AdId)
         {
-            return _CMSAds.updateAdStatus(AdId, 1);
+            var result = await _CMSAds.updateAdStatus(AdId, 1);
+
+            return result;
         }
 
         #endregion
