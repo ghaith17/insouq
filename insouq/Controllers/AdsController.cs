@@ -33,13 +33,23 @@ namespace insouq.Controllers
 
         [HttpPost]
         [Route("GetAds")]
-        public async Task<IActionResult> GetAds([FromBody] GetAdsDTO getAdsDTO)
+        public async Task<IActionResult> GetAds([FromQuery] GetAdsDTO getAdsDTO)
         {
-            var ads = await _adsService.GetAdsByCategoryId(getAdsDTO.TypeId, getAdsDTO.CategoryId , getAdsDTO.SearchText, getAdsDTO.Location, getAdsDTO.MaxKm == null ? 0 : getAdsDTO.MaxKm, getAdsDTO.MinKm == null ? 0 : getAdsDTO.MinKm, getAdsDTO.MaxYear == null ? 0 : getAdsDTO.MaxYear, getAdsDTO.MinYear , getAdsDTO.MaxPrice,getAdsDTO.MinPrice, getAdsDTO.Maker, getAdsDTO.Model, getAdsDTO.Trim);
+            var ads = await _adsService.GetAdsByCategoryId(getAdsDTO.TypeId, getAdsDTO.CategoryId, getAdsDTO.SearchText, getAdsDTO.Location, getAdsDTO.MaxKm == null ? 0 : getAdsDTO.MaxKm, getAdsDTO.MinKm == null ? 0 : getAdsDTO.MinKm, getAdsDTO.MaxYear == null ? 0 : getAdsDTO.MaxYear, getAdsDTO.MinYear, getAdsDTO.MaxPrice, getAdsDTO.MinPrice, getAdsDTO.Maker, getAdsDTO.Model, getAdsDTO.Trim);
 
             return Ok(ads);
 
         }
+        [HttpGet]
+        [Route("GetLatestAds")]
+        public async Task<IActionResult> GetAdsByType([FromQuery] int TypeId)
+        {
+            var ads = await _adsService.GetLatestAds(TypeId);
+
+            return Ok(ads);
+
+        }
+
 
         [HttpGet]
         [Route("GetAd")]

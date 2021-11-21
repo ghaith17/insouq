@@ -604,7 +604,7 @@ namespace insouq.Services
 
                 var imgNumber = 1;
 
-                if (model.Pictures.Count != 0)
+                if (model.Pictures?.Count != 0)
                 {
                     var webRootPath = _hostEnvironment.WebRootPath;
 

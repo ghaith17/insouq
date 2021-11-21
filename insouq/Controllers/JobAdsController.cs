@@ -45,7 +45,7 @@ namespace insouq.Controllers
 
         [HttpPost]
         [Route("AddInitialJobWanted")]
-        public async Task<IActionResult> AddInitialJobWanted([FromForm] AddInitialJobWanted dataModel)
+        public async Task<IActionResult> AddInitialJobWanted([FromBody] AddInitialJobWanted dataModel)
         {
             var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
 

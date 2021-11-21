@@ -366,6 +366,7 @@
             $('#Number').val(null);
 
 
+
             var plateT = $("#plateTypeDL option:selected").text();
             var _url = 'https://insouq.com/images/plates/';
             var plateEmirate = $("#emirateDL option:selected").text() + '-';
@@ -421,6 +422,23 @@
         $("#operatorDL").on("change", function () {
             $("#codeDL option").not(':first').remove();
             var operator = $("#operatorDL").val();
+
+            $('#MobileImg').attr('src', null);
+            $('#MobileNum').text(null);
+            $('#MobileImg').css("display", "none");
+            $('#MobileNum').val(null);
+
+            var _url_MB = 'https://insouq.com/images/' + $("#operatorDL option:selected").text().charAt(0) + 'Number.png';
+               $('#MobileImg').attr('src', _url_MB);
+
+            $('#MobileNum').text($('#codeDL option:selected').val() + $('#MbNum').val());
+              //  function imgLoadCallback() {
+                    $('#MobileImg').css("display", "block");
+                    $('#MobileNum').css("display", "block");
+              //  }
+
+
+           
             $.ajax({
                 url: `/DropDowns/GetAllMobileNumberCodeByOperator?operatorName=${operator}`,
                 method: "GET",
@@ -499,8 +517,30 @@
 
                     }
                 }
+                if ($(this).attr('id') == "codeDL") {
+
+                    if (!$('#MobileImg').is(':hidden')) {
+                        $('#MobileNum').text($('#codeDL option:selected').val() + $('#MbNum').val());
+                       // $('#plateNum').css("display", "block");
+                    }
+
+
+                }
             }
         });
+    });
+
+    $('#MbNum').on('input', function () {
+        if (!$('#MobileImg').is(':hidden')) {
+            $('#MobileNum').text($('#codeDL option:selected').val() + $('#MbNum').val());
+            // $('#plateNum').css("display", "block");
+        }
+    });
+    $('#Number').on('input', function () {
+        if (!$('#palteImg').is(':hidden')) {
+            $('#plateNum').text($('#Number').val());
+            $('#plateNum').css("display", "block");
+        }
     });
 </script>
    

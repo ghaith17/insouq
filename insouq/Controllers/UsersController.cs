@@ -147,5 +147,37 @@ namespace insouq.Controllers
 
             return BadRequest(response);
         }
+        [HttpGet]
+        [Route("GetCompanyProfile")]
+        public async Task<IActionResult> GetCompanyProfile()
+        {
+            if (!ModelState.IsValid)
+            {
+                var Errors = string.Join(Environment.NewLine,
+                    ModelState.SelectMany(x => x.Value.Errors.Select(y => y.ErrorMessage)));
+
+                return BadRequest(new BaseResponse { IsSuccess = false, Message = Errors });
+            }
+
+            var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            var _userId = HelperFunctions.ValidateJwtToken(token, _jwtConfig.Secret);
+
+            if (_userId == null)
+            {
+                return Unauthorized(new BaseResponse
+                {
+                    IsSuccess = false,
+                    Message = StaticData.Unauthorized_Message
+                });
+            }
+
+            var companyProfile = await _userService.GetCompanyProfile((int)_userId);
+
+            if (companyProfile == null) return Ok(new BaseResponse { IsSuccess = false, Message = "0" });
+
+
+            return Ok(companyProfile);
+        }
     }
 }
