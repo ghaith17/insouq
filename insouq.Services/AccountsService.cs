@@ -603,7 +603,7 @@ namespace insouq.Services
             try
             {
                 //check token
-                var httpClient = new HttpClient { BaseAddress = new Uri("https://graph.facebook.com/v11.0/") };
+                var httpClient = new HttpClient { BaseAddress = new Uri("https://graph.facebook.com/v2.8/") };
               
                 var fResponse = await httpClient.GetAsync($"me?access_token={accessToken}&fields=id,name,email,first_name,last_name,age_range,birthday,gender,locale,picture&scope=public_profile,email");
 
