@@ -267,7 +267,7 @@ namespace insouq.Controllers
                 return BadRequest(new BaseResponse { IsSuccess = false, Message = Errors });
             }
 
-            var response = await _accountsService.GmailLogin(model.Token, "Mobile");
+            var response = await _accountsService.GmailLogin(model.Token, "API");
 
             if (response.IsSuccess) return Ok(response);
 

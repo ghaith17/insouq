@@ -182,7 +182,7 @@
                             <div id="googleLoginError" style="display:none;margin-left:65px;margin-bottom:10px;">
                                 <span id="googleLoginErrorMessage" style="color:#FFB01C;"></span>
                             </div>
-                            <button onclick="fb_login()" type="button" class="register-btn" name="button">
+                            <button onclick="fb_login()" scope="public_profile,email" type="button" class="register-btn" name="button">
                                 <img style="width: 7%;margin-right: 10px;margin-left: 13px;" src="assets/img/2.svg"></img>Continue With Facebook
                             </button>
                             <div id="facebookLoginError" style="display:none;margin-left:65px;margin-bottom:10px;">
@@ -1096,12 +1096,15 @@
                                 $("#facebookLoginErrorMessage").text(response.message);
                             }
                         },
+
                         error: function (error) {
                             console.log(error);
                         }
                     });
                 }
-            });
+            }
+                 
+            );
         }
 
         (function (d, s, id) {

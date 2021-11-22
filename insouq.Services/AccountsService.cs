@@ -17,6 +17,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
+
 namespace insouq.Services
 {
     public class AccountsService : IAccountsService
@@ -724,7 +725,8 @@ namespace insouq.Services
                 // Change this to your google client ID
                 settings.Audience = new List<string>() { "347827155629-55umcequ7jk4s0mv6lg7u7kthrc03cgr.apps.googleusercontent.com" };
 
-                GoogleJsonWebSignature.Payload payload = GoogleJsonWebSignature.ValidateAsync(idToken, settings).Result;
+                var payload = await GoogleJsonWebSignature.ValidateAsync(idToken);
+
 
                 var identityUser = await _userManager.FindByEmailAsync(payload.Email);
 
