@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -231,6 +232,11 @@ namespace insouq.Web.Controllers
         public async Task<JsonResult> FacebookLogin(string accessToken)
         {
             var response = await _accountService.FacebookLogin(accessToken, "Web");
+            //var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
+            //if (loginInfo.Email == null)
+            //{
+            //    return RedirectToAction("FacebookError", "Account");
+            //}
 
             return Json(response);
         }

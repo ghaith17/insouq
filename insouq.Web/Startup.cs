@@ -148,6 +148,7 @@ Path.Combine(env.WebRootPath, "images")),
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
         }
     }
 }

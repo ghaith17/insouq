@@ -604,8 +604,8 @@ namespace insouq.Services
             {
                 //check token
                 var httpClient = new HttpClient { BaseAddress = new Uri("https://graph.facebook.com/v11.0/") };
-
-                var fResponse = await httpClient.GetAsync($"me?access_token={accessToken}&fields=email,first_name,last_name,birthday,gender");
+              
+                var fResponse = await httpClient.GetAsync($"me?access_token={accessToken}&fields=id,name,email,first_name,last_name,age_range,birthday,gender,locale,picture&scope=public_profile,email");
 
                 if (!fResponse.IsSuccessStatusCode)
                 {

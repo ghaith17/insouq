@@ -40,15 +40,7 @@ namespace insouq.Controllers
             return Ok(ads);
 
         }
-        [HttpGet]
-        [Route("GetLatestAds")]
-        public async Task<IActionResult> GetAdsByType([FromQuery] int TypeId)
-        {
-            var ads = await _adsService.GetLatestAds(TypeId);
-
-            return Ok(ads);
-
-        }
+    
 
 
         [HttpGet]
