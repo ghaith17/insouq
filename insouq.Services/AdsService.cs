@@ -4062,7 +4062,7 @@ namespace insouq.Services
                     var notification = new Notification
                     {
                         AdId = model.AdId,
-                        Date = DateTime.Now,
+                        Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
                         Status = NotificationStatus.NOT_VIEWD,
                         OfferId = offer.Id,
                         ImageUrl = imageUrl == "" ? null : imageUrl,
@@ -4073,6 +4073,7 @@ namespace insouq.Services
                         Number = numberAd.Number,
                         Code = "",
                         En_PlateType = numberAd.En_PlateType,
+                        Message= "You received a new offer on your ad"
 
                     };
                     await _db.Notifications.AddAsync(notification);
@@ -4082,7 +4083,7 @@ namespace insouq.Services
                     var notification = new Notification
                     {
                         AdId = model.AdId,
-                        Date = DateTime.Now,
+                        Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
                         Status = NotificationStatus.NOT_VIEWD,
                         OfferId = offer.Id,
                         ImageUrl = imageUrl == "" ? null : imageUrl,
@@ -4314,7 +4315,7 @@ namespace insouq.Services
                 var notification = new Notification
                 {
                     AdId = model.AdId,
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
                     Status = NotificationStatus.NOT_VIEWD,
                     JobApplicationId = jobAppliation.Id,
                     UserId = ad.UserId,

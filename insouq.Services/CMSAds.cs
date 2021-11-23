@@ -130,13 +130,14 @@ namespace insouq.Services
                     AdId = adId,
                     CategoryId = ad.CategoryId,
                     Status = NotificationStatus.NOT_VIEWD,
-                    Date = DateTime.Now,
+                    Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
                     UserId = ad.UserId,
                     ImageUrl= imageUrl,
                     En_Emirate = emirate != "" ? emirate : null,
                     En_PlateType = plateType != "" ? plateType : null,
                     PlateCode = plateCode != "" ? plateCode : null,
-                    Code = mobileCode != "" ? mobileCode : null
+                    Code = mobileCode != "" ? mobileCode : null,
+                    Message= "You received a confirmed on your ad"
                 });
                 _db.SaveChanges();
                 

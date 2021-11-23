@@ -23,5 +23,7 @@ namespace insouq.Models
         [ForeignKey(nameof(AdId))]
 
         public Ad Ad { get; set; }
+
+        
     }
 }

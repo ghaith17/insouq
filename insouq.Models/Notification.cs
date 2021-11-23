@@ -61,5 +61,7 @@ namespace insouq.Models
         public Category Category { get; set; }
 
         public int? CategoryId { get; set; }
+
+        public string Message { get; set; }
     }
 }

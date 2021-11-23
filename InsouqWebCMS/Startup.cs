@@ -60,6 +60,7 @@ namespace InsouqWebCMS
             services.AddScoped<ISubCategoryService, SubCategoryService>();
             services.AddScoped<ISubTypeService, SubTypeService>();
             services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped< IStaticDataService ,CMSStaticDataService>();
 
 
             // Auto Mapper Configurations
@@ -105,6 +106,13 @@ namespace InsouqWebCMS
 
             app.UseStaticFiles();
 
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+Path.Combine(env.WebRootPath, "images")),
+                RequestPath = "/images"
+            });
+
             app.UseRouting();
 
             app.UseAuthentication();
@@ -115,7 +123,7 @@ namespace InsouqWebCMS
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=AdsManagement}/{action=Index}/{id?}");
             });
         }
     }
