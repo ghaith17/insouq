@@ -652,5 +652,12 @@ namespace insouq.Services
 
             return list;
         }
+
+        public async Task<List<DLClassifiedBrand>> GetAllClassifiedBrand()
+        {
+            var list = await _db.DLClassifiedBrands.AsNoTracking().ToListAsync();
+
+            return list;
+        }
     }
 }

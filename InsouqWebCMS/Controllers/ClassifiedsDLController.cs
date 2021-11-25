@@ -52,6 +52,13 @@ namespace InsouqWebCMS.Controllers
             return View(list);
         }
 
+        public async Task<IActionResult> Brands()
+        {
+            var list = await _dropDownService.GetAllClassifiedBrand();
+
+            return View(list);
+        }
+
         #region API_CALLS
 
         #region AGE_APIS
@@ -168,6 +175,43 @@ namespace InsouqWebCMS.Controllers
 
         #endregion
 
+        #endregion
+
+        #region BRAND_APIS
+        [HttpPost]
+        public async Task<IActionResult> AddClassifiedBrand(TextDropDownDTO model)
+        {
+            var response = await _dropDownService.AddClassifiedBrand(model);
+
+            if (response.IsSuccess)
+            {
+                return RedirectToAction(nameof(Brands));
+            }
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateClassifiedBrand(TextDropDownDTO model)
+        {
+            var response = await _dropDownService.UpdateClassifiedBrand(model);
+
+            if (response.IsSuccess)
+            {
+                return RedirectToAction(nameof(Brands));
+            }
+
+            return View();
+        }
+
+        [HttpDelete]
+        public async Task<JsonResult> DeleteClassifiedBrand(int id)
+        {
+            var response = await _dropDownService.DeleteClassifiedBrand(id);
+
+            return Json(response);
+        }
         #endregion
     }
 }

@@ -55,22 +55,22 @@
                 <h1 class="section-title5">Notification  <span id="count">(@Model.Count)</span> </h1>
 
                 <div class="row">
-                    @foreach (var item in Model)
+                    @for (int i=0;i<Model.Count;i++)
                     {
 
                         <!-------------------------------------------------->
-                        <div class="col-md-12" id="_@item.Id">
+                        <div class="col-md-12" id="_@Model[i].Id">
                             <div class="featured-box">
                                 <div class="col-md-4">
                                     <figure>
 
-                                        @if (item.CategoryId != StaticData.PlateNumbers_ID && item.CategoryId != StaticData.MobileNumbers_ID)
+                                        @if (Model[i].CategoryId != StaticData.PlateNumbers_ID && Model[i].CategoryId != StaticData.MobileNumbers_ID)
                                         {
 
 
 
-                                            var imgUrl = StaticData.SERVER_DOMAIN + item.ImageUrl;
-                                            if (item.ImageUrl == "")
+                                            var imgUrl = StaticData.SERVER_DOMAIN + Model[i].ImageUrl;
+                                            if (Model[i].ImageUrl == "")
                                             {
                                                 imgUrl = "https://t3.ftcdn.net/jpg/01/84/81/64/360_F_184816468_sXO2m7Xhy2xqENls5YxrKlmFg3Ii82Mr.jpg";
                                             }
@@ -79,31 +79,31 @@
                                             <a href="#"><img class="img-fluid" src="@imgUrl" alt=""></a>
                                         }
 
-                                        else if (item.CategoryId == StaticData.MobileNumbers_ID)
+                                        else if (Model[i].CategoryId == StaticData.MobileNumbers_ID)
                                         {
-                                            var numberPhoto = StaticData.SERVER_DOMAIN + item.ImageUrl;
+                                            var numberPhoto = StaticData.SERVER_DOMAIN + Model[i].ImageUrl;
 
                                                     <div class="slider__contents1">
                                                         <div class="slider__image1">
                                                             <img src="@numberPhoto" alt="">
-                                                            <h2 class="mobile-numbers-Mylist">@item.Code @item.Number</h2>
+                                                            <h2 class="mobile-numbers-Mylist">@Model[i].Code @Model[i].Number</h2>
                                                         </div>
                                                     </div>
                                                
                                         }
-                                        else if (item.CategoryId == StaticData.PlateNumbers_ID)
+                                        else if (Model[i].CategoryId == StaticData.PlateNumbers_ID)
                                         {
-                                            var photo = StaticData.SERVER_DOMAIN + item.ImageUrl;
+                                            var photo = StaticData.SERVER_DOMAIN + Model[i].ImageUrl;
 
-                                            var plateCodeClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Code-Mylist";
-                                            var plateNumberClass = item.En_Emirate.Replace(" ", "") + "-" + item.En_PlateType.Substring(0, 1) + "Number-Mylist";
+                                            var plateCodeClass = Model[i].En_Emirate.Replace(" ", "") + "-" + Model[i].En_PlateType.Substring(0, 1) + "Code-Mylist";
+                                            var plateNumberClass = Model[i].En_Emirate.Replace(" ", "") + "-" + Model[i].En_PlateType.Substring(0, 1) + "Number-Mylist";
 
                                                     <div class="slider__contents1">
                                                         <div class="slider__image1">
                                                             <img src="@photo" alt="">
-                                                            <h2 class="@plateCodeClass">@item.PlateCode</h2>
+                                                            <h2 class="@plateCodeClass">@Model[i].PlateCode</h2>
                                                         </div>
-                                                        <h2 class="@plateNumberClass">@item.Number</h2>
+                                                        <h2 class="@plateNumberClass">@Model[i].Number</h2>
                                                    
                                             </div>
                                         }
@@ -115,12 +115,12 @@
                                     </figure>
                                 </div>
                                 <div class="col-md-8">
-                                    <button type="button" onclick="deleteNoti('@item.Id')" class="close-style1">&times;</button>
+                                    <button type="button" onclick="deleteNoti('@Model[i].Id')" class="close-style1">&times;</button>
                                     <div class="feature-content" style="margin-top: 10px;">
 
                                         <h4>
-                                            <a href="@Url.Action("Details","Ads", new { adId = item.AdId, typeId = item.Ad.TypeId})">
-                                               "@item.Message"  “@item.Ad.Title”
+                                            <a href="@Url.Action("Details","Ads", new { adId = Model[i].AdId, typeId = Model[i].Ad.TypeId})">
+                                               @Model[i].Message  “@Model[i].Ad.Title”
                                             </a>
                                         </h4>
                                         <div class="adupdate-style">
@@ -128,7 +128,7 @@
                                         </div>
                                     </div>
                                     <div class="span-style">
-                                        <span>@HelperFunctions.GetTime(item.Date)</span>
+                                        <span>@HelperFunctions.GetTime(Model[i].Date)</span>
                                     </div>
                                 </div>
                             </div>

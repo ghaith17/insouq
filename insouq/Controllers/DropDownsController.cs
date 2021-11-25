@@ -564,7 +564,13 @@ namespace insouq.Controllers
 
         //    return Ok(list);
         //}
+        [HttpGet(nameof(GetAllClassifiedBrand))]
+        public async Task<IActionResult> GetAllClassifiedBrand()
+        {
+            var list = await _dropDownService.GetAllClassifiedBrand();
 
+            return Ok(list);
+        }
         #endregion
 
     }

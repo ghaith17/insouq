@@ -193,6 +193,8 @@ namespace insouq.EntityFramework
         public DbSet<DLSteeringSide> DLSteeringSides { get; set; }
         public DbSet<DLPart> DLParts { get; set; }
         public DbSet<DLAdvertisingBudjet> DLAdvertisingBudjets { get; set; }
+
+        public DbSet<DLClassifiedBrand> DLClassifiedBrands { get; set; }
     }
 }
 

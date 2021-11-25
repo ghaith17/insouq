@@ -555,7 +555,13 @@ namespace insouq.Web.Controllers
 
             return Json(new { items = list });
         }
+        [HttpGet]
+        public async Task<JsonResult> GetAllClassifiedBrand()
+        {
+            var list = await _dropDownService.GetAllClassifiedBrand();
 
+            return Json(new { items = list });
+        }
         #endregion
 
     }

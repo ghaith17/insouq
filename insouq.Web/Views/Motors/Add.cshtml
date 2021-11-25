@@ -59,10 +59,19 @@
         cursor: pointer;
     }
 
-    :checked + label {
-        border: 5px solid;
-        border-color: #ffb01c;
-        border-radius: 15px;
+    .image-hides {
+        display: none;
+    }
+
+    :checked + label + .image-hides {
+        display: block;
+        position: absolute;
+        margin-left: 3%;
+        margin-top: 25px;
+        background: #7054f2;
+        color: white;
+        padding: 3px;
+        text-align: center;
     }
 
     .image {
@@ -101,7 +110,6 @@
         opacity: 1;
     }
 </style>
-
 <style media="screen">
     .ui-sortable-placeholder {
         visibility: visible !important;
@@ -566,7 +574,7 @@
             for (var i = 0; i < this.files.length; i++) {
                 let fileBloc = $('<span/>', { class: 'file-block' }),
                     fileName = $('<span/>', { class: 'name', text: this.files.item(i).name });
-                fileBloc.append('<input type="radio"  id=' + this.files.item(i).name + '  name="MainPhoto" value=' + this.files.item(i).name + ' class="chb" hidden /><label  for=' + this.files.item(i).name + ' ><img class="image-view" src=' + URL.createObjectURL(event.target.files[i]) + '></label><span class="file-delete"><span>x</span></span>').append(fileName);
+                 fileBloc.append('<input type="radio" checked  id=' + this.files.item(i).name + '  name="MainPhoto" value=' + this.files.item(i).name + ' class="chb" hidden /><label  for=' + this.files.item(i).name + ' class="titleview" ><img class="image-view" src=' + URL.createObjectURL(event.target.files[i]) + '></label><p class="image-hides">Main Image</p><span class="file-delete"><span>x</span></span>').append(fileName);
                 $("#filesList > #files-names").append(fileBloc);
                 // $('#image_preview').append("<div class='img-div' id='img-div"+i+"'><input type='radio'  id='"+this.files.item(i).name+"'  name='cb' value='"+this.files.item(i).name+"' class='chb' hidden /><label  for='"+this.files.item(i).name+"' ><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'></label><div class='middle'></div><span class="file-delete"><span>x</span></span></div>");
             };

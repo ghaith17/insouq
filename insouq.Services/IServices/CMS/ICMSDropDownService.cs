@@ -245,5 +245,18 @@ namespace insouq.Services.IServices.CMS
         Task<BaseResponse> AddFinalDriveSystem(TextDropDownDTO model);
         Task<BaseResponse> UpdateFinalDriveSystem(TextDropDownDTO model);
         Task<BaseResponse> DeleteFinalDriveSystem(int id);
+
+        Task<List<DLClassifiedBrand>> GetAllClassifiedBrand();
+
+        Task<BaseResponse> AddClassifiedBrand(TextDropDownDTO model);
+
+
+        Task<BaseResponse> UpdateClassifiedBrand(TextDropDownDTO model);
+
+
+        Task<BaseResponse> DeleteClassifiedBrand(int id);
+
+        Task<DLClassifiedBrand> GetClassifiedBrand(string value);
+      
     }
 }

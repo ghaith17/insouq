@@ -5,8 +5,10 @@
     var imageSrc = StaticData.SERVER_DOMAIN + Model.ProfilePicture;
     //var imageSrc = "";
 }
-<p>
-    <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Welcome @Model.FirstName
-    </a><img src="@imageSrc" alt="Avatar" class="avatar">
+<link href="~/assets/css/main.css" rel="stylesheet" />
+<p class="drop-avatar">
+    <img src="@imageSrc" alt="Avatar" class="avatarss">
+    <a class="nav-link dropdown-toggle sign-in-avatar" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        @Model.FirstName <i class="fa fa-caret-down sign-i" aria-hidden="true"></i>
+    </a>
 </p>

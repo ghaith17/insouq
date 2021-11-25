@@ -4467,5 +4467,115 @@ namespace insouq.Services.CMS
                 return response;
             }
         }
+
+
+        public async Task<List<DLClassifiedBrand>> GetAllClassifiedBrand()
+        {
+            var list = await _db.DLClassifiedBrands.AsNoTracking().ToListAsync();
+
+            return list;
+        }
+
+        public async Task<BaseResponse> AddClassifiedBrand(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = new DLClassifiedBrand()
+                {
+                    Ar_Text = model.ArabicTitle,
+                    En_Text = model.EnglishTitle
+                };
+
+                _db.DLClassifiedBrands.Add(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+
+        }
+
+        public async Task<BaseResponse> UpdateClassifiedBrand(TextDropDownDTO model)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLClassifiedBrands.FirstOrDefaultAsync(e => e.Id == model.Id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                entity.Ar_Text = model.ArabicTitle;
+                entity.En_Text = model.EnglishTitle;
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+
+        }
+
+        public async Task<BaseResponse> DeleteClassifiedBrand(int id)
+        {
+            var response = new BaseResponse();
+
+            try
+            {
+                var entity = await _db.DLClassifiedBrands.FirstOrDefaultAsync(e => e.Id == id);
+
+                if (entity == null)
+                {
+                    response.IsSuccess = false;
+                    response.Message = "Not found";
+                    return response;
+                }
+
+                _db.Remove(entity);
+
+                await _db.SaveChangesAsync();
+
+                response.IsSuccess = true;
+                return response;
+
+            }
+            catch (Exception)
+            {
+                response.IsSuccess = true;
+                response.Message = StaticData.ServerError_Message;
+                return response;
+            }
+
+        }
+
+        public async Task<DLClassifiedBrand> GetClassifiedBrand(string value)
+        {
+            var entity = await _db.DLClassifiedBrands.AsNoTracking().FirstOrDefaultAsync(l => l.En_Text == value || l.Ar_Text == value);
+
+            return entity;
+        }
     }
 }

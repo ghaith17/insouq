@@ -79,6 +79,7 @@ namespace insouq.Services.IServices
         Task<List<DLPlateType>> GetAllPlateType();
         Task<List<DLPlateType>> GetAllPlateTypeByEmirateId(int? emirateId);
         Task<List<DLPlateType>> GetAllPlateTypeByEmirate(string emirateId);
+        Task<List<DLClassifiedBrand>> GetAllClassifiedBrand();
 
     }
 }
