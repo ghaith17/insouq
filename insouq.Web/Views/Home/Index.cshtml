@@ -590,7 +590,7 @@
                 <div class="">
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(1)">New in Motors</h1>
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="1" asp-route-categoryId="2">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="1" asp-route-categoryId="2">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.MotorsAds)
@@ -636,7 +636,7 @@
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(2)">New in Property</h1>
 
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="2" asp-route-categoryId="10">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="2" asp-route-categoryId="10">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.PropertyAds)
@@ -795,7 +795,7 @@
                 <div class="">
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(3)">New in Jobs</h1>
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Jobs_ID" asp-route-categoryId="@StaticData.JobOpening_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="@StaticData.Jobs_ID" asp-route-categoryId="@StaticData.JobOpening_ID">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.JobsAds)
@@ -839,7 +839,7 @@
                 <div class="">
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(4)">New in Services</h1>
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Services_ID" asp-route-categoryId="@StaticData.CarLift_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="@StaticData.Services_ID" asp-route-categoryId="@StaticData.CarLift_ID">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.ServicesAds)
@@ -883,7 +883,7 @@
                 <div class="">
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(5)">New in Business</h1>
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Business_ID" asp-route-categoryId="23">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="@StaticData.Business_ID" asp-route-categoryId="23">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.BusinessAds)
@@ -927,7 +927,7 @@
                 <div class="">
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(6)">New in Classifieds</h1>
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="@StaticData.Classifieds_ID" asp-route-categoryId="@StaticData.FurnitureHomeAndGarden_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="@StaticData.Classifieds_ID" asp-route-categoryId="@StaticData.FurnitureHomeAndGarden_ID">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.ClassifiedAds)
@@ -972,7 +972,7 @@
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(7)">New in Numbers</h1>
 
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="7" asp-route-categoryId="@StaticData.PlateNumbers_ID">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="7" asp-route-categoryId="@StaticData.PlateNumbers_ID">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.NumbersAds)
@@ -1029,7 +1029,7 @@
                     <div class="Homepage__card">
                         <h1 class="section-title2"><img class="new-in-images" src="@StaticFunctions.GetTypeImage(8)">New in Electronics</h1>
 
-                        <p class="link-more"><a asp-controller="Ads" asp-action="All" asp-route-typeId="8" asp-route-categoryId="19">View all<i class="fa fa-arrow-right"></i></a></p>
+                        <p class="link-more"><a asp-controller="Ads" asp-action="Categories" asp-route-typeId="8" asp-route-categoryId="19">View all<i class="fa fa-arrow-right"></i></a></p>
 
                         <div class="recent-listing-wrapper">
                             @foreach (var item in Model.ElectronicAds)

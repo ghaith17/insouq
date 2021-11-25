@@ -7476,6 +7476,7 @@ button.close-style1 {
 ul.social-network5 li {
     display: inline;
     margin: 0 50px 0px 0px;
+    cursor: pointer;
 }
 
 ul.social-network5 {
@@ -18537,7 +18538,8 @@ input::-webkit-inner-spin-button {
 }
 
 .col-h-8 {
-    max-width: 72.666667%;
+    max-width: 72.666667% !important;
+    flex: 0 0 72.666667%;
 }
 .filled {
     border: 2px solid green;

@@ -120,7 +120,7 @@
 
                                         <h4>
                                             <a href="@Url.Action("Details","Ads", new { adId = Model[i].AdId, typeId = Model[i].Ad.TypeId})">
-                                               @Model[i].Message  “@Model[i].Ad.Title”
+                                                 @Model[i].Message  “@Model[i].Ad.Title”
                                             </a>
                                         </h4>
                                         <div class="adupdate-style">
@@ -158,7 +158,7 @@
                     $("#_" + id).hide();
                     //document.getElementById("_" + id).style.display = "none";
                     $('#count').html(response.message);
-                    alert("Deleted Successfully");
+                    
                 }
             },
             error: function (error) {

@@ -130,7 +130,7 @@ namespace insouq.Services
                     AdId = adId,
                     CategoryId = ad.CategoryId,
                     Status = NotificationStatus.NOT_VIEWD,
-                    Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
+                    Date = DateTime.Now,
                     UserId = ad.UserId,
                     ImageUrl= imageUrl,
                     En_Emirate = emirate != "" ? emirate : null,

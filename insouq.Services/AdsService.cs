@@ -4062,7 +4062,7 @@ namespace insouq.Services
                     var notification = new Notification
                     {
                         AdId = model.AdId,
-                        Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
+                        Date = DateTime.Now,
                         Status = NotificationStatus.NOT_VIEWD,
                         OfferId = offer.Id,
                         ImageUrl = imageUrl == "" ? null : imageUrl,
@@ -4083,7 +4083,7 @@ namespace insouq.Services
                     var notification = new Notification
                     {
                         AdId = model.AdId,
-                        Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
+                        Date = DateTime.Now,
                         Status = NotificationStatus.NOT_VIEWD,
                         OfferId = offer.Id,
                         ImageUrl = imageUrl == "" ? null : imageUrl,
@@ -4315,7 +4315,7 @@ namespace insouq.Services
                 var notification = new Notification
                 {
                     AdId = model.AdId,
-                    Date = DateTime.Parse(DateTime.Now.ToString("HH:mm:ss")),
+                    Date = DateTime.Now,
                     Status = NotificationStatus.NOT_VIEWD,
                     JobApplicationId = jobAppliation.Id,
                     UserId = ad.UserId,

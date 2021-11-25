@@ -16,7 +16,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
-using SaidOut.AspNetCore.HttpsWithStrictTransportSecurity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -89,20 +88,11 @@ namespace insouq.Web
             services.AddControllersWithViews();
 
             services.AddRazorPages().AddRazorRuntimeCompilation();
-            services.AddHttpsRedirection(options =>
-            {
-                options.HttpsPort = 443;
-            });                           // <=== Add this (AddHttpsRedirection) =====
-
-            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            
-           
-
             app.UseHttpsRedirection();
             if (env.IsDevelopment())
             {
@@ -115,7 +105,7 @@ namespace insouq.Web
                 app.UseHsts();
             }
 
-            
+            app.UseHttpsRedirection();
 
             app.UseCors(x => x
 .AllowAnyOrigin()
@@ -146,8 +136,7 @@ Path.Combine(env.WebRootPath, "images")),
             });
 
             app.UseRouting();
-            
-            app.UseHttpsRedirection();
+
             app.UseAuthentication();
 
             app.UseAuthorization();
@@ -158,7 +147,6 @@ Path.Combine(env.WebRootPath, "images")),
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-
         }
     }
 }
