@@ -1,0 +1,95 @@
+﻿@{
+    ViewData["Title"] = "Motors DL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["ActivePage"] = "Motors DL";
+}
+
+@using insouq.Shared.Utility
+
+<div class="row">
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Makers">
+            <div class="dl-style">
+                <p>Maker</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Models">
+            <div class="dl-style">
+                <p>Model</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Trims">
+            <div class="dl-style">
+                <p>Trim</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Specifications">
+            <div class="dl-style">
+                <p>Regional Specification</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Colors">
+            <div class="dl-style">
+                <p>Color</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Doors">
+            <div class="dl-style">
+                <p>Doors</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Transmissions">
+            <div class="dl-style">
+                <p>Transmission</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="BodyTypes">
+            <div class="dl-style">
+                <p>Body Type</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="FuelTypes">
+            <div class="dl-style">
+                <p>Fuel Type</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="NoOfCylinders">
+            <div class="dl-style">
+                <p>Number Of Cylinders</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="SteeringSides">
+            <div class="dl-style">
+                <p>Steering Side</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="Horsepowers" asp-route-categoryId="@StaticData.UsedCars_ID">
+            <div class="dl-style">
+                <p>Horse power</p>
+            </div>
+        </a>
+    </div>
+</div>
+

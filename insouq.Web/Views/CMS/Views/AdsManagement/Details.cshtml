@@ -1,0 +1,1791 @@
+﻿@using insouq.Shared.Utility
+
+@{
+    ViewData["Title"] = "Ads Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["ActivePage"] = "Ads";
+
+
+    string GetStringCondition(bool value)
+    {
+        if (value) return "Yes";
+        return "No";
+    }
+
+}
+
+<style media="screen">
+    .col-border {
+        border-bottom: 1px solid #dbdbdb;
+        margin-bottom: 10px;
+    }
+</style>
+
+<div class="row mb-2">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 style="color:#000;"><strong>Post</strong> details</h2>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @if (Model.TypeId == StaticData.Motors_ID)
+                    {
+                        if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                        {
+                            <div class="row">
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Maker :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Maker</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Model :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Model</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Trim :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Trim</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Kilometers :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@String.Format("{0:n0}", Model.Kilometers)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Year :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.Year</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Specs :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_RegionalSpecs</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Color :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Color</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Doors :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Doors</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Warranty :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Warranty)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Transmission :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Transmission</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Body Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_BodyType</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Fuel Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_FuelType</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Cylinder :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_NoOfCylinders</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Steering Side :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_SteeringSide</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Horsepower :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Horsepower</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.CategoryId == StaticData.Boats_ID)
+                        {
+                            <div class="row">
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Warranty :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Warranty)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Horsepower :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Horsepower</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Condition :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Condition</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Age :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Age</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Usage :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Usage</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Length :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Length</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Year :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.Year</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.CategoryId == StaticData.Machinery_ID)
+                        {
+                            <div class="row">
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Kilometers :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@String.Format("{0:n0}", Model.Kilometers)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Cylinders :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_NoOfCylinders</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Horsepower :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Horsepower</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Body Condition :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Condition</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Warranty :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Warranty)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Fuel Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_FuelType</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Seller Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_SellerType</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Mechanical Condition :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_MechanicalCondition</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Capacity :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Capacity</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Year :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.Year</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.CategoryId == StaticData.Parts_ID)
+                        {
+                            <div class="row">
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Age :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Age</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Condition :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Condition</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Name Of Part :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.NameOfPart</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Year :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.Year</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        else if (Model.CategoryId == StaticData.Bike_ID)
+                        {
+                            <div class="row">
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Engine Size :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_EngineSize</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold">Kilometers :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@String.Format("{0:n0}", Model.Kilometers)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Color :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Color</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Warranty :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Warranty)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Seller Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_SellerType</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Fuel Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_FuelType</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Cylinders :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_NoOfCylinders</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Wheels :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Wheels</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Usage :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Usage</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Final Drive System :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_FinalDriveSystem</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Year :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.Year</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+                    else if (Model.TypeId == StaticData.Business_ID)
+                    {
+                        <div class="row">
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Category :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @{
+                                            var category = "";
+
+                                            if (!string.IsNullOrEmpty(Model.OtherCategoryName))
+                                            {
+                                                category = Model.OtherCategoryName;
+                                            }
+                                            else
+                                            {
+                                                category = Model.CategoryEnName;
+                                            }
+
+                                        }
+                                        <p class="spe-p details-spe-font">@category</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Sub Business :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @{
+                                            var subCategory = "";
+
+                                            if (!string.IsNullOrEmpty(Model.OtherSubCategoryName))
+                                            {
+                                                subCategory = Model.OtherSubCategoryName;
+                                            }
+                                            else
+                                            {
+                                                subCategory = Model.SubCategoryEnName;
+                                            }
+
+                                        }
+                                        <p class="spe-p details-spe-font">@subCategory</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                    else if (Model.TypeId == StaticData.Services_ID)
+                    {
+                        <div class="row">
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Type :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.CategoryEnName</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (string.IsNullOrEmpty(Model.CarLiftFrom) || string.IsNullOrEmpty(Model.CarLiftTo))
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Cateogry :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            @{
+                                                var subCategory = "";
+
+                                                if (!string.IsNullOrEmpty(Model.OtherServiceType))
+                                                {
+                                                    subCategory = Model.OtherServiceType;
+                                                }
+                                                else
+                                                {
+                                                    subCategory = Model.ServiceTypeEn_Name;
+                                                }
+
+                                            }
+                                            <p class="spe-p details-spe-font">@subCategory</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+
+                            @if (!string.IsNullOrEmpty(Model.CarLiftFrom) && !string.IsNullOrEmpty(Model.CarLiftTo))
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Car Lift From :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.CarLiftFrom</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Car Lift To :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.CarLiftTo</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    else if (Model.TypeId == StaticData.Numbers_ID)
+                    {
+                        <div class="row">
+
+                            @if (Model.CategoryId == StaticData.PlateNumbers_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Emirate :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Emirate</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Plate Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_PlateType</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Plate Code :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.PlateCode</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                            else if (Model.CategoryId == StaticData.MobileNumbers_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Operator :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Operator</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Mobile Code :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.Code</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Number :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.Number</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+
+                    else if (Model.TypeId == StaticData.Electronics_ID)
+                    {
+                        <div class="row">
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Sub Category :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @{
+                                            var subCategory = "";
+
+                                            if (!string.IsNullOrEmpty(Model.OtherSubCategory))
+                                            {
+                                                subCategory = Model.OtherSubCategory;
+                                            }
+                                            else
+                                            {
+                                                subCategory = Model.SubCategoryEn_Name;
+                                            }
+
+                                        }
+                                        <p class="spe-p details-spe-font">@subCategory</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Trim :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @{
+                                            var subType = "";
+
+                                            if (!string.IsNullOrEmpty(Model.OtherSubType))
+                                            {
+                                                subType = Model.OtherSubType;
+                                            }
+                                            else
+                                            {
+                                                subType = Model.SubTypeEn_Name;
+                                            }
+
+                                        }
+                                        <p class="spe-p details-spe-font">@subType</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Age :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.En_Age</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Usage :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.En_Usage</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Color :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.En_Color</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Warranty :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@GetStringCondition(Model.Warranty)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    }
+
+                    else if (Model.TypeId == StaticData.Jobs_ID)
+                    {
+                        <div class="row">
+
+                            @if (Model.CategoryId == StaticData.JobOpening_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Job Category :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_JobType</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Career Level :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_CareerLevel</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Employment Type :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_EmploymentType</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Min Work Experience :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_MinWorkExperience</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Min Education Level :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_MinEducationLevel</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Company Name :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.CompanyName</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                            else if (Model.CategoryId == StaticData.JobWanted_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Job Category :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_JobType</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Job Title :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.JobTitle</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Gender :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Gender</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Nationality :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Nationality</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Current Location :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_CurrentLocation</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Education Level :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_EducationLevel</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Current Position :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.CurrentPosition</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Work Experience :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_WorkExperience</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Commitment :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Commitment</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Notice Period :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_NoticePeriod</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Visa Status :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_VisaStatus</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Career Level :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_CareerLevel</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Expected Monthly Salary :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.ExpectedMonthlySalary</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Phone Number :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.PhoneNumber</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                        </div>
+
+                        @if (Model.CategoryId == StaticData.JobWanted_ID)
+                        {
+                            <div class="row" style="margin-top:15px; margin-left: 1px;">
+                                @{
+                                    var cvUrl = StaticData.SERVER_DOMAIN + Model.CV;
+                                }
+                                <a href="@cvUrl" class="btn btn-primary">Download CV</a>
+                            </div>
+                        }
+
+                    }
+
+                    else if (Model.TypeId == StaticData.Classifieds_ID)
+                    {
+                        var groupId = StaticFunctions.GetClassifiedGroup(Model.CategoryId);
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Category :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.CategoryEnName</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Sub Category :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @{
+                                            var subCategory = "";
+
+                                            if (!string.IsNullOrEmpty(Model.OtherSubCategory))
+                                            {
+                                                subCategory = Model.OtherSubCategory;
+                                            }
+                                            else
+                                            {
+                                                subCategory = Model.SubCategoryEn_Name;
+                                            }
+
+                                        }
+                                        <p class="spe-p details-spe-font">@subCategory</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Item Name :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        @{
+                                            var itemName = "";
+
+                                            if (!string.IsNullOrEmpty(Model.OtherSubType))
+                                            {
+                                                itemName = Model.OtherSubType;
+                                            }
+                                            else
+                                            {
+                                                itemName = Model.SubTypeEn_Name;
+                                            }
+
+                                        }
+                                        <p class="spe-p details-spe-font">@itemName</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (groupId == 1 || groupId == 2)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Age :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Age</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Usage :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Usage</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Condition :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_Condition</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (groupId == 1)
+                                {
+                                    <div class="col-md-6 col-border">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <p class="spe-p details-spe-font" style="font-weight:bold"> Brand :</p>
+                                            </div>
+                                            <div class="col-md-8">
+                                                <p class="spe-p details-spe-font">@Model.En_Brand</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    }
+
+                    else if (Model.TypeId == StaticData.Properties_ID)
+                    {
+                        <div class="row">
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Sub Category :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.SubCategoryEn_Name</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Developer :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.Developer</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Ready By :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.ReadyBy.ToString("dd/MM/yyyy")</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Furnishing :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.En_Furnishing</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Size :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.Size</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Central AC And Heating :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@GetStringCondition(Model.CentralACAndHeating)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Shared Gym :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@GetStringCondition(Model.SharedGym)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Shared Spa :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@GetStringCondition(Model.SharedSpa)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> View Of Landmark :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@GetStringCondition(Model.ViewOfLandmark)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> View Of Water :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@GetStringCondition(Model.ViewOfWater)</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (Model.CategoryId == StaticData.ResidentialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForSale_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Bed Rooms :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.BedRooms</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Bath Rooms :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.BathRooms</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Balcony :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Balcony)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Built In Kitchen Appliances :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.BuiltInKitchenAppliances)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Build In Wardrobes :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.BuildInWardrobes)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Walk In Closet :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.WalkInCloset)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Conceirge Service :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.ConceirgeService)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Covered Parking :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.CoveredParking)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Maid Service :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.MaidService)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Maids Room :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.MaidsRoom)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Pets Allowed :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.PetsAllowed)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Private Garden :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.PrivateGarden)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Private Gym :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.PrivateGym)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Private Jacuzzi :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.PrivateJacuzzi)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Private Pool :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.PrivatePool)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Security :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.Security)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Shared Pool :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.SharedPool)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Study Room :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.StudyRoom)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                            else if (Model.CategoryId == StaticData.CommercialForRent_ID
+|| Model.CategoryId == StaticData.CommercialForSale_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Available Networked :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.AvailableNetworked)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Conference Room :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.ConferenceRoom)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Dining In Building :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.DiningInBuilding)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Retail In Building :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@GetStringCondition(Model.RetailInBuilding)</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+
+                            @if (Model.CategoryId == StaticData.CommercialForRent_ID
+|| Model.CategoryId == StaticData.ResidentialForRent_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Rent Paid In :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_RentPaidIn</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.CategoryId == StaticData.CommercialForSale_ID)
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Total Closing Fee :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.TotalClosingFee</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Annual Community Fee :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.AnnualCommunityFee</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Property Reference ID :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.PropertyReferenceID</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            @if (Model.ListedBy == "0")
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> RERA Landlord Name :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.RERALandlordName</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> Property Status :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.En_PropertyStatus</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> RERA Title Deed Number :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.RERATitleDeedNumber</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> RERA Pre Registration Number :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.RERAPreRegistrationNumber</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            else if (Model.ListedBy == "1")
+                            {
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> RERA Broker ID Number :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.RERABrokerIDNumber</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> RERA Lister Company Name :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.RERAListerCompanyName</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> RERA Permit Number :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.RERAPermitNumber</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-border">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <p class="spe-p details-spe-font" style="font-weight:bold"> RERA Agent Name :</p>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <p class="spe-p details-spe-font">@Model.RERAAgentName</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Building :</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.Building</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-border">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <p class="spe-p details-spe-font" style="font-weight:bold"> Neighborhood:</p>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p class="spe-p details-spe-font">@Model.Neighborhood</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    }
+
+                </div>
+                <div class="form-group">
+                    <p class="spe-p details-spe-font" style="font-weight:bold"> Description </p>
+                    <div class="row">
+                        <textarea type="text" name="descriptionEn" rows="6" style="width: 98%; background:#fff;" placeholder="Details" readonly class="form-control">@Model.Description</textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" name="save" value="Accept the Post" class="btn btn-success btn-sm" onclick="acceptAd(@Model.Id)">
+                    <a class="btn btn-danger btn-sm" type="button" asp-action="Index">Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
+<script>
+    function acceptAd(id) {
+        $.ajax({
+            url: `/AdsManagement/AcceptAdd?AdId=${id}`,
+            method: "GET",
+            success: function (response) {
+                if (response === true) {
+                    window.location.href = "/AdsManagement/Index";
+                } else {
+                    alert(response.message);
+                }
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    }
+</script>
+
+

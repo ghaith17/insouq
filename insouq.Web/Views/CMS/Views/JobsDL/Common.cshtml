@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Jobs DL";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["ActivePage"] = "Jobs DL";
+}
+
+@using insouq.Shared.Utility
+
+<div class="row">
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="JobTypes">
+            <div class="dl-style">
+                <p>Job Type (Job Category)</p>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="CareerLevels">
+            <div class="dl-style">
+                <p>Career Level</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="WorkExperiences">
+            <div class="dl-style">
+                <p>Work Experience</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="col-md-3">
+        <a class="dl-color" asp-action="EducationLevels">
+            <div class="dl-style">
+                <p>Education Level</p>
+            </div>
+        </a>
+    </div>
+</div>
+

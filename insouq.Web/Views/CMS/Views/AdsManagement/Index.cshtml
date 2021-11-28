@@ -1,0 +1,255 @@
+﻿
+@{
+    ViewData["Title"] = "Ads Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["ActivePage"] = "Ads";
+
+    int AdsCounter = 1;
+}
+
+@using insouq.Shared.Utility
+@using insouq.Models;
+@model List<Ad>
+
+@inject insouq.Services.IServices.ICMSAds adsService
+
+<style media="screen">
+    .dot {
+        height: 25px;
+        width: 25px;
+        background-color: red;
+        border-radius: 50%;
+        display: inline-block;
+        text-align: center;
+        color: #fff;
+        float: right;
+    }
+
+    .color {
+        background: #7d6755;
+        padding: 20px;
+        color: #fff;
+        width: 200px;
+    }
+</style>
+
+<!-- <div>Category </div> -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default" style="overflow-x: auto">
+
+            <div class="panel-body">
+                <div class="form-group">
+                    <x>
+
+                    </x>
+                    @*<x style="float:right;">
+                            <a href="add.html" class="btn btn-success btn-sm"><i class="fa fa-plus"></i> Add New Item</a>
+                        </x>*@
+                </div>
+
+                <table class="table table-striped bootstrap-datatable" id="example" style="width:auto">
+                    <thead class="">
+                        <tr>
+                            <th><p align="center" class="color">Number</p></th>
+                            <th><p align="center" class="color">Category</p></th>
+                            <th><p align="center" class="color">Title (AR/ENG)</p></th>
+                            <th><p align="center" class="color">Description (AR/ENG)</p></th>
+                            <th><p align="center" class="color">Main image</p></th>
+                            <th><p align="center" class="color">Price</p></th>
+                            <th><p align="center" class="color">Images</p></th>
+                            <th><p align="center" class="color">Action</p></th>
+                        </tr>
+                    </thead>
+
+                    <hr />
+
+
+                    <tbody style="padding-top:20px">
+                        @foreach (var ad in Model)
+                        {
+                            string imgUrl = "";
+                            if (ad.Pictures.Count != 0)
+                            {
+                                imgUrl = StaticData.SERVER_DOMAIN + ad.Pictures.FirstOrDefault().ImageURL;
+                            }
+                            <tr align="center" id="@ad.Id">
+                                <td>@AdsCounter</td>
+
+                                <td>@ad.Category.En_Name</td>
+                                <td>@ad.Title</td>
+                                <td>@ad.Description</td>
+
+                                @if (ad.TypeId == StaticData.Numbers_ID)
+                                {
+                                    var number = await adsService.GetAd(ad.Id, StaticData.Numbers_ID);
+                                    var photo = StaticData.SERVER_DOMAIN + number.Photo;
+
+                                    if (ad.CategoryId == StaticData.PlateNumbers_ID)
+                                    {
+
+                                        var plateCodeClass = number.En_Emirate.Replace(" ", "") + "-" + number.En_PlateType.Substring(0, 1) + "Code";
+                                        var plateNumberClass = number.En_Emirate.Replace(" ", "") + "-" + number.En_PlateType.Substring(0, 1) + "Number";
+
+                                        <td>
+                                            <img src="@photo" alt="" style="width:100px;">
+                                            @if (number.PlateCode != null)
+                                            {
+                                                <p class="@plateCodeClass">@number.PlateCode</p>
+                                            }
+                                            <p class="@plateNumberClass">@number.Number</p>
+                                        </td>
+                                    }
+                                    else if (ad.CategoryId == StaticData.MobileNumbers_ID)
+                                    {
+                                        <td>
+                                            <img src="@photo" alt="" style="width:100px;">
+                                            <p class="mobile-numbers">@number.Code @number.Number</p>
+                                        </td>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <td>
+                                        <div class="tz-gallery">
+                                            <a class="lightbox" href="@imgUrl">
+                                                <img src="@imgUrl" alt="" style="width:100px;">
+                                            </a>
+                                        </div>
+                                    </td>
+                                }
+
+                                @if (ad.Price == null || ad.Price < 0)
+                                {
+                                    <td> - </td>
+                                }
+                                else
+                                {
+
+                                    <td>@ad.Price UED</td>
+                                }
+
+                                <td>
+                                    @if (ad.Pictures.Count > 0)
+                                    {
+                                        <a asp-action="Gallary" asp-route-adId="@ad.Id" class="btn btn-primary btn-sm"><i class="fa fa-image"></i> All images</a>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+
+                                <td>
+                                    @if (ad.Status == 2)
+                                    {
+
+                                        <a onClick="accept(@ad.Id)" class="btn btn-success btn-sm"><i class="fa fa-check"></i> </a>
+                                        <a onClick="reject(@ad.Id)" class="btn btn-danger btn-sm"><i class="fas fa-times"></i> </a>
+                                        <a asp-action="Details" asp-route-adId="@ad.Id" asp-route-typeId="@ad.TypeId" class="btn btn-warning btn-sm" title="Details"><i class="fa fa-eye"></i></a>
+                                        <a onClick="deleteAd(@ad.Id)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> </a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-action="Details" asp-route-adId="@ad.Id" asp-route-typeId="@ad.TypeId" class="btn btn-warning btn-sm" title="Details"><i class="fa fa-eye"></i></a>
+                                        <a onClick="deleteAd(@ad.Id)" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> </a>
+                                    }
+                                </td>
+                            </tr>
+                            AdsCounter++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div><!--/col-->
+
+</div><!--/row-->
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Setup - add a text input to each footer cell
+        $('#example thead tr').clone(true).appendTo('#example thead');
+        $('#example thead tr:eq(1) th').each(function (i) {
+            var title = $(this).text();
+            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+
+            $('input', this).on('keyup change', function () {
+                if (table.column(i).search() !== this.value) {
+                    table
+                        .column(i)
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
+
+        var table = $('#example').DataTable({
+            orderCellsTop: true,
+            fixedHeader: true
+        });
+    });</script>
+
+
+<script>
+    function accept(id) {
+        $.ajax({
+            url: `/AdsManagement/AcceptAdd?AdId=${id}`,
+            method: "GET",
+            success: function (response) {
+                if (response === true) {
+                    $(`#${id}`).remove();
+                } else {
+                    alert(error.message);
+                }
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    }
+
+
+
+    function reject(id) {
+        $.ajax({
+            url: `/AdsManagement/RejectAd?AdId=${id}`,
+            method: "GET",
+            success: function (response) {
+                if (response === true) {
+                    $(`#${id}`).remove();
+                } else {
+                    alert(error.message);
+                }
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    }
+
+
+
+
+    function deleteAd(id) {
+        $.ajax({
+            url: `/AdsManagement/DeleteAd?AdId=${id}`,
+            method: "GET",
+            success: function (response) {
+                if (response === true) {
+                    $(`#${id}`).remove();
+                } else {
+                    alert(error.message);
+                }
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+    }
+</script>
+
+
