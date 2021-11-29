@@ -77,7 +77,7 @@ namespace insouq.Controllers
 
         [HttpPost]
         [Route("FilterElectronics")]
-        public async Task<IActionResult> FilterElectronics([FromBody] ElectronicFilters dataModel)
+        public async Task<IActionResult> FilterElectronics([FromForm] ElectronicFilters dataModel)
         {
             var response = await _electronicService.FilterElectronics(dataModel);
 

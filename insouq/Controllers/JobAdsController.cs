@@ -117,7 +117,7 @@ namespace insouq.Controllers
 
         [HttpPost]
         [Route("FilterJobs")]
-        public async Task<IActionResult> FilterJobs([FromBody] JobFilters dataModel) {
+        public async Task<IActionResult> FilterJobs([FromForm] JobFilters dataModel) {
 
             var response = await _jobAdsService.FilterJobs(dataModel);
 

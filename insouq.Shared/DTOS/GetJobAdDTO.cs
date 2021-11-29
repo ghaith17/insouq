@@ -111,5 +111,7 @@ namespace insouq.Shared.DTOS
         public string JobTitle { get; set; }
 
         public List<AdPictureDTO> Pictures { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 }

@@ -168,7 +168,8 @@ namespace insouq.Services
                         }).OrderByDescending(p => p.MainPicture).ToList(),
                         PostDate = motor.Ad.PostDate,
                         Title = motor.Ad.Title,
-                        Status = motor.Ad.Status
+                        Status = motor.Ad.Status,
+                        IsFavorite= this.IsInFavorite(userId,motor.Ad.Id).Result
                     }).AsNoTracking().ToListAsync();
 
                 if (isOwner)
@@ -2270,7 +2271,7 @@ namespace insouq.Services
         }
 
 
-        public async Task<dynamic> GetAdsByCategoryId(int typeId, int categoryId, string searchText = "", string location = "",
+        public async Task<dynamic> GetAdsByCategoryId(int userId,int typeId, int categoryId, string searchText = "", string location = "",
             int maxKm = int.MaxValue, int minKm = 0, int maxYear = 5000,
             int minYear = 1900, double maxPrice = 0, double minPrice = 0,
             string maker = "", string model = "", string trim = ""
@@ -2294,7 +2295,7 @@ namespace insouq.Services
                     && (model.Contains(a.En_Model) || string.IsNullOrEmpty(model) || model == "none")
                     && (trim.Contains(a.En_Trim) || string.IsNullOrEmpty(trim) || trim == "none")
                     )
-                    .Select(motor => new GetMotorAdDTO
+                    .Select( motor => new GetMotorAdDTO
                     {
                         Id = motor.Ad.Id,
                         TypeId = typeId,
@@ -2378,7 +2379,8 @@ namespace insouq.Services
                         }).OrderByDescending(p => p.MainPicture).ToList(),
                         PostDate = motor.Ad.PostDate,
                         Title = motor.Ad.Title,
-                        Status = motor.Ad.Status
+                        Status = motor.Ad.Status,
+                        
                     }).AsNoTracking().ToListAsync();
                 if (!string.IsNullOrEmpty(searchText))
                 {
@@ -2387,6 +2389,11 @@ namespace insouq.Services
                         AddSearchStatistic(Item.Id, (int)Item.UserId);
 
                     }
+                }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
                 }
                 return ads;
 
@@ -2456,6 +2463,11 @@ namespace insouq.Services
                         AddSearchStatistic(Item.Id, (int)Item.UserId);
 
                     }
+                }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
                 }
                 return ads;
 
@@ -2537,6 +2549,11 @@ namespace insouq.Services
                         AddSearchStatistic(Item.Id, (int)Item.UserId);
 
                     }
+                }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
                 }
                 return ads;
 
@@ -2634,7 +2651,8 @@ namespace insouq.Services
                         }).OrderByDescending(p => p.MainPicture).ToList(),
                         PostDate = property.Ad.PostDate,
                         Title = property.Ad.Title,
-                        Status = property.Ad.Status
+                        Status = property.Ad.Status,
+                       
                     }).AsNoTracking().ToListAsync();
                 if (!string.IsNullOrEmpty(searchText))
                 {
@@ -2643,6 +2661,11 @@ namespace insouq.Services
                         AddSearchStatistic(Item.Id, (int)Item.UserId);
 
                     }
+                }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
                 }
                 return ads;
 
@@ -2702,6 +2725,11 @@ namespace insouq.Services
 
                     }
                 }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
+                }
                 return ads;
 
 
@@ -2745,6 +2773,7 @@ namespace insouq.Services
                         PostDate = service.Ad.PostDate,
                         Title = service.Ad.Title,
                         Status = service.Ad.Status,
+                        
                         Pictures = service.Ad.Pictures.Select(p => new AdPictureDTO
                         {
                             Id = p.Id,
@@ -2759,6 +2788,11 @@ namespace insouq.Services
                         AddSearchStatistic(Item.Id, (int)Item.UserId);
 
                     }
+                }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
                 }
                 return ads;
 
@@ -2809,7 +2843,8 @@ namespace insouq.Services
                         UserId = number.Ad.UserId,
                         PostDate = number.Ad.PostDate,
                         Title = number.Ad.Title,
-                        Status = number.Ad.Status
+                        Status = number.Ad.Status,
+                        
                     }).AsNoTracking().ToListAsync();
                 if (!string.IsNullOrEmpty(searchText))
                 {
@@ -2818,6 +2853,11 @@ namespace insouq.Services
                         AddSearchStatistic(Item.Id, (int)Item.UserId);
 
                     }
+                }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
                 }
                 return ads;
 
@@ -2873,6 +2913,7 @@ namespace insouq.Services
                         PostDate = classified.Ad.PostDate,
                         Title = classified.Ad.Title,
                         Status = classified.Ad.Status,
+                        
                         Pictures = classified.Ad.Pictures.Select(p => new AdPictureDTO
                         {
                             Id = p.Id,
@@ -2888,6 +2929,11 @@ namespace insouq.Services
                         AddSearchStatistic(Item.Id, (int)Item.UserId);
 
                     }
+                }
+                foreach (var Item in ads)
+                {
+                    Item.IsFavorite = this.IsInFavorite(userId, Item.Id).Result;
+
                 }
                 return ads;
 

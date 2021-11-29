@@ -68,7 +68,7 @@ namespace insouq.Controllers
         
         [HttpPost]
         [Route("FilterProperities")]
-        public async Task<IActionResult> FilterProperities([FromBody] PropertyFilters dataModel)
+        public async Task<IActionResult> FilterProperities([FromForm] PropertyFilters dataModel)
         {
             var response = await _propertyService.FilterProperities(dataModel);
 

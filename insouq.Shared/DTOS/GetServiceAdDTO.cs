@@ -63,5 +63,7 @@ namespace insouq.Shared.DTOS
         public string CarLiftTo { get; set; }
 
         public List<AdPictureDTO> Pictures { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 }

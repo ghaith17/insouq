@@ -60,7 +60,7 @@ namespace InsouqWebCMS
             services.AddScoped<ISubCategoryService, SubCategoryService>();
             services.AddScoped<ISubTypeService, SubTypeService>();
             services.AddScoped<ICategoryService, CategoryService>();
-            services.AddScoped< IStaticDataService ,CMSStaticDataService>();
+            services.AddScoped<IStaticDataService, CMSStaticDataService>();
 
 
             // Auto Mapper Configurations

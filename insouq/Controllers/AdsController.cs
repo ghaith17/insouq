@@ -35,7 +35,19 @@ namespace insouq.Controllers
         [Route("GetAds")]
         public async Task<IActionResult> GetAds([FromQuery] GetAdsDTO getAdsDTO)
         {
-            var ads = await _adsService.GetAdsByCategoryId(getAdsDTO.TypeId, getAdsDTO.CategoryId, getAdsDTO.SearchText, getAdsDTO.Location, getAdsDTO.MaxKm == null ? 0 : getAdsDTO.MaxKm, getAdsDTO.MinKm == null ? 0 : getAdsDTO.MinKm, getAdsDTO.MaxYear == null ? 0 : getAdsDTO.MaxYear, getAdsDTO.MinYear, getAdsDTO.MaxPrice, getAdsDTO.MinPrice, getAdsDTO.Maker, getAdsDTO.Model, getAdsDTO.Trim);
+            var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+            var userId = HelperFunctions.ValidateJwtToken(token, _jwtConfig.Secret);
+
+            if (userId == null)
+            {
+                return Unauthorized(new BaseResponse
+                {
+                    IsSuccess = false,
+                    Message = StaticData.Unauthorized_Message
+                });
+            }
+            var ads = await _adsService.GetAdsByCategoryId((int)userId,getAdsDTO.TypeId, getAdsDTO.CategoryId, getAdsDTO.SearchText, getAdsDTO.Location, getAdsDTO.MaxKm == null ? 0 : getAdsDTO.MaxKm, getAdsDTO.MinKm == null ? 0 : getAdsDTO.MinKm, getAdsDTO.MaxYear == null ? 0 : getAdsDTO.MaxYear, getAdsDTO.MinYear, getAdsDTO.MaxPrice, getAdsDTO.MinPrice, getAdsDTO.Maker, getAdsDTO.Model, getAdsDTO.Trim);
 
             return Ok(ads);
 

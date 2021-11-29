@@ -67,7 +67,7 @@ namespace insouq.Controllers
 
         [HttpPost]
         [Route("FilterNumbers")]
-        public async Task<IActionResult> FilterNumbers([FromBody] NumberFilters dataModel)
+        public async Task<IActionResult> FilterNumbers([FromForm] NumberFilters dataModel)
         {
             var response = await _numberAdsService.FilterNumbers(dataModel);
 

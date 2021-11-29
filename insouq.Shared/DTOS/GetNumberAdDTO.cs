@@ -71,5 +71,6 @@ namespace insouq.Shared.DTOS
         public string UserImage { get; set; }
 
         public string PhoneNumber { get; set; }
+        public bool IsFavorite { get; set; }
     }
 }

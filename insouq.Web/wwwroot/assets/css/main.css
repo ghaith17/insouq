@@ -5004,7 +5004,7 @@ a.socialIcon:hover, .socialHoverClass {
     .items a {
         color: #7255F1;
         font-weight: bold;
-        font-size: 13px;
+        font-size: 15px;
     }
 
 
@@ -18122,7 +18122,7 @@ input::-webkit-inner-spin-button {
 .subcat-home {
     color: gray !important;
     font-weight: normal !important;
-    font-size: 12px;
+    font-size: 14px;
 }
 .bann-right-sub img {
     width: 96%;
@@ -18538,7 +18538,7 @@ input::-webkit-inner-spin-button {
 }
 
 .col-h-8 {
-    max-width: 72.666667% !important;
+    max-width: 72.666667%;
     flex: 0 0 72.666667%;
 }
 .filled {

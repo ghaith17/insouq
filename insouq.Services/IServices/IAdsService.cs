@@ -19,7 +19,7 @@ namespace insouq.Services.IServices
 
         Task<dynamic> GetLatestAds(int typeId);
 
-        Task<dynamic> GetAdsByCategoryId(int typeId,
+        Task<dynamic> GetAdsByCategoryId(int userId,int typeId,
             int categoryId, string searchText , string location ,
             int maxKm , int minKm , int maxYear ,
             int minYear , double maxPrice , double minPrice,

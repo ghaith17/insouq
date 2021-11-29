@@ -111,7 +111,7 @@ namespace insouq.Controllers
         
         [HttpPost]
         [Route("FilterClassifieds")]
-        public async Task<IActionResult> FilterClassifieds([FromBody] ClassifiedFilters dataModel)
+        public async Task<IActionResult> FilterClassifieds([FromForm] ClassifiedFilters dataModel)
         {
             var response = await _classifiedAdsService.FilterClassifieds(dataModel);
 

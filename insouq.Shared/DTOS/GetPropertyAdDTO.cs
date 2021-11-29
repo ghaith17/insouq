@@ -155,6 +155,8 @@ namespace insouq.Shared.DTOS
         public string SubCategoryAr_Name { get; set; }
 
         public string UserImage { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 
 }

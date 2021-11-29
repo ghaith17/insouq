@@ -93,7 +93,7 @@ namespace insouq.Controllers
 
         [HttpPost]
         [Route("FilterMotors")]
-        public async Task<IActionResult> FilterMotors([FromBody] MotorFilters dataModel)
+        public async Task<IActionResult> FilterMotors([FromForm] MotorFilters dataModel)
         {
             var response = await _motorsService.FilterMotors(dataModel);
 

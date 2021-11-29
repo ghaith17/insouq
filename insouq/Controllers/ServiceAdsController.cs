@@ -77,7 +77,7 @@ namespace insouq.Controllers
         
         [HttpPost]
         [Route("FilterServices")]
-        public async Task<IActionResult> FilterServices([FromBody] ServiceFilters dataModel)
+        public async Task<IActionResult> FilterServices([FromForm] ServiceFilters dataModel)
         {
             var response = await _serviceAdsService.FilterServices(dataModel);
 

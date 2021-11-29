@@ -127,7 +127,7 @@ namespace insouq.Web.Controllers
             }
             else
             {
-                ads = await _adsService.GetAdsByCategoryId(typeId, categoryId, searchText, location, int.Parse(maxKm == null ? "0" : maxKm), int.Parse(minKm == null ? "0" : minKm), int.Parse(maxYear == null ? "0" : maxYear), int.Parse(minYear == null ? "0" : minYear), double.Parse(maxPrice == null ? "0" : maxPrice), double.Parse(minPrice == null ? "0" : minPrice), maker, model, trim);
+                ads = await _adsService.GetAdsByCategoryId(0,typeId, categoryId, searchText, location, int.Parse(maxKm == null ? "0" : maxKm), int.Parse(minKm == null ? "0" : minKm), int.Parse(maxYear == null ? "0" : maxYear), int.Parse(minYear == null ? "0" : minYear), double.Parse(maxPrice == null ? "0" : maxPrice), double.Parse(minPrice == null ? "0" : minPrice), maker, model, trim);
 
 
                 var category = await _categoryService.GetById(categoryId);
