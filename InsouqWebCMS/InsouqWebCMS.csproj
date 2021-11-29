@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="Google.Apis.Auth" Version="1.53.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Certificate" Version="5.0.12" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.11" />

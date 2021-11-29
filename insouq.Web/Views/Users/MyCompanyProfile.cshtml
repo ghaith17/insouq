@@ -34,19 +34,19 @@
                         }
                         <p><img src="@imageSrc" alt=" " class="avatar1" id="CompanyPicture"></p>
                         <p><a class="change-picture3" style="margin-top:@marginTop" href="#"><label for="ProfilePictureFile">Change Picture</label></a></p>
-                        <input type="file" class="line-input-style4" asp-for="ProfilePicture" id="ProfilePictureFile" onchange="loadCompanyPricture()" hidden >
+                        <input type="file" class="line-input-style4" asp-for="ProfilePicture" id="ProfilePictureFile" onchange="loadCompanyPricture()" hidden>
                     </div>
                     <div class="col-md-5 padding-right">
                         <div class="padding-form">
                             <label class="change-color">Company name</label>
-                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Name" required>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Name">
                         </div>
                     </div>
 
                     <div class="col-md-5 padding-right">
                         <div class="padding-form">
                             <label class="change-color">Email address</label>
-                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Email" required>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.Email">
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -71,11 +71,11 @@
                     <div class="col-md-5 padding-right">
                         <div class="padding-form">
                             <label class="change-color">Trade license number</label>
-                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.TradeLicenseNumber" style="width:65%" required>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.TradeLicenseNumber">
                         </div>
                         <div class="padding-form">
                             <label class="change-color">Contact name</label>
-                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.ContactNumber" required>
+                            <input type="text" class="line-input-style4" asp-for="CompanyProfile.ContactNumber">
                         </div>
                         <div class="padding-form">
                             <label class="change-color">Company size</label>
@@ -151,8 +151,6 @@
 
 @section Scripts {
     <script>
-
-       
         function loadCompanyPricture() {
             $('#CompanyPicture').attr('src', URL.createObjectURL($("#ProfilePictureFile")[0].files[0]));
             $(".change-picture3").css("margin-top", "0px");
@@ -163,8 +161,6 @@
             var file = $('#licenseCopy')[0].files[0].name;
             $(this).prev('label').text(file);
         });
-     
 
     </script>
-   
 }

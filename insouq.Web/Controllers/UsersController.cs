@@ -174,23 +174,6 @@ namespace insouq.Web.Controllers
 
             return View(updateProfileVM);
         }
-        [HttpGet]
-        public async Task<IActionResult> GetCompanyProfile()
-        {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            
-
-            var companyProfile = await _usersService.GetCompanyProfile(getUserId());
-
-            if (companyProfile == null) return Ok(new BaseResponse { IsSuccess = false, Message = "0" });
-
-
-            return Ok(new BaseResponse { IsSuccess = true, Message = "0" });
-        }
 
         public async Task<IActionResult> MyCompanyProfile(int categoryId)
         {

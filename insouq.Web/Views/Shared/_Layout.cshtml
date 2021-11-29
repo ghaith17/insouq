@@ -92,7 +92,7 @@
                                 @(await Component.InvokeAsync("User"))
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item" asp-controller="Users" asp-action="MyProfile"> Edit My Profile</a>
-                                    <a class="dropdown-item" asp-controller="Users" asp-action="JobsDashBoard" style="display:none" id="JobsDashBoard"> Jobs Dashboard</a>
+                                    <a class="dropdown-item" asp-controller="Users" asp-action="JobsDashBoard"> Jobs Dashboard</a>
                                     <a class="dropdown-item" asp-controller="Users" asp-action="MyList"> My List</a>
                                     <a class="dropdown-item" asp-controller="Users" asp-action="Chat"> Chat</a>
                                     <a class="dropdown-item" asp-controller="Users" asp-action="Notifications"> Notifications</a>
@@ -1270,16 +1270,6 @@
                     console.log("in 55 ", -1);
 
                 }
-            });
-            $.ajax({
-                url: "/Users/GetCompanyProfile",
-                method: "GET",
-                success: function (response) {
-                    if (response.isSuccess) {
-                        $('#JobsDashBoard').css("display", "block");
-                    } 
-                },
-               
             });
 
         });

@@ -1,4 +1,5 @@
 using AutoMapper;
+using insouq.Configuration;
 using insouq.EntityFramework;
 using insouq.Models.IdentityConfiguration;
 using insouq.Services;
@@ -15,10 +16,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IO;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Certificate;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace InsouqWebCMS
 {
@@ -82,12 +86,6 @@ namespace InsouqWebCMS
                     options.LoginPath = "/Account/Login/";
                     options.ExpireTimeSpan = TimeSpan.FromHours(2);
                 });
-            services.AddAuthentication(
-       CertificateAuthenticationDefaults.AuthenticationScheme)
-       .AddCertificate()
-       // Adding an ICertificateValidationCache results in certificate auth caching the results.
-       // The default implementation uses a memory cache.
-       .AddCertificateCache();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
