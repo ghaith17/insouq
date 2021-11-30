@@ -1,5 +1,4 @@
-﻿
-@model AgencyWeb.Models.RegistrationUser
+﻿@model insouq.Shared.DTOS.AgencyDTOS.RegisterMotorsDTO
 
 @{
     ViewData["Title"] = "Registration";
@@ -126,7 +125,7 @@
                                         </div>
 
                                         <div class="agency-pho">
-                                            <select class=" phone-code" asp-for="PhoneCode">
+                                            <select class=" phone-code" >
                                                 <option asp-for="PhoneCode">+962</option>
                                                 <option asp-for="PhoneCode">+966</option>
                                                 <option asp-for="PhoneCode">+971</option>
@@ -236,10 +235,10 @@
 
     function validate() {
         var str = $('#RegisterPassword').val()
-            //document.getElementById("RegisterPassword").toString();
+        //document.getElementById("RegisterPassword").toString();
         //console.log(" str Password : " + str.toString());
         //console.log(str.toString().search(/[0-9]/));
-        var passRegEx =/^(?=.*[0-9])(?=.*[!@@#$%^&*])[a-zA-Z0-9!@@#$%^&*]{6,16}$/;
+        var passRegEx = /^(?=.*[0-9])(?=.*[!@@#$%^&*])[a-zA-Z0-9!@@#$%^&*]{6,16}$/;
         $("#PasswordError").remove();
         if (!passRegEx.test(str)) {
 
@@ -258,10 +257,10 @@
         //console.log(str.length);
         //console.log(str);
         var emailRegEx = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-       if (!emailRegEx.test(str)) {
-           $("#Email").after('<i id="errorRegisterIcon" style="background: red;" class="fa fa-times check-icons" aria-hidden="true"></i>');
+        if (!emailRegEx.test(str)) {
+            $("#Email").after('<i id="errorRegisterIcon" style="background: red;" class="fa fa-times check-icons" aria-hidden="true"></i>');
         } else {
-           $("#Email").after('<i id="successEmailIcon" class="fa fa-check" aria-hidden="true"></i>');
+            $("#Email").after('<i id="successEmailIcon" class="fa fa-check" aria-hidden="true"></i>');
         }
 
     }

@@ -64,7 +64,7 @@ namespace Insouq.Web.Agency.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Registration(RegisterMotorsDTO model)
+        public IActionResult Registration([FromForm] RegisterMotorsDTO model)
         {
             HttpContext.Session.SetObjectAsJson("CompanyData", model);
             return View();
