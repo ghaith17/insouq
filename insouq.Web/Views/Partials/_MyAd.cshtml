@@ -73,7 +73,7 @@
 
                 <figure>
                     <a href="@href">
-                        <img style=" object-fit: cover; object-position: center; border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
+                        <img onerror="this.src='/images/defaultAdImage.png'" style=" object-fit: cover; object-position: center; border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
                         <div class="sliderWrapper">
                             @{
                                 var imagesUrls = new List<string>();
@@ -134,7 +134,7 @@
 
                     <div class="slider__contents1">
                         <i class="slider__image1">
-                            <img src="@numberPhoto" alt="">
+                            <img onerror="this.src='/images/defaultAdImage.png'" src="@numberPhoto" alt="">
                             <h2 class="mobile-numbers-Mylist">@item.Code @item.Number</h2>
                         </i>
                     </div>
@@ -152,7 +152,7 @@
                 <figure style="height:170px">
                     <div class="slider__contents1">
                         <i class="slider__image1">
-                            <img src="@photo" alt="">
+                            <img onerror="this.src='/images/defaultAdImage.png'" src="@photo" alt="">
                             <h2 class="@plateCodeClass">@item.PlateCode</h2>
                         </i>
                         <h2 class="@plateNumberClass">@item.Number</h2>

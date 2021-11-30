@@ -15,7 +15,7 @@ namespace insouq.Shared.Utility
 
         public const string ServerError_Message = "Internal Server Error";
 
-        public const string DefaultUser_Image = @"/images/userImage.png";
+        public const string DefaultUser_Image = @"\images\userImage.png";
 
         public const string SERVER_DOMAIN = "https://insouq.com";
 

@@ -83,7 +83,7 @@
                             <td>
                                 <div class="tz-gallery">
                                     <a class="lightbox" href="@Model.img1Url">
-                                        <img src="@Model.img1Url" alt="" style="width:100px;">
+                                        <img onerror="this.src='/images/defaultAdImage.png'" src="@Model.img1Url" alt="" style="width:100px;">
                                     </a>
                                 </div>
                             </td>
@@ -91,7 +91,7 @@
                             <td>
                                 <div class="tz-gallery">
                                     <a class="lightbox" href="@Model.img2Url">
-                                        <img src="@Model.img2Url" alt="" style="width:100px;">
+                                        <img onerror="this.src='/images/defaultAdImage.png'" src="@Model.img2Url" alt="" style="width:100px;">
                                     </a>
                                 </div>
                             </td>

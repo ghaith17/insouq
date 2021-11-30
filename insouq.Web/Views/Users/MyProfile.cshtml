@@ -260,7 +260,7 @@
                         @{
                             var imageSrc = StaticData.SERVER_DOMAIN + Model.User.ProfilePicture;
                         }
-                        <p><img src="@imageSrc" alt="Avatar" class="avatar1" id="Picture"></p>
+                        <p><img onerror="this.src='/images/defaultAdImage.png'" src="@imageSrc" alt="Avatar" class="avatar1" id="Picture"></p>
                         <h1 class="section-title9">@Model.User.FirstName @Model.User.LastName</h1>
                         @*<p for="PictureFile"><a class="change-picture">Change Picture</a></p>*@
                         <p><a class="change-picture" href="#"><label for="PictureFile">Change Picture</label></a></p>

@@ -1,0 +1,287 @@
+﻿@model insouq.Shared.DTOS.AgencyDTOS.RegisterMotorsDTO
+@{
+    ViewData["Title"] = "MotorUserRegister";
+}
+@{
+    Layout = null;
+}
+
+
+<html lang="en" dir="ltr">
+<style media="screen">
+    #hero-area2 {
+        background: url(../img/123.png) no-repeat;
+        background-size: cover;
+        width: 100%;
+        overflow: hidden;
+        position: relative;
+        /* top: -4px; */
+        padding-bottom: 70px;
+    }
+
+    #list-view .featured-box6 {
+        display: block !important;
+    }
+
+    .featured-box6 {
+        width: 100%;
+        height: 105% !important;
+        padding: 15px 0px 45px 15px;
+        background: #fff;
+        box-shadow: 0px 2px 18px 0px rgb(198 198 198 / 30%);
+        margin-bottom: 45px !important;
+        margin-bottom: 80px;
+    }
+
+    .upload {
+        width: 25% !important;
+        padding-top: 0 !important;
+        padding-left: 64px !important;
+    }
+
+    .upload-fi {
+        width: 100%;
+        color: #707070 !important;
+        font-size: 18px;
+    }
+
+    .agency-pas select {
+        text-align: left;
+        width: 75%;
+        margin-left: 60px;
+        margin-right: 60px;
+        background: #140f26ad;
+        color: #fff;
+        margin-bottom: 20px;
+        padding: 13px 10px;
+        border: 0px;
+        border-radius: 15px;
+    }
+
+    .agency-pas input[type=text] {
+        text-align: left;
+        width: 75%;
+        margin-left: 60px;
+        background: #140f26ad;
+        color: #fff;
+        margin-bottom: 20px;
+        padding: 10px 10px;
+        border: 0px;
+        border-radius: 15px;
+    }
+</style>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+    <title>In Souq</title>
+</head>
+
+<!-- Navbar Start -->
+
+<body>
+
+
+
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat1">
+        <div id="hero-area2">
+            <div class="row">
+
+                <div class="col-md-12 pad-pas">
+
+                    <div class="featured-box6">
+                        <div class="col-md-6 ">
+                            <div class="featured ">
+
+                                <div class="agency-pas">
+
+                                    <div class="padding-form7">
+                                        <img class="agency-pas2" src="~/assets/img/70.png" alt="">
+                                    </div>
+                                    <div class="padding-form7">
+                                        <h3>Create New Account </h3>
+                                    </div>
+                                    <div class="padding-form7">
+                                        <p>To create your account, you need to add your company info .</p>
+                                    </div>
+                                    @*action="CreatePropertyAccount"*@
+                                <form class="" asp-controller="Accounts" asp-action="RegisterMotors" method="post" enctype="multipart/form-data">
+
+                                    <div class="padding-form7">
+
+
+                                        @*@Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })*@
+                                        <input class="agency-pas1" type="text" id="CompanyName" asp-for="CompanyName" placeholder="Company's name" style="border-right: 10px solid transparent;">
+
+                                        <select class="agency-pas1" id="LicenseIssueAuthority" asp-for="LicenseIssuingAuthority" style="border-right: 10px solid transparent;">
+                                            <option name="">License issuing authority</option>
+                                            <option name="LicenseIssueAuthority">License1</option>
+                                            <option name="LicenseIssueAuthority">License2</option>
+                                        </select>
+                                        <!--<div class="image-upload">-->
+                                        @*@Html.ValidationMessageFor(m => m.LicenseTradeCopy, "", new { @class = "text-danger" })*@
+
+                                        <!--<label for="file-input" class="upload-fi">
+
+            <img class="upload" src="~/assets/img/86.png" />
+            <label for="file-inputName">
+                <i class="fa fa-cloud-upload"></i>Add Trade License
+            </label>
+        </label>
+        <input id="file-inputName" type="file" asp-for="TradeLicenseCopy" hidden>-->
+                                        @*<input id="file-inputName" hidden type="file" asp-for="TradeLicenseCopy" />*@
+
+                                        <!--</div>-->
+                                        @*<div class="image-upload">
+                <label for="file-input" class="upload-fi">
+                    <img class="upload" src="~/assets/img/86.png" />
+
+
+
+            </div>*@
+
+
+                                        <div class="image-upload">
+                                            <label for="file-input" class="upload-fi">
+                                                <img class="upload" src="~/assets/img/86.png" />
+                                                <a id="TradeLicenseCopyText">Add trade license copy</a>
+                                            </label>
+                                            <input id="file-input" type="file" accept="image/gif, image/jpeg, image/png" hidden id="TradeLicenseCopy" asp-for="TradeLicenseCopyPath" />
+
+                                        </div>
+
+                                        @*<div class="image-upload" style="margin-top:20px;">
+                <p><a class="text-style3" href="#"><label style="top:345px;" class="add-your-cv1" for="addcv" id="TradeLicenseCopyText">Add trade license copy</label></a></p>
+                <i id="cvCircle" style="top:340px;" class="add-cv-style1"></i>
+                <i id="cvPlus" style="top:340px;" class="lni lni-plus add-cv-icon1"></i>
+                <input id="file-input" type="file" accept="image/gif, image/jpeg, image/png" hidden asp-for="TradeLicenseCopy" onchange="OnCvChanged()" />
+
+            </div>*@
+
+                                        @*@Html.ValidationMessageFor(m => m.ShowRoomAddress, "", new { @class = "text-danger" })*@
+                                        <input class="agency-pas1" type="text" id="ShowRoomAddress" placeholder="Showroom address" asp-for="ShowroomAddress">
+
+                                    </div>
+                                    @if (ViewBag.Message != null)
+                                    {
+                                        <script type="text/javascript">
+                                        window.onload = function () {
+                                           alert("@ViewBag.Message");
+                                        };
+                                        </script>
+                                    }
+
+                                    <div class="padding-form7">
+                                        <button type="button" name="button" onclick="window.location.href='/Accounts/registration'">Next</button>
+                                    </div>
+                               
+                                </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 logo-login">
+
+
+                            <div class="back-pas">
+                                <h3>Welcome to</h3>
+                                <h1><img class="back-pas-img" src="~/assets/img/81.png" alt=""> </h1>
+                                <p>Upload, manage and track the performance of your listings on insouq  </p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <script>
+        //$('#file-input').change(function () {
+        //    //var i = $(this).prev('label').clone();
+        //    //var file = $('#file-input')[0].files[0].name;
+        //    //$(this).prev('label').text(file);
+
+        //    var activimg = document.getElementsByClassName("file-input");
+        //     var url = URL.createObjectURL(event.target.files[0]);
+        //   // var file = "<img class=\"output\" src=\"" + url + "\" alt=\"img\" >";
+        //    var file = $('#file-input')[0].files[0].name;
+        //    $(this).prev('span').text(file)
+        //});
+
+
+        $('#file-input').change(function () {
+            var fileInput =
+                document.getElementById('file-input');
+
+            var filePath = fileInput.value;
+
+            // Allowing file type
+            var allowedExtensions =
+                /(\.jpg|\.jpeg|\.PNG|\.gif |\.docx  |\.pdf)$/i;
+
+            if (!allowedExtensions.exec(filePath)) {
+                //alert('Invalid file type');
+                //fileInput.value = '';
+                return false;
+            }
+            else {
+                var i = $(this).prev('label').clone();
+                var file = $('#file-input')[0].files[0].name;
+                $("#TradeLicenseCopyText").text(file);
+                //  $(this).prev('label').text(file);
+                //alert('Trade License File Uploaded ' + file);
+            }
+        });
+
+    </script>
+
+    <!-- Bootstrap core JavaScript
+        ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/assets/js/jquery-min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/jquery.slicknav.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+<script>
+</script>
+</html>

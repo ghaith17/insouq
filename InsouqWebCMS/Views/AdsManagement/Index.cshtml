@@ -92,7 +92,7 @@
                                         var plateNumberClass = number.En_Emirate.Replace(" ", "") + "-" + number.En_PlateType.Substring(0, 1) + "Number";
 
                                         <td>
-                                            <img src="@photo" alt="" style="width:100px;">
+                                            <img onerror="this.src='/images/defaultAdImage.png'" src="@photo" alt="" style="width:100px;">
                                             @if (number.PlateCode != null)
                                             {
                                                 <p class="@plateCodeClass">@number.PlateCode</p>
@@ -103,7 +103,7 @@
                                     else if (ad.CategoryId == StaticData.MobileNumbers_ID)
                                     {
                                         <td>
-                                            <img src="@photo" alt="" style="width:100px;">
+                                            <img onerror="this.src='/images/defaultAdImage.png'" src="@photo" alt="" style="width:100px;">
                                             <p class="mobile-numbers">@number.Code @number.Number</p>
                                         </td>
                                     }
@@ -114,7 +114,7 @@
                                     <td>
                                         <div class="tz-gallery">
                                             <a class="lightbox" href="@imgUrl">
-                                                <img src="@imgUrl" alt="" style="width:100px;">
+                                                <img onerror="this.src='/images/defaultAdImage.png'" src="@imgUrl" alt="" style="width:100px;">
                                             </a>
                                         </div>
                                     </td>

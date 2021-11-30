@@ -76,7 +76,7 @@
                                             }
 
 
-                                            <a href="#"><img class="img-fluid" src="@imgUrl" alt=""></a>
+                                            <a href="#"><img onerror="this.src='/images/defaultAdImage.png'" class="img-fluid" src="@imgUrl" alt=""></a>
                                         }
 
                                         else if (Model[i].CategoryId == StaticData.MobileNumbers_ID)
@@ -85,7 +85,7 @@
 
                                                     <div class="slider__contents1">
                                                         <div class="slider__image1">
-                                                            <img src="@numberPhoto" alt="">
+                                                            <img onerror="this.src='/images/defaultAdImage.png'" src="@numberPhoto" alt="">
                                                             <h2 class="mobile-numbers-Mylist">@Model[i].Code @Model[i].Number</h2>
                                                         </div>
                                                     </div>
@@ -100,7 +100,7 @@
 
                                                     <div class="slider__contents1">
                                                         <div class="slider__image1">
-                                                            <img src="@photo" alt="">
+                                                            <img onerror="this.src='/images/defaultAdImage.png'" src="@photo" alt="">
                                                             <h2 class="@plateCodeClass">@Model[i].PlateCode</h2>
                                                         </div>
                                                         <h2 class="@plateNumberClass">@Model[i].Number</h2>

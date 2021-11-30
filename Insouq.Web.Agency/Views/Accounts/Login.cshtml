@@ -1,0 +1,214 @@
+﻿@model insouq.Shared.DTOS.AccountsDTOS.LoginDTO
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main2.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+
+    <title>In Souq</title>
+</head>
+
+<!-- Navbar Start -->
+
+<body>
+
+
+
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat1">
+        <div id="hero-area2">
+            <div class="row">
+
+
+                <div class="col-md-12 pad-pas">
+
+                    <div class="featured-box6">
+                        <div class="col-md-6 ">
+                            <div class="featured ">
+                                <form class="" asp-controller="Accounts" asp-action="login" method="post">
+                                    <div class="agency-pas">
+
+                                        <div class="padding-form7">
+                                            <img class="agency-pas2" src="~/assets/img/70.png" alt="">
+                                        </div>
+                                        <div class="padding-form7">
+                                            <h3>Login Account </h3>
+                                        </div>
+                                        <div class="padding-form7">
+                                            <p>Please enter you information to login to your account.</p>
+                                        </div>
+                                        <div class="padding-form7">
+                                            <div class="login-style">
+                                                <input class="signin-email" id="LoginEmailOrPhone" placeholder="Your Email or phone number" onfocusout="EmailCheck()">
+                                            </div>
+                                            <input class="signin-input" type="password" id="LoginPassword" placeholder="Your password">
+
+                                            <i class="eyePassword fa fa-eye-slash" aria-hidden="true" onclick="togglePassword(1)"></i>
+                                            <div>
+                                                <a class="agency-forget" href="/User/Forgetpassword"> FORGOT your password?</a>
+                                            </div>
+                                        </div>
+                                        <div class="text-danger LoginValidation">@TempData["Message"]</div>
+                                        <div class="padding-form7">
+                                            <button type="submit" name="submit">Sign In</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                                <div class="padding-form7">
+                                    <p class="term-code">By signing in, I agree on their <a href="#">Terms and Conditions</a>  and <a href="#">Privacy Policy</a></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 logo-login">
+
+
+                            <div class="back-pas">
+                                <h3>Welcome to</h3>
+                                <h1><img class="back-pas-img" src="~/assets/img/81.png" alt=""> </h1>
+                                <p>Set your password to enter your account</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script>
+        $('#submit').click(function () {
+            if ($('#LoginEmailOrPhone').val() == '') {
+                alert('Please Enter Your Email');
+                return false;
+            } if ($('#passwordInput').val() == '') {
+                alert('Please Enter Your Password');
+                return false;
+            }
+        });
+    </script>
+
+    <script>
+        function ShowPassword() {
+            var x = document.getElementById("LoginPassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+
+        function togglePassword(target) {
+
+            if ($(".eyePassword").hasClass("fa-eye-slash")) {
+                $(".eyePassword").removeClass("fa-eye-slash");
+                $(".eyePassword").addClass("fa-eye");
+                if (target == 1) {
+                    $("#LoginPassword").removeAttr("type");
+                    $("#LoginPassword").attr("type", "text");
+                } else {
+                    $("#Password").removeAttr("type");
+                    $("#Password").attr("type", "text");
+                }
+            } else {
+                $(".eyePassword").removeClass("fa-eye");
+                $(".eyePassword").addClass("fa-eye-slash");
+
+                if (target == 1) {
+                    $("#LoginPassword").removeAttr("type");
+                    $("#LoginPassword").attr("type", "password");
+                } else {
+                    $("#Password").removeAttr("type");
+                    $("#Password").attr("type", "password");
+                }
+            }
+        }
+
+        function Login() {
+            var data = {
+                Email: $("#LoginEmailOrPhone").val(),
+                Password: $("#LoginPassword").val(),
+            };
+
+
+            if (EmailCheck()) {
+                console.log(EmailCheck());
+                $("#successEmailIcon").remove();
+                $("#errorRegisterIcon").remove();
+                $("#LoginEmailOrPhone").after('<i id="successEmailIcon" class="fa fa-check" aria-hidden="true"></i>');
+
+            } else {
+                $("#successEmailIcon").remove();
+                $("#errorRegisterIcon").remove();
+                $("#LoginEmailOrPhone").after('<i id="errorRegisterIcon" style="background: red;" class="fa fa-times check-icons" aria-hidden="true"></i>');
+            }
+        }
+
+        function EmailCheck() {
+            var str = $('#LoginEmailOrPhone').val();
+            $("#successEmailIcon").remove();
+            $("#errorRegisterIcon").remove();
+
+            var emailRegEx = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+
+            if (!emailRegEx.test(str)) {
+                $("#LoginEmailOrPhone").after('<i id="errorRegisterIcon" style="background: red;" class="fa fa-times check-icons" aria-hidden="true"></i>');
+                return false;
+            } else {
+                $("#LoginEmailOrPhone").after('<i id="successEmailIcon" class="fa fa-check" aria-hidden="true"></i>');
+                return true;
+            }
+
+        }
+    </script>
+
+
+    <!-- Bootstrap core JavaScript
+        ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/assets/js/jquery-min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/jquery.slicknav.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="~/maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+</html>

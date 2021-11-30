@@ -105,7 +105,7 @@ namespace insouq.EntityFramework
 
             base.OnModelCreating(builder);
         }
-
+        public DbSet<Agency> Agencies { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Models.Type> Types { get; set; }

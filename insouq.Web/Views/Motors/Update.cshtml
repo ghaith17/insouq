@@ -523,7 +523,7 @@
                                                         <input type="radio" id="@photo.ImageURL" name="MainPhoto" value="@photo.ImageURL" class="chb" hidden="" ch />
                                                     }
                                                     <label for="@photo.ImageURL">
-                                                        <img class="image-view" src="@imgSrc">
+                                                        <img onerror="this.src='/images/defaultAdImage.png'" class="image-view" src="@imgSrc">
                                                     </label>
 
                                                     <span class="file-delete" onclick="deleteAdPhoto(@photo.Id)">
@@ -1594,7 +1594,7 @@
     </script>
 
     <script type="text/javascript">
-        // <img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'>
+        // <img onerror="this.src='/images/defaultAdImage.png'" src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'>
         const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
 
         // remove old images from DOM
@@ -1616,9 +1616,9 @@
             for (var i = 0; i < this.files.length; i++) {
                 let fileBloc = $('<span/>', { class: 'file-block' }),
                     fileName = $('<span/>', { class: 'name', text: this.files.item(i).name });
-                 fileBloc.append('<input type="radio" checked  id=' + this.files.item(i).name + '  name="MainPhoto" value=' + this.files.item(i).name + ' class="chb" hidden /><label  for=' + this.files.item(i).name + ' class="titleview" ><img class="image-view" src=' + URL.createObjectURL(event.target.files[i]) + '></label><p class="image-hides">Main Image</p><span class="file-delete"><span>x</span></span>').append(fileName);
+                 fileBloc.append('<input type="radio" checked  id=' + this.files.item(i).name + '  name="MainPhoto" value=' + this.files.item(i).name + ' class="chb" hidden /><label  for=' + this.files.item(i).name + ' class="titleview" ><img onerror="this.src='/images/defaultAdImage.png'" class="image-view" src=' + URL.createObjectURL(event.target.files[i]) + '></label><p class="image-hides">Main Image</p><span class="file-delete"><span>x</span></span>').append(fileName);
                 $("#filesList > #files-names").append(fileBloc);
-                // $('#image_preview').append("<div class='img-div' id='img-div"+i+"'><input type='radio'  id='"+this.files.item(i).name+"'  name='cb' value='"+this.files.item(i).name+"' class='chb' hidden /><label  for='"+this.files.item(i).name+"' ><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'></label><div class='middle'></div><span class="file-delete"><span>x</span></span></div>");
+                // $('#image_preview').append("<div class='img-div' id='img-div"+i+"'><input type='radio'  id='"+this.files.item(i).name+"'  name='cb' value='"+this.files.item(i).name+"' class='chb' hidden /><label  for='"+this.files.item(i).name+"' ><img onerror="this.src='/images/defaultAdImage.png'" src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'></label><div class='middle'></div><span class="file-delete"><span>x</span></span></div>");
             };
             // Ajout des fichiers dans l'objet DataTransfer
             for (let file of this.files) {

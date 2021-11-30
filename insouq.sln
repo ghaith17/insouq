@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "insouq.Shared", "insouq.Sha
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "insouq.Web", "insouq.Web\insouq.Web.csproj", "{1E81BCA3-693D-4BAD-B906-DC7FC04545E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsouqWebCMS", "InsouqWebCMS\InsouqWebCMS.csproj", "{92DE191C-2717-41AC-B3DA-FC4B009E53E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsouqWebCMS", "InsouqWebCMS\InsouqWebCMS.csproj", "{92DE191C-2717-41AC-B3DA-FC4B009E53E7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Insouq.Web.Agency", "Insouq.Web.Agency\Insouq.Web.Agency.csproj", "{30478FB5-A7EE-4CA0-8FB5-00C17BB7E711}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{92DE191C-2717-41AC-B3DA-FC4B009E53E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92DE191C-2717-41AC-B3DA-FC4B009E53E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92DE191C-2717-41AC-B3DA-FC4B009E53E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30478FB5-A7EE-4CA0-8FB5-00C17BB7E711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30478FB5-A7EE-4CA0-8FB5-00C17BB7E711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30478FB5-A7EE-4CA0-8FB5-00C17BB7E711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30478FB5-A7EE-4CA0-8FB5-00C17BB7E711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -42,28 +42,28 @@
                     <span class="lni-menu"></span>
                     <span class="lni-menu"></span>
                 </button>
-                <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/assets/img/55.png" alt=""></a>
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/55.png" alt=""></a>
             </div>
             <div class="collapse navbar-collapse" id="main-navbar">
                 @(await Component.InvokeAsync("HeaderCategories"))
                 <div class="men-icon inline-view">
 
                     <button type="button" class="change-btn-17 map-point-sm" name="button" data-show=".darwin">
-                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
+                        <p><i class="icon-padding" aria-hidden="true"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
                     </button>
 
 
                     <button class="change-btn28" id="Div3"><label class="">@Model.User.MobileNumber</label></button>
 
                     <button type="button" class="change-btn15" name="button" onclick="switchVisible();" id="Button2">
-                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
+                        <p><i class="icon-padding" aria-hidden="true"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
                     </button>
 
                     @*<button type="button" class="change-btn-17 map-point-sm" name="button" data-show=".darwin">
-                            <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
+                            <p><i class="icon-padding" aria-hidden="true"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
                         </button>
                         <button type="button" class="change-btn-17" name="button">
-                            <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
+                            <p><i class="icon-padding" aria-hidden="true"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
                         </button>*@
 
 
@@ -142,7 +142,7 @@
     <div id="list-view" class="tab-pane fade active show containers trending-cat">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="section-title10"><img style="margin-right: 5px;" src="~/assets/img/32.png" alt="">@Model.Ad.Title</h1>
+                <h1 class="section-title10"><img onerror="this.src='/images/defaultAdImage.png'" style="margin-right: 5px;" src="~/assets/img/32.png" alt="">@Model.Ad.Title</h1>
                 <ol class="breadcrumb-style">
                     <li><a asp-controller="Home" asp-action="Index" class="breadcrumb-color">Home &gt; </a></li>
                     <li><a href="#" class="breadcrumb-color"> @GetTypeName()  &gt; </a></li>
@@ -184,7 +184,7 @@
                                                     active = "active";
                                                 }
                                                 <div class="carousel-item @active" data-slide-number="@index">
-                                                    <img style="object-fit: cover;object-position: center; height: 490px;" src="@src"  class="d-block w-100" alt="..." data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
+                                                    <img onerror="this.src='/images/defaultAdImage.png'" style="object-fit: cover;object-position: center; height: 490px;" src="@src"  class="d-block w-100" alt="..." data-type="image" data-toggle="lightbox" data-gallery="example-gallery">
                                                 </div>
 
                                             }
@@ -212,7 +212,7 @@
                                                     }
                                                     var src = StaticData.SERVER_DOMAIN + item.ImageURL;
                                                     <div id="carousel-selector-@indexx" class="thumb col-4 col-sm-2 px-1 py-2 @selected" data-target="#myCarousel" data-slide-to="@indexx">
-                                                        <img style="height: 90px; object-fit: cover; object-position: center;" src="@src" class="img-fluid" alt="...">
+                                                        <img onerror="this.src='/images/defaultAdImage.png'" style="height: 90px; object-fit: cover; object-position: center;" src="@src" class="img-fluid" alt="...">
                                                     </div>
 
                                                     indexx++;
@@ -230,7 +230,7 @@
                                                         {
                                                             var src = StaticData.SERVER_DOMAIN + Model.Ad.Pictures[i].ImageURL;
                                                             <div id="carousel-selector-@i" class="thumb col-4 col-sm-2 px-1 py-2" data-target="#myCarousel" data-slide-to="6">
-                                                                <img style="height: 90px; object-fit: cover; object-position: center;" src="@src" class="img-fluid" alt="...">
+                                                                <img onerror="this.src='/images/defaultAdImage.png'" style="height: 90px; object-fit: cover; object-position: center;" src="@src" class="img-fluid" alt="...">
                                                             </div>
                                                         }
                                                     </div>
@@ -275,7 +275,7 @@
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active" data-slide-number="0">
-                                        <img src="@numberPhoto" class="d-block w-100">
+                                        <img onerror="this.src='/images/defaultAdImage.png'" src="@numberPhoto" class="d-block w-100">
                                         <h2 class="@plateCodeClass">@Model.Ad.PlateCode</h2>
                                         <h2 class="@plateNumberClass">@Model.Ad.Number</h2>
                                     </div>
@@ -296,7 +296,7 @@
                             <div id="myCarousel" class="carousel slide" data-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active" data-slide-number="0">
-                                        <img src="@numberPhoto" class="d-block w-100">
+                                        <img onerror="this.src='/images/defaultAdImage.png'" src="@numberPhoto" class="d-block w-100">
                                         <h2 class="mobile-Details">@Model.Ad.Code @Model.Ad.Number</h2>
                                     </div>
 
@@ -480,7 +480,7 @@
                                     {
                                         <div class="col-md-7">
                                             <p class="spe-p details-spe-font">
-                                                <img class="spe-icon" src="~/assets/img/46.png" alt="">
+                                                <img onerror="this.src='/images/defaultAdImage.png'" class="spe-icon" src="~/assets/img/46.png" alt="">
                                                 Doors
                                             </p>
                                         </div>
@@ -1901,7 +1901,7 @@
                                                 width="888" height="350" allowfullscreen="" loading="lazy" style="border: 0; margin-left: -30px; width: 106.5%;"></iframe>
 
                                         <p class="location-p">Arabian Ranches 3, Dubailand, Dubai</p>
-                                        <button type="button" class="location-btn" name="button"><img src="~/assets/img/50.png" alt=""> Get Directions</button>
+                                        <button type="button" class="location-btn" name="button"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/50.png" alt=""> Get Directions</button>
                                         <div class="container">
 
                                             <!-- Trigger the modal with a button -->
@@ -1967,7 +1967,7 @@
                             var profileImageSrc = StaticData.SERVER_DOMAIN + Model.User.ProfilePicture;
 
                         }
-                        <p class=" avatar-seller"><img src="@profileImageSrc" alt="Avatar" class="avatar1"></p>
+                        <p class=" avatar-seller"><img onerror="this.src='https://insouq.com/assets/img/56.png'" src="@profileImageSrc" alt="Avatar" class="avatar1"></p>
                         @{
                             string getStars(string name)
                             {
@@ -2344,13 +2344,13 @@
                     </div>
 
                     <button type="button" class="change-btn15 map-point-sm" name="button" data-show=".darwin">
-                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
+                        <p><i class="icon-padding" aria-hidden="true"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/52.png" alt=""> </i></p> <p>Chat</p>
                     </button>
                     <button class="change-btn28" id="Div2"><label class="label-btn-28">@Model.User.MobileNumber</label></button>
 
 
                     <button type="button" class="change-btn15" name="button" onclick="switchVisible();" id="Button1">
-                        <p><i class="icon-padding" aria-hidden="true"><img src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
+                        <p><i class="icon-padding" aria-hidden="true"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/53.png" alt=""> </i></p> <p>Call</p>
                     </button>
 
 
@@ -2387,7 +2387,7 @@
                                 {
                                     var src = StaticData.SERVER_DOMAIN + item.Pictures[0].ImageURL;
                                     <figure>
-                                        <a href="#"><img style="height:115px;" class="img-fluid like-img" src="@src" alt=""></a>
+                                        <a href="#"><img onerror="this.src='/images/defaultAdImage.png'" style="height:115px;" class="img-fluid like-img" src="@src" alt=""></a>
                                     </figure>
                                 }
 
@@ -2420,7 +2420,7 @@
         <div class="row">
             <div class="chatbox chatbox22 chatbox--tray">
                 <div class="chatbox__title">
-                    <img src="https://emilcarlsson.se/assets/harveyspecter.png" alt="" />
+                    <img onerror="this.src='/images/defaultAdImage.png'" src="https://emilcarlsson.se/assets/harveyspecter.png" alt="" />
                     <h5><a href="">Leave a message</a></h5>
                     <i class="fa fa-info-circle" aria-hidden="true"></i>
                     <button class="chatbox__title__tray">

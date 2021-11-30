@@ -64,7 +64,7 @@
                             var profileImageSrc = StaticData.SERVER_DOMAIN + Model.User.ProfilePicture;
 
                         }
-                        <p class=" avatar-seller"><img src="@profileImageSrc" alt="Avatar" class="avatar1"></p>
+                        <p class=" avatar-seller"><img onerror="this.src='https://insouq.com/assets/img/56.png'" src="@profileImageSrc" alt="Avatar" class="avatar1"></p>
                         <h1 class="section-title11">@Model.User.FirstName @Model.User.LastName</h1>
                         <p class="date-title">Member since @Model.User.MemberSince.ToString("MMM dd yyyy")</p>
                     </div>

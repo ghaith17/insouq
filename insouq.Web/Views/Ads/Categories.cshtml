@@ -7,13 +7,13 @@
 <div class="row">
     <div class="col-md-2">
         <div class="bann-left-sub">
-            <img src="~/assets/img/86.png" alt="">
+            <img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/86.png" alt="">
         </div>
     </div>
     <div class="col-md-8 bann-marge">
         <div class="bann-top">
 
-            <img src="~/assets/img/88.png" alt="">
+            <img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/88.png" alt="">
         </div>
 
 
@@ -28,7 +28,7 @@
                             <span class="motors-color-1" style="background:@color;">@category.NumberOfAds</span>
                             <a asp-controller="Ads" asp-action="All" asp-route-typeId="@ViewBag.TypeId" asp-route-categoryId="@category.Id">
                                 <div class="subcategory-box" style="border:1px solid @color;">
-                                    <p><img style="height: 50px;" src="@category.FirstImage" alt=""><p>
+                                    <p><img onerror="this.src='/images/defaultAdImage.png'" style="height: 50px;" src="@category.FirstImage" alt=""><p>
                                     <p class="subcategory-p">@category.En_Name</p>
                                 </div>
                             </a>
@@ -41,7 +41,7 @@
     </div>
     <div class="col-md-2">
         <div class="bann-right-sub">
-            <img src="~/assets/img/84.png" alt="">
+            <img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/84.png" alt="">
         </div>
     </div>
 </div>

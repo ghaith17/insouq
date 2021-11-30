@@ -26,7 +26,7 @@
                 }
                 <figure>
                     <a href="@href">
-                        <img style=" object-fit: cover; object-position: center; border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
+                        <img onerror="this.src='/images/defaultAdImage.png'" style=" object-fit: cover; object-position: center; border-left: 4px solid #ff951b;padding-left: 3px; width:100%; height: 167px;" src="" alt="" id="slider-@itemIndex">
                         <div class="sliderWrapper">
                             @{
                                 var imagesUrls = new List<string>();
@@ -87,7 +87,7 @@
 
                     <div class="slider__contents1">
                         <i class="slider__image1">
-                            <img src="@numberPhoto" alt="">
+                            <img onerror="this.src='/images/defaultAdImage.png'" src="@numberPhoto" alt="">
                             <h2 class="mobile-numbers-Mylist">@item.Code @item.Number</h2>
                         </i>
                     </div>
@@ -105,7 +105,7 @@
                 <figure>
                     <div class="slider__contents1">
                         <i class="slider__image1">
-                            <img src="@photo" alt="">
+                            <img onerror="this.src='/images/defaultAdImage.png'" src="@photo" alt="">
                             <h2 class="@plateCodeClass">@item.PlateCode</h2>
                         </i>
                         <h2 class="@plateNumberClass">@item.Number</h2>
@@ -152,7 +152,7 @@
             <div class="col-md-8">
                 <div class="feature-content width-size">
 
-                    <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId"><img src="~/assets/img/32.png" class="star-style" alt=""> @item.Title</a></h4>
+                    <h4><a asp-controller="Ads" asp-action="Details" asp-route-adId="@item.Id" asp-route-typeId="@item.TypeId"><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/32.png" class="star-style" alt=""> @item.Title</a></h4>
 
                     @if (item.TypeId == StaticData.Motors_ID)
                     {
@@ -183,23 +183,23 @@
                                || item.CategoryId == StaticData.Bike_ID)
                                 {
                                     @*<p>@String.Format("{0:n0}", item.Kilometers) KM</p>*@
-                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@String.Format("{0:n0}", item.Kilometers) KM</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@String.Format("{0:n0}", item.Kilometers) KM</p>
                                 }
                                 else if (item.CategoryId == StaticData.Boats_ID)
                                 {
                                     @*<p>@item.Length m</p>*@
-                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Length</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@item.En_Length</p>
                                 }
                                 else if (item.CategoryId == StaticData.Parts_ID)
                                 {
                                     @*<p>@item.En_Maker</p>*@
-                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.NameOfPart</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@item.NameOfPart</p>
                                 }
 
                             </label>
                             <label class="label-view1">
 
-                                <p><i><img src="~/assets/img/37.png" alt=""></i>@item.Year</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/37.png" alt=""></i>@item.Year</p>
                                 @*<p>@item.Year</p>*@
 
                             </label>
@@ -207,19 +207,19 @@
                                 @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID
                                || item.CategoryId == StaticData.Bike_ID)
                                 {
-                                    <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Color</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/38.png" alt=""></i>@item.En_Color</p>
                                     @*<p>@item.En_Color</p>*@
 
                                 }
                                 else if (item.CategoryId == StaticData.Boats_ID || item.CategoryId == StaticData.Parts_ID)
                                 {
-                                    <p><i><img src="~/assets/img/38.png" alt=""></i>@item.En_Age</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/38.png" alt=""></i>@item.En_Age</p>
                                     @*<p>@item.Age year</p>*@
                                 }
                                 else if (item.CategoryId == StaticData.Machinery_ID)
                                 {
                                     @*<p>@String.Format("{0:n0}", item.Horsepower) HP</p>*@
-                                    <p><i><img src="~/assets/img/38.png" alt=""></i>@String.Format("{0:n0}", item.En_Horsepower)</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/38.png" alt=""></i>@String.Format("{0:n0}", item.En_Horsepower)</p>
                                 }
 
                             </label>
@@ -227,24 +227,24 @@
 
                                 @if (item.CategoryId == StaticData.UsedCars_ID || item.CategoryId == StaticData.ExportCar_ID)
                                 {
-                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_Transmission</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/39.png" alt=""></i>@item.En_Transmission</p>
                                     @*<p>@item.En_Transmission</p>*@
                                 }
                                 else if (item.CategoryId == StaticData.Boats_ID || item.CategoryId == StaticData.Parts_ID)
                                 {
-                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_Condition</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/39.png" alt=""></i>@item.En_Condition</p>
 
                                     @*<p>@item.En_Usage</p>*@
                                 }
                                 else if (item.CategoryId == StaticData.Bike_ID)
                                 {
-                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_FinalDriveSystem</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/39.png" alt=""></i>@item.En_FinalDriveSystem</p>
 
                                     @*<p>@item.En_FinalDriveSystem</p>*@
                                 }
                                 else if (item.CategoryId == StaticData.Machinery_ID)
                                 {
-                                    <p><i><img src="~/assets/img/39.png" alt=""></i>@item.En_FuelType</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/39.png" alt=""></i>@item.En_FuelType</p>
 
                                     @*<p>@item.En_FuelType</p>*@
                                 }
@@ -267,23 +267,23 @@
                         <div class="label-whidth">
 
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.En_Furnishing</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@item.En_Furnishing</p>
 
                             </label>
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Size sqft</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@item.Size sqft</p>
                             </label>
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.ReadyBy.ToString("dd/MM/yyyy")</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@item.ReadyBy.ToString("dd/MM/yyyy")</p>
                             </label>
                             <label class="label-view1">
                                 @if (item.ListedBy == "0")
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i> LandLord</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i> LandLord</p>
                                 }
                                 else
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i> Agent</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i> Agent</p>
                                 }
 
                             </label>
@@ -303,34 +303,34 @@
                         <div class="label-whidth">
 
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_JobType</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_JobType</p>
                             </label>
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_CareerLevel</p>
-
-                            </label>
-                            <label class="label-view1">
-
-                                @if (item.CategoryId == StaticData.JobWanted_ID)
-                                {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_WorkExperience year</p>
-
-                                }
-                                else if (item.CategoryId == StaticData.JobOpening_ID)
-                                {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MinWorkExperience year</p>
-                                }
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_CareerLevel</p>
 
                             </label>
                             <label class="label-view1">
 
                                 @if (item.CategoryId == StaticData.JobWanted_ID)
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_NoticePeriod</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_WorkExperience year</p>
+
                                 }
                                 else if (item.CategoryId == StaticData.JobOpening_ID)
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_EmploymentType</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_MinWorkExperience year</p>
+                                }
+
+                            </label>
+                            <label class="label-view1">
+
+                                @if (item.CategoryId == StaticData.JobWanted_ID)
+                                {
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_NoticePeriod</p>
+                                }
+                                else if (item.CategoryId == StaticData.JobOpening_ID)
+                                {
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_EmploymentType</p>
                                 }
 
                             </label>
@@ -381,21 +381,21 @@
                             @if (item.En_Usage != null)
                             {
                                 <label class="label-view1">
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
                                 </label>
                             }
 
                             @if (item.En_Age != null)
                             {
                                 <label class="label-view1">
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
                                 </label>
                             }
 
                             @if (item.En_Condition != null)
                             {
                                 <label class="label-view1">
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Condition</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Condition</p>
                                 </label>
                             }
 
@@ -415,45 +415,45 @@
                             <label class="label-view1">
                                 @if (item.CategoryId == StaticData.PlateNumbers_ID)
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Emirate</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Emirate</p>
                                 }
                                 else if (item.CategoryId == StaticData.MobileNumbers_ID)
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_MobileNumberPlan</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_MobileNumberPlan</p>
                                 }
                             </label>
                             <label class="label-view1">
                                 @if (item.CategoryId == StaticData.MobileNumbers_ID)
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Operator</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Operator</p>
 
                                 }
                                 else if (item.CategoryId == StaticData.PlateNumbers_ID)
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_PlateType</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_PlateType</p>
                                 }
                             </label>
                             <label class="label-view1">
                                 @if (item.CategoryId == StaticData.MobileNumbers_ID)
                                 {
-                                    <p><i><img src="~/assets/img/36.png" alt=""></i>@item.Code</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.Code</p>
                                 }
                                 else if (item.CategoryId == StaticData.PlateNumbers_ID)
                                 {
                                     if (!string.IsNullOrEmpty(item.PlateCode))
                                     {
-                                        <p><i><img src="~/assets/img/36.png" alt=""></i>@item.PlateCode</p>
+                                        <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.PlateCode</p>
                                     }
                                     else
                                     {
-                                        <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
+                                        <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
                                     }
                                 }
                             </label>
                             @if (!string.IsNullOrEmpty(item.PlateCode))
                             {
                                 <label class="label-view1">
-                                    <p><i><img src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
+                                    <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""> </i>@item.Number</p>
                                 </label>
                             }
                         </div>
@@ -485,15 +485,15 @@
 
                         <div class="label-whidth">
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Color</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Color</p>
 
                             </label>
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Usage</p>
 
                             </label>
                             <label class="label-view1">
-                                <p><i><img src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
+                                <p><i><img onerror="this.src='/images/defaultAdImage.png'" src="~/assets/img/36.png" alt=""></i>@item.En_Age</p>
                             </label>
                         </div>
                     }
@@ -501,7 +501,7 @@
                     @{
                         var userImageSrc = StaticData.SERVER_DOMAIN + item.UserImage;
                     }
-                    <span class="padding-span3 "><a asp-controller="Users" asp-action="LiveAds" asp-route-userId="@item.UserId"><img src="@userImageSrc" alt=""></a>  @HelperFunctions.GetTime(item.PostDate)</span>
+                    <span class="padding-span3 "><a asp-controller="Users" asp-action="LiveAds" asp-route-userId="@item.UserId"><img onerror="this.src='/images/defaultAdImage.png'" src="@userImageSrc" alt=""></a>  @HelperFunctions.GetTime(item.PostDate)</span>
                 </div>
             </div>
             <div class="col-md-4">

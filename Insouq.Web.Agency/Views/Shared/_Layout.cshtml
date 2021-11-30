@@ -1,0 +1,272 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main2.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+</head>
+<body>
+    @*<div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>*@
+    @*<div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+        data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">*@
+    <header class="topbar" data-navbarbg="skin5">
+        <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+            <div class="navbar-header" data-logobg="skin6">
+                <a class="navbar-brand1" href="/Home/Index">
+                    <img src="~/assets/img/57.png" alt="homepage" />
+                </a>
+                <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                   href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+            </div>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                <h1 class="agency-header"> @HttpContextAccessor.HttpContext.Session.GetString("SessionAgencyName")</h1>
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li>
+                        <a href="#" class="lang-style">Eng</a>
+                    </li>
+                    <li class=" in">
+                        <a class="tg-btn" href="/Topnavbar/PostAnAd"><i class="fa fa-plus"></i> Post An Ad</a>
+                    </li>
+                    <ul class="sign-in">
+                        <li class="nav-item dropdown inline-view">
+
+                            <p>
+                                <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @HttpContextAccessor.HttpContext.Session.GetString("SessionAgentName")
+                                </a><img src="../image/@HttpContextAccessor.HttpContext.Session.GetString("SessionProfilePicture")" alt="Avatar" class="avatar">
+                            </p>
+                            <div class="dropdown-menu">
+                                @if (@HttpContextAccessor.HttpContext.Session.GetInt32("SessionRole") == 3)
+                                {
+                                    <a class="dropdown-item" href="/Topnavbar/AgencyProfile"><i><img src="~/assets/img/59.png" alt=""> </i> Agency Profile</a>
+                                }
+                                <a class="dropdown-item" href="/Topnavbar/managerprofile"><i><img src="~/assets/img/64.png" alt=""> </i> My Profile</a>
+                                <a class="dropdown-item" href="/User/login"><i><img src="~/assets/img/66.png" alt=""> </i> Log Out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-sidebar" data-sidebarbg="skin6">
+        <!-- Sidebar scroll-->
+        <div class="scroll-sidebar">
+            <!-- Sidebar navigation-->
+            <nav class="sidebar-nav">
+                <ul id="sidebarnav">
+                    <!-- User Profile-->
+                    <li class="sidebar-item pt-2">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Home/index"
+                           aria-expanded="false">
+                            <i><img src="~/assets/img/58.png" alt=""> </i>
+                            <span class="hide-menu">Dashboard</span>
+                        </a>
+                    </li>
+                    @if (@HttpContextAccessor.HttpContext.Session.GetInt32("SessionRole") == 3)
+                    {
+
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/AgencyStatistics"
+                               aria-expanded="false">
+                                <i><img src="~/assets/img/60.png" alt=""> </i>
+                                <span class="hide-menu">Agency Statistics</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/PackageSubscription"
+                               aria-expanded="false">
+                                <i><img src="~/assets/img/61.png" alt=""> </i>
+                                <span class="hide-menu">Package Subscription</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/Staff"
+                               aria-expanded="false">
+                                <i><img src="~/assets/img/62.png" alt=""> </i>
+                                <span class="hide-menu">Staff</span>
+                            </a>
+                        </li>
+                    }
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/AdsListing"
+                           aria-expanded="false">
+                            <i><img src="~/assets/img/63.png" alt=""> </i>
+                            <span class="hide-menu">Ads Listing</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/inquiries"
+                           aria-expanded="false">
+                            <i><img src="~/assets/img/63.png" alt=""> </i>
+                            <span class="hide-menu">inquiries</span>
+                        </a>
+                    </li>
+
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/MyNotification"
+                           aria-expanded="false">
+                            <i><img src="~/assets/img/65.png" alt=""> </i>
+                            <span class="hide-menu">My Notification</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+
+            </nav>
+            <!-- End Sidebar navigation -->
+        </div>
+        <!-- End Sidebar scroll-->
+    </aside>
+    <div class="page-wrapper">
+        <section id="about" class="featured section-padding-agency how-title-agency" style="padding:0;margin-left: -7px;">
+            <div class="container text-center wow  wow fadeInUp ">
+                <div class="row">
+                    <div class="col-md-6 col-lg-6 col-xs-12">
+                        <div class="">
+
+                            @*<h1 class="dash-h1">Dashboard</h1>*@
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </div>
+    @*</div>*@
+
+    <div class="">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app-style-switcher.js"></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="~/js/pages/dashboards/dashboard1.js"></script>
+
+
+    <footer>
+        <!-- Footer Area Start -->
+        <section class="footer-Content1">
+            <div class="containers">
+                <div class="row">
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <div class="footer-logo"><img src="~/assets/img/67.png" alt=""></div>
+                        </div>
+                    </div>
+                    <div class="col-md-20">
+                        <div class="widget">
+
+                            <ul class="menu">
+                                <li><a href="/Footer/Aboutus">About Insouq</a></li>
+                                <li><a href="/Footer/Howitworks">How it works</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <ul class="menu">
+                                <li><a href="/Footer/FAQs">FAQs</a></li>
+                                <li><a href="/Footer/Contactus">Contact us</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <ul class="menu">
+                                <li><a href="/Footer/SellingGuidelines">Selling guidelines</a></li>
+                                <li><a href="/Footer/Privacypolicy">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-20">
+                        <div class="widget">
+                            <ul class="menu">
+                                <li><a href="/Footer/Termandconditions">Term &amp; Conditions</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer area End -->
+        <!-- Copyright Start  -->
+        <div id="copyright">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="footer-border"></div>
+                        <div class="site-info float-left">
+                            <!-- <p>Copy right &copy; 2021,All Rights Reserved.By <a href="http://www.hudhudit.com" target="_blank">HUDHUDIT</a></p> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+    </footer>
+
+
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
