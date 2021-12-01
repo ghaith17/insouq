@@ -31,7 +31,7 @@ namespace Insouq.Web.Agency.Controllers
             SignInManager<ApplicationUser> signInManager)
         {
             _accountService = accountService;
-            _agencyAccounttService = _agencyAccounttService;
+            _agencyAccounttService = agencyAccounttService;
             _signInManager = signInManager;
         }
 
@@ -64,45 +64,52 @@ namespace Insouq.Web.Agency.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult Registration([FromForm] RegisterMotorsDTO model)
+        public IActionResult Registration([FromQuery] RegisterMotorsDTO model)
         {
             HttpContext.Session.SetObjectAsJson("CompanyData", model);
-            return View();
+            return View(model);
         }
 
 
         [HttpPost]
         public async Task<JsonResult> RegisterMotors([FromForm] RegisterMotorsDTO model)
         {
-            if (!ModelState.IsValid)
-            {
-                var errors = string.Join(Environment.NewLine,
-                    ModelState.SelectMany(x => x.Value.Errors.Select(y => y.ErrorMessage)));
+            var CompanyDetails = HttpContext.Session.GetObjectFromJson<RegisterMotorsDTO>("CompanyData");
+            model.CompanyName= CompanyDetails.CompanyName;
+            model.LicenseIssuingAuthority= CompanyDetails.LicenseIssuingAuthority;
+            model.TradeLicenseCopyPath= CompanyDetails.TradeLicenseCopyPath;
+            model.ShowroomAddress= CompanyDetails.ShowroomAddress;
 
-                return Json(new { isSuccess = false, message = errors });
+            //if (!ModelState.IsValid)
+            //{
+            //    var errors = string.Join(Environment.NewLine,
+            //        ModelState.SelectMany(x => x.Value.Errors.Select(y => y.ErrorMessage)));
+
+            //    return Json(new { isSuccess = false, message = errors });
+            //}
+            
+
+            var registerMotorsResponse = await _agencyAccounttService.RegisterMotors(model);
+
+            if (!registerMotorsResponse.IsSuccess)
+            {
+                return Json(registerMotorsResponse);
             }
 
-            var addUserResponse = await _agencyAccounttService.RegisterMotors(model);
+            //var sendSmsCodeDTO = new SendSmsCodeDTO
+            //{
+            //    MobileNumber = model.MobileNumber,
+            //    UserId = registerMotorsResponse.UserId
+            //};
 
-            if (!addUserResponse.IsSuccess)
-            {
-                return Json(addUserResponse);
-            }
+            //var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
 
-            var sendSmsCodeDTO = new SendSmsCodeDTO
-            {
-                MobileNumber = model.MobileNumber,
-                UserId = addUserResponse.UserId
-            };
+            //if (!sendCodeResponse.IsSuccess)
+            //{
+            //    return Json(sendCodeResponse);
+            //}
 
-            var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
-
-            if (!sendCodeResponse.IsSuccess)
-            {
-                return Json(sendCodeResponse);
-            }
-
-            return Json(new { isSuccess = true, message = "User Registered Successfully", userId = addUserResponse.UserId });
+            return Json(new { isSuccess = true, message = "User Registered Successfully", userId = registerMotorsResponse.UserId });
         }
 
         [HttpPost]

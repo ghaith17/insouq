@@ -350,9 +350,9 @@ namespace insouq.Services
 
                 if (model.CvFile != null)
                 {
-                    var webRootPath = _hostEnvironment.WebRootPath;
+                    var ContentRootPath = _hostEnvironment.ContentRootPath;
 
-                    var folderPath = Path.Combine(webRootPath, "images");
+                    var folderPath = Path.Combine(ContentRootPath, "MyStaticFiles\\images");
 
                     cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads");
                 }

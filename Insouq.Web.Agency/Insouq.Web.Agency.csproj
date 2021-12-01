@@ -11,6 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="10.1.1" />
 		<PackageReference Include="Google.Apis.Auth" Version="1.53.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.8" />
@@ -25,7 +26,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-    <ProjectReference Include="..\insouq.Services\insouq.Services.csproj" />
-  </ItemGroup>
+		<ProjectReference Include="..\insouq.Services\insouq.Services.csproj" />
+		<ProjectReference Include="..\insouq.Shared\insouq.Shared.csproj" />
+	</ItemGroup>
 
 </Project>

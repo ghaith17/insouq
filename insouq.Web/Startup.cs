@@ -94,16 +94,16 @@ namespace insouq.Web
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseHttpsRedirection();
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
+            //}
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+            //    app.UseHsts();
+            //}
 
             app.UseHttpsRedirection();
 
@@ -112,14 +112,22 @@ namespace insouq.Web
 .AllowAnyMethod()
 .AllowAnyHeader());
 
-            app.UseStaticFiles();
+             app.UseStaticFiles();
 
+            // using Microsoft.Extensions.FileProviders;
+            // using System.IO;
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-Path.Combine(env.WebRootPath, "images")),
-                RequestPath = "/images"
+                    Path.Combine(env.ContentRootPath, "MyStaticFiles")),
+                RequestPath = "/StaticFiles"
             });
+//            app.UseStaticFiles(new StaticFileOptions
+//            {
+//                FileProvider = new PhysicalFileProvider(
+//Path.Combine(env.WebRootPath, "images")),
+//                RequestPath = "/images"
+//            });
 
             //app.UseStaticFiles(new StaticFileOptions
             //{

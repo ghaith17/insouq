@@ -245,9 +245,9 @@ namespace insouq.Services
 
                 if (model.Pictures.Count != 0)
                 {
-                    var webRootPath = _hostEnvironment.WebRootPath;
+                    var ContentRootPath = _hostEnvironment.ContentRootPath;
 
-                    var folderPath = Path.Combine(webRootPath, "images");
+                    var folderPath = Path.Combine(ContentRootPath, "MyStaticFiles\\images");
 
                     foreach (var picture in model.Pictures)
                     {

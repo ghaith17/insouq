@@ -94,7 +94,7 @@ namespace insouq.Shared.Utility
                 await file.CopyToAsync(fileStreams);
             }
 
-            return @"\images\" + fileName + extention;
+            return @"\MyStaticFiles\images\" + fileName + extention;
         }
 
         public static string GetTime(DateTime yourDate)

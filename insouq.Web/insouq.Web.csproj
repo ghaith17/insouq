@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>ac0ac92e-da2a-4101-950f-c629125385b3</UserSecretsId>
+	 
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +27,10 @@
   <ItemGroup>
     <ProjectReference Include="..\insouq.Services\insouq.Services.csproj" />
     <ProjectReference Include="..\insouq.Shared\insouq.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MyStaticFiles\images\" />
   </ItemGroup>
 
 
