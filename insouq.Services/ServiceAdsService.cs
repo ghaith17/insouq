@@ -27,7 +27,7 @@ namespace insouq.Services
             _db = db;
         }
 
-        public async Task<BaseResponse> AddServiceAd(int userId, ServiceAdDTO model)
+        public async Task<BaseResponse> AddServiceAd(int userId, ServiceAdDTO model,string host)
         {
             var response = new BaseResponse();
 

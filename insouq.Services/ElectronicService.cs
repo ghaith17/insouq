@@ -107,7 +107,7 @@ namespace insouq.Services
             return updateElectronicsDTO;
         }
 
-        public async Task<BaseResponse> AddElectronicAd(int userId, ElectronicAdDTO model)
+        public async Task<BaseResponse> AddElectronicAd(int userId, ElectronicAdDTO model,string host)
         {
             var response = new BaseResponse();
 
@@ -173,7 +173,7 @@ namespace insouq.Services
 
                     foreach (var picture in model.Pictures)
                     {
-                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                         var isMain = false;
 
@@ -391,7 +391,7 @@ namespace insouq.Services
             return ads;
         }
 
-        public async Task<BaseResponse> UpdateElectronicAd(int userId, UpdateElectronicsDTO model)
+        public async Task<BaseResponse> UpdateElectronicAd(int userId, UpdateElectronicsDTO model, string host)
         {
             var response = new BaseResponse();
 
@@ -491,7 +491,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                             var adPicture = new AdPicture()
                             {

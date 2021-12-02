@@ -156,7 +156,7 @@ namespace insouq.Services
                         }
                     }
 
-                    profileImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePictureFile, "users");
+                    profileImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePictureFile, "users", webRootPath);
 
                 }
 
@@ -176,7 +176,7 @@ namespace insouq.Services
                         }
                     }
 
-                    CvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CVFile, "users");
+                    CvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CVFile, "users", webRootPath);
                 }
 
                 var industryImageUrl = user.Industry; // null or oldImage
@@ -195,7 +195,7 @@ namespace insouq.Services
                         }
                     }
 
-                    industryImageUrl = await HelperFunctions.UploadImage(folderPath, model.IndustryFile, "users");
+                    industryImageUrl = await HelperFunctions.UploadImage(folderPath, model.IndustryFile, "users", webRootPath);
                 }
 
 
@@ -276,7 +276,7 @@ namespace insouq.Services
 
                     }
 
-                    tradeLicenseImageUrl = await HelperFunctions.UploadImage(folderPath, model.TradeLicenseFile, "users");
+                    tradeLicenseImageUrl = await HelperFunctions.UploadImage(folderPath, model.TradeLicenseFile, "users", webRootPath);
                 }
 
                 var profilePictureImageUrl = companyProfile?.Picture; // null or old image
@@ -296,7 +296,7 @@ namespace insouq.Services
 
                     }
 
-                    profilePictureImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePicture, "users");
+                    profilePictureImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePicture, "users", webRootPath);
                 }
 
                 var isNew = companyProfile == null;

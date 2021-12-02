@@ -10,9 +10,9 @@ namespace insouq.Services.IServices
 {
     public interface IClassifiedAdsService
     {
-        Task<BaseResponse> AddClassifiedAd(int userId, ClassifiedAdDTO model);
+        Task<BaseResponse> AddClassifiedAd(int userId, ClassifiedAdDTO model,string host);
         
-        Task<AddInitialDataResponse> AddInitialClassified(int userId, AddInitialClassified model);
+        Task<AddInitialDataResponse> AddInitialClassified(int userId, AddInitialClassified model,string host);
 
         Task<BaseResponse> UpdateClassifiedAd(int userId, UpdateClassifiedDTO model);
 

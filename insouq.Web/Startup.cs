@@ -116,18 +116,18 @@ namespace insouq.Web
 
             // using Microsoft.Extensions.FileProviders;
             // using System.IO;
+            //app.UseStaticFiles(new StaticFileOptions
+            //{
+            //    FileProvider = new PhysicalFileProvider(
+            //        Path.Combine(env.ContentRootPath, "MyStaticFiles")),
+            //    RequestPath = "/StaticFiles"
+            //});
             app.UseStaticFiles(new StaticFileOptions
             {
                 FileProvider = new PhysicalFileProvider(
-                    Path.Combine(env.ContentRootPath, "MyStaticFiles")),
-                RequestPath = "/StaticFiles"
+Path.Combine(env.WebRootPath, "images")),
+                RequestPath = "/images"
             });
-//            app.UseStaticFiles(new StaticFileOptions
-//            {
-//                FileProvider = new PhysicalFileProvider(
-//Path.Combine(env.WebRootPath, "images")),
-//                RequestPath = "/images"
-//            });
 
             //app.UseStaticFiles(new StaticFileOptions
             //{

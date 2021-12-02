@@ -10,7 +10,7 @@ namespace insouq.Services.IServices
 {
     public interface IBussinesAdsService
     {
-        Task<BaseResponse> AddBussinesAd(int userId, BussinesAdDTO model);
+        Task<BaseResponse> AddBussinesAd(int userId, BussinesAdDTO model,string host);
 
         Task<BaseResponse> UpdateBussinesAd(int userId, UpdateBusinessAdDTO model);
 

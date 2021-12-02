@@ -83,7 +83,7 @@ namespace insouq.Shared.Utility
             return jwtToken;
         }
 
-        public static async Task<string> UploadImage(string path, IFormFile file, string to)
+        public static async Task<string> UploadImage(string path, IFormFile file, string to, string webRootPath)
         {
             var fileName = Path.GetFileNameWithoutExtension(file.FileName) + Guid.NewGuid().ToString();
 
@@ -94,7 +94,9 @@ namespace insouq.Shared.Utility
                 await file.CopyToAsync(fileStreams);
             }
 
-            return @"\MyStaticFiles\images\" + fileName + extention;
+            
+            var folderPath = Path.Combine(webRootPath, @"\images\", fileName + extention);
+            return webRootPath+ @"\images\"+ fileName + extention;
         }
 
         public static string GetTime(DateTime yourDate)

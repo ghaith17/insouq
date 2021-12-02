@@ -10,7 +10,7 @@ namespace insouq.Services.IServices
 {
     public interface IElectronicService
     {
-        Task<BaseResponse> AddElectronicAd(int userId, ElectronicAdDTO model);
+        Task<BaseResponse> AddElectronicAd(int userId, ElectronicAdDTO model,string host);
 
         //Task<BaseResponse> UpdateElectronicAd(int userId, ElectronicAdDTO model);
 
@@ -18,7 +18,7 @@ namespace insouq.Services.IServices
 
         Task<UpdateElectronicsDTO> GetElectronicAd(int adId);
 
-        Task<BaseResponse> UpdateElectronicAd(int userId, UpdateElectronicsDTO model);
+        Task<BaseResponse> UpdateElectronicAd(int userId, UpdateElectronicsDTO model,string host);
 
     }
 }

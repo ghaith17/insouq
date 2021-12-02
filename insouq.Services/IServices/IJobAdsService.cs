@@ -20,11 +20,11 @@ namespace insouq.Services.IServices
 
         Task<JobAdDTO> GetJobAd(int adId);
 
-        Task<BaseResponse> Add(int userId, JobAdDTO model);
+        Task<BaseResponse> Add(int userId, JobAdDTO model,string host);
 
         Task<AddInitialJobWantedResponse> AddInitialJobWanted(int userId, AddInitialJobWanted model);
 
-        Task<BaseResponse> AddJobWanted(int userId, AddJobWanted model);
+        Task<BaseResponse> AddJobWanted(int userId, AddJobWanted model,string host);
 
         Task<BaseResponse> Update(int userId, JobAdDTO model);
 

@@ -89,7 +89,7 @@ namespace insouq.Services
             return dto;
         }
 
-        public async Task<BaseResponse> Add(int userId, NumberAdDTO model)
+        public async Task<BaseResponse> Add(int userId, NumberAdDTO model, string host)
         {
             var response = new BaseResponse();
 

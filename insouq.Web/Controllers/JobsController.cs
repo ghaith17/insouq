@@ -57,8 +57,8 @@ namespace insouq.Web.Controllers
             {
                 return View(dto);
             }
-
-            var response = await _jobAdsService.Add(getUserId(), dto);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _jobAdsService.Add(getUserId(), dto, hostName);
 
             if (!response.IsSuccess)
             {
@@ -114,8 +114,8 @@ namespace insouq.Web.Controllers
             {
                 return View(dto);
             }
-
-            var response = await _jobAdsService.AddJobWanted(getUserId(), dto);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _jobAdsService.AddJobWanted(getUserId(), dto, hostName);
 
             if (!response.IsSuccess)
             {

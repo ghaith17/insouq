@@ -4321,7 +4321,7 @@ namespace insouq.Services
 
                     var folderPath = Path.Combine(webRootPath, "images");
 
-                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads");
+                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads", webRootPath);
                 }
 
                 var jobAppliation = new JobApplication()

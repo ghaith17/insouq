@@ -12,7 +12,7 @@ namespace insouq.Services.IServices
     {
         Task<UpdatePropertyAdDTO> GetPropertyAd(int adId);
 
-        Task<BaseResponse> Add(int userId, PropertyAdDTO model);
+        Task<BaseResponse> Add(int userId, PropertyAdDTO model , string host);
 
         Task<BaseResponse> Update(int userId, UpdatePropertyAdDTO model);
 

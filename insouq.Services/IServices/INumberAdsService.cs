@@ -13,7 +13,7 @@ namespace insouq.Services.IServices
 
         Task<NumberAdDTO> GetNumberAd(int adId);
 
-        Task<BaseResponse> Add(int userId, NumberAdDTO model);
+        Task<BaseResponse> Add(int userId, NumberAdDTO model,string host);
 
         Task<List<GetNumberAdDTO>> FilterNumbers(NumberFilters model);
 

@@ -210,7 +210,7 @@ namespace insouq.Services
         }
 
 
-        public async Task<BaseResponse> AddJobWanted(int userId, AddJobWanted model)
+        public async Task<BaseResponse> AddJobWanted(int userId, AddJobWanted model, string host)
         {
             var response = new BaseResponse();
 
@@ -350,11 +350,11 @@ namespace insouq.Services
 
                 if (model.CvFile != null)
                 {
-                    var ContentRootPath = _hostEnvironment.ContentRootPath;
+                    var webRootPath = _hostEnvironment.WebRootPath;
 
-                    var folderPath = Path.Combine(ContentRootPath, "MyStaticFiles\\images");
+                    var folderPath = Path.Combine(webRootPath, "images");
 
-                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads");
+                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads", webRootPath);
                 }
 
 
@@ -411,7 +411,7 @@ namespace insouq.Services
         }
 
 
-        public async Task<BaseResponse> Add(int userId, JobAdDTO model)
+        public async Task<BaseResponse> Add(int userId, JobAdDTO model, string host)
         {
             var response = new BaseResponse();
 
@@ -587,7 +587,7 @@ namespace insouq.Services
 
                     var folderPath = Path.Combine(webRootPath, "images");
 
-                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads");
+                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads", webRootPath);
                 }
 
 
@@ -1014,7 +1014,7 @@ namespace insouq.Services
 
                     var folderPath = Path.Combine(webRootPath, "images");
 
-                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads");
+                    cvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CvFile, "ads", webRootPath);
                 }
 
                 ad.Ad.Title = model.Title;

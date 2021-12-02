@@ -360,7 +360,7 @@ namespace insouq.Services
         }
 
 
-        public async Task<BaseResponse> Add(int userId, MotorsAdDTO model)
+        public async Task<BaseResponse> Add(int userId, MotorsAdDTO model , string host)
         {
             var response = new BaseResponse();
 
@@ -612,7 +612,7 @@ namespace insouq.Services
 
                     foreach (var picture in model.Pictures)
                     {
-                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                         var isMain = false;
 
@@ -1074,7 +1074,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                             var adPicture = new AdPicture()
                             {
@@ -2557,7 +2557,7 @@ namespace insouq.Services
 
             var folderPath = Path.Combine(webRootPath, "testimg");
 
-            var imageUrl = await HelperFunctions.UploadImage(folderPath, file, "ads");
+            var imageUrl = await HelperFunctions.UploadImage(folderPath, file, "ads", webRootPath);
         }
     }
 }

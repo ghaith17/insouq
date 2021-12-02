@@ -69,7 +69,9 @@ namespace insouq.Controllers
                 });
             }
 
-            var response = await _classifiedAdsService.AddInitialClassified((int)userId, dataModel);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+
+            var response = await _classifiedAdsService.AddInitialClassified((int)userId, dataModel, hostName);
 
             if (response.IsSuccess) return Ok(response);
 
@@ -101,8 +103,8 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-
-            var response = await _classifiedAdsService.AddClassifiedAd((int)userId, dataModel);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _classifiedAdsService.AddClassifiedAd((int)userId, dataModel,hostName);
 
             if (response.IsSuccess) return Ok(response);
 

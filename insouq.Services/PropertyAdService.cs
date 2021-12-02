@@ -184,7 +184,7 @@ namespace insouq.Services
             return dto;
         }
 
-        public async Task<BaseResponse> Add(int userId, PropertyAdDTO model)
+        public async Task<BaseResponse> Add(int userId, PropertyAdDTO model , string host)
         {
             var response = new BaseResponse();
 
@@ -245,13 +245,13 @@ namespace insouq.Services
 
                 if (model.Pictures.Count != 0)
                 {
-                    var ContentRootPath = _hostEnvironment.ContentRootPath;
+                    var webRootPath = _hostEnvironment.WebRootPath;
 
-                    var folderPath = Path.Combine(ContentRootPath, "MyStaticFiles\\images");
+                    var folderPath = Path.Combine(webRootPath, "images");
 
                     foreach (var picture in model.Pictures)
                     {
-                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                         var isMain = false;
 
@@ -766,7 +766,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                             var adPicture = new AdPicture()
                             {

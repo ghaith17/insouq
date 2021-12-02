@@ -66,8 +66,8 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-
-            var response = await _bussinesAdsService.AddBussinesAd((int)userId, dataModel);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _bussinesAdsService.AddBussinesAd((int)userId, dataModel, hostName);
 
             if (response.IsSuccess) return Ok(response);
 

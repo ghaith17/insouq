@@ -29,9 +29,5 @@
     <ProjectReference Include="..\insouq.Shared\insouq.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="MyStaticFiles\images\" />
-  </ItemGroup>
-
 
 </Project>

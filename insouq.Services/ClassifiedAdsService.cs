@@ -31,7 +31,7 @@ namespace insouq.Services
             _hostEnvironment = hostEnvironment;
         }
 
-        public async Task<BaseResponse> AddClassifiedAd(int userId, ClassifiedAdDTO model)
+        public async Task<BaseResponse> AddClassifiedAd(int userId, ClassifiedAdDTO model,string host)
         {
             var response = new BaseResponse();
 
@@ -111,13 +111,13 @@ namespace insouq.Services
 
                 if (model.Pictures.Count != 0)
                 {
-                    var ContentRootPath = _hostEnvironment.ContentRootPath;
+                    var webRootPath = _hostEnvironment.WebRootPath;
 
-                    var folderPath = Path.Combine(ContentRootPath, "MyStaticFiles\\images");
+                    var folderPath = Path.Combine(webRootPath, "images");
 
                     foreach (var picture in model.Pictures)
                     {
-                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                         var isMain = false;
 
@@ -181,7 +181,7 @@ namespace insouq.Services
             }
         }
 
-        public async Task<AddInitialDataResponse> AddInitialClassified(int userId, AddInitialClassified model)
+        public async Task<AddInitialDataResponse> AddInitialClassified(int userId, AddInitialClassified model , string host)
         {
 
             var response = new AddInitialDataResponse();
@@ -474,7 +474,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads");
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
 
                             var adPicture = new AdPicture()
                             {

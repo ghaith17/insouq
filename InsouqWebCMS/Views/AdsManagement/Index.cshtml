@@ -71,7 +71,7 @@
                             string imgUrl = "";
                             if (ad.Pictures.Count != 0)
                             {
-                                imgUrl = StaticData.SERVER_DOMAIN + ad.Pictures.FirstOrDefault().ImageURL;
+                                imgUrl = ad.Pictures.FirstOrDefault().ImageURL;
                             }
                             <tr align="center" id="@ad.Id">
                                 <td>@AdsCounter</td>
@@ -83,7 +83,7 @@
                                 @if (ad.TypeId == StaticData.Numbers_ID)
                                 {
                                     var number = await adsService.GetAd(ad.Id, StaticData.Numbers_ID);
-                                    var photo = StaticData.SERVER_DOMAIN + number.Photo;
+                                    var photo =  number.Photo;
 
                                     if (ad.CategoryId == StaticData.PlateNumbers_ID)
                                     {

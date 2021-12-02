@@ -37,7 +37,7 @@ namespace insouq.Services.IServices
 
         Task<UpdateMotorsDTO> GetMotorAd(int adId);
 
-        Task<BaseResponse> Add(int userId, MotorsAdDTO model);
+        Task<BaseResponse> Add(int userId, MotorsAdDTO model,string host);
 
         Task<AddInitialDataResponse> AddInitialMotor(int userId, AddInitalMotor model);
 

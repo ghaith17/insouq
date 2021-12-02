@@ -111,14 +111,14 @@ namespace InsouqWebCMS.Controllers
 
             if (model.File != null)
             {
-                var imageUrl1 = await HelperFunctions.UploadImage(folderPath, model.File, "");
+                var imageUrl1 = await HelperFunctions.UploadImage(folderPath, model.File, "", webRootPath);
 
                 model.HIW.img1Url= imageUrl1;
             }
 
             if (model.File2 != null)
             {
-                var imageUrl2 = await HelperFunctions.UploadImage(folderPath, model.File2, "");
+                var imageUrl2 = await HelperFunctions.UploadImage(folderPath, model.File2, "", webRootPath);
 
                 model.HIW.img2Url = imageUrl2;
             }
@@ -156,7 +156,7 @@ namespace InsouqWebCMS.Controllers
 
             if (upsertBannerVM.File != null)
             {
-                var imageUrl = await HelperFunctions.UploadImage(folderPath, upsertBannerVM.File, "");
+                var imageUrl = await HelperFunctions.UploadImage(folderPath, upsertBannerVM.File, "", webRootPath);
 
                 upsertBannerVM.Banner.ImgUrl = imageUrl;
             }
@@ -196,28 +196,28 @@ namespace InsouqWebCMS.Controllers
 
             if (upsertAdvirtisorImagesVM.Image1 != null)
             {
-                var imageUrl1 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.Image1, "");
+                var imageUrl1 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.Image1, "", webRootPath);
 
                 upsertAdvirtisorImagesVM.AdvertisorImages.ImageUrl1 = imageUrl1;
             }
 
             if (upsertAdvirtisorImagesVM.Image2 != null)
             {
-                var imageUrl2 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.Image2, "");
+                var imageUrl2 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.Image2, "", webRootPath);
 
                 upsertAdvirtisorImagesVM.AdvertisorImages.ImageUrl2 = imageUrl2;
             }
 
             if (upsertAdvirtisorImagesVM.File1 != null)
             {
-                var fileUrl1 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.File1, "");
+                var fileUrl1 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.File1, "", webRootPath);
 
                 upsertAdvirtisorImagesVM.AdvertisorImages.FileUrl1 = fileUrl1;
             }
 
             if (upsertAdvirtisorImagesVM.File2 != null)
             {
-                var fileUrl2 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.File2, "");
+                var fileUrl2 = await HelperFunctions.UploadImage(folderPath, upsertAdvirtisorImagesVM.File2, "", webRootPath);
 
                 upsertAdvirtisorImagesVM.AdvertisorImages.FileUrl2 = fileUrl2;
             }
