@@ -4199,7 +4199,7 @@ namespace insouq.Services
                 response.IsSaved = false;
                 return response;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 response.IsSuccess = false;
                 response.Message = StaticData.ServerError_Message;

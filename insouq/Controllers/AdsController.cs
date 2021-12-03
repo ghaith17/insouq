@@ -1,6 +1,7 @@
 ﻿using insouq.Configuration;
 using insouq.Services.IServices;
 using insouq.Shared.DTOS;
+using insouq.Shared.DTOS.Filters;
 using insouq.Shared.DTOS.TypeDTOS;
 using insouq.Shared.Responses;
 using insouq.Shared.Utility;
@@ -520,6 +521,45 @@ namespace insouq.Controllers
             var response = await _adsService.ApplyForJob((int)userId, model);
 
             return Ok(response);
+        }
+      
+        [HttpPost]
+        [Route("SaveFillters")]
+        public async Task<IActionResult> SaveFillters([FromBody] SaveFiltersDTO model)
+        {
+
+            try
+            {
+
+                if (!ModelState.IsValid)
+                {
+                    var Errors = string.Join(Environment.NewLine,
+                        ModelState.SelectMany(x => x.Value.Errors.Select(y => y.ErrorMessage)));
+
+                    return BadRequest(new BaseResponse { IsSuccess = false, Message = Errors });
+                }
+
+                var token = HttpContext.Request.Headers["Authorization"].FirstOrDefault()?.Split(" ").Last();
+
+                var userId = HelperFunctions.ValidateJwtToken(token, _jwtConfig.Secret);
+
+                if (userId == null)
+                {
+                    return Unauthorized(new BaseResponse
+                    {
+                        IsSuccess = false,
+                        Message = StaticData.Unauthorized_Message
+                    });
+                }
+
+                var response = await _adsService.SaveFillters((int)userId, model);
+
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(new { error = e.Message.ToString() });
+            }
         }
     }
 }
