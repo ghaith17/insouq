@@ -69,7 +69,7 @@ namespace insouq.Services
             return categoriesDTO;
         }
 
-        public async Task<BaseResponse> Add(AddTypeDTO model)
+        public async Task<BaseResponse> Add(AddTypeDTO model, string host)
         {
             var response = new BaseResponse();
 
@@ -96,7 +96,7 @@ namespace insouq.Services
             }
         }
 
-        public async Task<BaseResponse> Update(int id, AddTypeDTO model)
+        public async Task<BaseResponse> Update(int id, AddTypeDTO model, string host)
         {
             var response = new BaseResponse();
 

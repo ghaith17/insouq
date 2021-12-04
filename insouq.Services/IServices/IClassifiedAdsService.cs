@@ -14,7 +14,7 @@ namespace insouq.Services.IServices
         
         Task<AddInitialDataResponse> AddInitialClassified(int userId, AddInitialClassified model,string host);
 
-        Task<BaseResponse> UpdateClassifiedAd(int userId, UpdateClassifiedDTO model);
+        Task<BaseResponse> UpdateClassifiedAd(int userId, UpdateClassifiedDTO model, string host);
 
         Task<List<GetClassifiedAdDTO>> FilterClassifieds(ClassifiedFilters model);
 

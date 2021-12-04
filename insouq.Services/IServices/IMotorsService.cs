@@ -39,9 +39,9 @@ namespace insouq.Services.IServices
 
         Task<BaseResponse> Add(int userId, MotorsAdDTO model,string host);
 
-        Task<AddInitialDataResponse> AddInitialMotor(int userId, AddInitalMotor model);
+        Task<AddInitialDataResponse> AddInitialMotor(int userId, AddInitalMotor model, string host);
 
-        Task<BaseResponse> Update(int userId, UpdateMotorsDTO model);
+        Task<BaseResponse> Update(int userId, UpdateMotorsDTO model, string host);
 
         //Task<List<GetMotorAdDTO>> FilterUsedCars(UsedCarsFilter model);
         //Task<List<GetMotorAdDTO>> FilterBoats(BoatFilters model);

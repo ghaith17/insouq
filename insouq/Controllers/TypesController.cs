@@ -91,8 +91,8 @@ namespace insouq.Controllers
 
                 return BadRequest(new BaseResponse { IsSuccess = false, Message = Errors });
             }
-
-            var resposne = await _typeService.Add(model);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var resposne = await _typeService.Add(model, hostName);
 
             if (resposne.IsSuccess) return Ok(resposne);
 
@@ -110,8 +110,8 @@ namespace insouq.Controllers
 
                 return BadRequest(new BaseResponse { IsSuccess = false, Message = Errors });
             }
-
-            var resposne = await _typeService.Update(id, model);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var resposne = await _typeService.Update(id, model, hostName);
 
             if (resposne.IsSuccess) return Ok(resposne);
 

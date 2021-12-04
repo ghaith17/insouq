@@ -22,11 +22,11 @@ namespace insouq.Services.IServices
 
         Task<BaseResponse> Add(int userId, JobAdDTO model,string host);
 
-        Task<AddInitialJobWantedResponse> AddInitialJobWanted(int userId, AddInitialJobWanted model);
+        Task<AddInitialJobWantedResponse> AddInitialJobWanted(int userId, AddInitialJobWanted model, string host);
 
         Task<BaseResponse> AddJobWanted(int userId, AddJobWanted model,string host);
 
-        Task<BaseResponse> Update(int userId, JobAdDTO model);
+        Task<BaseResponse> Update(int userId, JobAdDTO model, string host);
 
         Task<List<GetJobAdDTO>> FilterJobs(JobFilters model);
 

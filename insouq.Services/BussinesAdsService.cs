@@ -309,7 +309,7 @@ namespace insouq.Services
             return updateBusinessAdDTO;
         }
 
-        public async Task<BaseResponse> UpdateBussinesAd(int userId, UpdateBusinessAdDTO model)
+        public async Task<BaseResponse> UpdateBussinesAd(int userId, UpdateBusinessAdDTO model, string host)
         {
             var response = new BaseResponse();
 
@@ -380,7 +380,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", host);
 
                             var adPicture = new AdPicture()
                             {

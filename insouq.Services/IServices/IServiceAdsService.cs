@@ -18,6 +18,6 @@ namespace insouq.Services.IServices
 
         Task<GetServiceAdDTO> GetServiceAd(int adId);
 
-        Task<BaseResponse> UpdateServiceAd(int userId, ServiceAdDTO model);
+        Task<BaseResponse> UpdateServiceAd(int userId, ServiceAdDTO model, string host);
     }
 }

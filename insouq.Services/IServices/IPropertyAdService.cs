@@ -14,7 +14,7 @@ namespace insouq.Services.IServices
 
         Task<BaseResponse> Add(int userId, PropertyAdDTO model , string host);
 
-        Task<BaseResponse> Update(int userId, UpdatePropertyAdDTO model);
+        Task<BaseResponse> Update(int userId, UpdatePropertyAdDTO model, string host);
 
         Task<List<GetPropertyAdDTO>> FilterProperities(PropertyFilters model);
 

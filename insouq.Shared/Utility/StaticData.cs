@@ -17,7 +17,7 @@ namespace insouq.Shared.Utility
 
         public const string DefaultUser_Image = @"\images\userImage.png";
 
-        public const string SERVER_DOMAIN = "https://insouq.com";
+        public const string SERVER_DOMAIN = "";
 
         //public const string SERVER_DOMAIN = "http://hasanjaser-001-site1.dtempurl.com";
 

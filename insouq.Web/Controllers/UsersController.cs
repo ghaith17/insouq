@@ -240,8 +240,8 @@ namespace insouq.Web.Controllers
                 IndustryFile = model.IndustryFile,
                 ProfilePictureFile = model.ProfilePictureFile,
             };
-
-            var response = await _usersService.UpdateProfile(getUserId(), updateProfileDTO);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _usersService.UpdateProfile(getUserId(), updateProfileDTO, hostName);
 
             if (!response.IsSuccess)
             {
@@ -275,8 +275,8 @@ namespace insouq.Web.Controllers
                 TradeLicenseNumber = model.CompanyProfile.TradeLicenseNumber,
                 Website = model.CompanyProfile.Website
             };
-
-            var response = await _usersService.UpdateCompanyProfile(getUserId(), updateCompanyProfileDTO);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _usersService.UpdateCompanyProfile(getUserId(), updateCompanyProfileDTO, hostName);
 
             if (!response.IsSuccess)
             {

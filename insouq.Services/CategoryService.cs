@@ -51,7 +51,7 @@ namespace insouq.Services
             return categoriesDTO;
         }
 
-        public async Task<BaseResponse> Add(UpsertCategoryDTO model)
+        public async Task<BaseResponse> Add(UpsertCategoryDTO model,string host)
         {
             var response = new BaseResponse();
 
@@ -81,7 +81,7 @@ namespace insouq.Services
             }
         }
 
-        public async Task<BaseResponse> Update(UpsertCategoryDTO model)
+        public async Task<BaseResponse> Update(UpsertCategoryDTO model, string host)
         {
             var response = new BaseResponse();
 

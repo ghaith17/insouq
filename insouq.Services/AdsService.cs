@@ -168,8 +168,8 @@ namespace insouq.Services
                         }).OrderByDescending(p => p.MainPicture).ToList(),
                         PostDate = motor.Ad.PostDate,
                         Title = motor.Ad.Title,
-                        Status = motor.Ad.Status,
-                        IsFavorite= this.IsInFavorite(userId,motor.Ad.Id).Result
+                        Status = motor.Ad.Status
+                        
                     }).AsNoTracking().ToListAsync();
 
                 if (isOwner)

@@ -17,13 +17,13 @@ namespace insouq.Services.IServices
 
         Task<string> GetPhoneNumber(int userId);
 
-        Task<AuthenticationResponse> Add(AddUserDTO model, string type);
+        Task<AuthenticationResponse> Add(AddUserDTO model, string type, string host);
 
-        Task<UpdateProfileResponse> UpdateProfile(int userId, UpdateProfileDTO model);
+        Task<UpdateProfileResponse> UpdateProfile(int userId, UpdateProfileDTO model, string host);
 
         Task<CompanyProfileDTO> GetCompanyProfile(int userId);
 
-        Task<UpdateCompanyProfileResponse> UpdateCompanyProfile(int userId, UpdateCompanyProfileDTO model);
+        Task<UpdateCompanyProfileResponse> UpdateCompanyProfile(int userId, UpdateCompanyProfileDTO model, string host);
 
         Task<List<SavedSearch>> getSavedSearches(int UserId, int TypeId);
         string getUserStatistics(List<AdStatistic> UserStatistics, StatisticPeriod Period);

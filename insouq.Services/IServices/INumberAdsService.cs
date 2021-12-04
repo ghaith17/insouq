@@ -17,7 +17,7 @@ namespace insouq.Services.IServices
 
         Task<List<GetNumberAdDTO>> FilterNumbers(NumberFilters model);
 
-        Task<BaseResponse> Update(int userId, NumberAdDTO model);
+        Task<BaseResponse> Update(int userId, NumberAdDTO model, string host);
 
         //Task<BaseResponse> Update(int userId, NumberAdDTO model);
     }

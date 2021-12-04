@@ -12,7 +12,7 @@ namespace insouq.Services.IServices
     {
         Task<BaseResponse> AddBussinesAd(int userId, BussinesAdDTO model,string host);
 
-        Task<BaseResponse> UpdateBussinesAd(int userId, UpdateBusinessAdDTO model);
+        Task<BaseResponse> UpdateBussinesAd(int userId, UpdateBusinessAdDTO model, string host);
 
         Task<List<GetBussinesAdDTO>> FilterBusiness(BusinessFilters model);
 

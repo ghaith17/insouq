@@ -192,7 +192,7 @@ namespace insouq.Services
             return ads;
         }
 
-        public async Task<BaseResponse> UpdateServiceAd(int userId, ServiceAdDTO model)
+        public async Task<BaseResponse> UpdateServiceAd(int userId, ServiceAdDTO model, string host)
         {
             var response = new BaseResponse();
 

@@ -234,7 +234,7 @@ namespace insouq.Services
             return dto;
         }
 
-        public async Task<AddInitialDataResponse> AddInitialMotor(int userId, AddInitalMotor model)
+        public async Task<AddInitialDataResponse> AddInitialMotor(int userId, AddInitalMotor model, string host)
         {
             var response = new AddInitialDataResponse();
 
@@ -612,7 +612,7 @@ namespace insouq.Services
 
                     foreach (var picture in model.Pictures)
                     {
-                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
+                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", host);
 
                         var isMain = false;
 
@@ -723,7 +723,7 @@ namespace insouq.Services
         }
 
 
-        public async Task<BaseResponse> Update(int userId, UpdateMotorsDTO model)
+        public async Task<BaseResponse> Update(int userId, UpdateMotorsDTO model, string host)
         {
             var response = new BaseResponse();
 
@@ -1074,7 +1074,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", host);
 
                             var adPicture = new AdPicture()
                             {
@@ -2550,7 +2550,7 @@ namespace insouq.Services
             return motorAds;
         }
 
-
+        // test method
         public async Task UploadImage(IFormFile file)
         {
             var webRootPath = _hostEnvironment.ContentRootPath;

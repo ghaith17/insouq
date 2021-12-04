@@ -104,8 +104,8 @@ namespace insouq.Web.Controllers
             {
                 return View(dto);
             }
-
-            var response = await _classifiedAdsService.UpdateClassifiedAd(getUserId(), dto);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _classifiedAdsService.UpdateClassifiedAd(getUserId(), dto, hostName);
 
             if (!response.IsSuccess)
             {

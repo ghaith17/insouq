@@ -173,7 +173,7 @@ namespace insouq.Services
 
                     foreach (var picture in model.Pictures)
                     {
-                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
+                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", host);
 
                         var isMain = false;
 
@@ -491,7 +491,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", host);
 
                             var adPicture = new AdPicture()
                             {

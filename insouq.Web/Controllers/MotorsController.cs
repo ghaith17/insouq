@@ -53,7 +53,8 @@ namespace insouq.Web.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> AddInitalMotor(AddInitalMotor dto)
         {
-            var response = await _motorsService.AddInitialMotor(getUserId(), dto);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _motorsService.AddInitialMotor(getUserId(), dto, hostName);
 
             if (!response.IsSuccess)
             {
@@ -102,7 +103,8 @@ namespace insouq.Web.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Update(UpdateMotorsDTO dto)
         {
-            var response = await _motorsService.Update(getUserId(), dto);
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var response = await _motorsService.Update(getUserId(), dto, hostName);
 
             if (!response.IsSuccess)
             {

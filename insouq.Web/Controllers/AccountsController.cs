@@ -54,8 +54,8 @@ namespace insouq.Web.Controllers
 
                 return Json(new { isSuccess = false, message = errors });
             }
-
-            var addUserResponse = await _userService.Add(model, "Web");
+            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var addUserResponse = await _userService.Add(model, "Web",hostName);
 
             if(!addUserResponse.IsSuccess)
             {

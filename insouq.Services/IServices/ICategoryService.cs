@@ -11,8 +11,8 @@ namespace insouq.Services.IServices
     {
         Task<CategoryDTO> GetById(int id);
         Task<CategoryDTO> GetByName(string name);
-        Task<BaseResponse> Add(UpsertCategoryDTO model);
-        Task<BaseResponse> Update(UpsertCategoryDTO model);
+        Task<BaseResponse> Add(UpsertCategoryDTO model, string host);
+        Task<BaseResponse> Update(UpsertCategoryDTO model, string host);
         Task<List<CategoryDTO>> GetByTypeId(int id);
         Task<BaseResponse> Delete(int id);
     }

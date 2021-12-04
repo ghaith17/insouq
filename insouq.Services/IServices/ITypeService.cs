@@ -14,7 +14,7 @@ namespace insouq.Services.IServices
         Task<TypeDTO> GetByName(string name);
         Task<List<TypeDTO>> GetAll();
         Task<List<TypeDTO>> GetAllWithCategories();
-        Task<BaseResponse> Add(AddTypeDTO model);
-        Task<BaseResponse> Update(int id, AddTypeDTO model);
+        Task<BaseResponse> Add(AddTypeDTO model, string host);
+        Task<BaseResponse> Update(int id, AddTypeDTO model, string host);
     }
 }

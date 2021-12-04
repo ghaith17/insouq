@@ -69,7 +69,7 @@
 
 
 
-                                            var imgUrl = StaticData.SERVER_DOMAIN + Model[i].ImageUrl;
+                                            var imgUrl =  Model[i].ImageUrl;
                                             if (Model[i].ImageUrl == "")
                                             {
                                                 imgUrl = "https://t3.ftcdn.net/jpg/01/84/81/64/360_F_184816468_sXO2m7Xhy2xqENls5YxrKlmFg3Ii82Mr.jpg";
@@ -81,7 +81,7 @@
 
                                         else if (Model[i].CategoryId == StaticData.MobileNumbers_ID)
                                         {
-                                            var numberPhoto = StaticData.SERVER_DOMAIN + Model[i].ImageUrl;
+                                            var numberPhoto =  Model[i].ImageUrl;
 
                                                     <div class="slider__contents1">
                                                         <div class="slider__image1">
@@ -93,7 +93,7 @@
                                         }
                                         else if (Model[i].CategoryId == StaticData.PlateNumbers_ID)
                                         {
-                                            var photo = StaticData.SERVER_DOMAIN + Model[i].ImageUrl;
+                                            var photo =  Model[i].ImageUrl;
 
                                             var plateCodeClass = Model[i].En_Emirate.Replace(" ", "") + "-" + Model[i].En_PlateType.Substring(0, 1) + "Code-Mylist";
                                             var plateNumberClass = Model[i].En_Emirate.Replace(" ", "") + "-" + Model[i].En_PlateType.Substring(0, 1) + "Number-Mylist";

@@ -251,7 +251,7 @@ namespace insouq.Services
 
                     foreach (var picture in model.Pictures)
                     {
-                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
+                        var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", host);
 
                         var isMain = false;
 
@@ -664,7 +664,7 @@ namespace insouq.Services
 
         }
 
-        public async Task<BaseResponse> Update(int userId, UpdatePropertyAdDTO model)
+        public async Task<BaseResponse> Update(int userId, UpdatePropertyAdDTO model, string host)
         {
             var response = new BaseResponse();
 
@@ -766,7 +766,7 @@ namespace insouq.Services
 
                         foreach (var picture in model.Pictures)
                         {
-                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", webRootPath);
+                            var imageUrl = await HelperFunctions.UploadImage(folderPath, picture, "ads", host);
 
                             var adPicture = new AdPicture()
                             {

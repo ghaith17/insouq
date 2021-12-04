@@ -64,7 +64,7 @@ namespace insouq.Services
             return userDTO;
         }
 
-        public async Task<AuthenticationResponse> Add(AddUserDTO model, string type)
+        public async Task<AuthenticationResponse> Add(AddUserDTO model, string type, string host)
         {
             var response = new AuthenticationResponse();
 
@@ -128,7 +128,7 @@ namespace insouq.Services
             }
         }
 
-        public async Task<UpdateProfileResponse> UpdateProfile(int userId, UpdateProfileDTO model)
+        public async Task<UpdateProfileResponse> UpdateProfile(int userId, UpdateProfileDTO model, string host)
         {
             var response = new UpdateProfileResponse();
 
@@ -156,7 +156,7 @@ namespace insouq.Services
                         }
                     }
 
-                    profileImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePictureFile, "users", webRootPath);
+                    profileImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePictureFile, "users", host);
 
                 }
 
@@ -176,7 +176,7 @@ namespace insouq.Services
                         }
                     }
 
-                    CvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CVFile, "users", webRootPath);
+                    CvImageUrl = await HelperFunctions.UploadImage(folderPath, model.CVFile, "users", host);
                 }
 
                 var industryImageUrl = user.Industry; // null or oldImage
@@ -195,7 +195,7 @@ namespace insouq.Services
                         }
                     }
 
-                    industryImageUrl = await HelperFunctions.UploadImage(folderPath, model.IndustryFile, "users", webRootPath);
+                    industryImageUrl = await HelperFunctions.UploadImage(folderPath, model.IndustryFile, "users", host);
                 }
 
 
@@ -247,7 +247,7 @@ namespace insouq.Services
             return companyProfileDTO;
         }
 
-        public async Task<UpdateCompanyProfileResponse> UpdateCompanyProfile(int userId, UpdateCompanyProfileDTO model)
+        public async Task<UpdateCompanyProfileResponse> UpdateCompanyProfile(int userId, UpdateCompanyProfileDTO model,string host)
         {
             var response = new UpdateCompanyProfileResponse();
 
@@ -276,7 +276,7 @@ namespace insouq.Services
 
                     }
 
-                    tradeLicenseImageUrl = await HelperFunctions.UploadImage(folderPath, model.TradeLicenseFile, "users", webRootPath);
+                    tradeLicenseImageUrl = await HelperFunctions.UploadImage(folderPath, model.TradeLicenseFile, "users", host);
                 }
 
                 var profilePictureImageUrl = companyProfile?.Picture; // null or old image
@@ -296,7 +296,7 @@ namespace insouq.Services
 
                     }
 
-                    profilePictureImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePicture, "users", webRootPath);
+                    profilePictureImageUrl = await HelperFunctions.UploadImage(folderPath, model.ProfilePicture, "users", host);
                 }
 
                 var isNew = companyProfile == null;

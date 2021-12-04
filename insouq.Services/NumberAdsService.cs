@@ -386,7 +386,7 @@ a.Number.ToString().Length == model.PlateDigits2 || a.Number.ToString().Length =
             return list;
         }
 
-        public async Task<BaseResponse> Update(int userId, NumberAdDTO model)
+        public async Task<BaseResponse> Update(int userId, NumberAdDTO model,string host)
         {
             var response = new BaseResponse();
 
