@@ -62,7 +62,7 @@ namespace insouq.Web.Controllers
             {
                 return View(dto);
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _bussinesAdsService.AddBussinesAd(getUserId(), dto, hostName);
 
             if (!response.IsSuccess)
@@ -95,7 +95,7 @@ namespace insouq.Web.Controllers
             {
                 return View(dto);
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
            
             var response = await _bussinesAdsService.UpdateBussinesAd(getUserId(), dto, hostName);
 

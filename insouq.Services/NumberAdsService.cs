@@ -160,17 +160,17 @@ namespace insouq.Services
 
                 if (model.CategoryId == StaticData.PlateNumbers_ID)
                 {
-                    photo = @"\images\plates\" + en_emirate + "-" + en_plateType + ".png";
+                    photo = "https://www.insouq.com/"+"images/plates/" + en_emirate + "-" + en_plateType + ".png";
 
                     if (en_plateType.ToLower().Contains("private"))
                     {
-                        photo2 = @"\images\plates\" + en_emirate + "-" + en_plateType + "2.png";
+                        photo2 = "https://www.insouq.com/" + "images/plates/" + en_emirate + "-" + en_plateType + "2.png";
                     }
                 }
 
                 else if (model.CategoryId == StaticData.MobileNumbers_ID)
                 {
-                    photo = @"\images\" + en_operator.Trim().Substring(0, 1).ToUpper() + "Number.png";
+                    photo = "https://www.insouq.com/" + "images/" + en_operator.Trim().Substring(0, 1).ToUpper() + "Number.png";
                 }
 
                 var ad = new Ad()

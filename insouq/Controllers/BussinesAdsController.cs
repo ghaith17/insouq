@@ -66,7 +66,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _bussinesAdsService.AddBussinesAd((int)userId, dataModel, hostName);
 
             if (response.IsSuccess) return Ok(response);
@@ -108,7 +108,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _bussinesAdsService.UpdateBussinesAd((int)userId, dataModel, hostName);
 
             if (response.IsSuccess) return Ok(response);

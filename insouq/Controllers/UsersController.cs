@@ -69,7 +69,7 @@ namespace insouq.Controllers
 
                 return BadRequest(new BaseResponse { IsSuccess = false, Message = Errors });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var resposne = await _userService.Add(model, "Mobile", hostName);
 
             if (resposne.IsSuccess) return Ok(resposne);
@@ -103,7 +103,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _userService.UpdateProfile((int)userId, model, hostName);
 
             if (response.IsSuccess) return Ok(response);
@@ -138,7 +138,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _userService.UpdateCompanyProfile((int)userId, model,hostName);
 
             if (response.IsSuccess) return Ok(response);

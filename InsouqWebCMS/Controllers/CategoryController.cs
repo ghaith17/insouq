@@ -38,7 +38,7 @@ namespace InsouqWebCMS.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCategory(UpsertCategoryDTO upsertCategoryDTO)
         {
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _categoryService.Add(upsertCategoryDTO, hostName);
 
             if (response.IsSuccess)
@@ -52,7 +52,7 @@ namespace InsouqWebCMS.Controllers
         [HttpPost]
         public async Task<IActionResult> UpdateCategory(UpsertCategoryDTO upsertCategoryDTO)
         {
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _categoryService.Update(upsertCategoryDTO, hostName);
 
             if (response.IsSuccess)

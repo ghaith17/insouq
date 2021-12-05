@@ -3460,12 +3460,12 @@ namespace insouq.Services
 
                 if (isOwner)
                 {
-                    adCountDTO.Count = await _db.Ads.Where(b => b.TypeId == i && b.UserId == userId && (b.Status == 1 || b.Status == 2 ))
-                        .AsNoTracking().CountAsync();
+                    adCountDTO.Count =  _db.Ads.Where(b => b.TypeId == i && b.UserId == userId && (b.Status == 1 || b.Status == 2 ))
+                        .AsNoTracking().Count();
                 }
                 else
                 {
-                    await _db.Ads.Where(b => b.TypeId == i && b.UserId == userId && b.Status == 1).AsNoTracking().CountAsync();
+                    adCountDTO.Count = _db.Ads.Where(b => b.TypeId == i && b.UserId == userId && b.Status == 1).AsNoTracking().Count();
                 }
 
                 list.Add(adCountDTO);

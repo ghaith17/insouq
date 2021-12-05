@@ -59,7 +59,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _jobAdsService.AddInitialJobWanted((int)userId, dataModel, hostName);
 
             if (response.IsSuccess) return Ok(response);
@@ -83,7 +83,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _jobAdsService.AddJobWanted((int)userId, dataModel,hostName);
 
             if (response.IsSuccess) return Ok(response);
@@ -107,7 +107,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _jobAdsService.Add((int)userId, dataModel,hostName);
 
             if (response.IsSuccess) return Ok(response);
@@ -141,7 +141,7 @@ namespace insouq.Controllers
                     Message = StaticData.Unauthorized_Message
                 });
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _jobAdsService.Update((int)userId, dataModel, hostName);
 
             if (response.IsSuccess) return Ok(response);

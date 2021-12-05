@@ -50,7 +50,7 @@ namespace insouq.Web.Controllers
             {
                 return View(dto);
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _propertyAdService.Add(getUserId(), dto ,hostName);
 
             if (!response.IsSuccess)
@@ -83,7 +83,7 @@ namespace insouq.Web.Controllers
             {
                 return View(dto);
             }
-            var hostName = $"{this.Request.Scheme}://{this.Request.Host}";
+            var hostName = $"https://{this.Request.Host}";
             var response = await _propertyAdService.Update(getUserId(), dto, hostName);
 
             if (!response.IsSuccess)

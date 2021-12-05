@@ -119,7 +119,7 @@ namespace insouq.Services
             }
 
             var query = _db.ServiceAds.Include(a => a.Ad).Include(a => a.Ad.Pictures).Include(a => a.SubCategory).Include(a => a.Ad.User)
-                .Where(a => a.Ad.Status == 1);
+                .Where(a => a.Ad.Status == 1 && a.Ad.CategoryId == model.CategoryId);
 
             if (model.SubCategoryId != 0)
             {

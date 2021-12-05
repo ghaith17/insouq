@@ -1642,7 +1642,7 @@ namespace insouq.Services
             var query = _db.MotorAds.Include(a => a.Ad).Include(a => a.Ad.Pictures).Include(a => a.Ad.User)
                 .Where(a => a.Ad.Status == 1 && a.Ad.CategoryId == model.CategoryId && a.Price >= model.FromPrice && a.Price <= model.ToPrice &&
                 a.Kilometers >= model.FromKilometers && a.Kilometers <= model.ToKilometers &&
-                a.Year >= model.FromYear && a.Year <= model.ToYear && a.Warranty == model.Warranty);
+                a.Year >= model.FromYear && a.Year <= model.ToYear && a.Warranty == model.Warranty );
 
             if (model.SortBy == StaticData.Price_Heighest_To_Lowest)
             {
