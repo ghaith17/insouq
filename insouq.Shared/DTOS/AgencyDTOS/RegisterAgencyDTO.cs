@@ -5,36 +5,40 @@ using System.Text;
 
 namespace insouq.Shared.DTOS.AgencyDTOS
 {
-    public class RegisterMotorsDTO
+    public class RegisterAgencyDTO
     {
-        [Required]
-        [MaxLength(256)]
+       
         public string CompanyName { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+        
         public string LicenseIssuingAuthority { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+       
         public string TradeLicenseCopyPath { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+       
         public string ShowroomAddress { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+        
         public string Email { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+        
         public string Password { get; set; }
 
-        [Required]
-        [MaxLength(256)]
+        
         public string MobileNumber { get; set; }
 
-       
+        
+        public string BrokerNo { get; set; }
+
+        
+        public string BrokerIdCopyPath { get; set; }
+
+        
+        public string ReraListerCompanyName { get; set; }
+
+        public string ReraPermitNumber { get; set; }
+
+        public string ReraAgentName { get; set; }
     }
 }

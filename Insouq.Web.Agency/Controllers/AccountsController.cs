@@ -53,18 +53,28 @@ namespace Insouq.Web.Agency.Controllers
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult MotorRegister()
+      
+        
+        [HttpGet] // to return view
+        public IActionResult MotorRegister([FromQuery] RegisterAgencyDTO model)
+        {
+            HttpContext.Session.SetObjectAsJson("CompanyData", model);
+            return View();
+        }
+        [HttpGet] // to return view
+        public IActionResult PropertyRegister()
         {
             return View();
         }
-        [HttpGet]
-        public IActionResult PrpoertyRegister()
+       
+        [HttpGet] // to save in session
+        public IActionResult RegisterFullMotors([FromQuery] RegisterAgencyDTO model)
         {
-            return View();
+            HttpContext.Session.SetObjectAsJson("CompanyData", model);
+            return View(model);
         }
-        [HttpGet]
-        public IActionResult Registration([FromQuery] RegisterMotorsDTO model)
+        [HttpGet] // to save in session
+        public IActionResult RegisterFullProperty([FromQuery] RegisterAgencyDTO model)
         {
             HttpContext.Session.SetObjectAsJson("CompanyData", model);
             return View(model);
@@ -72,9 +82,9 @@ namespace Insouq.Web.Agency.Controllers
 
 
         [HttpPost]
-        public async Task<JsonResult> RegisterMotors([FromForm] RegisterMotorsDTO model)
+        public async Task<JsonResult> AddFullMotors([FromForm] RegisterAgencyDTO model)
         {
-            var CompanyDetails = HttpContext.Session.GetObjectFromJson<RegisterMotorsDTO>("CompanyData");
+            var CompanyDetails = HttpContext.Session.GetObjectFromJson<RegisterAgencyDTO>("CompanyData");
             model.CompanyName= CompanyDetails.CompanyName;
             model.LicenseIssuingAuthority= CompanyDetails.LicenseIssuingAuthority;
             model.TradeLicenseCopyPath= CompanyDetails.TradeLicenseCopyPath;
@@ -109,9 +119,46 @@ namespace Insouq.Web.Agency.Controllers
             //    return Json(sendCodeResponse);
             //}
 
-            return Json(new { isSuccess = true, message = "User Registered Successfully", userId = registerMotorsResponse.UserId });
+            return Json(new { isSuccess = true, message = "Motors Agency Registered Successfully", userId = registerMotorsResponse.UserId });
         }
+        [HttpPost]
+        public async Task<JsonResult> AddFullProperty([FromForm] RegisterAgencyDTO model)
+        {
+            var CompanyDetails = HttpContext.Session.GetObjectFromJson<RegisterAgencyDTO>("CompanyData");
+            model.CompanyName = CompanyDetails.CompanyName;
+            model.LicenseIssuingAuthority = CompanyDetails.LicenseIssuingAuthority;
+            model.TradeLicenseCopyPath = CompanyDetails.TradeLicenseCopyPath;
+            model.BrokerNo = CompanyDetails.BrokerNo;
+            model.BrokerIdCopyPath= CompanyDetails.BrokerIdCopyPath;
+            model.ReraListerCompanyName = CompanyDetails.ReraListerCompanyName;
+            model.ReraPermitNumber = CompanyDetails.ReraPermitNumber;
+            model.ReraAgentName = CompanyDetails.ReraAgentName;
 
+           
+
+            var registerMotorsResponse = await _agencyAccounttService.RegisterPropoerty(model);
+
+            if (!registerMotorsResponse.IsSuccess)
+            {
+                return Json(registerMotorsResponse);
+            }
+
+            //var sendSmsCodeDTO = new SendSmsCodeDTO
+            //{
+            //    MobileNumber = model.MobileNumber,
+            //    UserId = registerMotorsResponse.UserId
+            //};
+
+            //var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
+
+            //if (!sendCodeResponse.IsSuccess)
+            //{
+            //    return Json(sendCodeResponse);
+            //}
+
+            return Json(new { isSuccess = true, message = "Propoerty Agency Registered Successfully", userId = registerMotorsResponse.UserId });
+        }
+      
         [HttpPost]
         public async Task<JsonResult> VerifySmsCode([FromBody] VerifySmsCodeDTO model)
         {
@@ -143,13 +190,16 @@ namespace Insouq.Web.Agency.Controllers
 
             return Json(response);
         }
+        
+        
+        
         [HttpGet]
         public  IActionResult Login()
         {
             return View();
 ;        }
         [HttpPost]
-        public async Task<JsonResult> Login([FromBody] LoginDTO model)
+        public async Task<JsonResult> Login([FromForm] LoginDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -159,7 +209,7 @@ namespace Insouq.Web.Agency.Controllers
                 return Json(new { isSuccess = false, message = errors });
             }
 
-            var response = await _accountService.WebLogin(model);
+            var response = await _agencyAccounttService.Login(model);
 
             return Json(response);
         }

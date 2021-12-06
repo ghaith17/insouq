@@ -50,7 +50,7 @@
                     <div class="featured-box6">
                         <div class="col-md-6 ">
                             <div class="featured ">
-                                <form class="" asp-controller="Accounts" asp-action="login" method="post">
+                                <form  asp-controller="Accounts" asp-action="Login" method="post">
                                     <div class="agency-pas">
 
                                         <div class="padding-form7">
@@ -64,9 +64,9 @@
                                         </div>
                                         <div class="padding-form7">
                                             <div class="login-style">
-                                                <input class="signin-email" id="LoginEmailOrPhone" placeholder="Your Email or phone number" onfocusout="EmailCheck()">
+                                                <input class="signin-email" id="LoginEmailOrPhone" asp-for="EmailOrPhone" placeholder="Your Email or phone number" onfocusout="EmailCheck()">
                                             </div>
-                                            <input class="signin-input" type="password" id="LoginPassword" placeholder="Your password">
+                                            <input class="signin-input" type="password" id="LoginPassword" asp-for="Password" placeholder="Your password">
 
                                             <i class="eyePassword fa fa-eye-slash" aria-hidden="true" onclick="togglePassword(1)"></i>
                                             <div>

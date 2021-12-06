@@ -115,5 +115,10 @@ namespace insouq.Shared.Utility
         public const int Posted_ThisMonth = 3;
         public const int Posted_ThisYear = 4;
 
+        // agency 
+        public const int Confirmed = 1;
+        public const int Waiting = 0;
+       
+
     }
 }

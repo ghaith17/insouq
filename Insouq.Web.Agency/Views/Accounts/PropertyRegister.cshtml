@@ -1,4 +1,4 @@
-﻿@model insouq.Shared.DTOS.UserDTOS.AddUserDTO
+﻿@model insouq.Shared.DTOS.AgencyDTOS.RegisterAgencyDTO
 @{
     ViewData["Title"] = "PropertyRegistration";
 }
@@ -138,15 +138,15 @@
                                         <p>To create your account, you need to add your company info .</p>
                                     </div>
                                     @*action="CreatePropertyAccount"*@
-                                    <form class="" method="post" enctype="multipart/form-data">
+                                    <form asp-controller="Accounts" asp-action="RegisterFullProperty" method="get" enctype="multipart/form-data">
                                         <div class="padding-form7">
                                             @*@Html.ValidationMessageFor(m => m.CompanyName)*@
-                                            <input class="agency-pas1" type="text" id="CompanyName" placeholder="Company's name" required>
+                                            <input class="agency-pas1" type="text" id="CompanyName" placeholder="Company's name" required asp-for="CompanyName">
 
-                                            <select class="agency-pas1" id="LicenseIssuingAuthority" required>
-                                                <option asp-for="LicenseIssuingAuthority" value="Test">License issuing authority</option>
-                                                <option asp-for="LicenseIssuingAuthority" value="License1">License1</option>
-                                                <option asp-for="LicenseIssuingAuthority" value="License2">License2</option>
+                                            <select class="agency-pas1" id="LicenseIssuingAuthority" asp-for="LicenseIssuingAuthority" required>
+                                                <option>License issuing authority</option>
+                                                <option>License1</option>
+                                                <option>License2</option>
                                             </select>
 
                                             <div class="image-upload">
@@ -154,13 +154,13 @@
                                                     <img class="upload" src="~/assets/img/86.png" />
                                                     <a id="TradeLicenseCopyText">Add trade license copy</a>
                                                 </label>
-                                                <input id="file-input1" type="file" id="TradeLicenseCopyPath" hidden required />
+                                                <input id="file-input1" type="file" asp-for="TradeLicenseCopyPath" id="TradeLicenseCopyPath" hidden required />
                                             </div>
 
 
 
 
-                                            <input class="agency-pas1" type="text" name="BrokerIdNumber" placeholder="RERA broker id number" onkeypress="return isNumberKey(event)" required>
+                                            <input class="agency-pas1" type="text" name="BrokerNo" asp-for="BrokerNo" placeholder="RERA broker id number" onkeypress="return isNumberKey(event)" required >
 
                                             <div class="image-upload">
                                                 <label for="file-input2" class="upload-fi">
@@ -169,15 +169,15 @@
                                                     <a id="BrokerCardCopyText">Add Broker card copy</a>
                                                 </label>
 
-                                        
-                                                <input id="file-input2" type="file" id="BrokerIdCopyPath" hidden />
+
+                                                <input id="file-input2" type="file" id="BrokerIdCopyPath" asp-for="BrokerIdCopyPath" hidden />
 
                                             </div>
 
-                                            
-                                            <input class="agency-pas1" type="text" name="ReraListerCompanyName" placeholder="RERA lister company name" required>
-                                            <input class="agency-pas1" type="text" name="ReraPermitNumber" placeholder="RERA permit number" onkeypress="return isNumberKey(event)" required>
-                                            <input class="agency-pas1" type="text" name="ReraAgentName" placeholder="RERA agent name" required>
+
+                                            <input class="agency-pas1" type="text" name="ReraListerCompanyName" placeholder="RERA lister company name" asp-for="ReraListerCompanyName" required>
+                                            <input class="agency-pas1" type="text" name="ReraPermitNumber" placeholder="RERA permit number" asp-for="ReraPermitNumber" onkeypress="return isNumberKey(event)" required>
+                                            <input class="agency-pas1" type="text" name="ReraAgentName" placeholder="RERA agent name" asp-for="ReraAgentName" required>
 
                                         </div>
                                         <div class="padding-form7">

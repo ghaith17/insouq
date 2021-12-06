@@ -1,0 +1,280 @@
+﻿@model insouq.Shared.DTOS.AgencyDTOS.RegisterAgencyDTO
+
+@{
+    ViewData["Title"] = "Registration";
+}
+
+
+@{
+    Layout = null;
+}
+
+<style media="screen">
+    .padding-form7 {
+        padding-bottom: 10px !important;
+    }
+
+    .phone-code {
+        margin-left: 66px;
+        font-size: 20px;
+        width: 15%;
+        border: 0;
+    }
+
+    .PasswordString {
+        margin-left: 64px;
+        font-size: 15px;
+        color: red;
+    }
+
+    .agency-pho input[type=text] {
+        text-align: left;
+        width: 57%;
+        margin-left: 10px;
+        background: #140f26ad;
+        color: #fff;
+        margin-bottom: 20px;
+        padding: 10px 10px;
+        border: 0px;
+        border-radius: 15px;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+
+    <title>In Souq</title>
+</head>
+
+<!-- Navbar Start -->
+
+<body>
+
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat1">
+        <div id="hero-area2">
+            <div class="row">
+
+
+                <div class="col-md-12 pad-pas">
+
+                    <div class="featured-box6">
+                        <div class="col-md-6 ">
+                            <div class="featured ">
+                                <div class="agency-pas">
+
+
+
+                                    <form asp-controller="Accounts" asp-action="AddFullMotors" method="post" enctype="multipart/form-data">
+                                        @*asp-route-returnUrl="@Model.ReturnUrl"*@
+                                        <div class="padding-form7">
+                                            <img class="agency-pas2" src="~/assets/img/70.png" alt="">
+                                        </div>
+                                        <div class="padding-form7">
+
+                                            <h3>Create New Account  </h3>
+                                        </div>
+                                        <div class="padding-form7">
+                                            @*<h2 class="timer count-title count-number" data-to="11" data-speed="1500"> Values @ViewData["TotalData"] </h2>*@
+
+
+                                            @*@if (ViewBag.Message != null)
+                                                                                {
+                                                                                    <script type="text/javascript">
+                                                                            window.onload = function () {
+                                                                               alert("@ViewBag.Message");
+                                                };
+                                                                                    </script>
+                                                                                }*@
+
+                                            <p>Please complete these information to complete your registration process. </p>
+                                        </div>
+                                        <div class="padding-form7">
+                                            <div class="login-style">
+                                                @*<i class="fa fa-check" aria-hidden="true"></i>*@
+                                                @*@Html.ValidationMessageFor(m => m.Email)*@
+                                                <input class="signin-email" type="email" asp-for="Email" title="Please Enter Your Email" placeholder="Your Email" id="Email" onfocusout="EmailCheck()">
+                                            </div>
+
+                                            <input class="agency-pas1 agent-pass" type="password" asp-for="Password" placeholder="Your password" id="RegisterPassword"
+                                                   pattern="^(?=.*[0-9])(?=.*[!@@#$%^&*])[a-zA-Z0-9!@@#$%^&*]{6,16}$"
+                                                   title="Enter an Password from 6 digits at least, consisting of 1 number, 1 Upper letter, 1 Lower letter, 1 character" required>
+                                            <i class="eyePassword fa fa-eye-slash" aria-hidden="true" onclick="togglePassword(1)" id="eyePassword"></i>
+                                        </div>
+
+                                        <div class="agency-pho">
+                                            <select class=" phone-code" >
+                                                <option asp-for="PhoneCode">+962</option>
+                                                <option asp-for="PhoneCode">+966</option>
+                                                <option asp-for="PhoneCode">+971</option>
+                                            </select>
+
+                                            @*@Html.ValidationMessageFor(m => m.MobileNumber)*@
+                                            <input class="agency-pas1" type="text" asp-for="MobileNumber" placeholder="Phone Number" maxLength="9" minLength="9" onkeypress="return isNumberKey(event)" required>
+
+                                            @*<input class="agency-pas1" type="text" asp-for="MobileNumber" placeholder="Phone Number" maxLength="9" >*@
+
+                                        </div>
+                                        <div>
+                                            <span style="margin-left: 65px;color: red;" id="demo"></span>
+                                            @*<span asp-validation-for="Email" class="text-danger LoginValidation"></span>*@
+                                            <span asp-validation-for="Password" class="text-danger "></span>
+                                            <span asp-validation-for="MobileNumber" class="text-danger "></span>
+
+                                        </div>
+                                        <div class="text-danger LoginValidation">@TempData["Message"]</div>
+
+                                        <div class="padding-form7">
+                                            <button type="submit" name="submit">Save</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6 logo-login">
+                            <div class="back-pas">
+                                <h3>Welcome to</h3>
+                                <h1><img class="back-pas-img" src="~/assets/img/81.png" alt=""> </h1>
+                                <p>Upload, manage and track the performance of your listings on insouq</p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    </div>
+</body>
+
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro|Open+Sans+Condensed:300|Raleway' rel='stylesheet' type='text/css'>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script><!-- jQuery Library-->
+<link rel="stylesheet" href="css/passwordscheck.css" /><!-- Include Your CSS file here-->
+<script src="js/passwordscheck.js"></script><!-- Include Your jQUery file here-->
+
+<script type="text/javascript">
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+<script>
+    function ShowPassword() {
+        var x = document.getElementById("RegisterPassword");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    function togglePassword(target) {
+
+        if ($(".eyePassword").hasClass("fa-eye-slash")) {
+            $(".eyePassword").removeClass("fa-eye-slash");
+            $(".eyePassword").addClass("fa-eye");
+            if (target == 1) {
+                $("#RegisterPassword").removeAttr("type");
+                $("#RegisterPassword").attr("type", "text");
+            } else {
+                $("#Password").removeAttr("type");
+                $("#Password").attr("type", "text");
+            }
+        } else {
+            $(".eyePassword").removeClass("fa-eye");
+            $(".eyePassword").addClass("fa-eye-slash");
+
+            if (target == 1) {
+                $("#RegisterPassword").removeAttr("type");
+                $("#RegisterPassword").attr("type", "password");
+            } else {
+                $("#Password").removeAttr("type");
+                $("#Password").attr("type", "password");
+            }
+        }
+
+    }
+
+    function validate() {
+        var str = $('#RegisterPassword').val()
+        //document.getElementById("RegisterPassword").toString();
+        //console.log(" str Password : " + str.toString());
+        //console.log(str.toString().search(/[0-9]/));
+        var passRegEx = /^(?=.*[0-9])(?=.*[!@@#$%^&*])[a-zA-Z0-9!@@#$%^&*]{6,16}$/;
+        $("#PasswordError").remove();
+        if (!passRegEx.test(str)) {
+
+            $("#eyePassword").after('<Label class="PasswordString" id="PasswordError"  aria-hidden="true"> Please Enter Strong Password </Label>');
+        }
+
+    }
+
+    function EmailCheck() {
+        var str = $('#Email').val();
+        // console.log("str : " );
+        $("#successEmailIcon").remove();
+        $("#errorRegisterIcon").remove();
+        //console.log(" str Password : " + str.toString());
+        //console.log(str.toString().search(/[0-9]/));
+        //console.log(str.length);
+        //console.log(str);
+        var emailRegEx = /^(([^<>()[\]\\.,;:\s@@\"]+(\.[^<>()[\]\\.,;:\s@@\"]+)*)|(\".+\"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        if (!emailRegEx.test(str)) {
+            $("#Email").after('<i id="errorRegisterIcon" style="background: red;" class="fa fa-times check-icons" aria-hidden="true"></i>');
+        } else {
+            $("#Email").after('<i id="successEmailIcon" class="fa fa-check" aria-hidden="true"></i>');
+        }
+
+    }
+
+</script>
+<script src="~/assets/js/jquery-min.js"></script>
+<script src="~/assets/js/popper.min.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/jquery.counterup.min.js"></script>
+<script src="~/assets/js/waypoints.min.js"></script>
+<script src="~/assets/js/wow.js"></script>
+<script src="~/assets/js/owl.carousel.min.js"></script>
+<script src="~/assets/js/jquery.slicknav.js"></script>
+<script src="~/assets/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</html>
+

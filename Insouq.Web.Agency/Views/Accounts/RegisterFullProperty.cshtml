@@ -1,4 +1,4 @@
-﻿@model insouq.Shared.DTOS.AgencyDTOS.RegisterMotorsDTO
+﻿@model insouq.Shared.DTOS.AgencyDTOS.RegisterAgencyDTO
 
 @{
     ViewData["Title"] = "Registration";
@@ -87,7 +87,7 @@
 
 
 
-                                    <form asp-controller="Accounts" asp-action="RegisterMotors" method="post" enctype="multipart/form-data">
+                                    <form asp-controller="Accounts" asp-action="AddFullProperty" method="post" enctype="multipart/form-data">
                                         @*asp-route-returnUrl="@Model.ReturnUrl"*@
                                         <div class="padding-form7">
                                             <img class="agency-pas2" src="~/assets/img/70.png" alt="">
@@ -97,24 +97,12 @@
                                             <h3>Create New Account  </h3>
                                         </div>
                                         <div class="padding-form7">
-                                            @*<h2 class="timer count-title count-number" data-to="11" data-speed="1500"> Values @ViewData["TotalData"] </h2>*@
-
-
-                                            @*@if (ViewBag.Message != null)
-                                                                                {
-                                                                                    <script type="text/javascript">
-                                                                            window.onload = function () {
-                                                                               alert("@ViewBag.Message");
-                                                };
-                                                                                    </script>
-                                                                                }*@
+                                           
 
                                             <p>Please complete these information to complete your registration process. </p>
                                         </div>
                                         <div class="padding-form7">
                                             <div class="login-style">
-                                                @*<i class="fa fa-check" aria-hidden="true"></i>*@
-                                                @*@Html.ValidationMessageFor(m => m.Email)*@
                                                 <input class="signin-email" type="email" asp-for="Email" title="Please Enter Your Email" placeholder="Your Email" id="Email" onfocusout="EmailCheck()">
                                             </div>
 
@@ -125,7 +113,7 @@
                                         </div>
 
                                         <div class="agency-pho">
-                                            <select class=" phone-code" >
+                                            <select class=" phone-code">
                                                 <option asp-for="PhoneCode">+962</option>
                                                 <option asp-for="PhoneCode">+966</option>
                                                 <option asp-for="PhoneCode">+971</option>
