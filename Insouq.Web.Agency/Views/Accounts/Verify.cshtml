@@ -1,0 +1,386 @@
+﻿
+@model insouq.Shared.DTOS.AccountsDTOS.VerifySmsCodeDTO
+
+
+@{
+    Layout = null;
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+
+    <title>In Souq</title>
+</head>
+<style media="screen">
+    .digits-style input[type="text"] {
+        width: 12%;
+        height: 85px;
+        border: 1px solid white;
+        margin-left: 12px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 50px;
+        box-shadow: 0px 2px 8px 0px;
+    }
+</style>
+<!-- Navbar Start -->
+<script type="text/javascript">
+    $("#verifyButton").on("click", function (e) {
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/pages/test/",
+            data: { id: $(this).val(), access_token: $("#access_token").val() },
+            success: function (result) {
+                alert('ok');
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
+    $("button").click(function (e) {
+        var code = $("#firstCodeNumber").val() + $("#secondCodeNumber").val() + $("#thirdCodeNumber").val() + $("#forthCodeNumber").val() + $("#fifthCodeNumber").val() + $("#sixthCodeNumber").val();
+
+        var data = {
+            Code: code,
+            UserId: $("#otpUserId").val(),
+            MobileNumber: $("#otpMobileNumber").val(),
+        };
+        e.preventDefault();
+        $.ajax({
+            type: "POST",
+            url: "/pages/test/",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (result) {
+                alert('ok');
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
+    $("#verifyButton").click(function () {
+        var code = $("#firstCodeNumber").val() + $("#secondCodeNumber").val() + $("#thirdCodeNumber").val() + $("#forthCodeNumber").val() + $("#fifthCodeNumber").val() + $("#sixthCodeNumber").val();
+
+        var data = {
+            Code: code,
+            UserId: $("#otpUserId").val(),
+            MobileNumber: $("#otpMobileNumber").val(),
+        };
+
+        $.ajax({
+            url: "/Accounts/Verify",
+            method: "POST",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (response) {
+
+                if (response.isSuccess) {
+                    $("#OtpVerificationRegister").modal('hide');
+                    $("#myModal20").modal('show');
+                } else {
+                    $("#otpVerificationRegError").css("display", "block");
+                    $("#otpVerificationRegErrorMessage").text(response.message);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+        var vcode = (function () {
+        //cache dom
+        var $inputs = $("#vcode").find("input");
+
+        //bind events
+        $inputs.on('keyup', processInput);
+
+        //define methods
+        function processInput(e) {
+            var x = e.charCode || e.keyCode;
+            if ((x == 8 || x == 46) && this.value.length == 0) {
+                var indexNum = $inputs.index(this);
+                if (indexNum != 0) {
+                    $inputs.eq($inputs.index(this) - 1).focus();
+                }
+            }
+
+            if (ignoreChar(e))
+                return false;
+            else if (this.value.length == this.maxLength) {
+                $(this).next('input').focus();
+            }
+        }
+        function ignoreChar(e) {
+            var x = e.charCode || e.keyCode;
+            if (x == 37 || x == 38 || x == 39 || x == 40)
+                return true;
+            else
+                return false
+        }
+
+    })();
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+<body>
+
+
+
+    <div id="list-view" class="tab-pane fade active show containers trending-cat1">
+        <div id="hero-area2">
+            <div class="row">
+
+
+                <div class="col-md-12 pad-pas">
+
+                    <div class="featured-box6">
+                        <div class="col-md-6 ">
+                            <div class="featured ">
+
+
+
+
+                                <div class="agency-pas">
+
+                                    <div class="padding-form7">
+                                        <img class="agency-pas2" src="~/assets/img/70.png" alt="">
+                                    </div>
+                                    <div class="padding-form7">
+                                        <img class="agency-pas3" src="~/assets/img/71.png" alt="">
+                                    </div>
+                                    <div class="padding-form7">
+                                        <h3>OTP Verification </h3>
+                                    </div>
+                                    <div class="padding-form7">
+                                        <p>Please enter the 6 digit OTP code sent to your registered mobile number</p>
+                                    </div>
+                                    <form>
+                                        <div class="digits-style" id="vcode">
+                                            <input id="firstCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                            <input id="secondCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                            <input id="thirdCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                            <input id="forthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                            <input id="fifthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                            <input id="sixthCodeNumber" required class="" type="text" name="" value="" maxLength="1" placeholder="">
+                                        </div>
+
+
+                                        <div class="LoginValidation text-danger">
+                                            @TempData["Message"]
+                                        </div>
+
+                                        <div class="padding-form7">
+                                            <button type="button" name="submit" id="verifyButton">Sign up</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                                <div class="padding-form7">
+                                    <p class="term-code">By signing in, I agree on their <a href="#">Terms and Conditions</a>  and <a href="#">Privacy Policy</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 logo-login">
+
+
+                            <div class="back-pas">
+                                <h3>Welcome to</h3>
+                                <h1><img class="back-pas-img" src="~/assets/img/81.png" alt=""> </h1>
+                                <p>Upload, manage and track the performance of your listings on insouq  </p>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+
+    <script type="text/javascript">
+
+     
+        var vcode = (function () {
+            //cache dom
+            var $inputs = $("#vcode").find("input");
+
+            //bind events
+            $inputs.on('keyup', processInput);
+
+            //define methods
+            function processInput(e) {
+                var x = e.charCode || e.keyCode;
+                if ((x == 8 || x == 46) && this.value.length == 0) {
+                    var indexNum = $inputs.index(this);
+                    if (indexNum != 0) {
+                        $inputs.eq($inputs.index(this) - 1).focus();
+                    }
+                }
+
+                if (ignoreChar(e))
+                    return false;
+                else if (this.value.length == this.maxLength) {
+                    $(this).next('input').focus();
+                }
+            }
+            function ignoreChar(e) {
+                var x = e.charCode || e.keyCode;
+                if (x == 37 || x == 38 || x == 39 || x == 40)
+                    return true;
+                else
+                    return false
+            }
+
+        })();
+
+        function isNumberKey(evt) {
+            var charCode = (evt.which) ? evt.which : event.keyCode;
+            if (charCode != 46 && charCode > 31
+                && (charCode < 48 || charCode > 57))
+                return false;
+
+            return true;
+        }
+    </script>
+    <!-- Bootstrap core JavaScript
+        ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/assets/js/jquery-min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/jquery.slicknav.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="~/maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+</body>
+<script type="text/javascript">
+
+    function CheckVerficationCode() {
+        var code = $("#firstCodeNumber").val() + $("#secondCodeNumber").val() + $("#thirdCodeNumber").val() + $("#forthCodeNumber").val() + $("#fifthCodeNumber").val() + $("#sixthCodeNumber").val();
+
+        var data = {
+            Code: code,
+            UserId: $("#otpUserId").val(),
+            MobileNumber: $("#otpMobileNumber").val(),
+        };
+
+        $.ajax({
+            url: "/Accounts/VerifySmsCode",
+            method: "POST",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (response) {
+
+                if (response.isSuccess) {
+                    $("#OtpVerificationRegister").modal('hide');
+                    $("#myModal20").modal('show');
+                } else {
+                    $("#otpVerificationRegError").css("display", "block");
+                    $("#otpVerificationRegErrorMessage").text(response.message);
+                }
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+    var vcode = (function () {
+        //cache dom
+        var $inputs = $("#vcode").find("input");
+
+        //bind events
+        $inputs.on('keyup', processInput);
+
+        //define methods
+        function processInput(e) {
+            var x = e.charCode || e.keyCode;
+            if ((x == 8 || x == 46) && this.value.length == 0) {
+                var indexNum = $inputs.index(this);
+                if (indexNum != 0) {
+                    $inputs.eq($inputs.index(this) - 1).focus();
+                }
+            }
+
+            if (ignoreChar(e))
+                return false;
+            else if (this.value.length == this.maxLength) {
+                $(this).next('input').focus();
+            }
+        }
+        function ignoreChar(e) {
+            var x = e.charCode || e.keyCode;
+            if (x == 37 || x == 38 || x == 39 || x == 40)
+                return true;
+            else
+                return false
+        }
+
+    })();
+    $("#verifyButton").on("click", function (e) {
+        e.preventDefault();
+         var code = $("#firstCodeNumber").val() + $("#secondCodeNumber").val() + $("#thirdCodeNumber").val() + $("#forthCodeNumber").val() + $("#fifthCodeNumber").val() + $("#sixthCodeNumber").val();
+
+        var data = {
+            Code: code,
+            UserId: $("#otpUserId").val(),
+            MobileNumber: $("#otpMobileNumber").val(),
+        };
+        $.ajax({
+            url: "/Accounts/Verify",
+            method: "POST",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (result) {
+                window.location = "/Accounts/Review";
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
+</script>

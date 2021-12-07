@@ -141,7 +141,7 @@
                                     <form asp-controller="Accounts" asp-action="RegisterFullProperty" method="get" enctype="multipart/form-data">
                                         <div class="padding-form7">
                                             @*@Html.ValidationMessageFor(m => m.CompanyName)*@
-                                            <input class="agency-pas1" type="text" id="CompanyName" placeholder="Company's name" required asp-for="CompanyName">
+                                            <input class="agency-pas1" type="text" id="CompanyName" placeholder="Company's name" required asp-for="CompanyName" >
 
                                             <select class="agency-pas1" id="LicenseIssuingAuthority" asp-for="LicenseIssuingAuthority" required>
                                                 <option>License issuing authority</option>

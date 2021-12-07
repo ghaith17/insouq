@@ -22,14 +22,15 @@ namespace insouq.Shared.Utility
                 {
                     mobileNumber = mobileNumber.Substring(2, mobileNumber.Length - 2);
                     WebClient client = new WebClient();
-                    string baseurl = "https://mshastra.com/sendurl.aspx?user=20101102&pwd=kdzd26&senderid=AD-INSOUQ&mobileno=+" + mobileNumber + "&msgtext=" + code + "&priority=High&CountryCode=ALL";
+                    string baseurl= "http://josmsservice.com/sms/api/SendBulkMessages.cfm?numbers=" + mobileNumber + "&senderid=HUDHUD&AccName=HUDHUD&AccPass=U2@lK4@JsX2&msg="+ code + "&requesttimeout=5000000";
+                    //string baseurl = "https://mshastra.com/sendurl.aspx?user=20101102&pwd=kdzd26&senderid=AD-INSOUQ&mobileno=+" + mobileNumber + "&msgtext=" + code + "&priority=High&CountryCode=ALL";
                     Stream data = client.OpenRead(baseurl);
                     StreamReader reader = new StreamReader(data);
                     string s = reader.ReadToEnd();
                     data.Close();
                     reader.Close();
-
-                    if (s.Contains("Successful")) return true;
+                    // for UAE replace invalid success and remove !
+                    if (!s.Contains("invalid")) return true;
 
                     return false;
                 }

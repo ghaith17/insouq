@@ -70,6 +70,7 @@ namespace Insouq.Web.Agency.Controllers
         [HttpGet] // to save in session
         public IActionResult RegisterFullMotors([FromQuery] RegisterAgencyDTO model)
         {
+           
             HttpContext.Session.SetObjectAsJson("CompanyData", model);
             return View(model);
         }
@@ -82,9 +83,10 @@ namespace Insouq.Web.Agency.Controllers
 
 
         [HttpPost]
-        public async Task<JsonResult> AddFullMotors([FromForm] RegisterAgencyDTO model)
+        public async Task<IActionResult> AddFullMotors([FromForm] RegisterAgencyDTO model)
         {
             var CompanyDetails = HttpContext.Session.GetObjectFromJson<RegisterAgencyDTO>("CompanyData");
+            model.MobileNumber ="00"+ model.PhoneCode.Remove(0,1)+ model.MobileNumber;
             model.CompanyName= CompanyDetails.CompanyName;
             model.LicenseIssuingAuthority= CompanyDetails.LicenseIssuingAuthority;
             model.TradeLicenseCopyPath= CompanyDetails.TradeLicenseCopyPath;
@@ -103,26 +105,30 @@ namespace Insouq.Web.Agency.Controllers
 
             if (!registerMotorsResponse.IsSuccess)
             {
-                return Json(registerMotorsResponse);
+                TempData["Message"]= registerMotorsResponse.Message;
+                return View("RegisterFullMotors");
             }
 
-            //var sendSmsCodeDTO = new SendSmsCodeDTO
-            //{
-            //    MobileNumber = model.MobileNumber,
-            //    UserId = registerMotorsResponse.UserId
-            //};
+            var sendSmsCodeDTO = new SendSmsCodeDTO
+            {
+                MobileNumber = model.MobileNumber,
+                UserId = registerMotorsResponse.UserId
+            };
 
-            //var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
+            var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
 
-            //if (!sendCodeResponse.IsSuccess)
-            //{
-            //    return Json(sendCodeResponse);
-            //}
+            if (!sendCodeResponse.IsSuccess)
+            {
+                TempData["Message"] = sendCodeResponse.Message;
+                return View("RegisterFullMotors");
+            }
 
-            return Json(new { isSuccess = true, message = "Motors Agency Registered Successfully", userId = registerMotorsResponse.UserId });
+
+
+            return RedirectToAction("Verify");
         }
         [HttpPost]
-        public async Task<JsonResult> AddFullProperty([FromForm] RegisterAgencyDTO model)
+        public async Task<IActionResult> AddFullProperty([FromForm] RegisterAgencyDTO model)
         {
             var CompanyDetails = HttpContext.Session.GetObjectFromJson<RegisterAgencyDTO>("CompanyData");
             model.CompanyName = CompanyDetails.CompanyName;
@@ -140,27 +146,35 @@ namespace Insouq.Web.Agency.Controllers
 
             if (!registerMotorsResponse.IsSuccess)
             {
-                return Json(registerMotorsResponse);
+                TempData["Message"] = registerMotorsResponse.Message;
+                return View("RegisterFullProperty");
             }
 
-            //var sendSmsCodeDTO = new SendSmsCodeDTO
-            //{
-            //    MobileNumber = model.MobileNumber,
-            //    UserId = registerMotorsResponse.UserId
-            //};
+            var sendSmsCodeDTO = new SendSmsCodeDTO
+            {
+                MobileNumber = model.MobileNumber,
+                UserId = registerMotorsResponse.UserId
+            };
 
-            //var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
+            var sendCodeResponse = await _accountService.SendSmsCode(sendSmsCodeDTO);
 
-            //if (!sendCodeResponse.IsSuccess)
-            //{
-            //    return Json(sendCodeResponse);
-            //}
+            if (!sendCodeResponse.IsSuccess)
+            {
+                TempData["Message"] = sendCodeResponse.Message;
+                return View("RegisterFullProperty");
+            }
 
-            return Json(new { isSuccess = true, message = "Propoerty Agency Registered Successfully", userId = registerMotorsResponse.UserId });
+
+
+            return RedirectToAction("Verify");
         }
-      
+        [HttpGet] // to return view
+        public IActionResult Verify()
+        {
+            return View();
+        }
         [HttpPost]
-        public async Task<JsonResult> VerifySmsCode([FromBody] VerifySmsCodeDTO model)
+        public async Task<JsonResult> Verify([FromBody] VerifySmsCodeDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -176,7 +190,7 @@ namespace Insouq.Web.Agency.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> SendSmsCode([FromBody] SendSmsCodeDTO model)
+        public async Task<JsonResult> SendSmsCode(SendSmsCodeDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -199,7 +213,7 @@ namespace Insouq.Web.Agency.Controllers
             return View();
 ;        }
         [HttpPost]
-        public async Task<JsonResult> Login([FromForm] LoginDTO model)
+        public async Task<IActionResult> Login([FromForm] LoginDTO model)
         {
             if (!ModelState.IsValid)
             {
@@ -210,7 +224,11 @@ namespace Insouq.Web.Agency.Controllers
             }
 
             var response = await _agencyAccounttService.Login(model);
-
+            if (!response.IsSuccess)
+            {
+                TempData["Message"] = response.Message;
+                return View();
+            }
             return Json(response);
         }
 
@@ -333,7 +351,11 @@ namespace Insouq.Web.Agency.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
-
+        [HttpGet]
+        public async Task<IActionResult> Review()
+        {
+            return View();
+        }
         #endregion
     }
 }

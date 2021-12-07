@@ -136,9 +136,9 @@
 
 
                                         @*@Html.ValidationMessageFor(m => m.CompanyName, "", new { @class = "text-danger" })*@
-                                        <input class="agency-pas1" type="text" id="CompanyName" asp-for="CompanyName" placeholder="Company's name" style="border-right: 10px solid transparent;">
+                                        <input class="agency-pas1" type="text" id="CompanyName" asp-for="CompanyName" placeholder="Company's name" style="border-right: 10px solid transparent;" required>
 
-                                        <select class="agency-pas1" id="LicenseIssueAuthority" asp-for="LicenseIssuingAuthority" style="border-right: 10px solid transparent;">
+                                        <select class="agency-pas1" id="LicenseIssueAuthority" asp-for="LicenseIssuingAuthority" style="border-right: 10px solid transparent;" required>
                                             <option name="">License issuing authority</option>
                                             <option name="LicenseIssueAuthority">License1</option>
                                             <option name="LicenseIssueAuthority">License2</option>
@@ -171,7 +171,7 @@
                                                 <img class="upload" src="~/assets/img/86.png" />
                                                 <a id="TradeLicenseCopyText">Add trade license copy</a>
                                             </label>
-                                            <input id="file-input" type="file" accept="image/gif, image/jpeg, image/png" hidden id="TradeLicenseCopy" asp-for="TradeLicenseCopyPath" />
+                                            <input id="file-input" type="file" accept="image/gif, image/jpeg, image/png" hidden id="TradeLicenseCopy" asp-for="TradeLicenseCopyPath" required />
 
                                         </div>
 
@@ -184,7 +184,7 @@
             </div>*@
 
                                         @*@Html.ValidationMessageFor(m => m.ShowRoomAddress, "", new { @class = "text-danger" })*@
-                                        <input class="agency-pas1" type="text" id="ShowRoomAddress" placeholder="Showroom address" asp-for="ShowroomAddress">
+                                        <input class="agency-pas1" type="text" id="ShowRoomAddress" placeholder="Showroom address" asp-for="ShowroomAddress" required>
 
                                     </div>
                                     @if (ViewBag.Message != null)

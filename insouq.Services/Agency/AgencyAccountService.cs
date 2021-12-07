@@ -116,7 +116,7 @@ namespace insouq.Services.Agency
                     Picture=user.ProfilePicture,
                     BrokerNo=agency.BrokerNo
                 };
-                await _db.Agents.AddAsync(agent);
+                await _db.Agent.AddAsync(agent);
 
 
                 await _db.SaveChangesAsync();
@@ -133,7 +133,7 @@ namespace insouq.Services.Agency
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = StaticData.ServerError_Message; ;
+                response.Message =ex.Message; ;
                 return response;
             }
         }
@@ -211,7 +211,7 @@ namespace insouq.Services.Agency
                     Picture = user.ProfilePicture,
                     BrokerNo = agency.BrokerNo
                 };
-                await _db.Agents.AddAsync(agent);
+                await _db.Agent.AddAsync(agent);
                 await _db.SaveChangesAsync();
 
                 var token = "";
@@ -275,7 +275,7 @@ namespace insouq.Services.Agency
 
                     return response;
                 }
-                var agent = await _db.Agents.AsNoTracking().FirstOrDefaultAsync(u => u.Id == user.Id);
+                var agent = await _db.Agent.AsNoTracking().FirstOrDefaultAsync(u => u.Id == user.Id);
                 if (agent == null)
                 {
                     response.IsSuccess = false;

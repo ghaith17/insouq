@@ -125,10 +125,10 @@
                                         </div>
 
                                         <div class="agency-pho">
-                                            <select class=" phone-code" >
-                                                <option asp-for="PhoneCode">+962</option>
-                                                <option asp-for="PhoneCode">+966</option>
-                                                <option asp-for="PhoneCode">+971</option>
+                                            <select class=" phone-code" asp-for="PhoneCode"  >
+                                                <option >+962</option>
+                                                <option >+966</option>
+                                                <option >+971</option>
                                             </select>
 
                                             @*@Html.ValidationMessageFor(m => m.MobileNumber)*@
@@ -144,7 +144,7 @@
                                             <span asp-validation-for="MobileNumber" class="text-danger "></span>
 
                                         </div>
-                                        <div class="text-danger LoginValidation">@TempData["Message"]</div>
+                                        <div class="text-danger LoginValidation"  style=" margin-left: 12%;">@TempData["Message"]</div>
 
                                         <div class="padding-form7">
                                             <button type="submit" name="submit">Save</button>

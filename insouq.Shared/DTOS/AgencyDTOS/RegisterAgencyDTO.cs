@@ -25,7 +25,7 @@ namespace insouq.Shared.DTOS.AgencyDTOS
         
         public string Password { get; set; }
 
-        
+        public string PhoneCode { get; set; }
         public string MobileNumber { get; set; }
 
         
