@@ -1,0 +1,1185 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+@{
+    Layout = "_Layout";
+}
+
+
+<html dir="ltr" lang="en">
+<style media="screen">
+    /* #SvgjsPath1021{
+      stroke:#ffe396 !important;
+    } */
+    .dash-style2 {
+        width: 100%;
+        height: 2384px !important;
+        background: #f6f6f9;
+    }
+
+    .sidebar-nav ul .sidebar-item .sidebar-link {
+        color: gray !important
+    }
+
+    #app {
+        width: 100%;
+        height: 12% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #SvgjsPath1221 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1223 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1225 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1227 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1229 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1231 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1233 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1235 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1237 {
+        fill: #8c63e7 !important;
+    }
+
+    #SvgjsPath1239 {
+        fill: #8c63e7 !important;
+    }
+    /*
+    #SvgjsPath1745{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1747{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1749{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1751{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1753{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1755{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1757{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1759{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1761{
+          fill: #8c63e7 !important;
+    }
+    #SvgjsPath1787{
+      fill:#ffe396 !important;
+    }
+    #SvgjsPath1789{
+      fill:#ffe396 !important;
+    }
+    #SvgjsPath1791{
+      fill:#ffe396 !important;
+    }
+    #SvgjsPath1793{
+      fill:#ffe396 !important;
+    }
+    #SvgjsPath1795{
+      fill:#ffe396 !important;
+    }
+    #SvgjsPath1797{
+      fill:#ffe396 !important;
+    }
+    #SvgjsPath1799{
+      fill:#ffe396 !important;
+    }
+    #SvgjsPath1801{
+      fill:#ffe396 !important;
+    }
+    .apexcharts-legend-marker{
+          background: rgb(140 99 231) !important;
+    } */
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet" type="text/css">
+
+
+
+
+
+    <!-- <link rel="stylesheet" href="assets/styles.css" /> -->
+    <script>
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js"><\/script>'
+            )
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20171210/classList.min.js"><\/script>'
+            )
+        window.Promise ||
+            document.write(
+                '<script src="https://cdn.jsdelivr.net/npm/findindex_polyfill_mdn"><\/script>'
+            )
+    </script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+    <script>
+        // Replace Math.random() with a pseudo-random number generator to get reproducible results in e2e tests
+        // Based on https://gist.github.com/blixt/f17b47c62508be59987b
+        var _seed = 42;
+        Math.random = function () {
+            _seed = _seed * 16807 % 2147483647;
+            return (_seed - 1) / 2147483646;
+        };
+    </script>
+</head>
+
+<body>
+
+
+    <!-- mobile Menu -->
+    <!--<div class="topnav">
+        <a href="#home" class="menu-active"><img src="~/assets/img/57.png" alt=""> </a>
+        <div id="myLinks">
+            <a href=""><img src="~/assets/img/24.png" alt="Avatar" class="avatar"><p class="menu-center">Steave</p></a>
+            <a class="tg-btn" href="/topnavbar/postanad"><i class="fa fa-plus"></i> Post An Ad</a>
+            <a href="/Topnavbar/AgencyProfile"> Agency Profile</a>
+            <a href="/topnavbar/ManagerProfile"> My Profile</a>
+            <a href="/Home/Index">Dashboard</a>
+            <a href="/leftsidebar/AgencyStatictics">Agency Statistics</a>
+            <a href="/leftsidebar/PackageSubscription">Package Subscription</a>
+            <a href="/topnavbar/Staff">Staff</a>
+            <a href="/leftsidebar/adslisting">Ads Listing</a>
+            <a href="/leftsidebar/inquiries">inquiries</a>
+            <a href="/leftsidebar/MyNotifacation">My Notification</a>
+            <a href="/User/login"> Log Out</a>
+        </div>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>-->
+    <!-- End smartphone / tablet look -->
+    <!--</div>-->
+
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        @*    <header class="topbar" data-navbarbg="skin5">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header" data-logobg="skin6">
+                        <a class="navbar-brand1" href="dashboard.html">
+                            <img src="~/assets/img/57.png" alt="homepage" />
+                        </a>
+                        <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                           href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                        <h1 class="agency-header">The Ocean Agency</h1>
+                        <ul class="navbar-nav ms-auto d-flex align-items-center">
+                            <li>
+                                <a href="#" class="lang-style">Eng</a>
+                            </li>
+                            <li class=" in">
+                                <a class="tg-btn" href="postanad.html"><i class="fa fa-plus"></i> Post An Ad</a>
+                            </li>
+                            <ul class="sign-in">
+                                <li class="nav-item dropdown inline-view">
+                                    <p>
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Steave
+                                        </a><img src="~/assets/img/24.png" alt="Avatar" class="avatar">
+                                    </p>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/topnavbar/agencyprofile"><i><img src="~/assets/img/59.png" alt=""> </i> Agency Profile</a>
+                                        <a class="dropdown-item" href="/topbnavbar/managerprofile"><i><img src="~/assets/img/64.png" alt=""> </i> My Profile</a>
+                                        <a class="dropdown-item" href="/User/login"><i><img src="~/assets/img/66.png" alt=""> </i> Log Out</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>*@
+
+        <!--<aside class="left-sidebar" data-sidebarbg="skin6">-->
+        <!-- Sidebar scroll-->
+        <!--<div class="scroll-sidebar">-->
+        <!-- Sidebar navigation-->
+        <!--<nav class="sidebar-nav">
+        <ul id="sidebarnav">-->
+        <!-- User Profile-->
+        <!--<li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manegerdashbord.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/58.png" alt=""> </i>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="statictics.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/60.png" alt=""> </i>
+                        <span class="hide-menu">Agency Statistics</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="currentpackages.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/61.png" alt=""> </i>
+                        <span class="hide-menu">Package Subscription</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="agentslist.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/62.png" alt=""> </i>
+                        <span class="hide-menu">Staff</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adlisting.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/63.png" alt=""> </i>
+                        <span class="hide-menu">Ads Listing</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="inquiries.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/63.png" alt=""> </i>
+                        <span class="hide-menu">inquiries</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="notifacation.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/65.png" alt=""> </i>
+                        <span class="hide-menu">My Notification</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+        </nav>-->
+        <!-- End Sidebar navigation -->
+        <!--</div>-->
+        <!-- End Sidebar scroll-->
+        <!--</aside>-->
+
+        <div class="page-wrapper">
+            <section id="about" class="featured section-padding-agency how-title-agency" style="padding:3;margin-left: -7px;">
+                @*@if (ViewBag.Message != null)
+                        {
+                            <script type="text/javascript">
+                                                window.onload = function () {
+                                                   alert("@ViewBag.Message");
+                    };
+                            </script>
+                        }*@
+                <div class="container text-center wow  wow fadeInUp ">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="about-wrapper dash-style2">
+
+                                <h1 class="dash-h1">Dashboard</h1>
+
+                                <div class="box1">
+                                    <div class="col-md-12">
+
+
+                                        <div class="col-md-8">
+                                            <div class="dash-date">
+                                                <h3>Date</h3>
+                                                <h2>Mar 26- Abr 26.2021</h2>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="dash-user">
+                                                <h3>Users</h3>
+                                                <h2>All Users</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8">
+
+                                        <div class="col-md-4">
+                                            <a href="#">
+                                                <div class="count1">
+                                                    <h3 class="count-h2">Total Impressions</h3>
+                                                    <i class="fa fa-puzzle-piece" aria-hidden="true"></i>
+                                                    <h2 class="timer count-title count-number" data-to="20254" data-speed="1500">@ViewData["TotalImpressions"]</h2>
+                                                </div>
+                                            </a>
+                                        </div>
+
+
+                                        <div class="col-md-4">
+                                            <a href="#">
+                                                <div class="count1">
+                                                    <h3 class="count-h2">Total inquiries</h3>
+                                                    <i class="fa fa-leanpub" aria-hidden="true"></i>
+                                                    <h2 class="timer count-title count-number" data-to="169" data-speed="1500">@ViewData["TotalInquiries"]</h2>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <a href="#">
+                                                <div class="count1 count3">
+                                                    <h3 class="count-h2">Active Motors</h3>
+                                                    <i class="fa fa-check-circle" aria-hidden="true"></i>
+                                                    <h2 class="timer count-title count-number" data-to="11" data-speed="1500">@ViewData["TotalMotors"]</h2>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                    </div>
+                                </div>
+                                <div class="featured-box" style="margin-top: 289px; margin-left: 20px; width: 95% !important; height: 360px; ">
+                                    <div id="app"></div>
+
+
+                                    <div id="html">
+
+                                    </div>
+
+
+                                </div>
+                                <div class="featured-box" style="margin-top: 0px; margin-left: 20px; width: 95% !important; height: 365px; ">
+                                    <div id="app1"></div>
+
+                                    <div id="html">
+
+                                    </div>
+                                </div>
+                                <div class="featured-box" style="margin-top: 0px;margin-left: 20px;width: 95% !important;">
+                                    <div id="app2"></div>
+
+                                    <div id="html">
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="featured-box" style="margin-top: 0px;margin-left: 20px;width: 95% !important;">
+                                    <div id="app3"></div>
+
+                                    <div id="html">
+
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+
+
+    @*</div>*@
+    @*</div>
+        </div>*@
+    @*</div>*@
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app-style-switcher.js"></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="~/js/pages/dashboards/dashboard1.js"></script>
+
+</body>
+
+<!--<footer>-->
+<!-- Footer Area Start -->
+<!--<section class="footer-Content1">
+    <div class="containers">
+        <div class="row">
+            <div class="col-md-20">
+                <div class="widget">
+                    <div class="footer-logo"><img src="assets/img/67.png" alt=""></div>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+
+                    <ul class="menu">
+                        <li><a href="aboutus.html">About Insouq</a></li>
+                        <li><a href="howitwork.html">How it works</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contactus.html">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="selling.html">Selling guidelines</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="ourterms.html">Term &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+<!-- Footer area End -->
+<!-- Copyright Start  -->
+<!--<div id="copyright">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-border"></div>
+                <div class="site-info float-left">-->
+<!-- <p>Copy right &copy; 2021,All Rights Reserved.By <a href="http://www.hudhudit.com" target="_blank">HUDHUDIT</a></p> -->
+<!--</div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!-- Copyright End -->
+<!--</footer>-->
+
+<script>
+
+    (function ($) {
+        $.fn.countTo = function (options) {
+            options = options || {};
+
+            return $(this).each(function () {
+                // set options for current element
+                var settings = $.extend({}, $.fn.countTo.defaults, {
+                    from: $(this).data('from'),
+                    to: $(this).data('to'),
+                    speed: $(this).data('speed'),
+                    refreshInterval: $(this).data('refresh-interval'),
+                    decimals: $(this).data('decimals')
+                }, options);
+
+                // how many times to update the value, and how much to increment the value on each update
+                var loops = Math.ceil(settings.speed / settings.refreshInterval),
+                    increment = (settings.to - settings.from) / loops;
+
+                // references & variables that will change with each update
+                var self = this,
+                    $self = $(this),
+                    loopCount = 0,
+                    value = settings.from,
+                    data = $self.data('countTo') || {};
+
+                $self.data('countTo', data);
+
+                // if an existing interval can be found, clear it first
+                if (data.interval) {
+                    clearInterval(data.interval);
+                }
+                data.interval = setInterval(updateTimer, settings.refreshInterval);
+
+                // initialize the element with the starting value
+                render(value);
+
+                function updateTimer() {
+                    value += increment;
+                    loopCount++;
+
+                    render(value);
+
+                    if (typeof (settings.onUpdate) == 'function') {
+                        settings.onUpdate.call(self, value);
+                    }
+
+                    if (loopCount >= loops) {
+                        // remove the interval
+                        $self.removeData('countTo');
+                        clearInterval(data.interval);
+                        value = settings.to;
+
+                        if (typeof (settings.onComplete) == 'function') {
+                            settings.onComplete.call(self, value);
+                        }
+                    }
+                }
+
+                function render(value) {
+                    var formattedValue = settings.formatter.call(self, value, settings);
+                    $self.html(formattedValue);
+                }
+            });
+        };
+
+        $.fn.countTo.defaults = {
+            from: 0,               // the number the element should start at
+            to: 0,                 // the number the element should end at
+            speed: 1000,           // how long it should take to count between the target numbers
+            refreshInterval: 100,  // how often the element should be updated
+            decimals: 0,           // the number of decimal places to show
+            formatter: formatter,  // handler for formatting the value before rendering
+            onUpdate: null,        // callback method for every time the element is updated
+            onComplete: null       // callback method for when the element finishes updating
+        };
+
+        function formatter(value, settings) {
+            return value.toFixed(settings.decimals);
+        }
+    }(jQuery));
+
+    jQuery(function ($) {
+        // custom formatting example
+        $('.count-number').data('countToOptions', {
+            formatter: function (value, options) {
+                return value.toFixed(options.decimals).replace(/\B(?=(?:\d{3})+(?!\d))/g, ',');
+            }
+        });
+
+        // start all the timers
+        $('.timer').each(count);
+
+        function count(options) {
+            var $this = $(this);
+            options = $.extend({}, options || {}, $this.data('countToOptions') || {});
+            $this.countTo(options);
+        }
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/react@16.12/umd/react.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-dom@16.12/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prop-types@15.7.2/prop-types.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://cdn.jsdelivr.net/npm/react-apexcharts@1.3.6/dist/react-apexcharts.iife.min.js"></script>
+<script>
+    var densityCanvas = document.getElementById("densityChart");
+
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 12;
+
+    var datasetA = {
+        label: 'sale',
+        data: [2, 1, 1, 1, 1],
+        backgroundColor: '#a787ed',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+
+    };
+
+    var datasetB = {
+        label: 'Rent',
+        data: [0, 0, 1.5, 0, 0.5],
+        backgroundColor: '#ffe396',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+    };
+
+
+
+
+    var categoryData = {
+        labels: ["Al Barsha", "Dubai Sports City", "Al Warqaa", "Bur Dubai", "Dubai Marina"],
+        datasets: [datasetA, datasetB]
+    };
+
+    var chartOptions = {
+        scales: {
+            xAxes: [{
+                barPercentage: 1,
+                categoryPercentage: 0.6
+            }],
+            yAxes: [{
+                id: "y-axis-A",
+                ticks: {
+                    min: 0,
+                    max: 2
+                }
+            }
+            ]
+        }
+    };
+
+    var barChart = new Chart(densityCanvas, {
+        type: 'bar',
+        data: categoryData,
+        options: chartOptions
+    });
+</script>
+<script>
+    var densityCanvas = document.getElementById("densityChart1");
+
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 9.5;
+
+    var datasetA = {
+        label: 'Rent',
+        data: [3600, 2250, 1950, 1950, 2000],
+        backgroundColor: '#a787ed',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+
+    };
+
+    var datasetB = {
+        label: 'sale',
+        data: [0, 2550, 0, 1100, 0],
+        backgroundColor: '#ffe396',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+    };
+
+
+
+
+    var categoryData = {
+        labels: ["Al Warqaa", "Al Barsha", "Dubai Marina", "Dubai Investment Park(Dip)", "Dubai Marina"],
+        datasets: [datasetA, datasetB]
+    };
+
+    var chartOptions = {
+        scales: {
+            xAxes: [{
+                barPercentage: 1,
+                categoryPercentage: 0.6
+            }],
+            yAxes: [{
+                id: "y-axis-A",
+                ticks: {
+                    min: 0,
+                    max: 4000
+                }
+            }
+            ]
+        }
+    };
+
+    var barChart = new Chart(densityCanvas, {
+        type: 'bar',
+        data: categoryData,
+        options: chartOptions
+    });
+</script>
+<script>
+    var densityCanvas = document.getElementById("densityChart2");
+
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 12;
+
+    var datasetA = {
+        label: 'sale',
+        data: [2, 2, 1, 2, 2],
+        backgroundColor: '#a787ed',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+
+    };
+
+    var datasetB = {
+        label: 'Rent',
+        data: [2, 0.5, 1, 0.5, 1.5],
+        backgroundColor: '#ffe396',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+    };
+
+
+
+
+    var categoryData = {
+        labels: ["Al Barsha", "Dubai Sports City", "Al Warqaa", "Bur Dubai", "Dubai Marina"],
+        datasets: [datasetA, datasetB]
+    };
+
+    var chartOptions = {
+        scales: {
+            xAxes: [{
+                barPercentage: 1,
+                categoryPercentage: 0.6
+            }],
+            yAxes: [{
+                id: "y-axis-A",
+                ticks: {
+                    min: 0,
+                    max: 2
+                }
+            }
+            ]
+        }
+    };
+
+    var barChart = new Chart(densityCanvas, {
+        type: 'bar',
+        data: categoryData,
+        options: chartOptions
+    });
+</script>
+<script>
+    var densityCanvas = document.getElementById("densityChart3");
+
+    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontSize = 9.5;
+
+    var datasetA = {
+        label: 'Rent',
+        data: [3000, 3250, 950, 2950, 2500],
+        backgroundColor: '#a787ed',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+
+    };
+
+    var datasetB = {
+        label: 'sale',
+        data: [2550, 2550, 1100, 0, 1100],
+        backgroundColor: '#ffe396',
+        borderWidth: 0,
+        yAxisID: "y-axis-A"
+    };
+
+
+
+
+    var categoryData = {
+        labels: ["Al Warqaa", "Al Barsha", "Dubai Marina", "Dubai Investment Park(Dip)", "Dubai Marina"],
+        datasets: [datasetA, datasetB]
+    };
+
+    var chartOptions = {
+        scales: {
+            xAxes: [{
+                barPercentage: 1,
+                categoryPercentage: 0.6
+            }],
+            yAxes: [{
+                id: "y-axis-A",
+                ticks: {
+                    min: 0,
+                    max: 4000
+                }
+            }
+            ]
+        }
+    };
+
+    var barChart = new Chart(densityCanvas, {
+        type: 'bar',
+        data: categoryData,
+        options: chartOptions
+    });
+</script>
+<script type="text/babel">
+    class ApexChart extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+
+          series: [
+            {
+              name: "For Sale",
+              data: [12, 15, 10, 8, 20, 13, 10]
+            },
+            {
+              name: "For Rent",
+              data: [12, 11, 14, 18, 17, 13, 13]
+            }
+          ],
+          options: {
+            chart: {
+              height: 350,
+              type: 'line',
+              zoom: {
+                enabled: false
+              }
+            },
+            dataLabels: {
+              enabled: false
+            },
+            colors: ['#8c63e7', '#ffe396'],
+            stroke: {
+              curve: 'straight'
+            },
+            title: {
+              text: 'Views',
+              align: 'left'
+            },
+            tooltip: {
+              y: {
+                formatter: function (val) {
+                  return  val + " Views"
+                }
+              }
+            },
+            grid: {
+              row: {
+                colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.5
+              },
+            },
+            xaxis: {
+              categories: ['Abr 12', 'Abr 15', 'Abr 18', 'Abr 21', 'Abr 24', 'Abr 27', 'Abr 30', 'May 3', 'May 6'],
+            }
+          },
+
+
+        };
+      }
+
+
+
+      render() {
+        return (
+          <div>
+            <div id="chart">
+              <ReactApexChart options={this.state.options} series={this.state.series} type="line" height={350} />
+            </div>
+            <div id="html-dist"></div>
+          </div>
+        );
+      }
+    }
+
+    const domContainer = document.querySelector('#app');
+    ReactDOM.render(React.createElement(ApexChart), domContainer);
+</script>
+
+
+
+<script type="text/babel">
+    class ApexChart extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+
+          series: [{
+            name: 'For Sale',
+            data: [50, 40, 60, 20, 30, 10, 70, 55, 35]
+          }, {
+            name: 'For Rent',
+            data: [60, 30, 70, 10, 40, 20, 40, 25, 50]
+          }],
+          options: {
+            chart: {
+              type: 'bar',
+              height: 350
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+              },
+            },
+            dataLabels: {
+              enabled: false
+            },
+            colors: ['#8c63e7', '#ffe396'],
+            stroke: {
+              show: true,
+              width: 2,
+              colors: ['transparent']
+            },
+            xaxis: {
+              categories: ['Wadi Al safa 2', 'Bur Dubai', 'Doentown Dubai', 'Deire', 'World Trade Center'
+              , 'Al Warqaa', 'City of Arabia', 'Dubai Sport City', 'Dubai Investment Park(DIP)', 'Jumirah Beach Residence(JBR)'],
+            },
+            title: {
+              text: 'Number of ads by location',
+              align: 'left'
+            },
+            fill: {
+              opacity: 1
+            },
+            tooltip: {
+              y: {
+                formatter: function (val) {
+                  return  val + " Ads"
+                }
+              }
+            }
+          },
+
+
+        };
+      }
+
+
+      render() {
+        return (
+          <div>
+            <div id="chart">
+              <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={350} />
+            </div>
+            <div id="html-dist"></div>
+          </div>
+        );
+      }
+    }
+
+    const domContainer = document.querySelector('#app1');
+    ReactDOM.render(React.createElement(ApexChart), domContainer);
+</script>
+
+<script type="text/babel">
+    class ApexChart extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+
+          series: [{
+            name: 'For Sale',
+            data: [1600, 1200, 1300, 1000, 1500, 1400, 900, 1200, 1300]
+          }, {
+            name: 'For Rent',
+            data: [1200, 1400, 1500, 1000, 1100, 900, 1300, 1000, 1100]
+          }],
+          options: {
+            chart: {
+              type: 'bar',
+              height: 350
+            },
+
+            plotOptions: {
+              bar: {
+                borderRadius: 4,
+                horizontal: true,
+
+              }
+            },
+            title: {
+              text: 'Number of inquiries by Location',
+              align: 'left'
+            },
+            dataLabels: {
+              enabled: false
+            },
+            colors: ['#8c63e7', '#ffe396'],
+            stroke: {
+              show: true,
+              width: 1,
+              colors: ['transparent']
+            },
+            tooltip: {
+              y: {
+                formatter: function (val) {
+                  return  val + " Inquiries"
+                }
+              }
+            },
+            xaxis: {
+              categories: ['Wadi Al safa 2', 'Bur Dubai', 'Doentown Dubai', 'Deire', 'World Trade Center'
+              , 'Al Warqaa', 'City of Arabia', 'Dubai Sport City', 'Dubai Investment Park(DIP)', 'Jumirah Beach Residence(JBR)'
+              ],
+            }
+
+          },
+
+
+        };
+      }
+
+
+
+      render() {
+        return (
+          <div>
+            <div id="chart">
+              <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={650} />
+            </div>
+            <div id="html-dist"></div>
+          </div>
+        );
+      }
+    }
+
+    const domContainer = document.querySelector('#app2');
+    ReactDOM.render(React.createElement(ApexChart), domContainer);
+</script>
+
+
+
+<script type="text/babel">
+    class ApexChart extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+
+          series: [{
+            name: 'For Sale',
+            data: [950, 840, 760, 620, 530, 410, 370, 255, 135]
+          }, {
+            name: 'For Rent',
+            data: [960, 830, 770, 610, 540, 420, 340, 225, 150]
+          }],
+          options: {
+            chart: {
+              type: 'bar',
+              height: 350
+            },
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                columnWidth: '55%',
+                endingShape: 'rounded'
+              },
+            },
+            dataLabels: {
+              enabled: false
+            },
+            colors: ['#8c63e7', '#ffe396'],
+            stroke: {
+              show: true,
+              width: 2,
+              colors: ['transparent']
+            },
+            xaxis: {
+              categories: ['Wadi Al safa 2', 'Bur Dubai', 'Doentown Dubai', 'Deire', 'World Trade Center'
+              , 'Al Warqaa', 'City of Arabia', 'Dubai Sport City', 'Dubai Investment Park(DIP)', 'Jumirah Beach Residence(JBR)'],
+            },
+            title: {
+              text: 'Total Impressions by Location',
+              align: 'left'
+            },
+            fill: {
+              opacity: 1
+            },
+            tooltip: {
+              y: {
+                formatter: function (val) {
+                  return  val + " Impressions"
+                }
+              }
+            }
+          },
+
+
+        };
+      }
+
+
+      render() {
+        return (
+          <div>
+            <div id="chart">
+              <ReactApexChart options={this.state.options} series={this.state.series} type="bar" height={350} />
+            </div>
+            <div id="html-dist"></div>
+          </div>
+        );
+      }
+    }
+
+    const domContainer = document.querySelector('#app3');
+    ReactDOM.render(React.createElement(ApexChart), domContainer);
+</script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+</script>
+
+</html>

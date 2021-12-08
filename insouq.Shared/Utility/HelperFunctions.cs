@@ -95,7 +95,7 @@ namespace insouq.Shared.Utility
             }
 
             
-            var folderPath = Path.Combine(webRootPath, @"\images\", fileName + extention);
+          //  var folderPath = Path.Combine(webRootPath, @"\images\", fileName + extention);
             return webRootPath+ @"\images\"+ fileName + extention;
         }
 

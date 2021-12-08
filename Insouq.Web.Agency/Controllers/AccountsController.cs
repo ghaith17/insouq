@@ -230,7 +230,7 @@ namespace Insouq.Web.Agency.Controllers
                 TempData["Message"] = response.Message;
                 return View();
             }
-            return Json(response);
+            return RedirectToAction("index","Motors");
         }
 
         [Authorize]

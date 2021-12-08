@@ -253,7 +253,88 @@ namespace insouq.Services.Agency
                     return response;
                 }
 
-                var motorAd = await _db.MotorAds.Include(a => a.Ad).FirstOrDefaultAsync(a => a.AdId == model.AdId);
+                var en_partName = "";
+
+                var ar_partName = "";
+
+                if (model.OtherPartName != null)
+                {
+                    en_partName = model.OtherPartName;
+                    ar_partName = model.OtherPartName;
+                }
+                else if (model.PartName != null)
+                {
+                    var PartNameArray = model.PartName.Split('-');
+                    en_partName = PartNameArray[0].Trim();
+                    ar_partName = PartNameArray[1].Trim();
+                }
+
+
+                var en_maker = "";
+                var ar_maker = "";
+
+                if (model.OtherMaker != null)
+                {
+                    en_maker = model.OtherMaker;
+                    ar_maker = model.OtherMaker;
+                }
+                else if (model.Maker != null)
+                {
+                    var makerArray = model.Maker.Split('-');
+                    en_maker = makerArray[0].Trim();
+                    ar_maker = makerArray[1].Trim();
+                }
+
+
+                var en_model = "";
+
+                var ar_model = "";
+
+                if (model.OtherModel != null)
+                {
+                    en_model = model.OtherModel;
+                    ar_model = model.OtherModel;
+                }
+                else if (model.Model != null)
+                {
+                    var modelArray = model.Model.Split('-');
+                    en_model = modelArray[0].Trim();
+                    ar_model = modelArray[1].Trim();
+                }
+
+
+                var en_trim = "";
+
+                var ar_trim = "";
+
+                if (model.OtherTrim != null)
+                {
+                    en_trim = model.OtherTrim;
+                    ar_trim = model.OtherTrim;
+                }
+                else if (model.Trim != null)
+                {
+                    var trimArray = model.Trim.Split('-');
+                    en_trim = trimArray[0].Trim();
+                    ar_trim = trimArray[1].Trim();
+                }
+
+
+                var ad = new Ad()
+                {
+                    Title = model.Title,
+                    PostDate = DateTime.Now,
+                    LastUpdatedDate = DateTime.Now,
+                    UserId = userId,
+                    Status = 0,
+                    CategoryId = model.CategoryId,
+                    TypeId = StaticData.Motors_ID
+                };
+
+
+                await _db.Ads.AddAsync(ad);
+
+                await _db.SaveChangesAsync();
 
                 var en_color = "";
 
@@ -519,12 +600,29 @@ namespace insouq.Services.Agency
                     }
                 }
 
-
-
-
                 category.NumberOfAds++;
 
 
+                var motorAd = new MotorAd()
+                {
+                    En_Maker = en_maker != "" ? en_maker : null,
+                    Ar_Maker = ar_maker != "" ? ar_maker : null,
+                    En_Model = en_model != "" ? en_model : null,
+                    Ar_Model = ar_model != "" ? ar_model : null,
+                    En_Trim = en_trim != "" ? en_trim : null,
+                    Ar_Trim = ar_trim != "" ? ar_trim : null,
+                    Year = model.Year,
+                    En_PartName = en_partName != "" ? en_partName : null,
+                    Ar_PartName = ar_partName != "" ? ar_partName : null,
+                    SubCategoryId = model.SubCategoryId != 0 ? model.SubCategoryId : null,
+                    OtherSubCategory = model.OtherSubCategory,
+                    SubTypeId = model.SubTypeId != 0 ? model.SubTypeId : null,
+                    OtherSubType = model.OtherSubType,
+                    Ad = ad,
+                    AdId = ad.Id
+                    
+
+                };
                 motorAd.Ad.Description = model.Description;
                 motorAd.Ad.En_Location = en_location;
                 motorAd.Ad.Ar_Location = ar_location;
@@ -585,16 +683,18 @@ namespace insouq.Services.Agency
                 motorAd.Ar_SteeringSide = ar_steeringSide != "" ? ar_steeringSide : null;
                 motorAd.NameOfPart = model.NameOfPart;
 
+                await _db.MotorAds.AddAsync(motorAd);
 
                 await _db.SaveChangesAsync();
 
                 response.IsSuccess = true;
                 return response;
+
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = StaticData.ServerError_Message;
+                response.Message = ex.Message;
                 return response;
             }
 

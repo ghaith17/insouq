@@ -238,21 +238,21 @@
 
                         @*<div class="">
 
-                                <label for=''>
-                                    <p class="post-p5">Pictures of your ad</p>
-                                    <div class="">
-                                        <label for="files"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
-                                        <p><small>You can add upto 10 pictures</small></p>
-                                        <p style="color:#ffb01c">drag and drop your main image to the first</p>
-                                    </div>
-                                    <div class=" inline-dispaly">
-                                        <div id="sortableImgThumbnailPreview">
-                                        </div>
-                                        <div><output id='result' /></output></div>
-                                    </div>
-                                </label>
-                            </div>
-                            <input asp-for="Pictures" required id="files" type="file" multiple hidden accept="image/*" />*@
+                <label for=''>
+                    <p class="post-p5">Pictures of your ad</p>
+                    <div class="">
+                        <label for="files"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
+                        <p><small>You can add upto 10 pictures</small></p>
+                        <p style="color:#ffb01c">drag and drop your main image to the first</p>
+                    </div>
+                    <div class=" inline-dispaly">
+                        <div id="sortableImgThumbnailPreview">
+                        </div>
+                        <div><output id='result' /></output></div>
+                    </div>
+                </label>
+            </div>
+            <input asp-for="Pictures" required id="files" type="file" multiple hidden accept="image/*" />*@
 
 
                         <div class="">
@@ -552,6 +552,7 @@
                             <button type="button" class="change-btn3" name="button" onclick="onFormSubmit()">CONTINUE</button>
                         </div>
                     </form>
+                   
                 </div>
                 <div class="col-md-2">
                 </div>

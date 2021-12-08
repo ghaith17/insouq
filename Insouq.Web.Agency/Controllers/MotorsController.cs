@@ -47,6 +47,10 @@ namespace Insouq.Web.Agency.Controllers
             return agent;
         }
 
+        public ActionResult index()
+        {
+            return View();
+        }
         public async Task<IActionResult> Add(int categoryId)
         {
             //if (categoryId == 0)
@@ -64,8 +68,11 @@ namespace Insouq.Web.Agency.Controllers
             HttpContext.Session.SetString("SessionMobileNumberWithCode", user.MobileNumber);
             HttpContext.Session.SetString("SessionWorkNumber", agent.WorkNumber);
             //HttpContext.Session.SetString("agencyName", agency.Name);
-
-            return View();
+            var dto = new insouq.Shared.DTOS.AgencyDTOS.MotorsAdDTO
+            {
+                CategoryId = categoryId,
+            };
+            return View(dto);
         }
 
         //[HttpPost]
@@ -88,10 +95,10 @@ namespace Insouq.Web.Agency.Controllers
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Add(insouq.Shared.DTOS.AgencyDTOS.MotorsAdDTO dto)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(dto);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return View(dto);
+            //}
             var hostName = $"https://{this.Request.Host}";
             var response = await _AgencyMotorsService.Add(getUserId(), dto, hostName);
 

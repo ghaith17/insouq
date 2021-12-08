@@ -1,1 +1,409 @@
-﻿
+﻿@{
+
+    Layout = "_Layout";
+}
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+    <link href="~/assets/css/flag-icon.css" rel="stylesheet">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- mobile Menu -->
+    @*<div class="topnav">
+            <a href="#home" class="menu-active"><img src="assets/img/57.png" alt=""> </a>
+            <div id="myLinks">
+                <a href=""><img src="assets/img/24.png" alt="Avatar" class="avatar"><p class="menu-center">Steave</p></a>
+                <a class="tg-btn" href="postanad.html"><i class="fa fa-plus"></i> Post An Ad</a>
+                <a href="agencyprofile.html"> Agency Profile</a>
+                <a href="managerprofile.html"> My Profile</a>
+                <a href="manegerdashbord.html">Dashboard</a>
+                <a href="statictics.html">Agency Statistics</a>
+                <a href="currentpackages.html">Package Subscription</a>
+                <a href="agentslist.html">Staff</a>
+                <a href="adlisting.html">Ads Listing</a>
+                <a href="inquiries.html">inquiries</a>
+                <a href="notifacation.html">My Notification</a>
+                <a href="login.html"> Log Out</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>*@
+    <!-- End smartphone / tablet look -->
+    <div class="container">
+
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal11" role="dialog">
+            <div class="modal-dialog dialog-padding">
+
+                <!-- Modal content-->
+                <div class="modal5-styles">
+                    <div class="modal-header-styles2">
+                        <h4 class="title-dir">Change Location</h4>
+                        <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                    </div>
+                    <div class="modal-body">
+                        <form class="" action="" method="post">
+
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">All UAE</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Abu Dhabi</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Ajman</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Al Ain</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Dubai</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Fujairah</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Ras Al Khaimah</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Sharjah</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="30days">
+                                <label for="30days" class="change-color2">Um Al Quwain</label>
+
+                            </p>
+
+
+
+                            <button type="button" class="signin-btn2" name="button">Go</button>
+
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+        @*<header class="topbar" data-navbarbg="skin5">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header" data-logobg="skin6">
+                        <a class="navbar-brand1" href="/Home/Index">
+                            <img src="~/assets/img/57.png" alt="homepage" />
+                        </a>
+                        <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                           href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                        <h1 class="agency-header">The Ocean Agency</h1>
+                        <ul class="navbar-nav ms-auto d-flex align-items-center">
+                            <li>
+                                <a href="#" class="lang-style">Eng</a>
+                            </li>
+                            <li class=" in">
+                                <a class="tg-btn" href="/Topnavbar/PostAnAd"><i class="fa fa-plus"></i> Post An Ad</a>
+                            </li>
+                            <ul class="sign-in">
+                                <li class="nav-item dropdown inline-view">
+                                    <p>
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Steave
+                                        </a><img src="~/assets/img/24.png" alt="Avatar" class="avatar">
+                                    </p>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Topnavbar/AgencyProfile"><i><img src="~/assets/img/59.png" alt=""> </i> Agency Profile</a>
+                                        <a class="dropdown-item" href="/Topnavbar/managerprofile"><i><img src="~/assets/img/64.png" alt=""> </i> My Profile</a>
+                                        <a class="dropdown-item" href="/Topnavbar/logout"><i><img src="~/assets/img/66.png" alt=""> </i> Log Out</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>*@
+
+        <!--<aside class="left-sidebar" data-sidebarbg="skin6">-->
+        <!-- Sidebar scroll-->
+        <!--<div class="scroll-sidebar">-->
+        <!-- Sidebar navigation-->
+        <!--<nav class="sidebar-nav">
+            <ul id="sidebarnav">-->
+        <!-- User Profile-->
+        <!--<li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manegerdashbord.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/58.png" alt=""> </i>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="statictics.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/60.png" alt=""> </i>
+                        <span class="hide-menu">Agency Statistics</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="currentpackages.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/61.png" alt=""> </i>
+                        <span class="hide-menu">Package Subscription</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="agentslist.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/62.png" alt=""> </i>
+                        <span class="hide-menu">Staff</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adlisting.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/63.png" alt=""> </i>
+                        <span class="hide-menu">Ads Listing</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="inquiries.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/63.png" alt=""> </i>
+                        <span class="hide-menu">inquiries</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="notifacation.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/65.png" alt=""> </i>
+                        <span class="hide-menu">My Notification</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+        </nav>-->
+        <!-- End Sidebar navigation -->
+        <!--</div>-->
+        <!-- End Sidebar scroll-->
+        <!--</aside>-->
+        <div class="page-wrapper">
+            <div id="list-view" class="tab-pane  active show containers trending-cat">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1 class="section-title5">Post an Ad</h1>
+
+                    </div>
+                    <div class="col-md-12">
+
+                        <p class="post-p2">Used cars for sale it is, so how would you like to list your cars information?</p>
+                        <p class="post-p3">Enter chassis number</p>
+                        <p>Get instant information about your car by entering the chassis number.</p>
+                        <!-- <input type="text" class="line-input-style5" name="" value=""
+                        placeholder="XX00-0000000">
+                        <p>Example: SV30-0169266</p>
+                        <div class="padding-form">
+                          <button type="button" class="change-btn3" name="button"onclick="window.location.href='manegerdashbord.html'">Fill car details automatically</button>
+                        </div>
+                        <p class="post-p6">OR</p> -->
+                        <form method="post" asp-action="GoToFillData">
+                            <div class="padding-form">
+                                <button type="submit" class="change-btn3" onclick="window.location.href='/topnavbar/MotorfillDataManually'">Fill data manually</button>
+
+
+
+                            </div>
+                            <div class="text-danger LoginValidation">@TempData["Message"]</div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+            <!-- Bootstrap tether Core JavaScript -->
+            <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="~/js/app-style-switcher.js"></script>
+            <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+            <!--Wave Effects -->
+            <script src="~/js/waves.js"></script>
+            <!--Menu sidebar -->
+            <script src="~/js/sidebarmenu.js"></script>
+            <!--Custom JavaScript -->
+            <script src="~/js/custom.js"></script>
+            <!--This page JavaScript -->
+            <!--chartis chart-->
+            <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+            <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+            <script src="~/js/pages/dashboards/dashboard1.js"></script>
+</body>
+<!--<footer>-->
+<!-- Footer Area Start -->
+<!--<section class="footer-Content1">
+    <div class="containers">
+        <div class="row">
+            <div class="col-md-20">
+                <div class="widget">
+                    <div class="footer-logo"><img src="assets/img/67.png" alt=""></div>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+
+                    <ul class="menu">
+                        <li><a href="aboutus.html">About Insouq</a></li>
+                        <li><a href="howitwork.html">How it works</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contactus.html">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="selling.html">Selling guidelines</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="ourterms.html">Term &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+<!-- Footer area End -->
+<!-- Copyright Start  -->
+<!--<div id="copyright">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-border"></div>
+                <div class="site-info float-left">-->
+<!-- <p>Copy right &copy; 2021,All Rights Reserved.By <a href="http://www.hudhudit.com" target="_blank">HUDHUDIT</a></p> -->
+<!--</div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!-- Copyright End -->
+<!--</footer>-->
+<script src="~/assets/js/jquery-min.js"></script>
+<script src="~/assets/js/popper.min.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/jquery.counterup.min.js"></script>
+<script src="~/assets/js/waypoints.min.js"></script>
+<script src="~/assets/js/wow.js"></script>
+<script src="~/assets/js/owl.carousel.min.js"></script>
+<script src="~/assets/js/jquery.slicknav.js"></script>
+<script src="~/assets/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="~/maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script>
+    $('#Industry').change(function () {
+        var i = $(this).prev('label').clone();
+        var file = $('#Industry')[0].files[0].name;
+        $(this).prev('label').text(file);
+    });
+    $('#cv').change(function () {
+        var i = $(this).prev('label').clone();
+        var file = $('#cv')[0].files[0].name;
+        $(this).prev('label').text(file);
+    });
+
+
+</script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+</script>
+</html>

@@ -30,4 +30,8 @@
 		<ProjectReference Include="..\insouq.Shared\insouq.Shared.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\images\" />
+	</ItemGroup>
+
 </Project>
