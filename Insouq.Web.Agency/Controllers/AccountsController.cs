@@ -131,6 +131,7 @@ namespace Insouq.Web.Agency.Controllers
         public async Task<IActionResult> AddFullProperty([FromForm] RegisterAgencyDTO model)
         {
             var CompanyDetails = HttpContext.Session.GetObjectFromJson<RegisterAgencyDTO>("CompanyData");
+            model.MobileNumber = "00" + model.PhoneCode.Remove(0, 1) + model.MobileNumber;
             model.CompanyName = CompanyDetails.CompanyName;
             model.LicenseIssuingAuthority = CompanyDetails.LicenseIssuingAuthority;
             model.TradeLicenseCopyPath = CompanyDetails.TradeLicenseCopyPath;

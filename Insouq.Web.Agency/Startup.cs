@@ -71,7 +71,7 @@ namespace Insouq.Web.Agency
             services.AddScoped<IDropDownService, DropDownService>();
             services.AddScoped<INotificationsService, NotificationsService>();
             services.AddScoped<IAgencyAccountService, AgencyAccountService>();
-
+            services.AddScoped<IAgencyMotorsServices, AgencyMotorsServices>();
             services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             // Auto Mapper Configurations

@@ -113,10 +113,10 @@
                                         </div>
 
                                         <div class="agency-pho">
-                                            <select class=" phone-code">
-                                                <option asp-for="PhoneCode">+962</option>
-                                                <option asp-for="PhoneCode">+966</option>
-                                                <option asp-for="PhoneCode">+971</option>
+                                            <select class=" phone-code" asp-for="PhoneCode">
+                                                <option >+962</option>
+                                                <option >+966</option>
+                                                <option >+971</option>
                                             </select>
 
                                             @*@Html.ValidationMessageFor(m => m.MobileNumber)*@
@@ -252,6 +252,29 @@
         }
 
     }
+    $("#verifyButton").on("click", function (e) {
+        e.preventDefault();
+        var code = $("#firstCodeNumber").val() + $("#secondCodeNumber").val() + $("#thirdCodeNumber").val() + $("#forthCodeNumber").val() + $("#fifthCodeNumber").val() + $("#sixthCodeNumber").val();
+
+        var data = {
+            Code: code,
+            UserId: $("#otpUserId").val(),
+            MobileNumber: $("#otpMobileNumber").val(),
+        };
+        $.ajax({
+            url: "/Accounts/Verify",
+            method: "POST",
+            data: JSON.stringify(data),
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (result) {
+                window.location = "/Accounts/Review";
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    });
 
 </script>
 <script src="~/assets/js/jquery-min.js"></script>

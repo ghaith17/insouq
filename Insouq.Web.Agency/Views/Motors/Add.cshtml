@@ -1,0 +1,1174 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@*@model System.Collections.Generic.List<AgencyWeb.DL.UsedCarDL>*@
+@model insouq.Shared.DTOS.AgencyDTOS.MotorsAdDTO
+
+@{
+    Layout = "_Layout";
+}
+
+<style media="screen">
+    #files-area {
+        margin: 0 auto;
+    }
+
+    .file-block {
+        border-radius: 10px;
+        margin: 5px;
+        color: initial;
+        display: inline-flex;
+        & > span.name
+
+    {
+        padding-right: 10px;
+        width: max-content;
+        display: inline-flex;
+    }
+
+    }
+
+    .image-view {
+        width: 150px;
+        height: 150px;
+        object-fit: scale-down;
+        background: white;
+    }
+
+    .file-delete {
+        position: absolute;
+        background-color: #db0909;
+        color: white;
+        border-radius: 100%;
+        font-weight: bold;
+        margin-top: 8px;
+        justify-content: center;
+        font-size: 14px;
+        margin-right: 0;
+        padding: 0px 7px 1px 7px;
+        margin-left: 121px;
+        cursor: pointer;
+    }
+
+    .name {
+        display: none;
+    }
+
+    .img-div {
+        position: relative;
+        display: inline-block;
+        width: 18%;
+        margin-right: 5px;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    /*   :checked + label {
+        border: 5px solid;
+        border-color: #ffb01c;
+        border-radius: 15px;
+    }*/
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        max-width: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .icon-delete {
+        background: #db0909;
+        border: none;
+        position: absolute;
+        border-radius: 100%;
+        margin-left: -22%;
+        margin-top: 8px;
+        color: white;
+        font-size: 10px;
+        padding: 0 8px;
+    }
+
+    .img-div:hover .middle {
+        opacity: 1;
+    }
+</style>
+
+<style media="screen">
+    .ui-sortable-placeholder {
+        visibility: visible !important;
+        background: #eeeeee78 !important;
+    }
+
+        .ui-sortable-placeholder * {
+            visibility: hidden;
+        }
+
+    .RearangeBox.dragElemThumbnail {
+        opacity: 0.6;
+    }
+
+    .RearangeBox {
+        width: 180px;
+        height: 240px;
+        padding: 10px 5px;
+        cursor: all-scroll;
+        float: left;
+        font-family: sans-serif;
+        display: inline-block;
+        margin: 5px !important;
+        text-align: center;
+        color: #673ab7;
+        /*color: rgb(34, 34, 34);
+        background: #f3f2f1;     */
+    }
+
+    /*    body {
+        font-family: sans-serif;
+        margin: 0px;
+    }*/
+
+    .IMGthumbnail {
+        max-width: 168px;
+        height: 220px;
+        margin: auto;
+        background-color: #ececec;
+        padding: 2px;
+        border: none;
+    }
+
+        .IMGthumbnail img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+    .imgThumbContainer {
+        margin: 4px;
+        border: solid;
+        display: inline-block;
+        justify-content: center;
+        position: relative;
+        border: 1px solid rgba(0,0,0,0.14);
+        -webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 0 4px 0 rgba(0,0,0,.2);
+    }
+
+        .imgThumbContainer > .imgName {
+            text-align: center;
+            padding: 2px 6px;
+            margin-top: 4px;
+            font-size: 13px;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .imgThumbContainer > .imgRemoveBtn {
+            position: absolute;
+            color: #e91e63ba;
+            right: 2px;
+            top: 2px;
+            cursor: pointer;
+            display: none;
+        }
+
+    .RearangeBox:hover > .imgRemoveBtn {
+        display: block;
+    }
+
+    .custom-file-container__image-multi-preview {
+        position: relative;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+        border-radius: 6px;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
+        float: left;
+        margin: 1.858736059%;
+        width: 29.615861214%;
+        height: 190px;
+        box-shadow: 0 4px 10px 0 rgb(51 51 51 / 25%);
+    }
+</style>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+    <link href="~/assets/css/flag-icon.css" rel="stylesheet">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Trigger the modal with a button -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal11" role="dialog">
+            <div class="modal-dialog dialog-padding">
+
+                <!-- Modal content-->
+                <div class="modal5-styles">
+                    <div class="modal-header-styles2">
+                        <h4 class="title-dir">Change Location</h4>
+                        <button type="button" class="close-style7" data-dismiss="modal">&times;</button>
+
+                    </div>
+
+                    <div class="modal-body">
+                        <form class="" method="post">
+
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="All UAE">
+                                <label for="All UAE" class="change-color2">All UAE</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Abu Dhabi">
+                                <label for="Abu Dhabi" class="change-color2">Abu Dhabi</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Ajman">
+                                <label for="Ajman" class="change-color2">Ajman</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Al Ain">
+                                <label for="AL Ain" class="change-color2">Al Ain</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Dubai">
+                                <label for="Dubai" class="change-color2">Dubai</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Fujairah">
+                                <label for="30days" class="change-color2">Fujairah</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Ras Al Khaimah">
+                                <label for="30days" class="change-color2">Ras Al Khaimah</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Sharjah">
+                                <label for="30days" class="change-color2">Sharjah</label>
+
+                            </p>
+                            <p class="tex-pad4">
+                                <input type="radio" id="30days" name="days" value="Um Al Quwain">
+                                <label for="30days" class="change-color2">Um Al Quwain</label>
+
+                            </p>
+                            <button type="submit" class="signin-btn2" name="button">Go</button>
+
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+        <div class="page-wrapper">
+
+            <div id="list-view" class="tab-pane fade active show  trending-cat">
+                <div class="row">
+                    @if (TempData["Message"] != null)
+                    {
+                        <script type="text/javascript">
+                                            window.onload = function () {
+                                               alert("@TempData["Message"]");
+                                                 };
+                        </script>
+                    }
+                    <div id="list-view" class="tab-pane fade active show containers trending-cat">
+                        <div class="row">
+                            <div id="list-view" class="tab-pane fade active show containers trending-cat">
+
+                                <div class="row row-badding">
+                                    <div class="row">
+                                        <div class="col-md-12">
+
+                                            <h1 class="section-title5">Ads Listing</h1>
+                                            <ol class="breadcrumb-style">
+                                                <li><a href="/Topnavbar/PostAnAd" class="breadcrumb-color">Ads Listing > </a></li>
+
+                                                <li class="breadcrumb-color"> Edit ad</li>
+                                            </ol>
+                                        </div>
+                                        <div class="form-width">
+                                            <div class="col-md-6">
+                                                <p class="post-p3">Car specifications</p>
+
+
+                                                <form class="" method="post" enctype="multipart/form-data">
+
+                                                    <div class="padding-form">
+                                                        <p class="post-p3">Title</p>
+                                                        @*@Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })*@
+
+                                                        <input type="text" class="line-input-style10" maxlength="40" asp-for="Title" id="Title" placeholder="Dodge charger 2010 for Sale, perfect condition">
+                                                        <Small>Recommended 40 characters</Small>
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Location</label>
+
+                                                        <select required asp-for="Location" class="line-input-style8" id="locationDL">
+                                                            <option value="">Your Location</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="">
+                                                        <label for=''>
+                                                            <p class="post-p5">Pictures of your ad</p>
+                                                            <div class="">
+                                                                <label for="images"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
+                                                                <p><small>You can add upto 10 pictures</small></p>
+                                                                @*<p style="color:#ffb01c">select your main image by click on it</p>*@
+                                                            </div>
+
+                                                        </label>
+                                                        <div class="form-group">
+                                                            <input type="file" asp-for="Pictures" id="images" multiple class="form-control" required hidden>
+                                                            <p id="files-area">
+                                                                <span id="filesList">
+                                                                    <span id="files-names"></span>
+                                                                </span>
+                                                            </p>
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <div id="image_preview" style="width:100%;">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <p class="post-p5">Main Photo</p>
+                                                    @*@Html.ValidationMessageFor(m => m.MainImagePath, "", new { @class = "text-danger" })*@
+                                                    <div class="padding-form inline-dispaly">
+                                                        <div>
+                                                            <p><img src="" alt="Main" class="main-img" id="MainImage" /></p>
+                                                            <p><a class="main-img" href="#"><label for="MainImageInput">Change Picture</label></a></p>
+                                                            <input type="file" id="MainImageInput" hidden="" asp-for="MainPhoto" required title="Please Enter Main Image to your Ad" />
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Trim, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Maker</label>
+
+                                                        <select required asp-for="Maker" class="line-input-style8" id="MakerDL">
+                                                            <option value="">Maker</option>
+                                                        </select>
+                                                    </div>
+                                                    <div> @TempData["Message"] </div>
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Trim, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Model</label>
+
+                                                        <select required asp-for="Model" class="line-input-style8" id="modelDL">
+                                                            <option value="">Model</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Trim, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Trim</label>
+
+                                                        <select required asp-for="Trim" class="line-input-style8" id="TrimDL">
+                                                            <option value="">Trim</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Other, please type here</label>
+
+                                                        <input type="text" class="line-input-style8" asp-for="Description" id="Decription" value="" placeholder="">
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Kilometers, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Mileage (in KMS)</label>
+
+                                                        @*<select class="line-input-style8 " asp-for="Kilometers">*@
+                                                        <input type="number" class="line-input-style8" asp-for="Kilometers" id="KiloMeters" required />
+                                                        @*</select>*@
+                                                    </div>
+
+                                                    <div class="padding-form">
+
+                                                        @*@Html.ValidationMessageFor(m => m.RegionalSpecs, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Regional Specs</label>
+                                                        <select required asp-for="RegionalSpecs" class="line-input-style8" id="RegionalSpecsDL">
+                                                            <option value="">Regional Specification</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <label>
+
+                                                    </label>
+                                                    <div class="padding-form">
+
+                                                        <label class="change-color">Year</label>
+                                                        <select required asp-for="Year" class="line-input-style8" id="YearDL">
+                                                            <option value="">Year</option>
+                                                        </select>
+
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Year, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Color</label>
+
+                                                        <select required asp-for="Color" class="line-input-style8" id="colorDL">
+                                                            <option value="">Color</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        <label>
+                                                            @*@Html.ValidationMessageFor(m => m.Doors, "", new { @class = "text-danger" })*@
+                                                        </label>
+                                                        <label class="change-color">Door</label>
+
+                                                        <select required asp-for="Doors" class="line-input-style8" id="doorsDL">
+                                                            <option value="">Door</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        <label>
+                                                            @*@Html.ValidationMessageFor(m => m.Warranty, "", new { @class = "text-danger" })*@
+                                                        </label>
+                                                        <label class="change-color">Warranty</label>
+                                                        <select class="line-input-style8 " asp-for="Warranty">
+                                                            <option name="Warranty" value="">Warranty</option>
+                                                            <option name="0" value="Yes">Yes</option>
+                                                            <option name="1" value="No">No</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="padding-form">
+
+                                                        @*@Html.ValidationMessageFor(m => m.Transmission, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Transmission</label>
+
+                                                        <select required asp-for="Transmission" class="line-input-style8" id="transmissionDL">
+                                                            <option value="">Transmission</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.BodyType, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Body Type</label>
+
+                                                        <select required asp-for="BodyType" class="line-input-style8" id="bodyTypeDL">
+                                                            <option value="">BodyType</option>
+                                                        </select>
+                                                    </div>
+
+
+                                                    <div class="padding-form">
+
+                                                        @*@Html.ValidationMessageFor(m => m.FuelType, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Fuel Type</label>
+
+                                                        <select required asp-for="FuelType" class="line-input-style8" id="fuelTypeDL">
+                                                            <option value="">FuelType</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="padding-form">
+
+                                                        @*@Html.ValidationMessageFor(m => m.NoOfCylinders, "", new { @class = "text-danger" })*@
+
+                                                        <label class="change-color">Number of Cylinders</label>
+                                                        <select required asp-for="NoOfCylinders" class="line-input-style8" id="NoOfCylindersDL">
+                                                            <option value="">Number Of Cylinders</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="padding-form">
+
+                                                        <label class="change-color">Horsepower</label>
+                                                        @*@Html.ValidationMessageFor(m => m.Horsepower, "", new { @class = "text-danger" })*@
+                                                        <select required asp-for="Horsepower" class="line-input-style8" id="horsePowerDL">
+                                                            <option value="">Horse Power</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="padding-form">
+
+                                                        <label class="change-color">Car Condition</label>
+                                                        @*@Html.ValidationMessageFor(m => m.CarCondition, "", new { @class = "text-danger" })*@
+                                                        <select required asp-for="Condition" class="line-input-style8" id="carConditionDL">
+                                                            <option value="">Car Condition</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.MechanicalCondition, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Mechanical Condition</label>
+
+                                                        <select required asp-for="MechanicalCondition" class="line-input-style8" id="MechanicalConditionDL">
+                                                            <option value="">Mechanical Condition</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <p>Add a short description</p>
+                                                    <div class="featured-box5">
+                                                        <p class="stylep">Car has most of the regular service and repair done by VW Dubai and last few service done outside VW agency.</p>
+                                                        <p class="stylep">Car has Panamera sunroof in good working condition but the curtain.</p>
+                                                    </div>
+                                                    <span>148/400 words</span>
+
+                                                    <div class="padding-form padding-top">
+                                                        @*@Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Listing price</label>
+
+                                                        <input type="number" class="line-input-style14" asp-for="Price" id="Price" placeholder="AED" min="1000" title="Please Enter Correct Price." required>
+                                                        <label class="label-price"></label>
+
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Your location</label>
+
+                                                        <input type="text" class="line-input-style8" asp-for="Location" placeholder="Your Location" id="Location">
+                                                        <i class="fa fa-location-arrow location-style4" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        <button type="button" class="change-btn2" data-toggle="modal" data-target="#myModal11">Detect Location</button>
+                                                    </div>
+
+                                                    <label class="cont2">
+                                                        <p class="text-style3">
+                                                            By submitting this ad, I agree on <a href="/Footer/Termandconditions"> {Terms & Conditions}</a> and
+                                                            <a href="/Footer/Privacypolicy">{Privacy Policy}</a>
+                                                        </p>
+                                                        <input type="checkbox" asp-for="Trim">
+                                                        <span class="checkmark3"></span>
+                                                    </label>
+
+                                                    <label class="">
+                                                        <p class="text-style3">Once you submit the ad, we will review before publishing. You will be notified once approved</p>
+                                                    </label>
+
+                                                    <div class="padding-form padding-top">
+                                                        <button type="submit" class="change-btn3" name="button">Submit</button>
+                                                        <button type="button" class="change-btn4" name="button">Cancel</button>
+                                                    </div>
+
+                                                </form>
+                                            </div>
+                                            <div class="col-md-2">
+
+                                            </div>
+                                            <div class="col-md-4">
+
+                                                <div class="featured-box1">
+                                                    <div class="order-border">
+                                                        <h3 class="section-title15">Agent Information</h3>
+                                                    </div>
+
+                                                    <div class="padding-form padding-top">
+                                                        <label class="change-color-label2">Agency Name</label>
+                                                        <label class="noline-input-style1" name="" value="" placeholder="">
+                                                            @HttpContextAccessor.HttpContext.Session.GetString("SessionAgencyName")
+                                                         
+                                                        </label>
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        <label class="change-color-label2">Agency Logo</label>
+                                                        <img src="../image/@HttpContextAccessor.HttpContext.Session.GetString("SessionAgencyPicture")" alt="Avatar" class="avatar-info">
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        <label class="change-color-label2">Agent Name</label>
+                                                        <label class="noline-input-style1" name="" value="" placeholder="Sara Grover">
+                                                            @User.Identity.Name
+                                                        </label>
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        <label class="change-color-label2">Agent Photo</label>
+                                                        <img src="../image/@HttpContextAccessor.HttpContext.Session.GetString("SessionProfilePicture")" alt="Avatar" class="avatar-info">
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        <label class="change-color-label2">Mobile Number</label>
+                                                        <label class="noline-input-style1" name="" value="">
+                                                            @HttpContextAccessor.HttpContext.Session.GetString("SessionMobileNumberWithCode")
+                                                        </label>
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        <label class="change-color-label2">Work number</label>
+                                                        <label class="noline-input-style1" name="" value="" placeholder="00000000000">
+                                                            @HttpContextAccessor.HttpContext.Session.GetString("SessionWorkNumber")
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/app-style-switcher.js"></script>
+        <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <!--Wave Effects -->
+        <script src="~/js/waves.js"></script>
+        <!--Menu sidebar -->
+        <script src="~/js/sidebarmenu.js"></script>
+        <!--Custom JavaScript -->
+        <script src="~/js/custom.js"></script>
+        <!--This page JavaScript -->
+        <!--chartis chart-->
+        <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+        <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+        <script src="~/js/pages/dashboards/dashboard1.js"></script>
+</body>
+
+<script src="~/assets/js/jquery-min.js"></script>
+<script src="~/assets/js/popper.min.js"></script>
+<script src="~/assets/js/bootstrap.min.js"></script>
+<script src="~/assets/js/jquery.counterup.min.js"></script>
+<script src="~/assets/js/waypoints.min.js"></script>
+<script src="~/assets/js/wow.js"></script>
+<script src="~/assets/js/owl.carousel.min.js"></script>
+<script src="~/assets/js/jquery.slicknav.js"></script>
+<script src="~/assets/js/main.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script type="text/javascript">
+    // <img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'>
+    const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
+
+    $("#images").on('change', function (e) {
+        for (var i = 0; i < this.files.length; i++) {
+            let fileBloc = $('<span/>', { class: 'file-block' }),
+                fileName = $('<span/>', { class: 'name', text: this.files.item(i).name });
+            fileBloc.append('<input type="radio"  id=' + this.files.item(i).name + '  name="MainPhoto" value=' + this.files.item(i).name + ' class="chb" hidden /><label  for=' + this.files.item(i).name + ' ><img class="image-view" src=' + URL.createObjectURL(event.target.files[i]) + '></label><span class="file-delete"><span>x</span></span>').append(fileName);
+            $("#filesList > #files-names").append(fileBloc);
+            // $('#image_preview').append("<div class='img-div' id='img-div"+i+"'><input type='radio'  id='"+this.files.item(i).name+"'  name='cb' value='"+this.files.item(i).name+"' class='chb' hidden /><label  for='"+this.files.item(i).name+"' ><img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'></label><div class='middle'></div><span class="file-delete"><span>x</span></span></div>");
+        };
+        // Ajout des fichiers dans l'objet DataTransfer
+        for (let file of this.files) {
+            dt.items.add(file);
+        }
+        // Mise à jour des fichiers de l'input file après ajout
+        this.files = dt.files;
+
+        // EventListener pour le bouton de suppression créé
+        $('span.file-delete').click(function () {
+            let name = $(this).next('span.name').text();
+            // Supprimer l'affichage du nom de fichier
+            $(this).parent().remove();
+            for (let i = 0; i < dt.items.length; i++) {
+                // Correspondance du fichier et du nom
+                if (name === dt.items[i].getAsFile().name) {
+                    // Suppression du fichier dans l'objet DataTransfer
+                    dt.items.remove(i);
+                    continue;
+                }
+            }
+            // Mise à jour des fichiers de l'input file après suppression
+            document.getElementById('images').files = dt.files;
+        });
+    });
+</script>
+
+//
+
+<script type="text/javascript">
+    // <img src='"+URL.createObjectURL(event.target.files[i])+"' class='img-responsive image ' title='"+this.files.item(i).name+"'>
+    const dt = new DataTransfer(); // Permet de manipuler les fichiers de l'input file
+
+
+
+
+</script>
+///
+<script>
+
+    $("#MainImageInput").on('change', function (e) {
+        console.log("testtt");
+        const [file] = MainImageInput.files
+        if (file) {
+            MainImage.src = URL.createObjectURL(file)
+        }
+    });
+
+
+    function handleFileImage(evt) {
+        var files = evt.target.files;
+        var output = document.getElementById("sortableImgThumbnailPreview1");
+        // Loop through the FileList and render image files as thumbnails.
+        for (var i = 0, f; f = files[i]; i++) {
+
+            // Only process image files.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            // Closure to capture the file information.
+            reader.onload = (function (theFile) {
+                return function (e) {
+                    // Render thumbnail.
+                    var imgThumbnailElem = "<div class='RearangeBox imgThumbContainer'><div class='IMGthumbnail' ><img  src='" + e.target.result + "'" + "title='" + theFile.name + "'/></div>";
+
+                    output.innerHTML = output.innerHTML + imgThumbnailElem;
+                };
+            })(f);
+            // Read in the image file as a data URL.
+            reader.readAsDataURL(f);
+        }
+    }
+
+
+</script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+</script>
+
+<script>
+    var NoOfCylindersDLloaded = false;
+    $("#NoOfCylindersDL").on("click", function () {
+        if (NoOfCylindersDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllNoOfCylinders",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#NoOfCylindersDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                //alert(error.message);
+            }
+        });
+        NoOfCylindersDLloaded = true;
+    });
+
+
+    var locationDLloaded = false;
+    $("#locationDL").on("click", function () {
+        if (locationDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllLocation",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#locationDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+
+                });
+                console.log(items);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        locationDLloaded = true;
+    });
+
+
+    var TrimDLloaded = false;
+    $("#TrimDL").on("click", function () {
+        if (TrimDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllMotorTrim",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#TrimDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        TrimDLloaded = true;
+    });
+
+
+    var MakerDLloaded = false;
+    $("#MakerDL").on("click", function () {
+        if (MakerDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllMotorMaker",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#MakerDL").append(`<option value='${item.id}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        MakerDLloaded = true;
+    });
+
+    //$("#MakerDL").on("change", function () {
+
+    //    $('#modelDL option').remove();
+    //    $("#modelDL").append(`<option value=''>All Models</option>`);
+
+    //    $("#modelDL").val(null);
+    //    var Id = $("#MakerDL").val();
+    //    console.log(Id);
+    //    $.ajax({
+    //        url: `/DropDowns/GetAllMotorModelByMaker?maker=${Id}`,
+    //        method: "GET",
+    //        success: function (response) {
+    //            $.each(response.items, function (i, item) {
+    //                $("#modelDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+    //            });
+    //        },
+    //        error: function (error) {
+    //            alert(error.message);
+    //        }
+    //    });
+
+    //});
+    $("#MakerDL").on("change", function () {
+
+            
+
+            $('#modelDL option').remove();
+            $("#modelDL").append(`<option value=''>Select Model</option>`);
+
+                $("#modelDL").val(null);
+                var maker = $("#MakerDL").val();
+                $.ajax({
+                    url: `/DropDowns/GetAllMotorModelByMaker?maker=${maker}`,
+                    method: "GET",
+                    success: function (response) {
+                        $.each(response.items, function (i, item) {
+                            $("#modelDL").append(`<option value='${item.en_Text} - ${item.ar_Text}'>${item.en_Text}</option>`);
+                        });
+                    },
+                    error: function (error) {
+                        alert(error.message);
+                    }
+                });
+        });
+
+    //GetAllModelDL
+    var ColorDLloaded = false;
+    $("#colorDL").on("click", function () {
+        if (ColorDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllColor",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#colorDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        ColorDLloaded = true;
+    });
+
+    var RegionalSpecsDLloaded = false;
+    $("#RegionalSpecsDL").on("click", function () {
+        if (RegionalSpecsDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllMotorRegionalSpecs",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#RegionalSpecsDL").append(`<option value='${item.en_Text} '>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        RegionalSpecsDLloaded = true;
+    });
+
+
+    var YearDLloaded = false;
+    $("#YearDL").on("click", function () {
+        if (YearDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllYear",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    console.log(item.valueOf(i));
+                    $("#YearDL").append(`<option value='${item.valueOf(i)}'>${item.valueOf(i)}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        YearDLloaded = true;
+    });
+
+    var doorsDLloaded = false;
+    $("#doorsDL").on("click", function () {
+        if (doorsDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllDoor",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#doorsDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        doorsDLloaded = true;
+    });
+
+
+    var transmissionDLloaded = false;
+    $("#transmissionDL").on("click", function () {
+        if (transmissionDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllTransmission",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#transmissionDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        transmissionDLloaded = true;
+    });
+
+    var bodyTypeDLloaded = false;
+    $("#bodyTypeDL").on("click", function () {
+        if (bodyTypeDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllBodyType",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#bodyTypeDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        bodyTypeDLloaded = true;
+    });
+
+
+    var fuelTypeDLloaded = false;
+    $("#fuelTypeDL").on("click", function () {
+        if (fuelTypeDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllFuelType",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#fuelTypeDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        fuelTypeDLloaded = true;
+    });
+
+
+    var horsePowerDLloaded = false;
+    $("#horsePowerDL").on("click", function () {
+        if (horsePowerDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllHorsepower",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#horsePowerDL").append(`<option value='${item.en_Text}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        horsePowerDLloaded = true;
+    });
+
+    var carConditionDLloaded = false;
+    $("#carConditionDL").on("click", function () {
+        if (carConditionDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllMechanicalCondition",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#carConditionDL").append(`<option value='${item.en_Text}}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        carConditionDLloaded = true;
+    });
+
+    var MechanicalConditionDLloaded = false;
+    $("#MechanicalConditionDL").on("click", function () {
+        if (MechanicalConditionDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllMechanicalCondition",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#MechanicalConditionDL").append(`<option value='${item.en_Text}}'>${item.en_Text}</option>`);
+                });
+                console.log(response);
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        MechanicalConditionDLloaded = true;
+    });
+
+</script>
+</html>
