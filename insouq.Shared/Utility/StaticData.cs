@@ -118,7 +118,11 @@ namespace insouq.Shared.Utility
         // agency 
         public const int Confirmed = 1;
         public const int Waiting = 0;
-       
+
+        // agent
+        public const bool Active = true;
+        public const bool disable = false;
+
 
     }
 }

@@ -368,30 +368,44 @@
 
                                                     @*<div class="">
 
-                                                            <label for=''>
-                                                                <p class="post-p5">Pictures of your ad</p>
-                                                                <div class="">
-                                                                    <label for="files"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
-                                                                    <p><small>You can add upto 10 pictures</small></p>
-                                                                    <p style="color:#ffb01c">drag and drop your main image to the first</p>
-                                                                </div>
-                                                                <div class=" inline-dispaly">
-                                                                    <div id="sortableImgThumbnailPreview">
-                                                                    </div>
-                                                                    <div><output id='result' /></output></div>
-                                                                </div>
-                                                            </label>
-                                                        </div>
-                                                        <input asp-for="Pictures" required id="files" type="file" multiple hidden accept="image/*" />*@
+            <label for=''>
+                <p class="post-p5">Pictures of your ad</p>
+                <div class="">
+                    <label for="files"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
+                    <p><small>You can add upto 10 pictures</small></p>
+                    <p style="color:#ffb01c">drag and drop your main image to the first</p>
+                </div>
+                <div class=" inline-dispaly">
+                    <div id="sortableImgThumbnailPreview">
+                    </div>
+                    <div><output id='result' /></output></div>
+                </div>
+            </label>
+        </div>
+        <input asp-for="Pictures" required id="files" type="file" multiple hidden accept="image/*" />*@
 
+                                                    <div class="padding-form">
+                                                        <p class="post-p3">Title</p>
+                                                        @*@Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })*@
 
+                                                        <input type="text" class="line-input-style10" maxlength="40" asp-for="Title" id="Title" placeholder="Dodge charger 2010 for Sale, perfect condition">
+                                                        <Small>Recommended 40 characters</Small>
+                                                    </div>
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Location</label>
+
+                                                        <select required asp-for="Location" class="line-input-style8" id="locationDL">
+                                                            <option value="">Your Location</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="">
                                                         <label for=''>
                                                             <p class="post-p5">Pictures of your ad</p>
                                                             <div class="">
                                                                 <label for="images"><i class="fa fa-plus add-image"><p>Add more pictures</p></i></label>
                                                                 <p><small>You can add upto 10 pictures</small></p>
-                                                                <p style="color:#ffb01c">select your main image by click on it</p>
+
                                                             </div>
 
                                                         </label>
@@ -410,24 +424,86 @@
                                                         </div>
                                                     </div>
 
-
-                                                    <div class="padding-form">
-                                                        <label class="label-price1">AED</label><input placeholder="Listing price" type="number" class="line-input-style16" asp-for="Price" min="0" required>
+                                                    <p class="post-p5">Main Photo</p>
+                                                    @*@Html.ValidationMessageFor(m => m.MainImagePath, "", new { @class = "text-danger" })*@
+                                                    <div class="padding-form inline-dispaly">
+                                                        <div>
+                                                            <p><img src="" alt="Main" class="main-img" id="MainImage" /></p>
+                                                            <p><a class="main-img" href="#"><label for="MainImageInput">Change Picture</label></a></p>
+                                                            <input type="file" id="MainImageInput" hidden="" asp-for="MainPhoto" required title="Please Enter Main Image to your Ad" />
+                                                        </div>
                                                     </div>
-
                                                     <div class="padding-form">
-                                                        <label class="change-color">Phone Number</label>
-                                                        <input required type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="11" class="line-input-style17" asp-for="PhoneNumber" value="@ViewBag.phoneNumber" maxlength="11" min="11">
-                                                    </div>
+                                                        @*@Html.ValidationMessageFor(m => m.Trim, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Maker</label>
 
+                                                        <select required asp-for="Maker" class="line-input-style8" id="makerDL">
+                                                            <option value="">Maker</option>
+                                                        </select>
+                                                    </div>
                                                     <div class="padding-form">
-                                                        <textarea placeholder="Add a short description" class="line-input-textarea1" asp-for="Description" cols="80" rows="7" style="border:0px;"></textarea>
-                                                        <br>
-                                                        <span>0/400 words</span>
+                                                        @*@Html.ValidationMessageFor(m => m.Trim, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Model</label>
+
+                                                        <select required asp-for="Model" class="line-input-style8" id="modelDL">
+                                                            <option value="">Model</option>
+                                                        </select>
                                                     </div>
+                                                    <div class="padding-form">
+                                                        @*@Html.ValidationMessageFor(m => m.Trim, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Trim</label>
 
-                                                    <p class="post-p4">Specifications</p>
+                                                        <select required asp-for="Trim" class="line-input-style8" onchange="onTrimChange()" id="trimDL">
+                                                            <option value="">Trim</option>
+                                                        </select>
+                                                    </div>
+                                                    <div id="otherTrim" style="display:none">
 
+                                                    </div>
+                                                    @if (Model.CategoryId == StaticData.UsedCars_ID
+|| Model.CategoryId == StaticData.ExportCar_ID
+|| Model.CategoryId == StaticData.Machinery_ID
+|| Model.CategoryId == StaticData.Bike_ID)
+                                                    {
+                                                        @*<div class="padding-form">
+                <input placeholder="Mileage (in KMS)" required class="line-input-style15" type="number" asp-for="Kilometers">
+            </div>*@
+                                                        <div class="padding-form">
+                                                            @*@Html.ValidationMessageFor(m => m.Kilometers, "", new { @class = "text-danger" })*@
+                                                            <label class="change-color">Mileage (in KMS)</label>
+
+                                                            @*<select class="line-input-style8 " asp-for="Kilometers">*@
+                                                            <input type="number" class="line-input-style8" asp-for="Kilometers" id="KiloMeters" required />
+                                                            @*</select>*@
+                                                        </div>
+                                                    }
+                                                    @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                                                    {
+                                                        @*<div class="padding-form">
+                <select required asp-for="RegionalSpecs" class="line-input-style15" id="specificationDL">
+                    <option value="">Regional Specification</option>
+                </select>
+            </div>*@
+                                                        <div class="padding-form">
+
+                                                            @*@Html.ValidationMessageFor(m => m.RegionalSpecs, "", new { @class = "text-danger" })*@
+                                                            <label class="change-color">Regional Specs</label>
+                                                            <select required asp-for="RegionalSpecs" class="line-input-style8" id="specificationDL">
+                                                                <option value="">Regional Specification</option>
+                                                            </select>
+                                                        </div>
+                                                    }
+                                                    @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.Boats_ID || Model.CategoryId == StaticData.Machinery_ID || Model.CategoryId == StaticData.Parts_ID || Model.CategoryId == StaticData.Bike_ID || Model.CategoryId == StaticData.ExportCar_ID)
+                                                    {
+                                                        var selectList =
+                                                                   new SelectList(Enumerable.Range(1900, (DateTime.Now.Year - 1900) + 1));
+                                                        <div class="padding-form">
+                                                            <label class="change-color">Year</label>
+                                                            @Html.DropDownList("year", selectList, "year of manufacturee",
+                                                        new { @class = "line-input-style8", required = true })
+
+                                                        </div>
+                                                    }
                                                     @if (Model.CategoryId == StaticData.Bike_ID)
                                                     {
                                                         <div class="padding-form">
@@ -447,60 +523,85 @@
                                                     }
 
 
-                                                    @if (Model.CategoryId == StaticData.UsedCars_ID
-|| Model.CategoryId == StaticData.ExportCar_ID
-|| Model.CategoryId == StaticData.Machinery_ID
-|| Model.CategoryId == StaticData.Bike_ID)
-                                                    {
-                                                        <div class="padding-form">
-                                                            <input placeholder="Mileage (in KMS)" required class="line-input-style15" type="number" asp-for="Kilometers">
-                                                        </div>
-                                                    }
 
-                                                    @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
-                                                    {
-                                                        <div class="padding-form">
-                                                            <select required asp-for="RegionalSpecs" class="line-input-style15" id="specificationDL">
-                                                                <option value="">Regional Specification</option>
-                                                            </select>
-                                                        </div>
-                                                    }
+
+
 
 
                                                     @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID
 || Model.CategoryId == StaticData.Bike_ID)
                                                     {
+                                                        @*<div class="padding-form">
+                <select required asp-for="Color" class="line-input-style15" id="colorDL">
+                    <option value="">Color</option>
+                </select>
+            </div>*@
+
                                                         <div class="padding-form">
-                                                            <select required asp-for="Color" class="line-input-style15" id="colorDL">
+                                                            @*@Html.ValidationMessageFor(m => m.Year, "", new { @class = "text-danger" })*@
+                                                            <label class="change-color">Color</label>
+
+                                                            <select required asp-for="Color" class="line-input-style8" id="colorDL">
                                                                 <option value="">Color</option>
                                                             </select>
                                                         </div>
+
                                                     }
 
                                                     @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
                                                     {
                                                         <div class="padding-form">
-                                                            <select required asp-for="Doors" class="line-input-style15" id="doorDL">
-                                                                <option value="">Doors</option>
+                                                            <label>
+                                                                @*@Html.ValidationMessageFor(m => m.Doors, "", new { @class = "text-danger" })*@
+                                                            </label>
+                                                            <label class="change-color">Door</label>
+
+                                                            <select required asp-for="Doors" class="line-input-style8" id="doorsDL">
+                                                                <option value="">Door</option>
                                                             </select>
                                                         </div>
+                                                        @*<div class="padding-form">
+                <select required asp-for="Doors" class="line-input-style15" id="doorDL">
+                    <option value="">Doors</option>
+                </select>
+            </div>*@
                                                     }
 
                                                     @if (Model.CategoryId != StaticData.Parts_ID)
                                                     {
+                                                        @*<div class="padding-form">
+                <select required asp-for="Warranty" class="line-input-style15">
+                    <option value="">Warranty</option>
+                    <option value="true">Yes</option>
+                    <option value="false">No</option>
+                </select>
+            </div>*@
                                                         <div class="padding-form">
-                                                            <select required asp-for="Warranty" class="line-input-style15">
-                                                                <option value="">Warranty</option>
-                                                                <option value="true">Yes</option>
-                                                                <option value="false">No</option>
+                                                            <label>
+                                                                @*@Html.ValidationMessageFor(m => m.Warranty, "", new { @class = "text-danger" })*@
+                                                            </label>
+                                                            <label class="change-color">Warranty</label>
+                                                            <select class="line-input-style8 " asp-for="Warranty">
+                                                                <option name="Warranty" value="">Warranty</option>
+                                                                <option name="0" value="Yes">Yes</option>
+                                                                <option name="1" value="No">No</option>
                                                             </select>
                                                         </div>
                                                     }
 
                                                     @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
                                                     {
+                                                        @*<div class="padding-form">
+                <select required asp-for="Transmission" class="line-input-style15" id="transmissionDL">
+                    <option value="">Transmission</option>
+                </select>
+            </div>*@
                                                         <div class="padding-form">
-                                                            <select required asp-for="Transmission" class="line-input-style15" id="transmissionDL">
+
+                                                            @*@Html.ValidationMessageFor(m => m.Transmission, "", new { @class = "text-danger" })*@
+                                                            <label class="change-color">Transmission</label>
+
+                                                            <select required asp-for="Transmission" class="line-input-style8" id="transmissionDL">
                                                                 <option value="">Transmission</option>
                                                             </select>
                                                         </div>
@@ -508,9 +609,17 @@
 
                                                     @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
                                                     {
+                                                        @*<div class="padding-form">
+                <select required asp-for="BodyType" class="line-input-style15" id="bodyTypeDL">
+                    <option value="">Body Type</option>
+                </select>
+            </div>*@
                                                         <div class="padding-form">
-                                                            <select required asp-for="BodyType" class="line-input-style15" id="bodyTypeDL">
-                                                                <option value="">Body Type</option>
+                                                            @*@Html.ValidationMessageFor(m => m.BodyType, "", new { @class = "text-danger" })*@
+                                                            <label class="change-color">Body Type</label>
+
+                                                            <select required asp-for="BodyType" class="line-input-style8" id="bodyTypeDL">
+                                                                <option value="">BodyType</option>
                                                             </select>
                                                         </div>
                                                     }
@@ -520,9 +629,18 @@
 || Model.CategoryId == StaticData.Machinery_ID
 || Model.CategoryId == StaticData.Bike_ID)
                                                     {
+                                                        @*<div class="padding-form">
+                <select required asp-for="FuelType" class="line-input-style15" id="fuelTypeDL">
+                    <option value="">Fuel Type</option>
+                </select>
+            </div>*@
                                                         <div class="padding-form">
-                                                            <select required asp-for="FuelType" class="line-input-style15" id="fuelTypeDL">
-                                                                <option value="">Fuel Type</option>
+
+                                                            @*@Html.ValidationMessageFor(m => m.FuelType, "", new { @class = "text-danger" })*@
+                                                            <label class="change-color">Fuel Type</label>
+
+                                                            <select required asp-for="FuelType" class="line-input-style8" id="fuelTypeDL">
+                                                                <option value="">FuelType</option>
                                                             </select>
                                                         </div>
                                                     }
@@ -532,31 +650,49 @@
 || Model.CategoryId == StaticData.Machinery_ID
 || Model.CategoryId == StaticData.Bike_ID)
                                                     {
+                                                        @*<div class="padding-form">
+                <select required asp-for="NoOfCylinders" class="line-input-style15" id="NoOfCylindersDL">
+                    <option value="">Number Of Cylinders</option>
+                </select>
+            </div>*@
                                                         <div class="padding-form">
-                                                            <select required asp-for="NoOfCylinders" class="line-input-style15" id="NoOfCylindersDL">
+
+                                                            @*@Html.ValidationMessageFor(m => m.NoOfCylinders, "", new { @class = "text-danger" })*@
+
+                                                            <label class="change-color">Number of Cylinders</label>
+                                                            <select required asp-for="NoOfCylinders" class="line-input-style8" id="NoOfCylindersDL">
                                                                 <option value="">Number Of Cylinders</option>
                                                             </select>
                                                         </div>
                                                     }
+                                                    @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID
+|| Model.CategoryId == StaticData.Machinery_ID || Model.CategoryId == StaticData.Boats_ID)
+                                                    {
+                                                        @*<div class="padding-form">
+                <select required asp-for="Horsepower" class="line-input-style15" id="HorsepowerDL">
+                    <option value="">Horse Power</option>
+                </select>
+            </div>*@
+                                                        <div class="padding-form">
 
+                                                            <label class="change-color">Horsepower</label>
+                                                            @*@Html.ValidationMessageFor(m => m.Horsepower, "", new { @class = "text-danger" })*@
+                                                            <select required asp-for="Horsepower" class="line-input-style8" id="HorsepowerDL">
+                                                                <option value="">Horse Power</option>
+                                                            </select>
+                                                        </div>
+                                                    }
                                                     @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID)
                                                     {
                                                         <div class="padding-form">
-                                                            <select required asp-for="SteeringSide" class="line-input-style15" id="steeringSideDL">
+                                                            <label class="change-color">Steering Side</label>
+                                                            <select required asp-for="SteeringSide" class="line-input-style8" id="steeringSideDL">
                                                                 <option value="">Steering Side</option>
                                                             </select>
                                                         </div>
                                                     }
 
-                                                    @if (Model.CategoryId == StaticData.UsedCars_ID || Model.CategoryId == StaticData.ExportCar_ID
-|| Model.CategoryId == StaticData.Machinery_ID || Model.CategoryId == StaticData.Boats_ID)
-                                                    {
-                                                        <div class="padding-form">
-                                                            <select required asp-for="Horsepower" class="line-input-style15" id="HorsepowerDL">
-                                                                <option value="">Horse Power</option>
-                                                            </select>
-                                                        </div>
-                                                    }
+
 
                                                     @if (Model.CategoryId == StaticData.Bike_ID)
                                                     {
@@ -640,20 +776,44 @@
                                                     }
 
 
-                                                    @if (Model.CategoryId == StaticData.Machinery_ID)
-                                                    {
-                                                        <div class="padding-form">
-                                                            <select required asp-for="MechanicalCondition" class="line-input-style15" id="mechanicalConditionDL">
-                                                                <option value="">Mechanical Condition</option>
-                                                            </select>
-                                                        </div>
-                                                    }
+
+
+                                                    @*<div class="padding-form">
+            <select required asp-for="Location" class="line-input-style15" id="locationDL">
+                <option value="">Your Location</option>
+            </select>
+        </div>*@
+
+                                                    <div class="padding-form padding-top">
+                                                        @*@Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Listing price</label>
+
+                                                        <input type="number" class="line-input-style14" asp-for="Price" id="Price" placeholder="AED" min="1000" title="Please Enter Correct Price." required>
+                                                        <label class="label-price"></label>
+
+                                                    </div>
 
                                                     <div class="padding-form">
-                                                        <select required asp-for="Location" class="line-input-style15" id="locationDL">
-                                                            <option value="">Your Location</option>
-                                                        </select>
+                                                        @*@Html.ValidationMessageFor(m => m.Location, "", new { @class = "text-danger" })*@
+                                                        <label class="change-color">Your location</label>
+
+                                                        <input type="text" class="line-input-style8" asp-for="Location" placeholder="Your Location" id="Location">
+                                                        <i class="fa fa-location-arrow location-style4" aria-hidden="true"></i>
                                                     </div>
+
+                                                    <div class="padding-form">
+                                                        <label class="change-color">Phone Number</label>
+                                                        <input required type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="11" class="line-input-style8" asp-for="PhoneNumber" value="@ViewBag.phoneNumber" maxlength="11" min="11">
+                                                    </div>
+
+                                                    <div class="padding-form">
+                                                        <textarea placeholder="Add a short description" class="line-input-textarea1" asp-for="Description" cols="80" rows="7" style="border:0px;"></textarea>
+                                                        <br>
+                                                        <span>0/400 words</span>
+                                                    </div>
+
+
+
 
 
                                                     <div class="padding-form">
@@ -679,7 +839,7 @@
                                                     </label>
 
                                                     <div class="padding-form padding-top">
-                                                        <button type="submit" class="change-btn3" name="button" >CONTINUE</button>
+                                                        <button type="submit" class="change-btn3" name="button">CONTINUE</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -702,7 +862,7 @@
                                                     </div>
                                                     <div class="padding-form">
                                                         <label class="change-color-label2">Agency Logo</label>
-                                                        <img src="../image/@HttpContextAccessor.HttpContext.Session.GetString("SessionAgencyPicture")" alt="Avatar" class="avatar-info">
+                                                        <img onerror="this.src='/images/defaultUserImage.png'" src="@HttpContextAccessor.HttpContext.Session.GetString("SessionAgencyPicture")" alt="Avatar" class="avatar-info">
                                                     </div>
                                                     <div class="padding-form">
                                                         <label class="change-color-label2">Agent Name</label>
@@ -712,7 +872,7 @@
                                                     </div>
                                                     <div class="padding-form">
                                                         <label class="change-color-label2">Agent Photo</label>
-                                                        <img src="../image/@HttpContextAccessor.HttpContext.Session.GetString("SessionProfilePicture")" alt="Avatar" class="avatar-info">
+                                                        <img onerror="this.src='/images/defaultUserImage.png'" src="@HttpContextAccessor.HttpContext.Session.GetString("SessionAgencyPicture")" alt="Avatar" class="avatar-info">
                                                     </div>
                                                     <div class="padding-form">
                                                         <label class="change-color-label2">Mobile Number</label>
@@ -875,7 +1035,13 @@
 
 
 <script>
-
+    $("#MainImageInput").on('change', function (e) {
+        console.log("testtt");
+        const [file] = MainImageInput.files
+        if (file) {
+            MainImage.src = URL.createObjectURL(file)
+        }
+    });
         var makerDLloaded = false;
         $("#makerDL").on("click", function () {
             if (makerDLloaded)
@@ -1221,6 +1387,7 @@
             ageDLloaded = true;
         });
 
+ 
         var usageDLloaded = false;
         $("#usageDL").on("click", function () {
             if (usageDLloaded)
@@ -1472,5 +1639,18 @@
         });
     });
 
+</script>
+<script>
+    function onTrimChange() {
+        if ($("#trimDL").val().toLowerCase() == "others") {
+            $("#otherTrim").css("display", "block");
+            $("#otherTrim").html(`<div class='padding-form'>
+                                                                                    <label class= "change-color"> Other, please type here</label>
+                                                                                <input required id='OtherTrim' name='OtherTrim' class="line-input-style8" type="text" id="Trim">
+                                                                                        </div>`);
+        } else {
+            $("#otherTrim").html("");
+        }
+    }
 </script>
 </html>

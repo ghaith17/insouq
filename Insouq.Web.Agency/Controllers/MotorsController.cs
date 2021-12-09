@@ -47,7 +47,21 @@ namespace Insouq.Web.Agency.Controllers
             return agent;
         }
 
-        public ActionResult index()
+        public async Task<IActionResult> index()
+        {
+            ViewBag.phoneNumber = await _usersService.GetPhoneNumber(getUserId());
+            var agency = await _agencyAccountService.GetAgencyByUserId(getUserId());
+            //HttpContext.Session.SetObjectAsJson("agency", agency);
+            HttpContext.Session.SetString("SessionAgencyName", agency.Name);
+            var user = await getUser();
+            HttpContext.Session.SetString("SessionAgencyPicture", user.ProfilePicture);
+            var agent = await getAgent();
+            HttpContext.Session.SetString("SessionMobileNumberWithCode", user.MobileNumber);
+            HttpContext.Session.SetString("SessionWorkNumber", agent.WorkNumber);
+            return View();
+        }
+
+        public ActionResult PostMotorsAd()
         {
             return View();
         }
@@ -58,15 +72,7 @@ namespace Insouq.Web.Agency.Controllers
             //    return RedirectToAction("Index", "Home");
             //}
             categoryId = 2;
-            ViewBag.phoneNumber = await _usersService.GetPhoneNumber(getUserId());
-            var agency= await _agencyAccountService.GetAgencyByUserId(getUserId());
-            //HttpContext.Session.SetObjectAsJson("agency", agency);
-            HttpContext.Session.SetString("SessionAgencyName", agency.Name);
-            var user = await getUser();
-            HttpContext.Session.SetString("SessionAgencyPicture", user.ProfilePicture);
-            var agent = await getAgent();
-            HttpContext.Session.SetString("SessionMobileNumberWithCode", user.MobileNumber);
-            HttpContext.Session.SetString("SessionWorkNumber", agent.WorkNumber);
+            
             //HttpContext.Session.SetString("agencyName", agency.Name);
             var dto = new insouq.Shared.DTOS.AgencyDTOS.MotorsAdDTO
             {

@@ -41,6 +41,16 @@ namespace Insouq.Web.Agency.Controllers
             var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
             return Int32.Parse(claims.Value);
         }
+        private async Task<insouq.Models.User> getUser()
+        {
+            var user = await _agencyAccounttService.GetUserById(getUserId());
+            return user;
+        }
+        private async Task<insouq.Models.Agent> getAgent()
+        {
+            var agent = await _agencyAccounttService.GetAgentByUserId(getUserId());
+            return agent;
+        }
         public IActionResult Index()
         {
             return View();
@@ -230,6 +240,8 @@ namespace Insouq.Web.Agency.Controllers
                 TempData["Message"] = response.Message;
                 return View();
             }
+            var user = await getUser();
+            
             return RedirectToAction("index","Motors");
         }
 

@@ -1,0 +1,68 @@
+﻿
+@model System.Collections.Generic.List<insouq.Models.Agent>
+
+<div>
+    @*@using (Html.BeginForm("searchAgent", "LeftSideBar", FormMethod.Post))
+    {*@
+        <table class="agents-table" id="agentsTable">
+            <tr>
+                <th>NO</th>
+                <th>Agent name</th>
+                <th>Profile Picture</th>
+                <th>Email Address</th>
+                <th>Broker No.</th>
+                <th>Mobile Number</th>
+                <th>Agent Status</th>
+                <th>Action</th>
+            </tr>
+
+            @{
+                if (Model != null)
+                {
+
+                    foreach (var item in @Model)
+                    {
+
+                        <tr class="featured-box1">
+                            <td>@Html.DisplayFor(model => item.Id) </td>
+                            <td>@Html.DisplayFor(model => item.Name)</td>
+                            <td><img src="../image/@Html.DisplayFor(model=> item.Picture)" alt="user-img" width="36" class="img-circle profile-img-whidth2"></td>
+                            <td>@Html.DisplayFor(model => item.Email)</td>
+                            <td>@Html.DisplayFor(model => item.BrokerNo)</td>
+                            <td>@Html.DisplayFor(model => item.MobileNumber)</td>
+                            @{
+                                if (item.Status == false)
+                                {
+                                    <td>
+                                        <p><button type="button" class="ActiveAgent-btn" style="opacity: 50%;">Active</button></p>
+                                        <p><button type="button" class="dis-btn" id="btnDisableAgent" >Disable</button></p>
+                                    </td>
+                                }
+                                else if (item.Status == true)
+                                {
+                                    <td>
+                                        <p><button type="button" class="ActiveAgent-btn" id="btnActiveAgent">Active</button></p>
+                                        <p><button type="button" class="dis-btn"  style="opacity: 50%;">Disable</button></p>
+                                    </td>
+                                }
+                            }
+
+                            <td>
+                                <button type="submit" class="change-btn17" id="btnEdit"
+                                        @*asp-controller="LeftSideBar" asp-action="EditAgentData" asp-route-adId="@item.Id"*@ onclick="window.location.href = ''">
+                                    @*onclick="window.location.href = '/leftsidebar/editagent'" >*@
+                                    <i class="fa fa-pencil icon-padding" aria-hidden="true"></i>Edit
+                                </button>
+                                <p>
+                                    <button type="button" class="change-btn18" name="button" id="btnDelete">
+                                        <i class="fa fa-trash-o icon-padding" aria-hidden="true"></i>Delete
+                                    </button>
+                                </p>
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </table>
+                @*}*@
+    </div>

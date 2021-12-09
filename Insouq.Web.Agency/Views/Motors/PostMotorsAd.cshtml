@@ -271,22 +271,23 @@
                         <p class="post-p3">Enter chassis number</p>
                         <p>Get instant information about your car by entering the chassis number.</p>
                         <!-- <input type="text" class="line-input-style5" name="" value=""
-                        placeholder="XX00-0000000">
-                        <p>Example: SV30-0169266</p>
+        placeholder="XX00-0000000">
+        <p>Example: SV30-0169266</p>
+        <div class="padding-form">
+          <button type="button" class="change-btn3" name="button"onclick="window.location.href='manegerdashbord.html'">Fill car details automatically</button>
+        </div>
+        <p class="post-p6">OR</p> -->
+
                         <div class="padding-form">
-                          <button type="button" class="change-btn3" name="button"onclick="window.location.href='manegerdashbord.html'">Fill car details automatically</button>
+                            <button type="submit" class="change-btn3" onclick="window.location.href='/Motors/Add'">Fill data manually</button>
+
+
+
                         </div>
-                        <p class="post-p6">OR</p> -->
-                        <form method="post" asp-action="GoToFillData">
-                            <div class="padding-form">
-                                <button type="submit" class="change-btn3" onclick="window.location.href='/topnavbar/MotorfillDataManually'">Fill data manually</button>
+                        <div class="text-danger LoginValidation">@TempData["Message"]</div>
 
-
-
-                            </div>
-                            <div class="text-danger LoginValidation">@TempData["Message"]</div>
-                        </form>
                     </div>
+                  
 
                 </div>
             </div>

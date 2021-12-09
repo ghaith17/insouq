@@ -13,4 +13,8 @@
     <PackageReference Include="Vse.Web.Serialization.ControlledSerializationJsonConverter" Version="1.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\insouq.Models\insouq.Models.csproj" />
+  </ItemGroup>
+
 </Project>

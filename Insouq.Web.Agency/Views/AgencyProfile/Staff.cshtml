@@ -1,0 +1,404 @@
+﻿@*@model IEnumerable<AgencyWeb.Models.Agent>*@
+@model System.Collections.Generic.List<insouq.Models.Agent>
+@{
+    Layout = "_Layout";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+    <link href="~/assets/css/flag-icon.css" rel="stylesheet">
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+        @*<header class="topbar" data-navbarbg="skin5">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header" data-logobg="skin6">
+                        <a class="navbar-brand1" href="/Home/Index">
+                            <img src="~/assets/img/57.png" alt="homepage" />
+                        </a>
+                        <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                           href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                        <h1 class="agency-header">The Ocean Agency</h1>
+                        <ul class="navbar-nav ms-auto d-flex align-items-center">
+                            <li>
+                                <a href="#" class="lang-style">Eng</a>
+                            </li>
+                            <li class=" in">
+                                <a class="tg-btn" href="/Topnavbar/PostAnAd"><i class="fa fa-plus"></i> Post An Ad</a>
+                            </li>
+                            <ul class="sign-in">
+                                <li class="nav-item dropdown inline-view">
+                                    <p>
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Steave
+                                        </a><img src="~/assets/img/24.png" alt="Avatar" class="avatar">
+                                    </p>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Topnavbar/AgencyProfile"><i><img src="~/assets/img/59.png" alt=""> </i> Agency Profile</a>
+                                        <a class="dropdown-item" href="/Topnavbar/managerprofile"><i><img src="~/assets/img/64.png" alt=""> </i> My Profile</a>
+                                        <a class="dropdown-item" href="/Topnavbar/logout"><i><img src="~/assets/img/66.png" alt=""> </i> Log Out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </ul>
+                    </div>
+                </nav>
+            </header>*@
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            function DeleteAgent(id) {
+                //console.log("in Delete : " + id);
+                var Id = id;
+                $.ajax({
+                    url: `/AgencyProfile/RemoveAgent?agentId=${Id}`,
+                    method: "POST",
+                    success: function (response) {
+                        $("#Agents").empty();
+                        $("#Agents").html(response);
+                        //                       console.log(response);
+                    },
+                    error: function (error) {
+                        console.log("in 282 ", -1);
+                    }
+                });
+            }
+
+            function DisableAgent(id) {
+                var Id = id;
+                $.ajax({
+                    url: "/LeftSideBar/DisableAgent",
+                    method: "POST",
+                    data: JSON.stringify(id),
+                    contentType: "application/json",
+                    success: function (response) {
+                        $("#Agents").empty();
+                        $("#Agents").html(response);
+                    },
+                    error: function (error) {
+                        console.log("in 282 ", -1);
+                    }
+                });
+            }
+
+
+            function ActiveAgent(id) {
+                var Id = id;
+                $.ajax({
+                    url: "/LeftSideBar/ActiveAgent",
+                    method: "POST",
+                    data: JSON.stringify(id),
+                    contentType: "application/json",
+                    success: function (response) {
+                        $("#Agents").empty();
+                        $("#Agents").html(response);
+                    },
+                    error: function (error) {
+                        console.log("in 282 ", -1);
+                    }
+                });
+            }
+
+            $(function () {
+                $('[id*=btnEdit]').on('click', function () {
+                    var id = $(this).closest('tr').find('td').eq(0).html().trim();
+//                    console.log(id);
+                    let urlParams = "Id=" + id;
+                  //  console.log("urlParams ", urlParams);
+                    window.location.href = '@Url.Action("EditAgent","LeftSideBar")' + "?" + urlParams;
+
+                });
+
+
+                $('[id*=btnDelete]').on('click', function () {
+                    var id = $(this).closest('tr').find('td').eq(0).html().trim();
+                    //                    console.log(id);
+                    // let urlParams = "Id= " + id;
+                    // console.log("Id ", id);
+                    DeleteAgent(id);
+                });
+
+                $('[id*=btnDisableAgent]').on('click', function () {
+                    var id = $(this).closest('tr').find('td').eq(0).html().trim();
+                    //                    console.log(id);
+                    // let urlParams = "Id= " + id;
+                    // console.log("Id ", id);
+                    DisableAgent(id);
+                });
+
+                $('[id*=btnActiveAgent]').on('click', function () {
+                    var id = $(this).closest('tr').find('td').eq(0).html().trim();
+                    //                    console.log(id);
+                    // let urlParams = "Id= " + id;
+                    // console.log("Id ", id);
+                    ActiveAgent(id);
+                });
+
+
+
+            });
+
+
+        </script>
+
+        <div class="page-wrapper">
+            <div id="list-view" class="tab-pane fade active show  trending-cat">
+                <div class="row">
+                    <section id="about" class="featured section-padding-agency how-title-agency" style="padding:10px">
+
+                        <div class="container text-center wow  wow fadeInUp ">
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-xs-12">
+                                    <div class="about-wrapper2 ">
+
+                                        @*<h3>TotalData : @ViewData["TotalData"]</h3>*@
+                                        <h3>Agents List</h3>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="padding-form ">
+                                        <button type="button" class="list-btn" name="button" onclick="window.location.href='/leftsidebar/AddAgent'">
+                                            Add Agent
+                                        </button>
+                                        <button type="button" class="list-btn" id="filterButton" name="button" data-toggle="modal" data-target="#myModal2">
+                                            <i class="fa fa-plus-circle icon-padding" aria-hidden="true"></i>Filter
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        <div class="modal right fade " id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+                            <div class="modal-dialog" role="document" id="myModal2">
+                                <div class="modal-content">
+
+                                    <div class="modal-header1 filter-modal">
+                                        <h4 class="modal-title" id="myModalLabel2">FILTERS</h4>
+                                        <button type="button" data-dismiss="modal" aria-label="Close" onclick="StaffFilter()">RESET</button>
+                                        <button type="button" class="close cloase-style" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="padding-form par-dir3">
+
+                                            <label>Agent name</label>
+                                            <input type="text" class="popup-line-input" name="AgentName" id="AgentName" placeholder="">
+                                        </div>
+                                        <div class="padding-form par-dir3">
+
+                                            <label>Mobile Number</label>
+
+                                            <select class="popup-line-input" name="MobileNumber" id="MobileNumber">
+                                                <option name="MobileNumber" value="All">All</option>
+                                                @{
+                                                    if (Model != null)
+                                                    {
+                                                        foreach (var item in @Model)
+                                                        {
+                                                            <option name="MobileNumber" value="@Html.DisplayFor(model => item.MobileNumber)">@Html.DisplayFor(model => item.MobileNumber)</option>
+                                                        }
+                                                    }
+                                                }
+
+                                            </select>
+
+                                        </div>
+                                        <div class="padding-form par-dir3">
+
+                                            <label>Agent Status</label>
+
+                                            <select class="popup-line-input" id="AgentStatus">
+                                                <option name="Status" value="All">All</option>
+                                                <option name="Status" value="Active">Active</option>
+                                                <option name="Status" value="Disable">Disable</option>
+                                                @*<option name="AgetnSatus" value="select">Select</option>*@
+                                            </select>
+                                        </div>
+
+                                        <div class="padding-form par-dir3">
+                                            @*      <button type="button" name="button" id="btnFilter" onclick="FilterAgent()">Filter results</button>*@
+                                            <button type="button" class="" data-dismiss="modal" aria-label="Close" onclick="FilterAgent()">
+                                                Filter results
+                                                <span aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+
+                                </div><!-- modal-content -->
+                            </div><!-- modal-dialog -->
+                        </div>
+                        @*@if (ViewBag.Message != null)
+                            {
+                                <script type="text/javascript">
+                                            window.onload = function () {
+                                               alert("@ViewBag.Message");
+                                     };
+                                </script>
+                            }*@
+                        @*<div class="flow-table">*@
+                        <div id="Agents">
+                            <partial name="~/Views/Partials/_Agents.cshtml" model="@Model" />
+                        </div>
+                        @*      </div> *@
+                    </section>
+                    @*<div class="text-danger LoginValidation">@TempData["in"]</div>
+                        <div class="text-danger LoginValidation">@TempData["Data"]</div>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app-style-switcher.js"></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    @*<script src="~/js/pages/dashboards/dashboard1.js"></script>*@
+
+
+    <script src="~/assets/js/jquery-min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.counterup.min.js"></script>
+    <script src="~/assets/js/waypoints.min.js"></script>
+    <script src="~/assets/js/wow.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/jquery.slicknav.js"></script>
+    <script src="~/assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+
+    <script src="~/maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <link href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+    <script>
+        function FilterAgent() {
+            var data = {
+                AgentName: $("#AgentName").val(),
+                MobileNumber: $("#MobileNumber").val(),
+                AgentStatus: $('#AgentStatus').val(),
+            }
+
+            //console.log($("#MobileNumber").val() + " ,, " + MobileNumber);
+            $.ajax({
+                url: "/LeftSideBar/searchAgent",
+                method: "POST",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#Agents").empty();
+                    $("#Agents").html(response);
+                    //                       console.log(response);
+                },
+                error: function (error) {
+                    console.log("in 282 ", -1);
+                }
+            });
+
+        }
+
+
+        function EditAgent() {
+            $.ajax({
+                url: "/LeftSideBar/EditAgent",
+                method: "GET",
+                //data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#ads").empty();
+                    $("#ads").html(response);
+                    //                       console.log(response);
+                },
+                error: function (error) {
+                    console.log("in 510 ", -1);
+                }
+
+            });
+        }
+
+        function StaffFilter() {
+            $.ajax({
+                url: "/LeftSideBar/StaffFilter",
+                method: "POST",
+                //data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#Agents").empty();
+                    $("#Agents").html(response);
+                    //                       console.log(response);
+                },
+                error: function (error) {
+                    console.log("in 399 ", -1);
+                }
+
+            });
+        }
+
+    </script>
+</body>

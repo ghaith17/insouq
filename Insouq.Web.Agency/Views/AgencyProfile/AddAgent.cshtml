@@ -1,0 +1,351 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model insouq.Shared.DTOS.AgencyDTOS.AgentDTO
+
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+   
+    <!-- End smartphone / tablet look -->
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+     
+
+        <div class="page-wrapper">
+
+            <div id="list-view" class=" show trending-cat " style="padding-left:20px">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1 class="section-title5">Agents List</h1>
+                        <ol class="breadcrumb-style">
+                            <li><a href="/leftsidebar/staff" class="breadcrumb-color">Agents list > </a></li>
+                            <li class="breadcrumb-color"> Add Agent</li>
+                        </ol>
+
+                    </div>
+                    <div class="form-width">
+                        <form class="" action="AddAgent" method="post" enctype="multipart/form-data">
+                            @Html.HiddenFor(m => m.Agency.Id)
+                            @Html.HiddenFor(m => m.Agency.BrokerCardCopy)
+                            @Html.HiddenFor(m => m.Agency.BrokerNo)
+                            @Html.HiddenFor(m => m.Agency.CompanyTradeLicenseCopy)
+                            @Html.HiddenFor(m => m.Agency.Location)
+                            @Html.HiddenFor(m => m.Agency.MemberSince)
+                            @Html.HiddenFor(m => m.Agency.Name)
+                            @Html.HiddenFor(m => m.Agency.ReciveSmsAndEmails)
+                            @Html.HiddenFor(m => m.Agency.Type)
+                            @Html.HiddenFor(m => m.Agency.Status)
+                            @Html.HiddenFor(m => m.Agency.Website)
+                            @Html.HiddenFor(m => m.Agency.TradeLicenseNumber)
+                            @Html.HiddenFor(m => m.AgencyId)
+
+                            <div class="col-md-2">
+                                @*SessionDefaultPicture*@
+                                <p><img src="../image/@HttpContextAccessor.HttpContext.Session.GetString("SessionDefaultPicture")" alt="Main" class="avatar1" id="Picture" /></p>
+                                <p><a class="change-picture" href="#"><label for="PictureFile">Change Picture</label></a></p>
+                                <input class="line-input-style4" type="file" id="PictureFile" hidden asp-for="PicturePath" onchange="loadProfileImg()" />
+                            </div>
+
+                            <div class="col-md-5 padding-right">
+                                <div class="padding-form">
+                                    <label class="change-color">Agent name</label>
+                                    <input type="text" class="line-input-style" asp-for="Name" placeholder="" required>
+                                </div>
+                                <div class="padding-form">
+                                    <label class="change-color">Email Address</label>
+                                    <input type="email" class="line-input-style" asp-for="Email" placeholder="" required title="Please Enter Valid Email">
+                                </div>
+
+                                <div class="padding-form">
+                                    <div class="wrapper5">
+                                        <label class="change-color">country Code</label>
+                                        <select class="line-input-style change-color" asp-for="MobileNumberCode">
+                                            <option asp-for="PhoneCode">+962</option>
+                                            <option asp-for="PhoneCode">+966</option>
+                                            <option asp-for="PhoneCode">+971</option>
+                                        </select>
+
+
+                                    </div>
+                                </div>
+                                <div class="padding-form">
+                                    @*<label class="change-color">Country Code</label>*@
+                                    <div class="wrapper5">
+                                        <label class="change-color">country Code</label>
+                                        <select class="line-input-style change-color" asp-for="WorkNumberCode">
+                                            <option value="+962">+962</option>
+                                            <option value="+966">+966</option>
+                                            <option value="+971">+971</option>
+                                        </select>
+
+                                    </div>
+                                </div>
+                                <div class="padding-form">
+                                    <label class="change-color">Broker No.</label>
+                                    <input type="text" class="line-input-style" asp-for="BrokerNo" placeholder="000000000" onkeypress="return isNumberKey(event)" maxlength="6" minLength="6"
+                                           title="Please Enter valid Broker Number" required>
+                                </div>
+
+                                <div class="padding-form">
+                                    <label class="change-color">Password</label>
+                                    <input type="password" class="line-input-style" asp-for="Password"
+                                           pattern="^(?=.*[0-9])(?=.*[!@@#$%^&*])[a-zA-Z0-9!@@#$%^&*]{6,16}$" required
+                                           title="Enter an Password from 6 digits at least, consisting of 1 number, 1 Upper letter, 1 Lower letter, 1 character">
+                                </div>
+
+                                <div class="padding-form">
+                                    <label class="change-color">Gender</label>
+                                    <select class="line-input-style" asp-for="Gender">
+                                        <option value="Female">Female</option>
+                                        <option value="Male">Male</option>
+                                    </select>
+                                </div>
+                                <div class="padding-form">
+                                    <label class="change-color">Language</label>
+                                    <select class="line-input-style" asp-for="Language" required>
+                                        <option value="">Select</option>
+                                        <option value="English">English</option>
+                                        <option value="Arabic">arabic</option>
+                                    </select>
+                                </div>
+                                <div class="padding-form">
+                                    <label class="change-color">Privacy</label>
+                                    <label class="cont2">
+                                        <p class="text-style3">Show agent's information in ads</p>
+                                        <input type="checkbox" asp-for="ShowInformation">
+                                        <span class="checkmark3"></span>
+                                    </label>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="signin-btn6" name="submit">Update</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button type="button" class="signin-btn7" name="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 padding-top2">
+
+
+                                <div class="padding-form">
+                                    <label class="change-color">Mobile Number</label>
+                                    <input type="text" class="line-input-style" asp-for="MobileNumber" placeholder="000000000" onkeypress="return isNumberKey(event)" maxlength="9" minlength="9"
+                                           title="Please Enter Valid Mobile Number" required>
+                                </div>
+                                <div class="padding-form">
+                                    <label class="change-color">Work Number</label>
+                                    <input type="text" class="line-input-style" asp-for="WorkNumber" placeholder="000000000" onkeypress="return isNumberKey(event)" maxlength="9" minlength="9"
+                                           title="Please Enter Valid Work Number" required>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="col-md-4">
+                            <div class="text-danger LoginValidation">@TempData["Message"]</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app-style-switcher.js"></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="~/js/pages/dashboards/dashboard1.js"></script>
+</body>
+
+<!--<footer>-->
+<!-- Footer Area Start -->
+<!--<section class="footer-Content1">
+    <div class="containers">
+        <div class="row">
+            <div class="col-md-20">
+                <div class="widget">
+                    <div class="footer-logo"><img src="assets/img/67.png" alt=""></div>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+
+                    <ul class="menu">
+                        <li><a href="aboutus.html">About Insouq</a></li>
+                        <li><a href="howitwork.html">How it works</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contactus.html">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="selling.html">Selling guidelines</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="ourterms.html">Term &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+<!-- Footer area End -->
+<!-- Copyright Start  -->
+<!--<div id="copyright">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-border"></div>
+                <div class="site-info float-left">-->
+<!-- <p>Copy right &copy; 2021,All Rights Reserved.By <a href="http://www.hudhudit.com" target="_blank">HUDHUDIT</a></p> -->
+<!--</div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!-- Copyright End -->
+<!--</footer>-->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script>
+
+    function loadProfileImg() {
+
+        $('#Picture').attr('src', URL.createObjectURL($("#PictureFile")[0].files[0]));
+    }
+
+    function setCountry(code) {
+        if (code || code == '') {
+            var text = jQuery('a[cunt_code="' + code + '"]').html();
+            $(".dropdown dt a span").html(text);
+        }
+    }
+
+    //$("#PictureFile").on('change', function (e) {
+    //    //console.log("testtt");
+    //    const [file] = PictureFile.files
+    //    if (file) {
+    //        Picture.src = URL.createObjectURL(file)
+    //    }
+
+    $(document).ready(function () {
+
+        $(".dropdown img.flag").addClass("flagvisibility");
+
+        $(".dropdown dt a").click(function () {
+            $(".dropdown dd ul").toggle();
+        });
+
+        $(".dropdown dd ul li a").click(function () {
+            //console.log($(this).html())
+            var text = $(this).html();
+            $(".dropdown dt a span").html(text);
+            $(".dropdown dd ul").hide();
+            $("#result").html("Selected value is: " + getSelectedValue("country-select"));
+        });
+
+        function getSelectedValue(id) {
+            //console.log(id,$("#" + id).find("dt a span.value").html())
+            return $("#" + id).find("dt a span.value").html();
+        }
+
+        $(document).bind('click', function (e) {
+            var $clicked = $(e.target);
+            if (!$clicked.parents().hasClass("dropdown"))
+                $(".dropdown dd ul").hide();
+        });
+
+        $("#flagSwitcher").click(function () {
+            $(".dropdown img.flag").toggleClass("flagvisibility");
+        });
+    });
+
+</script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+</script>
+
+
+</html>

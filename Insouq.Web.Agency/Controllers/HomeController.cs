@@ -20,6 +20,7 @@ namespace Insouq.Web.Agency.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 

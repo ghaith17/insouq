@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
  
 	<PropertyGroup>
@@ -28,10 +28,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\insouq.Services\insouq.Services.csproj" />
 		<ProjectReference Include="..\insouq.Shared\insouq.Shared.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="wwwroot\images\" />
 	</ItemGroup>
 
 </Project>
