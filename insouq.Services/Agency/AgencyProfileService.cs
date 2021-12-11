@@ -236,18 +236,18 @@ namespace insouq.Services.Agency
                 }
 
 
-                _db.Agent.Remove(agent);
-                _db.Users.Remove(user);
+                user.Status = StaticData.Status_Deleted;
+                 _db.Users.Update(user);
                 await _db.SaveChangesAsync();
 
                 response.IsSuccess = true;
-                response.Message = "Agent removed from your agency";
+                response.Message = "Agent removed from your agency successfully";
                 return response;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Message = StaticData.ServerError_Message;
+                response.Message =ex.Message;
                 return response;
             }
         }
@@ -387,10 +387,35 @@ namespace insouq.Services.Agency
         public async Task<List<Agent>> GetAllAgentsByAgency(int agencyId)
         {
             
-                var agents = await _db.Agent.Where(l => l.AgencyId == agencyId).AsNoTracking().ToListAsync();
+                var agents = await _db.Agent.Where(l => l.AgencyId == agencyId ).AsNoTracking().ToListAsync();
+                var activeAgents = new List<Agent>();
+                for(int i= 0; i<agents.Count;i++)
+                {
+                var user = await _db.Users.Where(U => U.Id == agents[i].Id && U.Status !=StaticData.Status_Deleted).AsNoTracking().FirstOrDefaultAsync();
+               if(user != null)
+                activeAgents.Add(agents[i]);
+                }
 
-            return agents;
+            return activeAgents;
                 
+        }
+        public async Task<Models.Agency> UpdateAgency(Models.Agency newAgency)
+        {
+
+            var agency = await _db.Agency.Where(l => l.Id == newAgency.Id).AsNoTracking().FirstOrDefaultAsync();
+            agency.Location = newAgency.Location;
+            agency.Name = newAgency.Name;
+            agency.Website = newAgency.Website;
+            agency.Type = newAgency.Type;
+            agency.ReciveSmsAndEmails = newAgency.ReciveSmsAndEmails;
+            agency.BrokerCardCopy = newAgency.BrokerCardCopy;
+            agency.BrokerNo = newAgency.BrokerNo;
+            agency.CompanyTradeLicenseCopy = newAgency.CompanyTradeLicenseCopy;
+            agency.TradeLicenseNumber = newAgency.TradeLicenseNumber;
+            _db.Agency.Update(agency);
+            await _db.SaveChangesAsync();
+            return newAgency;
+
         }
         //public async Task<BaseResponse> DisableMotorsAgent(int agentId)
         //{

@@ -1,0 +1,504 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model insouq.Models.Agency
+@{
+    Layout = "_Layout";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- mobile Menu -->
+    @*<div class="topnav">
+            <a href="#home" class="menu-active"><img src="assets/img/57.png" alt=""> </a>
+            <div id="myLinks">
+                <a href=""><img src="assets/img/24.png" alt="Avatar" class="avatar"><p class="menu-center">Steave</p></a>
+                <a class="tg-btn" href="postanad.html"><i class="fa fa-plus"></i> Post An Ad</a>
+                <a href="agencyprofile.html"> Agency Profile</a>
+                <a href="managerprofile.html"> My Profile</a>
+                <a href="manegerdashbord.html">Dashboard</a>
+                <a href="statictics.html">Agency Statistics</a>
+                <a href="currentpackages.html">Package Subscription</a>
+                <a href="agentslist.html">Staff</a>
+                <a href="adlisting.html">Ads Listing</a>
+                <a href="inquiries.html">inquiries</a>
+                <a href="notifacation.html">My Notification</a>
+                <a href="login.html"> Log Out</a>
+            </div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>*@
+    @*End smartphone / tablet look*@
+
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+
+        @*<header class="topbar" data-navbarbg="skin5">
+                <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                    <div class="navbar-header" data-logobg="skin6">
+                        <a class="navbar-brand1" href="/Home/Index">
+                            <img src="~/assets/img/57.png" alt="homepage" />
+                        </a>
+                        <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                           href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                        <h1 class="agency-header">The Ocean Agency</h1>
+                        <ul class="navbar-nav ms-auto d-flex align-items-center">
+                            <li>
+                                <a href="#" class="lang-style">Eng</a>
+                            </li>
+                            <li class=" in">
+                                <a class="tg-btn" href="/Topnavbar/PostAnAd"><i class="fa fa-plus"></i> Post An Ad</a>
+                            </li>
+                            <ul class="sign-in">
+                                <li class="nav-item dropdown inline-view">
+                                    <p>
+                                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Steave
+                                        </a><img src="~/assets/img/24.png" alt="Avatar" class="avatar">
+                                    </p>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="/Topnavbar/AgencyProfile"><i><img src="~/assets/img/59.png" alt=""> </i> Agency Profile</a>
+                                        <a class="dropdown-item" href="/Topnavbar/managerprofile"><i><img src="~/assets/img/64.png" alt=""> </i> My Profile</a>
+                                        <a class="dropdown-item" href="/Topnavbar/logout"><i><img src="~/assets/img/66.png" alt=""> </i> Log Out</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>*@
+
+        <!--<aside class="left-sidebar" data-sidebarbg="skin6">-->
+        <!-- Sidebar scroll-->
+        <!--<div class="scroll-sidebar">-->
+        <!-- Sidebar navigation-->
+        <!--<nav class="sidebar-nav">
+        <ul id="sidebarnav">-->
+        <!-- User Profile-->
+        <!--<li class="sidebar-item pt-2">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="manegerdashbord.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/58.png" alt=""> </i>
+                        <span class="hide-menu">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="statictics.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/60.png" alt=""> </i>
+                        <span class="hide-menu">Agency Statistics</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="currentpackages.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/61.png" alt=""> </i>
+                        <span class="hide-menu">Package Subscription</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="agentslist.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/62.png" alt=""> </i>
+                        <span class="hide-menu">Staff</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="adlisting.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/63.png" alt=""> </i>
+                        <span class="hide-menu">Ads Listing</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="inquiries.html"
+                       aria-expanded="false">
+                        <i><img src="assets/img/63.png" alt=""> </i>
+                        <span class="hide-menu">inquiries</span>
+                    </a>
+                </li>
+
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="notifacation.html"
+                       aria-expanded="false">
+                        <i><img src="~/assets/img/65.png" alt=""> </i>
+                        <span class="hide-menu">My Notification</span>
+                    </a>
+                </li>
+
+
+            </ul>
+
+        </nav>-->
+        <!-- End Sidebar navigation -->
+        <!--</div>-->
+        <!-- End Sidebar scroll-->
+        <!--</aside>-->
+        <div class="page-wrapper">
+
+
+
+            <div id="list-view" class="tab-pane fade active show containers trending-cat">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <h1 class="section-title5">Agency Profile</h1>
+
+
+                    </div>
+                    <div class="form-width">
+                        <form asp-action="UpdateAgencyProfile" asp-controller="AgencyProfile" enctype="multipart/form-data">
+                            @Html.HiddenFor(m => m.Id)
+
+                            <div class="col-md-2">
+                                <p><img src="~/images/@HttpContextAccessor.HttpContext.Session.GetString("SessionAgencyPicture")" alt=" " class="avatar1" id="Picture"></p>
+                                <p><a class="change-picture" href="#"><label for="PictureFile">Change Picture</label></a></p>
+                                @*<input type="file" class="line-input-style4" id="PictureFile" hidden="" asp-for="PicturePath" onchange="loadProfileImg()">*@
+                            </div>
+
+                            <div class="col-md-10">
+                                <div class="col-md-8 padding-right">
+                                    <div class="padding-form">
+                                        <label class="change-color">Agency name</label>
+                                        <input type="text" class="line-input-style4" asp-for="Name" placeholder="" value="@Model.Name"
+                                               title="Please Enter Company Profile." required>
+                                    </div>
+                                    <div class="padding-form">
+                                        <label class="change-color">Agency type</label>
+                                        <select class="line-input-style4" asp-for="Type" title="Please Choose Agency Type." required>
+                                            <option value="">Agency Type</option>
+                                            <option value="@Model.Type" selected>@Model.Type</option>
+                                            <option value="Type">Type</option>
+                                            <option value="Type">Type</option>
+                                        </select>
+                                    </div>
+                                    <div class="padding-form">
+                                        <label class="change-color">Agency website</label>
+                                        <input type="text" class="line-input-style4" asp-for="Website" placeholder=""
+                                               value="@Model.Website" title="Please Enter Agency Website." required>
+                                    </div>
+                                    <div class="padding-form">
+                                        <label class="change-color">Trade license number</label>
+                                        <input type="text" class="line-input-style4" asp-for="TradeLicenseNumber" placeholder="" onkeypress="return isNumberKey(event)"
+                                               value="@Model.TradeLicenseNumber" title="Please Enter Trade License Number." required>
+
+                                    </div>
+                                    <div class="padding-form">
+                                        <label class="change-color">Trade license copy</label>
+                                        <i class=" fa fa-ellipsis-h add-icon"></i>
+                                        @*<label for="file-upload" class="line-input-style4">chose your file</label>*@
+
+                                        <label for="TradeLicense" class="line-input-style4">
+                                            <i class=""></i> chose your file
+                                        </label>
+                                        <input type="file" class="line-input-style4" asp-for="CompanyTradeLicenseCopy" id="TradeLicense" hidden
+                                               onchange="return fileValidation()" title="Please Add Trade License File." value="@Model.CompanyTradeLicenseCopy" required>
+                                    </div>
+                                    <div class="padding-form">
+                                        <label class="change-color">Broker No.</label>
+                                        <input type="text" class="line-input-style4" asp-for="BrokerNo"
+                                               value="@Model.BrokerNo" placeholder="000000000" onkeypress="return isNumberKey(event)"
+                                               title="Please Enter Broker Number." maxlength="6" minlength="6" required>
+                                    </div>
+                                    <div class="padding-form">
+                                        <label class="change-color">Broker card copy</label>
+                                        <i class=" fa fa-ellipsis-h add-icon"></i>
+                                        <label for="file-upload" class="line-input-style4">chose your file</label>
+                                        <input type="file" class="line-input-style4" id="file-upload" asp-for="BrokerCardCopy" name="BrokerFile" hidden
+                                               title="Please Add Broker Card Copy." value="@Model.BrokerCardCopy" required>
+                                    </div>
+
+                                    <div class="padding-form">
+                                        <label class="change-color">Your location</label>
+                                        <button class=" fa fa-location-arrow add-icon" style="border: none;"></button>
+                                        <label for="detectLocation" class="line-input-style4" id="detectLocation">Arabian Ranches, Dubai</label>
+                                        <input type="button" class="line-input-style4" id="detectLocation" hidden onclick="getLocation()" asp-for="Location" value="@Model.Location">
+                                        <div id="detectLocationError" style="margin-top:10px; display:none;">
+                                            <span id="detectLocationErrorMessage" style="color:red;"></span>
+                                        </div>
+                                    </div>
+                                    <div class="padding-form ">
+                                        <div class="featured-box5">
+                                            <h3>Agency Settings</h3>
+                                            <p class="agency-up">notifacation preferences</p>
+                                            <div id="app">
+                                                <label class="switch-holder">
+                                                    <input class="input"
+                                                           type="checkbox"
+                                                           :checked="checked"
+                                                           value="@Model.ReciveSmsAndEmails"
+                                                           asp-for="ReciveSmsAndEmails" />
+                                                    <span class="switch"></span>
+                                                    <span v-if="checked"
+                                                          class="label1">Receive SMS and Email Notifications for Not Connected Calls</span>
+                                                </label>
+                                            </div>
+                                            <p class="agency-p">These are calls that do not get Connected due to technical issues</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="padding-form ">
+                                        <button type="submit" class="change-btn1" name="submit">UPDATE PROFILE</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    @*<div class="text-danger LoginValidation">@TempData["Message"]</div>*@
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @*@if (ViewBag.Message != null)
+            {
+                <script type="text/javascript">
+                    window.onload = function () {
+                    alert("@ViewBag.Message");
+                };
+                </script>
+            }*@
+    </div>
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app-style-switcher.js"></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    <script src="~/js/pages/dashboards/dashboard1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+</body>
+<!--<footer>-->
+<!-- Footer Area Start -->
+<!--<section class="footer-Content1">
+    <div class="containers">
+        <div class="row">
+            <div class="col-md-20">
+                <div class="widget">
+                    <div class="footer-logo"><img src="assets/img/67.png" alt=""></div>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+
+                    <ul class="menu">
+                        <li><a href="aboutus.html">About Insouq</a></li>
+                        <li><a href="howitwork.html">How it works</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="faq.html">FAQs</a></li>
+                        <li><a href="contactus.html">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="selling.html">Selling guidelines</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-20">
+                <div class="widget">
+                    <ul class="menu">
+                        <li><a href="ourterms.html">Term &amp; Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>-->
+<!-- Footer area End -->
+<!-- Copyright Start  -->
+<!--<div id="copyright">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="footer-border"></div>
+                <div class="site-info float-left">-->
+<!-- <p>Copy right &copy; 2021,All Rights Reserved.By <a href="http://www.hudhudit.com" target="_blank">HUDHUDIT</a></p> -->
+<!--</div>
+            </div>
+        </div>
+    </div>
+</div>-->
+<!-- Copyright End -->
+<!--</footer>-->
+<script>
+
+
+    function loadProfileImg() {
+
+        $('#Picture').attr('src', URL.createObjectURL($("#PictureFile")[0].files[0]));
+    }
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                checked: false,
+            }
+        },
+        methods: {
+            toggleSwitch() {
+                this.checked = !this.checked
+            }
+        }
+    });
+</script>
+<script type="text/javascript">
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function OnTradeLicenseCopyChanged() {
+        $("#TradeLicenseCopyText").text("CHANGE YOUR CV");
+    }
+
+    $('#file-upload').change(function () {
+        var fileInput =
+            document.getElementById('file-upload');
+
+        var filePath = fileInput.value;
+
+        // Allowing file type
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.PNG|\.gif |\.docx)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            // alert('Invalid file type');
+            fileInput.value = '';
+            return false;
+        }
+        else {
+            var i = $(this).prev('label').clone();
+            var file = $('#file-upload')[0].files[0].name;
+            $(this).prev('label').text(file);
+        }
+    });
+
+    $('#TradeLicense').change(function () {
+        var fileInput =
+            document.getElementById('TradeLicense');
+
+        var filePath = fileInput.value;
+
+        // Allowing file type
+        var allowedExtensions =
+            /(\.jpg|\.jpeg|\.PNG|\.gif |\.docx)$/i;
+
+        if (!allowedExtensions.exec(filePath)) {
+            //alert('Invalid file type');
+            fileInput.value = '';
+            return false;
+        }
+        else {
+            var i = $(this).prev('label').clone();
+            var file = $('#TradeLicense')[0].files[0].name;
+            $(this).prev('label').text(file);
+        }
+    });
+
+
+</script>
+<script>
+    function myFunction() {
+        var x = document.getElementById("myLinks");
+        if (x.style.display === "block") {
+            x.style.display = "none";
+        } else {
+            x.style.display = "block";
+        }
+    }
+
+    var Location = document.getElementById("detectLocation");
+
+    function getLocation() {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            detectLocationErrorMessage.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
+    function showPosition(position) {
+        //detectLocation.innerHTML = "Latitude: " + position.coords.latitude +
+        //  "<br>Longitude: " + position.coords.longitude;
+        detectLocation.innerHTML = position.coords.latitude + ", " + position.coords.longitude;
+        // longitude.innerHTML = position.coords.longitude;
+        //latitude.innerHTML = position.coords.latitude;
+    }
+</script>
+<script>
+    function loadCompanyPricture() {
+        $('#CompanyPicture').attr('src', URL.createObjectURL($("#ProfilePictureFile")[0].files[0]));
+        $(".change-picture3").css("margin-top", "0px");
+
+    }
+</script>
+
+
+
+</html>

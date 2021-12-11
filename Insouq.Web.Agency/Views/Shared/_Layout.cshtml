@@ -74,7 +74,7 @@
                             <div class="dropdown-menu">
                                 @if (User.IsInRole(StaticData.AgentManager_Role))
                                 {
-                                    <a class="dropdown-item" href="/Topnavbar/AgencyProfile"><i><img src="~/assets/img/59.png" alt=""> </i> Agency Profile</a>
+                                    <a class="dropdown-item" href="/AgencyProfile/AgencyProfile"><i><img src="~/assets/img/59.png" alt=""> </i> Agency Profile</a>
                                 }
                                 <a class="dropdown-item" href="/Topnavbar/managerprofile"><i><img src="~/assets/img/64.png" alt=""> </i> My Profile</a>
                                 <a class="dropdown-item" href="/User/login"><i><img src="~/assets/img/66.png" alt=""> </i> Log Out</a>
@@ -100,7 +100,7 @@
                             <span class="hide-menu">Dashboard</span>
                         </a>
                     </li>
-                    @if (@HttpContextAccessor.HttpContext.Session.GetInt32("SessionRole") == 3)
+                    @if (User.IsInRole(StaticData.AgentManager_Role))
                     {
 
                         <li class="sidebar-item">
@@ -118,7 +118,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item">
-                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/Staff"
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="AgencyProfile/staff"
                                aria-expanded="false">
                                 <i><img src="~/assets/img/62.png" alt=""> </i>
                                 <span class="hide-menu">Staff</span>
@@ -126,7 +126,7 @@
                         </li>
                     }
                     <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Leftsidebar/AdsListing"
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/Ads/AdsListing"
                            aria-expanded="false">
                             <i><img src="~/assets/img/63.png" alt=""> </i>
                             <span class="hide-menu">Ads Listing</span>

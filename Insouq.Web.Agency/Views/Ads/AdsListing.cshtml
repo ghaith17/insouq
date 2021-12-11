@@ -1,0 +1,431 @@
+﻿@using insouq.Shared.Utility
+@model Insouq.Web.Agency.Models.AllAdsVM
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+<style media="screen">
+    #SvgjsPath1127 {
+        stroke: #FFB01C !important;
+    }
+
+    #app {
+        width: 100%;
+        height: 12% !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dash-style2 {
+        width: 100%;
+        height: 1283px !important;
+        background: #f6f6f9;
+    }
+
+    .tabs {
+        display: inline-flex;
+        position: relative;
+        background: white;
+        border-radius: 30px;
+        margin-left: 0px !important;
+        margin-bottom: 20px;
+    }
+
+    .tabs-content-style i {
+        color: black !important;
+        padding: 10px;
+    }
+
+    .tab-item {
+        min-width: 81px;
+        padding: 1px 20px 0px 20px !important;
+        font-size: 15px;
+        text-align: center;
+        color: #8c63e7;
+        background-color: #fff;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        border-bottom: 5px solid transparent;
+        cursor: pointer;
+        transition: all 0.5s ease;
+        border-radius: 30px;
+        font-weight: bold;
+    }
+
+    .tabs-content-style {
+        text-align: center;
+        width: 100% !important;
+        margin-left: 0 !important;
+    }
+</style>
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Icon -->
+    <link rel="stylesheet" type="text/css" href="~/assets/fonts/line-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/font-awesome.min.css">
+    <!-- Slicknav -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/slicknav.css">
+
+
+    <!-- Animate -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.css">
+    <!-- Owl carousel -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/owl.carousel.css">
+    <!-- Main Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/response.css">
+    <!-- Responsive Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/responsive.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <title>agency</title>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <!-- Favicon icon -->
+    <!-- Custom CSS -->
+    <link href="~/plugins/bower_components/chartist/dist/chartist.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.css">
+    <!-- Custom CSS -->
+    <link href="~/css/style.min.css" rel="stylesheet">
+
+
+    <link href="//cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    
+
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+      
+        <div class="page-wrapper">
+            <section id="about" class="featured section-padding-agency how-title-agency" style="padding:0;margin-left: -7px;">
+                <div class="container text-center wow  wow fadeInUp ">
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <form>
+                                <div class="about-wrapper dash-style2">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <button type="button" class="active-btn" name="button">Active Ads</button>
+                                            <button type="button" class="featured-btn" name="button">featured</button>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <button type="button" class="reset-ads" name="button" onclick="ResetFilter()">Reset Filter</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <button class="search-btn1" name="button" type="button" id="buttonFilter" onclick="FilterData()"><i class="fa fa-search"></i>Search</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="select-inq">
+                                            <div class="col-md-2">
+                                                <label>Purpose</label>
+                                                <select class="Purpose" name="Purpose" id="Purpose">
+
+                                                    <option value="forRent">For Rent</option>
+                                                    <option value="forSale">For Sale</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>category</label>
+                                                <select class="category" name="category" id="category">
+                                                    <option value="Motors">Motors</option>
+                                                    <option value="Motors">Motors</option>
+                                                    <option value="Motors">Motors</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>location</label>
+                                                <select class="location" name="AdLocation" id="locationDL">
+                                                    <option value="All">Your Location</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <label>status</label>
+                                                <select class="status" name="status" id="status">
+                                                    <option value="2">All</option>
+                                                    <option value="0">Active</option>
+                                                    <option value="1">Non Active</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="col-md-2">
+                                                @if (User.IsInRole(StaticData.AgentManager_Role))
+                                                {
+                                                    <label><br></label>
+
+                                                    <select class="agent" name="agent" id="AgentDL">
+                                                        <option value="All">Agents Name</option>
+                                                    </select>
+                                                }
+                                            </div>
+
+                                        </div>
+                                        @if (User.IsInRole(StaticData.AgentManager_Role))
+                                        {
+                                            <ul class="sign-in" style="">
+                                                <li class="nav-item dropdown inline-view sort-hover ">
+                                                    <p>
+                                                        <a class="nav-link dropdown-toggle sort-btn drop-listing" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                                                        </a>
+                                                    </p>
+                                                    <div class="dropdown-menu" style="margin-left: 773%;margin-top: -28px;">
+                                                        <a class="dropdown-item" onclick="NewestFilter()">Newest First</a>
+                                                        <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="HighestImpressions">Highest Impressions</a>
+                                                        <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="LowestImpressions">Lowest  Impressions</a>
+                                                        <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="LowestClicks"> Lowest Clicks</a>
+                                                        <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="HighestClicks"> Highest Clicks</a>
+                                                        <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="LowestLeads"> Lowest Leads</a>
+
+                                                    </div>
+                                                </li>
+                                            </ul>
+
+                                            <button type="button" class="list-btn3" name="button">
+
+                                                <i class="fa fa-file-excel-o icon-padding" aria-hidden="true"></i>Export to Excel
+                                            </button>
+                                        }
+
+                                        @* If the agent is sub *@
+                                       @if (User.IsInRole(StaticData.AgentManager_Role))
+                                        {
+                                        <ul class="sign-in" style="">
+                                            <li class="nav-item dropdown inline-view sort-hover ">
+                                                <p>
+                                                    <a class="sign-in-subAgent nav-link dropdown-toggle sort-btn drop-listing" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                        <i class="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                                                    </a>
+                                                </p>
+                                                <div class="dropdown-menu" style="margin-left: 773%;margin-top: -28px;">
+                                                    <a class="dropdown-item" onclick="NewestFilter()">Newest First</a>
+                                                    <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="HighestImpressions">Highest Impressions</a>
+                                                    <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="LowestImpressions">Lowest  Impressions</a>
+                                                    <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="LowestClicks"> Lowest Clicks</a>
+                                                    <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="HighestClicks"> Highest Clicks</a>
+                                                    <a class="dropdown-item" asp-controller="LeftSideBar" asp-action="LowestLeads"> Lowest Leads</a>
+
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                        <button type="button" class="list-btnExport" name="button">
+
+                                            <i class="fa fa-file-excel-o icon-padding" aria-hidden="true"></i>Export to Excel
+                                        </button>
+
+                                        }
+                                        <div class="pro-table1">
+                                        
+                                            <div id="ads">
+                                                <partial name="~/Views/Partials/_UserAd.cshtml" model="@Model.Ads" />
+                                            </div>
+                                       
+                                        </div>
+
+                                    </div>
+                                    </div>
+                            </form>
+                        </div>
+
+
+                    </div>
+                </div>
+                </section>
+            </div>
+        </div>
+    
+      
+
+    <script src="~/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="~/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/app-style-switcher.js"></script>
+    <script src="~/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!--Wave Effects -->
+    <script src="~/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="~/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="~/js/custom.js"></script>
+    <!--This page JavaScript -->
+    <!--chartis chart-->
+    <script src="~/plugins/bower_components/chartist/dist/chartist.min.js"></script>
+    <script src="~/plugins/bower_components/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    @*<script src="~/js/pages/dashboards/dashboard1.js"></script>*@
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script>
+
+        $('[id*=btnEditAds]').on('click', function () {
+            var id = $(this).closest('tr').find('td').eq(0).html().trim();
+            //                    console.log(id);
+            // let urlParams = "Id= " + id;
+            // console.log("Id ", id);
+            //EditAds(id);
+        });
+
+        function EditAds(id) {
+            var Id = id;
+            $.ajax({
+                url: "/LeftSideBar/EditAds",
+                method: "GET",
+                data: JSON.stringify(id),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#Agents").empty();
+                    $("#Agents").html(response);
+                },
+                error: function (error) {
+                    console.log("in 282 ", -1);
+                }
+            });
+        }
+
+        $("#sortBy a").click(function () {
+            alert($("#sortBy").val())
+        });
+
+
+        $(".dropdown-menu a").click(function () {
+            $(".dropdown-menu  a").css("color", "inherit");
+            $(this).css("color", "red");
+        });
+
+        function myFunction() {
+            var x = document.getElementById("myLinks");
+            if (x.style.display === "block") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
+        //var listLocations = document.getElementById('locationDL');
+        //var listAgents    = document.getElementById('AgentDL');
+
+        function FilterData() {
+            /*   $('[id*=btnFilter]').on('click', function () {*/
+            //        console.log("In JS Code");
+            var data = {
+                Location: $("#locationDL").val(),
+                //Purpose: this['Purpose'].value,
+                // category: $("#category").val(),
+                //Location: this['AdLocation'].value,
+                //status: this['status'].value,
+                agent: $("#AgentDL").val(),
+                //    sortBy: this['sortBy'].value,
+            }
+            $.ajax({
+                url: "/LeftSideBar/UserAdsFilter",
+                method: "POST",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#ads").empty();
+                    $("#ads").html(response);
+                    //                       console.log(response);
+                },
+                error: function (error) {
+                    console.log("in 484 ", -1);
+                }
+
+            });
+        }
+
+        function NewestFilter() {
+            $.ajax({
+                url: "/LeftSideBar/NewestFirst",
+                method: "POST",
+                //data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#ads").empty();
+                    $("#ads").html(response);
+                    //                       console.log(response);
+                },
+                error: function (error) {
+                    console.log("in 510 ", -1);
+                }
+
+            });
+        }
+        function ResetFilter() {
+            $.ajax({
+                url: "/LeftSideBar/ResetFilter",
+                method: "POST",
+                //data: JSON.stringify(data),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#ads").empty();
+                    $("#ads").html(response);
+                    //console.log(response);
+                },
+                error: function (error) {
+                    console.log("in 510 ", -1);
+                }
+            });
+        }
+
+    </script>
+</body>
+
+<script>
+
+    var locationDLloaded = false;
+    $("#locationDL").on("click", function () {
+        if (locationDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllLocation",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    $("#locationDL").append(`<option value='${item.valueOf(i)}'>${item.valueOf(i)}</option>`);
+                    //console.log(item.valueOf(i));
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        locationDLloaded = true;
+    });
+
+
+    var AgentDLloaded = false;
+    $("#AgentDL").on("click", function () {
+        if (AgentDLloaded)
+            return;
+        $.ajax({
+            url: "/DropDowns/GetAllAgent",
+            method: "GET",
+            success: function (response) {
+                $.each(response.items, function (i, item) {
+                    //console.log(item.valueOf(i));
+                    $("#AgentDL").append(`<option value='${item.valueOf(i)}'>${item.valueOf(i)}</option>`);
+                });
+            },
+            error: function (error) {
+                alert(error.message);
+            }
+        });
+        AgentDLloaded = true;
+    });
+
+</script>
+
+
+</html>

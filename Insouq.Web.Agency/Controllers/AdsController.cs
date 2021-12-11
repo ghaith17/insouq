@@ -4,9 +4,10 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using insouq.Services.IServices;
+using insouq.Services.IServices.Agency;
 using insouq.Shared.DTOS;
 using insouq.Shared.DTOS.Filters;
-
+using Insouq.Web.Agency.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Insouq.Web.Agency.Controllers
@@ -18,18 +19,21 @@ namespace Insouq.Web.Agency.Controllers
         private readonly IUsersService _usersService;
         private readonly ICategoryService _categoryService;
         private readonly INotificationsService _notificationsService;
+        private readonly IAgencyAccountService _agencyAccounttService;
         public AdsController(
             ITypeService typeService,
             IAdsService adsService,
             IUsersService usersService,
             ICategoryService categoryService,
-            INotificationsService notificationsService)
+            INotificationsService notificationsService,
+            IAgencyAccountService agencyAccounttService)
         {
             _adsService = adsService;
             _typeService = typeService;
             _usersService = usersService;
             _categoryService = categoryService;
             _notificationsService = notificationsService;
+            _agencyAccounttService = agencyAccounttService;
         }
 
         private int getUserId()
@@ -47,6 +51,18 @@ namespace Insouq.Web.Agency.Controllers
             }
         }
 
+       
+        private async Task<insouq.Models.User> getUser(int userId)
+        {
+            var user = await _agencyAccounttService.GetUserById(userId);
+            return user;
+        }
+        private async Task<insouq.Models.Agent> getAgent(int userId)
+        {
+            var agent = await _agencyAccounttService.GetAgentByUserId(userId);
+            return agent;
+        }
+
         public async Task<IActionResult> Categories(int typeId)
         {
             var cateogires = await _categoryService.GetByTypeId(typeId);
@@ -57,7 +73,7 @@ namespace Insouq.Web.Agency.Controllers
         }
 
 
-        public IActionResult PackagesSubsicription()
+        public IActionResult PackageSubsicription()
         {
             return View();
         }
@@ -107,50 +123,46 @@ namespace Insouq.Web.Agency.Controllers
         //    return View(adDetailsVM);
         //}
 
-        //public async Task<IActionResult> All(int typeId,
-        //    int categoryId, string searchText, string location,
-        //    string maxKm, string minKm, string maxYear,
-        //    string minYear, string maxPrice, string minPrice,
-        //    string maker, string model, string trim
-        //    )
-        //{
-        //    dynamic ads;
+        public async Task<IActionResult> AdsListing( )
+        {
+            dynamic ads;
 
-        //    var cateogryName = "";
+            
+            
+            var cateogryName = "";
 
-        //    var categoryStatus = 0;
+            var categoryStatus = 0;
 
-        //    if (categoryId == 0)
-        //    {
-        //        ads = await _adsService.GetAds(typeId, searchText, location, int.Parse(maxKm == null ? "0" : maxKm), int.Parse(minKm == null ? "0" : minKm), int.Parse(maxYear == null ? "0" : maxYear), int.Parse(minYear == null ? "0" : minYear), double.Parse(maxPrice == null ? "0" : maxPrice), double.Parse(minPrice == null ? "0" : minPrice), maker, model, trim);
-        //    }
-        //    else
-        //    {
-        //        ads = await _adsService.GetAdsByCategoryId(0, typeId, categoryId, searchText, location, int.Parse(maxKm == null ? "0" : maxKm), int.Parse(minKm == null ? "0" : minKm), int.Parse(maxYear == null ? "0" : maxYear), int.Parse(minYear == null ? "0" : minYear), double.Parse(maxPrice == null ? "0" : maxPrice), double.Parse(minPrice == null ? "0" : minPrice), maker, model, trim);
+            
+                ads = await _adsService.GetAdsByCategoryId(0, 1, 2,  "",  "",
+            0, 0, 50000,
+            1900,  0,  0,
+             "", "",  ""
+            );
 
 
-        //        var category = await _categoryService.GetById(categoryId);
+                var category = await _categoryService.GetById(1);
 
-        //        if (category != null)
-        //        {
-        //            cateogryName = category.En_Name;
-        //            categoryStatus = category.Status;
-        //        }
-        //    }
+                if (category != null)
+                {
+                    cateogryName = category.En_Name;
+                    categoryStatus = category.Status;
+                }
+           
 
 
-        //    var allAdsVM = new AllAdsVM
-        //    {
-        //        Ads = ads,
-        //        TypeId = typeId,
-        //        CategoryId = categoryId,
-        //        CategoryName = cateogryName,
-        //        CategoryStatus = categoryStatus,
-        //        SearchLocation = location,
-        //    };
+            var allAdsVM = new AllAdsVM
+            {
+                Ads = ads,
+                TypeId = 1,
+                CategoryId = 2,
+                CategoryName = cateogryName,
+                CategoryStatus = categoryStatus,
+                SearchLocation = "",
+            };
 
-        //    return View(allAdsVM);
-        //}
+            return View(allAdsVM);
+        }
 
 
         #region API_CALLS

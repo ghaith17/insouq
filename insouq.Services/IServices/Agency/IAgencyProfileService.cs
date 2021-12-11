@@ -20,6 +20,7 @@ namespace insouq.Services.IServices.Agency
         
         Task<BaseResponse> DisableAgent(int agentId);
         Task<List<Agent>> GetAllAgentsByAgency(int agencyId);
+        Task<Models.Agency> UpdateAgency(Models.Agency newAgency);
 
     }
 }

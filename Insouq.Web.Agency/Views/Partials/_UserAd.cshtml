@@ -1,1 +1,160 @@
-﻿
+﻿@using insouq.Shared.Utility;
+@using insouq.Services.IServices;
+@using System.Security.Claims;
+
+@inject IAdsService _adsService
+
+@{
+    var itemIndex = 1;
+
+    string AddDoubleQuotes(string value)
+    {
+        return "\"" + value + "\"";
+    }
+
+    var itemsCount = Model.Count;
+
+    var c = 1;
+    var b = 0;
+    var itemsPerPage = 0;
+
+    if (itemsCount < 5)
+    {
+        itemsPerPage = itemsCount;
+
+    }
+}
+
+
+@while (itemsCount > 0)
+{
+    var id = "pageItems" + c;
+
+    var to = itemsPerPage;
+
+    if (itemsPerPage == 0)
+    {
+        if (b + 5 > Model.Count)
+        {
+            to = Model.Count;
+        }
+        else
+        {
+            to = b + 5;
+        }
+    }
+
+    var display = "none";
+
+    if (c == 1)
+    {
+        display = "block";
+    }
+
+    @*<div class="pageAds" id="@id" style="display:@display">*@
+
+    @for (int i = b; i < to; i++)
+    {
+        var item = Model[i];
+
+
+        <div>
+
+            <table>
+                <tr>
+                    <th>Status</th>
+                    <th>Ref</th>
+                    <th>Maker</th>
+                    <th>Description</th>
+                    <th>Location</th>
+                    <th>Price</th>
+                    <th>Year</th>
+                    <th>Model</th>
+                    <th>Agent</th>
+                </tr>
+
+
+                <tr>
+                    <td><div class="green-circle"></div> </td>
+                    @foreach (var picture in item.Pictures)
+                        if (picture.MainPicture)
+                        {
+                            <td><img src="@picture.ImageURL"><p>@item.PostDate </p> </td>
+                            break;
+                        }
+                    <td>@item.En_Maker</td>
+                    <td>@item.Description</td>
+                    <td>@item.En_Location</td>
+                    <td>@item.Price</td>
+                    <td>@item.Year</td>
+                    <td>@item.En_Model</td>
+                    <td>@item.UserId</td>
+
+                    @*<td><div class="green-circle"></div> </td>
+                        <td><img src="@item.MainImageUrl"><p> @Html.DisplayFor(model => item.Date) </p> </td>
+                        <td>@Html.DisplayFor(model => item.Maker)</td>
+                        <td>@Html.DisplayFor(model => item.Description)</td>
+                        <td>@Html.DisplayFor(model => item.Location)</td>
+                        <td>@Html.DisplayFor(model => item.Price)</td>
+                        <td>@Html.DisplayFor(model => item.Year)</td>
+                        <td>@Html.DisplayFor(model => item.Model)</td>
+                        <td>@Html.DisplayFor(model => item.agentName)</td>*@
+                    <td>
+                        <ul class="sign-in">
+                            <li class="nav-item dropdown inline-view pro-hover">
+                                <p>
+                                    <a class="nav-link dropdown-toggle nav-btn" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Manage Ads
+                                    </a>
+                                </p>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-level-up"></i> Upgrade Listing</a>
+                                    <a class="dropdown-item" href="@Url.Action("Update","Motors",new { AdId = item.Id})" id="btnEditAds"><i class="fa fa-pencil"></i> Edit Listing</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-youtube-play"></i> Video Tour Url</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-search"></i> View Ad</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-eye-slash"></i> Unpublish</a>
+                                    <a class="dropdown-item" href="#"><i class="fa fa-times-circle-o"></i> Unavailable</a>
+                                    <a class="dropdown-item" href="@Url.Action("Update","Motors",new { AdId = item.Id})"><i class="fa fa-trash"></i> Delete</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+    }
+
+
+    b += 5;
+    c++;
+    itemsCount -= 5;
+}
+
+
+@{
+    int pageCount = Model.Count;
+}
+
+@if (pageCount != 0)
+{
+    <div class="pagination" style="display:none">
+        <a href="#"><i class="fa fa-chevron-left" aria-hidden="true"></i></a>
+        @{
+            var pagee = 1;
+        }
+
+
+        @while (pageCount > 0)
+        {
+            <a onclick="ShowPageItems(@pagee)">@pagee</a>
+
+            pagee++;
+
+            pageCount -= 5;
+        }
+
+        <a href="#"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+    </div>
+}

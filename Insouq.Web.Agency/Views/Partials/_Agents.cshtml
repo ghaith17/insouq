@@ -22,7 +22,7 @@
 
                     foreach (var item in @Model)
                     {
-
+                        
                         <tr class="featured-box1">
                             <td>@Html.DisplayFor(model => item.Id) </td>
                             <td>@Html.DisplayFor(model => item.Name)</td>
@@ -34,7 +34,7 @@
                                 if (item.Status == false)
                                 {
                                     <td>
-                                        <p><button type="button" class="ActiveAgent-btn" style="opacity: 50%;">Active</button></p>
+                                        <p><button type="button" class="ActiveAgent-btn" style="opacity: 50%;" onclick="ActiveAgent(@item.Id)">Active</button></p>
                                         <p><button type="button" class="dis-btn" id="btnDisableAgent" >Disable</button></p>
                                     </td>
                                 }
@@ -42,7 +42,7 @@
                                 {
                                     <td>
                                         <p><button type="button" class="ActiveAgent-btn" id="btnActiveAgent">Active</button></p>
-                                        <p><button type="button" class="dis-btn"  style="opacity: 50%;">Disable</button></p>
+                                        <p><button type="button" class="dis-btn"  style="opacity: 50%; " onclick="DisableAgent(@item.Id)">Disable</button></p>
                                     </td>
                                 }
                             }
@@ -54,7 +54,7 @@
                                     <i class="fa fa-pencil icon-padding" aria-hidden="true"></i>Edit
                                 </button>
                                 <p>
-                                    <button type="button" class="change-btn18" name="button" id="btnDelete">
+                                    <button type="button" class="change-btn18" name="button" id="btnDelete" onclick="DeleteAgent(@item.Id)">
                                         <i class="fa fa-trash-o icon-padding" aria-hidden="true"></i>Delete
                                     </button>
                                 </p>

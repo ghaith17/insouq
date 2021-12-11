@@ -210,7 +210,11 @@ namespace insouq.Web.Controllers
 
             return View(updateCompanyProfileVM);
         }
-
+       
+        public async Task<IActionResult> UpdateProfile()
+        {
+            
+        }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> UpdateProfile(UpdateProfileVM model)

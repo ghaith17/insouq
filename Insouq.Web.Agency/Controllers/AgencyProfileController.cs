@@ -63,6 +63,12 @@ namespace Insouq.Web.Agency.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> AgencyProfile()
+        {
+            var agency = await getAgency();
+            
+            return View(agency);
+        }
         public async Task<IActionResult> AddAgent()
         {
             var agency = await getAgency();
@@ -95,7 +101,7 @@ namespace Insouq.Web.Agency.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Staff");
         
         }
 
@@ -112,7 +118,7 @@ namespace Insouq.Web.Agency.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Staff");
 
         }
         [HttpPost]
@@ -128,7 +134,7 @@ namespace Insouq.Web.Agency.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Staff");
 
         }
         [HttpPost]
@@ -144,7 +150,7 @@ namespace Insouq.Web.Agency.Controllers
                 return View();
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Staff");
 
         }
         public async Task<IActionResult> Staff()
@@ -152,9 +158,17 @@ namespace Insouq.Web.Agency.Controllers
             var agency = await getAgency();
 
             var staff = await _agencyProfileService.GetAllAgentsByAgency(agency.Id);
-
+             staff.Remove(staff.Find(x => x.Id==getUserId()));
             return View(staff);
 
+        }
+        [HttpPost]
+        public async Task<IActionResult> UpdateAgencyProfile(insouq.Models.Agency model)
+        {
+           
+            var response = await _agencyProfileService.UpdateAgency(model);
+
+            return RedirectToAction("AgencyProfile");
         }
     }
 }

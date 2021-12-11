@@ -100,9 +100,7 @@
                     url: `/AgencyProfile/RemoveAgent?agentId=${Id}`,
                     method: "POST",
                     success: function (response) {
-                        $("#Agents").empty();
-                        $("#Agents").html(response);
-                        //                       console.log(response);
+                         
                     },
                     error: function (error) {
                         console.log("in 282 ", -1);
@@ -113,13 +111,11 @@
             function DisableAgent(id) {
                 var Id = id;
                 $.ajax({
-                    url: "/LeftSideBar/DisableAgent",
+                    url: `/AgencyProfile/DisableAgent?agentId=${Id}`,
                     method: "POST",
-                    data: JSON.stringify(id),
-                    contentType: "application/json",
+                    
                     success: function (response) {
-                        $("#Agents").empty();
-                        $("#Agents").html(response);
+                       
                     },
                     error: function (error) {
                         console.log("in 282 ", -1);
@@ -131,13 +127,11 @@
             function ActiveAgent(id) {
                 var Id = id;
                 $.ajax({
-                    url: "/LeftSideBar/ActiveAgent",
+                    url: `/AgencyProfile/ActivateAgent?agentId=${Id}`,
                     method: "POST",
-                    data: JSON.stringify(id),
-                    contentType: "application/json",
+                   
                     success: function (response) {
-                        $("#Agents").empty();
-                        $("#Agents").html(response);
+                       
                     },
                     error: function (error) {
                         console.log("in 282 ", -1);

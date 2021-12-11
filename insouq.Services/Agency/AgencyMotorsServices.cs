@@ -631,6 +631,8 @@ namespace insouq.Services.Agency
                 motorAd.Ad.Lng = model.Lng;
                 motorAd.Ad.Status = 2;
                 motorAd.Ad.PhoneNumber = model.PhoneNumber;
+                motorAd.Ad.AgentId = userId;
+
 
 
                 motorAd.En_Color = en_color != "" ? en_color : null;

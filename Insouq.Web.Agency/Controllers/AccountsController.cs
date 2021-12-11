@@ -25,6 +25,7 @@ namespace Insouq.Web.Agency.Controllers
         private readonly IAgencyAccountService _agencyAccounttService;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
+
         public AccountsController(
             IAccountsService accountService,
             IAgencyAccountService agencyAccounttService,
