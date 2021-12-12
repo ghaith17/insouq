@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -12,6 +13,7 @@ using insouq.Models.IdentityConfiguration;
 using insouq.Services.IServices.Agency;
 using insouq.Shared.DTOS.AccountsDTOS;
 using insouq.Shared.DTOS.AgencyDTOS;
+using insouq.Shared.DTOS.UserDTOS;
 using insouq.Shared.Responses;
 using insouq.Shared.Utility;
 using Microsoft.AspNetCore.Hosting;
@@ -513,6 +515,77 @@ namespace insouq.Services.Agency
                 return null;
             }
         }
+
+        public async Task<Models.Agent> UpdateAgentProfile(AgentDTO agentDTO)
+        {
+
+
+            var response = new UpdateProfileResponse();
+
+            try
+            {
+                var user = await _db.Users.FirstOrDefaultAsync(u => u.Id == agentDTO.Id);
+
+                var webRootPath = _hostEnvironment.WebRootPath;
+
+                var folderPath = Path.Combine(webRootPath, "images");
+
+                var profileImageUrl = user.ProfilePicture; // null or oldImage
+
+                if (agentDTO.PicturePath != null)
+                {
+                    if (!String.IsNullOrEmpty(profileImageUrl))
+                    {
+                        //Image changed, we need to remove old image
+
+                        var imagePath = Path.Combine(webRootPath, profileImageUrl.TrimStart('\\'));
+
+                        if (File.Exists(imagePath))
+                        {
+                            File.Delete(imagePath);
+                        }
+                    }
+
+                    profileImageUrl = await HelperFunctions.UploadImage(folderPath, agentDTO.PicturePath, "users", host);
+
+                }
+
+                
+
+
+
+                user.FirstName = agentDTO.Name;
+                user.LastName = agentDTO.Name;
+                user.Gender = agentDTO.Gender;
+                user.DefaultLanguage = agentDTO.Language;
+                user.ProfilePicture = profileImageUrl;
+                user.HideInfromation = agentDTO.ShowInformation;
+
+                _db.Users.Update(user);
+
+                await _db.SaveChangesAsync();
+
+                var userDTO = _mapper.Map<UserDTO>(user);
+
+                response.User = userDTO;
+                response.IsSuccess = true;
+                var agent = await _db.Agent.FirstOrDefaultAsync(u => u.Id == agentDTO.Id);
+
+                agent.Name = agentDTO.Name;
+                agent.WorkNumber = agentDTO.WorkNumber;
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Message = StaticData.ServerError_Message;
+                return null;
+            }
+
+
+        }
+
 
 
 

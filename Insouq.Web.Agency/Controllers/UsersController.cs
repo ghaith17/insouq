@@ -241,10 +241,17 @@ namespace Insouq.Web.Agency.Controllers
 
             var updateProfileDTO = new AgentDTO
             {
-               AgencyId
+               Id=model.Agent.Id,
+               Email=model.Agent.Email,
+               Language=model.Agent.Language,
+               BrokerNo=model.Agent.BrokerNo,
+               Gender=model.Agent.Gender,
+               MobileNumber=model.Agent.MobileNumber,
+               WorkNumber=model.Agent.WorkNumber
+
             };
             var hostName = $"https://{this.Request.Host}";
-            var response = await _usersService.UpdateProfile(getUserId(), updateProfileDTO, hostName);
+            var response = await _agencyAccounttService.( updateProfileDTO, hostName);
 
             if (!response.IsSuccess)
             {
